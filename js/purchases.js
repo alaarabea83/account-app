@@ -92,7 +92,7 @@ function updateInvoiceTotal() {
 function updateGrandTotal() {
   const balance = +document.getElementById("customerBalance").value || 0;
   const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
-  document.getElementById("grandTotal").value = balance - invoiceTotal;
+  document.getElementById("grandTotal").value = balance + invoiceTotal;
   updateRemaining();
 }
 
@@ -242,6 +242,11 @@ function editPurchase(index) {
     if (product) product.qty -= item.qty;
   });
 
+  if (invoice.customer !== "نقدي") {
+    const customer = customers.find(c => c.name === invoice.customer);
+    if (customer) customer.balance -= invoice.total - invoice.paid;
+  }
+
   document.getElementById("invoiceCustomer").value =
     invoice.customer === "نقدي"
       ? ""
@@ -284,6 +289,11 @@ function confirmDeletePurchase(order) {
       const product = products.find(p => p.name === item.name);
       if (product) product.qty -= item.qty;
     });
+
+    if (invoice.customer !== "نقدي") {
+      const customer = customers.find(c => c.name === invoice.customer);
+      if (customer) customer.balance -= invoice.total - invoice.paid;
+    }
 
     cash.expenses -= invoice.paid;
     purchases.splice(index, 1);
