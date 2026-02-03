@@ -172,11 +172,6 @@ function savePurchase() {
     if (product) product.qty += item.qty;
   });
 
-  // تحديث رصيد العميل
-  if (cIndex !== "") {
-    customers[cIndex].balance = newBalance;
-  }
-
   cash.expenses += paid;
 
   const invoiceData = {
@@ -247,11 +242,6 @@ function editPurchase(index) {
     if (product) product.qty -= item.qty;
   });
 
-  if (invoice.customer !== "نقدي") {
-    const customer = customers.find(c => c.name === invoice.customer);
-    if (customer) customer.balance -= invoice.total - invoice.paid;
-  }
-
   document.getElementById("invoiceCustomer").value =
     invoice.customer === "نقدي"
       ? ""
@@ -294,11 +284,6 @@ function confirmDeletePurchase(order) {
       const product = products.find(p => p.name === item.name);
       if (product) product.qty -= item.qty;
     });
-
-    if (invoice.customer !== "نقدي") {
-      const customer = customers.find(c => c.name === invoice.customer);
-      if (customer) customer.balance -= invoice.total - invoice.paid;
-    }
 
     cash.expenses -= invoice.paid;
     purchases.splice(index, 1);
