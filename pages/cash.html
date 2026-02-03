@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>سهل لإدارة الحسابات</title>
+
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      background: #1b2631;
+      margin: 0;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 20px auto;
+      margin-top: 60px;
+      background: #1f2d3a;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cairo", sans-serif;
+      font-weight: 700;
+      margin: 5px;
+    }
+
+    .t-container {
+      display: flex;
+      flex-direction: column;
+      background: #1f2d3a;
+      justify-content: center;
+      align-items: stretch;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .t-container h3 {
+      color: #ecf0f1;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .summary-table {
+      width: 100%;
+      background: #1f2d3a;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
+        0 8px 18px rgba(0, 0, 0, .45);
+    }
+
+    .summary-table td {
+      padding: 10px;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: right;
+    }
+
+    .summary-table td:first-child {
+      font-weight: bold;
+      background: #1f2d3a;
+      width: 50%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1f2d3a;
+    }
+
+    thead th {
+      background: #2e86c1;
+      color: #fff;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+
+    }
+
+    tbody tr:hover {
+      background: #065bb1;
+    }
+
+    .t-scroll {
+      width: 100%;
+      overflow-x: auto;
+      padding: 1px;
+    }
+
+    .t-scroll table {
+      min-width: 900px;
+    }
+
+    .t-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .t-scroll::-webkit-scrollbar-thumb {
+      background: #ffef0e;
+      border-radius: 10px;
+    }
+
+    .cashSummary {
+      padding: 1rem;
+      border-radius: 12px;
+      color: #fff;
+      background: #1f2d3a;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
+        0 8px 18px rgba(0, 0, 0, .45);
+    }
+
+    .cashMovement {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #1f2d3a;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
+        0 8px 18px rgba(0, 0, 0, .45);
+    }
+
+    #cashStatementTable tfoot:last-child {
+      border-top: 2px solid #f4f6f8;
+      height: 50px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+
+      margin: 20px auto;
+      padding: 14px 18px;
+
+      background: linear-gradient(135deg, rgba(52, 73, 94, .95), rgba(44, 62, 80, .95));
+      backdrop-filter: blur(10px);
+
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .05);
+
+      max-width: 900px;
+      color: #fff;
+    }
+
+    .filters input {
+      background: #22313f !important;
+      color: #ecf0f1 !important;
+
+      border: 1px solid #34495e;
+      border-radius: 10px;
+
+      padding: 10px 12px;
+      transition: .2s;
+    }
+
+    .filters input:focus {
+      border-color: #5dade2;
+      box-shadow: 0 0 0 2px rgba(93, 173, 226, .25);
+    }
+
+    .filters select {
+      background-color: #22313f !important;
+      color: #ecf0f1 !important;
+      border: 1px solid #34495e;
+      border-radius: 8px;
+    }
+
+
+    .filters button {
+      background: linear-gradient(135deg, #3498db, #2c80b4);
+      color: white;
+
+      border: none;
+      border-radius: 10px;
+
+      padding: 10px 16px;
+      cursor: pointer;
+
+      font-weight: 600;
+      letter-spacing: .3px;
+
+      transition: .2s;
+    }
+
+    .filters button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(52, 152, 219, .4);
+    }
+
+
+    @media (max-width: 768px) {
+      .filters {
+        margin: 12px;
+        padding: 12px;
+      }
+
+      .filters input,
+      .filters button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="breadcrumbs">
+    <a href="../index.html" class="home">الرئيسية</a>
+    <a href="../pages/customers.html" class="home">العملاء</a>
+    <a href="../pages/products.html" class="home">المنتجات</a>
+    <a href="../pages/sales.html" class="home"> المبيعات</a>
+    <a href="../pages/purchases.html" class="home">المشتريات</a>
+    <a href="../pages/income.html" class="home">المقبوضات</a>
+    <a href="../pages/expenses.html" class="home">المدفوعات</a>
+    <span class="current">الخزينة</span>
+    <a href="../pages/about.html" class="home">معلومات</a>
+  </nav>
+
+  <section>
+    <div class="t-container">
+      <div class="cashSummary">
+        <h3>ملخص حركة الخزينة</h3>
+        <table class="summary-table">
+          <tbody>
+            <tr>
+              <td>الرصيد الافتتاحي</td>
+              <td id="cashOpening">0</td>
+            </tr>
+            <tr>
+              <td>إجمالي المقبوضات</td>
+              <td id="cashIncome">0</td>
+            </tr>
+            <tr>
+              <td>إجمالي المصروفات</td>
+              <td id="cashExpenses">0</td>
+            </tr>
+            <tr>
+              <td>الرصيد الختامي</td>
+              <td id="cashFinal">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="t-container">
+      <div class="cashMovement">
+        <h3>كشف حركات الخزينة</h3>
+
+        <div class="filters">
+          <label>من تاريخ:</label>
+          <input type="date" id="cashFromDate" />
+          <label>إلي تاريخ:</label>
+          <input type="date" id="cashToDate" />
+          <select id="cashCustomerFilter" style="min-width:150px; padding:0.5rem; font-size:1rem; text-align: center;">
+            <option value="">إختر العميل</option>
+          </select>
+          <button id="filterCashBtn">عرض الكشف</button>
+        </div>
+
+
+        <div class="t-scroll">
+          <table id="cashStatementTable">
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>العميل</th>
+                <th>البيان</th>
+                <th>مدين</th>
+                <th>دائن</th>
+                <th>الرصيد</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 10px 0;">
+        <a href="../index.html" class="back-btn">🏠 عودة للرئيسية</a>
+      </div>
+    </div>
+  </section>
+  <script src="../js/data.js"></script>
+  <script src="../js/cash.js"></script>
+</body>
+
+</html>

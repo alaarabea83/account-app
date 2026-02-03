@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>سهل لإدارة الحسابات</title>
+
+  <style>
+    * {
+            box-sizing: border-box;
+            font-family: "Cairo", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #1b2631;
+            color: #ecf0f1;
+        }
+
+        .header {
+            background: #1f2d3a;
+            padding: 16px 24px;
+            margin: 16px auto;
+            border-radius: 12px;
+            max-width: 1000px;
+        }
+
+        .breadcrumb {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin: 16px auto;
+            max-width: 1000px;
+        }
+
+        .breadcrumb a {
+            color: #5dade2;
+            text-decoration: none;
+        }
+
+        .breadcrumb .active {
+            color: #bdc3c7;
+        }
+
+        @media (max-width: 768px) {
+            .breadcrumb {
+                margin: 12px 12px;
+                /* مسافة من كل الجهات */
+                padding: 14px 16px;
+                /* راحة للمس */
+            }
+        }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cairo", sans-serif;
+      font-weight: 700;
+      margin: 5px;
+      color: #ecf0f1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #1b2631;
+    }
+
+    .container2 {
+      max-width: 1000px;
+      margin: 0 auto;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      padding: 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+    }
+
+    section {
+      display: block;
+      text-align: center;
+      color: #1ebe5d;
+      max-width: 1000px;
+      background: #1f2d3a;
+      padding: 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
+        0 8px 18px rgba(0, 0, 0, .45);
+      border-radius: 12px;
+    }
+
+    .whatsapp-footer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      width: 42px;
+      height: 42px;
+      background: blue;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 22px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .whatsapp-footer:hover {
+      background: #1ebe5d;
+    }
+
+    .footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+      text-align: center;
+      background: #2e86c1;
+      color: #fff;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+        <h2>سهل لإدارة الحسابات</h2>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="../index.html">الرئيسية</a> /
+        <span class="active">عن التطبيق</span>
+    </nav>
+
+  <div class="container">
+    <section>
+      <p>
+        تطبيق "سهل لإدارة الحسابات" يساعدك على إدارة العملاء، المنتجات،
+        المبيعات، المشتريات، المقبوضات، المصروفات، والخزنة بكل سهولة.
+      </p>
+      <p>
+        هدفنا تقديم حلول بسيطة وفعّالة لإدارة الحسابات والمبيعات، لمساعدة
+        أصحاب الأعمال على تنظيم بياناتهم واتخاذ قرارات أفضل بسهولة ودقة. نسعى
+        دائمًا إلى تطوير أدواتنا لتواكب احتياجات المستخدمين وتسهّل عليهم إدارة
+        أعمالهم اليومية.
+      </p>
+      <h6>الإصدار: 1.0.0</h6>
+      <h5>تطوير: علاء ربيع</h5>
+      <h4>لتفعيل الإشتراك يمكنك مراسلتنا عن طريق واتس آب</h4>
+      <a href="https://wa.me/201019065615" class="whatsapp-footer" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </section>
+  </div>
+
+  <footer class="footer">
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+</body>
+
+</html>
