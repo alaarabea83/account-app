@@ -153,17 +153,23 @@ function savePurchase() {
 
   // استرجاع البيانات القديمة عند التعديل
   if (oldInvoice) {
+    // استرجاع كميات المنتجات
     oldInvoice.items.forEach((item) => {
       const product = products.find((p) => p.name === item.name);
-      if (product) product.qty -= item.qty;
+      if (product) product.qty += item.qty; // + بدل - عشان يرجع الكمية
     });
 
+    // استرجاع رصيد العميل
     if (oldInvoice.customer !== "نقدي") {
       const customer = customers.find((c) => c.name === oldInvoice.customer);
-      if (customer) customer.balance -= oldInvoice.total - oldInvoice.paid;
+      if (customer) {
+        // زيادة الرصيد بمقدار الدين اللي كانت الفاتورة القديمة عاملاه
+        customer.balance += oldInvoice.total - oldInvoice.paid;
+      }
     }
 
-    cash.expenses -= oldInvoice.paid;
+    // استرجاع المدفوع للخزنة
+    cash.expenses += oldInvoice.paid; // + بدل - عشان يرجع المبلغ للخزنة
   }
 
   // تحديث المخزون
