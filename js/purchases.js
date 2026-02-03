@@ -92,7 +92,7 @@ function updateInvoiceTotal() {
 function updateGrandTotal() {
   const balance = +document.getElementById("customerBalance").value || 0;
   const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
-  document.getElementById("grandTotal").value = balance + invoiceTotal;
+  document.getElementById("grandTotal").value = balance - invoiceTotal;
   updateRemaining();
 }
 
