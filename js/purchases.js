@@ -12,37 +12,35 @@ window.onload = function () {
   document.getElementById("addItemBtn").onclick = addPurchaseItem;
   document.getElementById("saveInvoiceBtn").onclick = savePurchase;
 
-  document
-    .getElementById("invoiceCustomer")
-    .addEventListener("change", function () {
-      const i = this.value;
-      document.getElementById("customerBalance").value =
-        i === "" ? 0 : customers[i].balance || 0;
-      updateGrandTotal();
-    });
+  document.getElementById("invoiceCustomer").addEventListener("change", function () {
+    const index = this.value;
+    document.getElementById("customerBalance").value =
+      index === "" ? 0 : customers[index].balance || 0;
+    updateGrandTotal();
+  });
 
-  document
-    .getElementById("paidAmount")
-    .addEventListener("input", updateRemaining);
+  document.getElementById("paidAmount").addEventListener("input", updateRemaining);
 };
 
 // ===============================
-// عرض الموردين
+// عرض العملاء في اختيار الفاتورة
 // ===============================
 function renderCustomerSelect() {
   const sel = document.getElementById("invoiceCustomer");
+  if (!sel) return;
 
   sel.innerHTML =
-    `<option value="" disabled selected>اختر الحساب</option>
-     <option value="">شراء نقدي</option>` +
+    `<option value="" disabled selected>اختر الحساب</option>` +
+    `<option value="">شراء نقدي</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
 
 // ===============================
-// إضافة صنف
+// إضافة صف منتج في الفاتورة
 // ===============================
 function addPurchaseItem() {
   const container = document.getElementById("invoiceItems");
+  if (!container) return;
 
   const row = document.createElement("div");
   row.className = "form-row invoice-item";
@@ -52,8 +50,7 @@ function addPurchaseItem() {
       <option value="">اختر منتج</option>
       ${products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("")}
     </select>
-
-    <input type="number" class="itemQty" placeholder="الكمية">
+    <input type="number" class="itemQty" min="1" placeholder="الكمية">
     <input type="number" class="itemPrice" placeholder="سعر الشراء">
     <input type="number" class="itemTotal" readonly placeholder="الإجمالي">
     <button type="button" class="btn-delete-item">❌</button>
@@ -61,17 +58,18 @@ function addPurchaseItem() {
 
   container.appendChild(row);
 
-  const qty = row.querySelector(".itemQty");
-  const price = row.querySelector(".itemPrice");
-  const total = row.querySelector(".itemTotal");
+  const productSelect = row.querySelector(".itemProduct");
+  const qtyInput = row.querySelector(".itemQty");
+  const priceInput = row.querySelector(".itemPrice");
+  const totalInput = row.querySelector(".itemTotal");
 
-  function calc() {
-    total.value = (+qty.value || 0) * (+price.value || 0);
+  function calcRow() {
+    totalInput.value = (+qtyInput.value || 0) * (+priceInput.value || 0);
     updateInvoiceTotal();
   }
 
-  qty.oninput = calc;
-  price.oninput = calc;
+  qtyInput.oninput = calcRow;
+  priceInput.oninput = calcRow;
 
   row.querySelector(".btn-delete-item").onclick = () => {
     row.remove();
@@ -84,57 +82,50 @@ function addPurchaseItem() {
 // ===============================
 function updateInvoiceTotal() {
   let total = 0;
-
   document.querySelectorAll(".invoice-item").forEach((r) => {
     total += +r.querySelector(".itemTotal").value || 0;
   });
-
   document.getElementById("invoiceTotal").value = total;
   updateGrandTotal();
 }
 
 function updateGrandTotal() {
-  const bal = +document.getElementById("customerBalance").value || 0;
-  const inv = +document.getElementById("invoiceTotal").value || 0;
-
-  document.getElementById("grandTotal").value = bal - inv;
+  const balance = +document.getElementById("customerBalance").value || 0;
+  const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
+  document.getElementById("grandTotal").value = balance + invoiceTotal;
   updateRemaining();
 }
 
 function updateRemaining() {
   const g = +document.getElementById("grandTotal").value || 0;
   const p = +document.getElementById("paidAmount").value || 0;
-
-  document.getElementById("remainingAmount").value = g + p;
+  document.getElementById("remainingAmount").value = g - p;
 }
 
 // ===============================
-// حفظ فاتورة شراء
+// حفظ فاتورة الشراء
 // ===============================
 function savePurchase() {
   const container = document.getElementById("invoiceItems");
   if (!container.children.length) {
-    showModal("أضف منتج واحد على الأقل", "تنبيه");
+    showModal("أضف منتج واحد على الأقل");
     return;
   }
 
   let total = 0;
   let items = [];
 
-  // جمع بيانات كل صف
   document.querySelectorAll(".invoice-item").forEach((row) => {
     const pIndex = row.querySelector(".itemProduct").value;
     const qty = +row.querySelector(".itemQty").value || 0;
     const price = +row.querySelector(".itemPrice").value || 0;
 
-    // تحقق من صحة المنتج
     if (pIndex === "" || !products[pIndex]) {
-      showModal("من فضلك اختر منتج صحيح", "تنبيه");
+      showModal("من فضلك اختر منتج صحيح");
       throw new Error("منتج غير صحيح");
     }
 
     const product = products[pIndex];
-
     total += qty * price;
 
     items.push({
@@ -147,25 +138,24 @@ function savePurchase() {
   const paid = +document.getElementById("paidAmount").value || 0;
   const cIndex = document.getElementById("invoiceCustomer").value;
 
-  let supplierName = "نقدي";
+  let customerName = "نقدي";
   let previousBalance = 0;
   let newBalance = total - paid;
 
   if (cIndex !== "") {
     const c = customers[cIndex];
     customerName = c.name;
-    previousBalance = c.balance || 0; // مهم جدًا
+    previousBalance = c.balance || 0;
     newBalance = previousBalance - (total - paid);
   }
 
-  const oldInvoice =
-    editPurchaseIndex !== null ? purchases[editPurchaseIndex] : null;
+  const oldInvoice = editPurchaseIndex !== null ? purchases[editPurchaseIndex] : null;
 
-  // ===== استرجاع المخزون والرصيد القديم لو تعديل =====
+  // استرجاع البيانات القديمة عند التعديل
   if (oldInvoice) {
     oldInvoice.items.forEach((item) => {
       const product = products.find((p) => p.name === item.name);
-      if (product) product.qty -= item.qty; // نطرح الكمية القديمة قبل تعديلها
+      if (product) product.qty -= item.qty;
     });
 
     if (oldInvoice.customer !== "نقدي") {
@@ -176,21 +166,19 @@ function savePurchase() {
     cash.expenses -= oldInvoice.paid;
   }
 
-  // ===== إضافة جديد للمخزون =====
+  // تحديث المخزون
   items.forEach((item) => {
     const product = products.find((p) => p.name === item.name);
-    if (product) product.qty += item.qty; // نزيد الكمية الجديدة
+    if (product) product.qty += item.qty;
   });
 
-  // ===== تحديث رصيد المورد =====
+  // تحديث رصيد العميل
   if (cIndex !== "") {
     customers[cIndex].balance = newBalance;
   }
 
-  // ===== تحديث الخزنة =====
   cash.expenses += paid;
 
-  // ===== إنشاء كائن الفاتورة =====
   const invoiceData = {
     customer: customerName,
     items,
@@ -203,7 +191,6 @@ function savePurchase() {
     order: oldInvoice ? oldInvoice.order : Date.now(),
   };
 
-  // ===== حفظ الفاتورة =====
   if (editPurchaseIndex !== null) {
     purchases[editPurchaseIndex] = invoiceData;
     editPurchaseIndex = null;
@@ -213,44 +200,40 @@ function savePurchase() {
 
   saveData();
   renderPurchases();
-
   container.innerHTML = "";
   document.querySelectorAll("input").forEach((i) => (i.value = ""));
   document.getElementById("invoiceCustomer").value = "";
-
   showModal("تم حفظ فاتورة الشراء بنجاح ✅", "نجاح");
 }
 
 // ===============================
-// عرض الفواتير
+// عرض فواتير الشراء
 // ===============================
 function renderPurchases(data = purchases) {
   const tbody = document.querySelector("#salesTable tbody");
-  if (!tbody) return;
-
   tbody.innerHTML = "";
 
   data.forEach((inv, i) => {
     tbody.innerHTML += `
-    <tr>
-      <td>${i + 1}</td>
-      <td>${inv.date}</td>
-      <td>${inv.customer}</td>
-      <td>${inv.total}</td>
-      <td>${inv.paid}</td>
-      <td>${inv.remaining}</td>
-      <td>${inv.previousBalance}</td>
-      <td>${inv.newBalance}</td>
-      <td>
-        <button onclick="editPurchase(${i})">✏️ تعديل</button>
-        <button onclick="confirmDeletePurchase(${inv.order})">🗑 حذف</button>
-      </td>
-    </tr>`;
+      <tr>
+        <td>${i + 1}</td>
+        <td>${inv.date}</td>
+        <td>${inv.customer}</td>
+        <td>${inv.total}</td>
+        <td>${inv.paid}</td>
+        <td>${inv.remaining}</td>
+        <td>${inv.previousBalance}</td>
+        <td>${inv.newBalance}</td>
+        <td>
+          <button class="btn-edit" onclick="editPurchase(${i})">تعديل الفاتورة</button>
+          <button class="btn-delete" onclick="confirmDeletePurchase(${inv.order})">حذف الفاتورة</button>
+        </td>
+      </tr>`;
   });
 }
 
 // ===============================
-// تعديل
+// تعديل فاتورة
 // ===============================
 function editPurchase(index) {
   const invoice = purchases[index];
@@ -259,39 +242,34 @@ function editPurchase(index) {
   const container = document.getElementById("invoiceItems");
   container.innerHTML = "";
 
-  // ===== استرجاع المخزون القديم =====
-  invoice.items.forEach((item) => {
-    const product = products.find((p) => p.name === item.name);
-    if (product) product.qty -= item.qty; // نطرح الكمية لأنها كانت مضافة من الفاتورة
+  invoice.items.forEach(item => {
+    const product = products.find(p => p.name === item.name);
+    if (product) product.qty -= item.qty;
   });
 
-  // ===== استرجاع رصيد المورد القديم =====
   if (invoice.customer !== "نقدي") {
-    const customer = customers.find((c) => c.name === invoice.customer);
+    const customer = customers.find(c => c.name === invoice.customer);
     if (customer) customer.balance -= invoice.total - invoice.paid;
   }
 
-  // ===== تعبئة الحقول =====
   document.getElementById("invoiceCustomer").value =
     invoice.customer === "نقدي"
       ? ""
-      : customers.findIndex((c) => c.name === invoice.customer);
+      : customers.findIndex(c => c.name === invoice.customer);
 
   document.getElementById("customerBalance").value =
     invoice.customer === "نقدي"
       ? 0
-      : customers.find((c) => c.name === invoice.customer).balance;
+      : customers.find(c => c.name === invoice.customer).balance;
 
   document.getElementById("paidAmount").value = invoice.paid;
 
-  // ===== تعبئة الأصناف =====
-  invoice.items.forEach((item) => {
+  invoice.items.forEach(item => {
     addPurchaseItem();
     const row = container.lastElementChild;
 
-    row.querySelector(".itemProduct").value = products.findIndex(
-      (p) => p.name === item.name,
-    );
+    row.querySelector(".itemProduct").value =
+      products.findIndex(p => p.name === item.name);
     row.querySelector(".itemQty").value = item.qty;
     row.querySelector(".itemPrice").value = item.price;
     row.querySelector(".itemTotal").value = item.qty * item.price;
@@ -299,37 +277,35 @@ function editPurchase(index) {
 
   updateInvoiceTotal();
   updateGrandTotal();
-
-  showModal("تم تحميل فاتورة الشراء للتعديل ✏️", "تعديل فاتورة");
+  showModal("تم تحميل الفاتورة للتعديل ✏️", "تعديل فاتورة");
 }
 
 // ===============================
-// حذف
+// حذف فاتورة
 // ===============================
 function confirmDeletePurchase(order) {
-  showDeleteModal("هل متأكد من الحذف؟", () => {
-    const i = purchases.findIndex((p) => p.order === order);
-    if (i === -1) return;
+  showDeleteModal("هل أنت متأكد من حذف هذه الفاتورة؟", () => {
+    const index = purchases.findIndex((p) => p.order === order);
+    if (index === -1) return;
 
-    const inv = purchases[i];
+    const invoice = purchases[index];
 
-    inv.items.forEach((it) => {
-      const p = products.find((x) => x.name === it.name);
-      if (p) p.qty -= it.qty;
+    invoice.items.forEach(item => {
+      const product = products.find(p => p.name === item.name);
+      if (product) product.qty -= item.qty;
     });
 
-    if (inv.customer !== "نقدي") {
-      const c = customers.find((x) => x.name === inv.customer);
-      if (c) c.balance -= inv.total - inv.paid;
+    if (invoice.customer !== "نقدي") {
+      const customer = customers.find(c => c.name === invoice.customer);
+      if (customer) customer.balance -= invoice.total - invoice.paid;
     }
 
-    cash.expenses -= inv.paid;
-
-    purchases.splice(i, 1);
+    cash.expenses -= invoice.paid;
+    purchases.splice(index, 1);
 
     saveData();
     renderPurchases();
-    showModal("تم الحذف ✅");
+    showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
   });
 }
 
@@ -338,8 +314,13 @@ function confirmDeletePurchase(order) {
 // ===============================
 function showDeleteModal(msg, onConfirm) {
   const m = document.getElementById("appModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMessage = document.getElementById("modalMessage");
+  const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+  const modalCancelBtn = document.getElementById("modalCancelBtn");
+  const modalOkBtn = document.getElementById("modalOkBtn");
 
-  modalTitle.innerText = "تأكيد";
+  modalTitle.innerText = "تأكيد الحذف";
   modalMessage.innerText = msg;
 
   modalConfirmBtn.style.display = "flex";
@@ -359,6 +340,11 @@ function showDeleteModal(msg, onConfirm) {
 
 function showModal(msg, title = "تنبيه") {
   const m = document.getElementById("appModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMessage = document.getElementById("modalMessage");
+  const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+  const modalCancelBtn = document.getElementById("modalCancelBtn");
+  const modalOkBtn = document.getElementById("modalOkBtn");
 
   modalTitle.innerText = title;
   modalMessage.innerText = msg;
