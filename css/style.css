@@ -15,6 +15,7 @@
   font-family: "cairo", sans-serif;
   overflow-x: auto;
   scrollbar-width: none;
+  border: 2px solid #000;
 }
 
 .breadcrumbs::-webkit-scrollbar {
