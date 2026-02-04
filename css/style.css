@@ -32,20 +32,6 @@
   font-weight: bold;
 }
 
-.back-btn {
-  display: block; /* لازم علشان margin: auto يشتغل */
-  margin: 1rem auto 0 auto; /* مركزي أفقيًا */
-  padding: 0.5rem 1.2rem;
-  width: fit-content; /* خلي العرض حسب المحتوى */
-  background: #ffc107;
-  border-radius: 5px;
-  color: #000;
-  text-decoration: none;
-  transition: 0.3s;
-  font-weight: bold;
-  text-align: center;
-}
-
 .back-btn:hover {
   background: #ffca28;
 }
