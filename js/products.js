@@ -118,6 +118,7 @@ function renderProducts(searchQuery = "") {
     const trTotal = document.createElement("tr");
     trTotal.style.background = "#111827";
     trTotal.style.fontWeight = "bold";
+    trTotal.style.color = "#fff";
 
     trTotal.innerHTML = `
       <td colspan="6">إجمالي قيمة المخزون (بسعر الشراء)</td>

@@ -99,6 +99,7 @@ function renderCustomers(searchQuery = "") {
   const totalRow = document.createElement("tr");
   totalRow.style.background = "#111827";
   totalRow.style.fontWeight = "bold";
+  totalRow.style.color = "#fff";
 
   totalRow.innerHTML = `
     <td colspan="2">الإجمالي</td>
