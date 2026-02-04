@@ -10,3 +10,4 @@ window.onload = function () {
   if (typeof renderExpense === "function") renderExpense();
   if (typeof renderCash === "function") renderCash();
 };
+
