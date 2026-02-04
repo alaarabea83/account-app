@@ -92,14 +92,14 @@ function updateInvoiceTotal() {
 function updateGrandTotal() {
   const balance = +document.getElementById("customerBalance").value || 0;
   const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
-  document.getElementById("grandTotal").value = balance + invoiceTotal;
+  document.getElementById("grandTotal").value = balance - invoiceTotal;
   updateRemaining();
 }
 
 function updateRemaining() {
   const g = +document.getElementById("grandTotal").value || 0;
   const p = +document.getElementById("paidAmount").value || 0;
-  document.getElementById("remainingAmount").value = g - p;
+  document.getElementById("remainingAmount").value = g + p;
 }
 
 // ===============================
