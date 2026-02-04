@@ -29,6 +29,7 @@
 
     h2 {
       text-align: right;
+      color: #e0a800;
     }
 
     /* ===== Layout ===== */
@@ -36,18 +37,20 @@
       max-width: 1000px;
       margin: 20px auto;
       margin-top: 60px;
-      background: #1f2d3a;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: #1b2631;
       display: flex;
       flex-direction: column;
       gap: 25px;
+      padding: 15px;
     }
 
     .t-container {
       background: #1f2d3a;
       color: #ecf0f1;
       border-radius: 12px;
-      padding: 15px;
+      padding: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border: 2px solid #21618c;
     }
 
     /* ===== Form ===== */
@@ -72,7 +75,7 @@
     }
 
     .form-row button {
-      background: #2e86c1;
+      background: #21618c;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -86,7 +89,7 @@
       background: #21618c;
     }
 
-    /* ==== Table ==== */
+    /* ===== Table ===== */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -94,10 +97,12 @@
     }
 
     thead th {
-      background: #2e86c1;
+      background: #14532d;
       color: #fff;
       padding: 12px;
       font-size: 14px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
     tbody td {
@@ -126,7 +131,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #ffef0e;
+      background: #e74c3c;
       border-radius: 10px;
     }
 
@@ -177,10 +182,6 @@
 
     .btn-delete:hover {
       opacity: 0.85;
-    }
-
-    .back-btn:hover {
-      background: #e0a800;
     }
 
     /* ===== Modal ===== */
@@ -250,16 +251,11 @@
     .invoice-section {
       padding: 1rem;
       border-radius: 12px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     .previousInvoices {
       padding: 1rem;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
   </style>
 </head>
