@@ -97,7 +97,7 @@ function renderCustomers(searchQuery = "") {
 
   // ===== صف الإجمالي =====
   const totalRow = document.createElement("tr");
-  totalRow.style.background = "green";
+  totalRow.style.background = "#111827";
   totalRow.style.fontWeight = "bold";
 
   totalRow.innerHTML = `
