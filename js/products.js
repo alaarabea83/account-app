@@ -116,7 +116,7 @@ function renderProducts(searchQuery = "") {
   /* صف الإجمالي العام */
   if (products.length) {
     const trTotal = document.createElement("tr");
-    trTotal.style.background = "#2196f3";
+    trTotal.style.background = "#111827";
     trTotal.style.fontWeight = "bold";
 
     trTotal.innerHTML = `

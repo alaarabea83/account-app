@@ -40,16 +40,12 @@
       margin: 5px;
     }
 
-    h2 {
-      text-align: right;
-      color: #e0a800;
-    }
-
     .card {
       background: #1f2d3a;
       color: #ecf0f1;
       border-radius: 12px;
       padding: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       border: 2px solid #21618c;
     }
 
@@ -349,7 +345,7 @@
 <body>
   <nav class="breadcrumbs">
     <a href="../index.html" class="home">الرئيسية</a>
-    <span class="current">العملاء</span>
+    <span class="current">الحسابات</span>
     <a href="../pages/products.html" class="home">المنتجات</a>
     <a href="../pages/sales.html" class="home">المبيعات</a>
     <a href="../pages/purchases.html" class="home"> المشتريات</a>
@@ -362,7 +358,7 @@
   <section>
     <div class="card">
       <div class="addCustomer">
-        <h3>🧑‍💼 إضافة عميل جديد</h3>
+        <h3>📝 إضافة حساب جديد</h3>
         <div class="form-row">
           <input type="text" id="customerName" placeholder="إسم العميل او المورد او الحساب" />
           <input type="number" id="openingBalance" placeholder="الرصيد الإفتتاحي" />
@@ -373,9 +369,9 @@
 
     <div class="card">
       <div class="customerMenu">
-        <h3>📋 قائمة العملاء</h3>
+        <h3>📋 قائمة الحسابات</h3>
         <!-- حقل البحث -->
-        <input type="text" id="searchCustomer" placeholder="🔍 ابحث باسم العميل..." style="
+        <input type="text" id="searchCustomer" placeholder="🔍 ابحث بإسم الحساب..." style="
             display: block;
             padding: 10px;
             border-radius: 8px;
@@ -392,7 +388,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>الاسم</th>
+                <th>الإسم</th>
                 <th>الرصيد الحالي</th>
                 <th>إجراءات</th>
               </tr>
