@@ -36,18 +36,32 @@
       max-width: 1000px;
       margin: 20px auto;
       margin-top: 60px;
-      background: #1f2d3a;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: #1b2631;
       display: flex;
       flex-direction: column;
       gap: 25px;
+      padding: 15px;
     }
 
     .t-container {
       background: #1f2d3a;
       color: #ecf0f1;
       border-radius: 12px;
-      padding: 15px;
+      padding: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border: 2px solid #21618c;
+    }
+
+    .expenseReciept {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #1f2d3a;
+    }
+
+    .expenseMenu {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #1f2d3a;
     }
 
     /* ===== Form ===== */
@@ -76,7 +90,7 @@
     }
 
     .form-row button {
-      background: #2e86c1;
+      background: #21618c;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -98,10 +112,12 @@
     }
 
     thead th {
-      background: #2e86c1;
-      color: #fff;
+      background: #14532d;
+      color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
     tbody td {
@@ -132,22 +148,6 @@
     .table-scroll::-webkit-scrollbar-thumb {
       background: #ffef0e;
       border-radius: 10px;
-    }
-
-    .expenseReciept {
-      padding: 1rem;
-      border-radius: 12px;
-      background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
-    }
-
-    .expenseMenu {
-      padding: 1rem;
-      border-radius: 12px;
-      background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     .modal {
@@ -219,19 +219,19 @@
     <!-- صندوق إضافة سند الدفع -->
     <div class="t-container">
       <div class="expenseReciept">
-        <h3>💸 إضافة سند دفع</h3>
+        <h3>💸 دفع لحساب</h3>
         <div class="form-row">
           <select id="expenseTitle">
             <option value="" disabled selected>اختر البيان</option>
             <option>مصروفات نثرية</option>
             <option>مصروفات إدارية</option>
-            <option>سلف العاملين</option>
+            <option>سلفة موظف</option>
             <option>أجور ومرتبات</option>
-            <option>وقود ومحروقات</option>
-            <option>تسويات</option>
-            <option>حـ/ مدين</option>
-            <option>التوزيعات</option>
-            <option>تصفية شركاء</option>
+            <option>بنزين أو وقود</option>
+            <option>تسوية رصيد</option>
+            <option>أرصدة أخري مدينة</option>
+            <option>توزيع أرباح</option>
+            <option>تصفية شريك</option>
             <option value="other">أخرى</option>
           </select>
           <input type="number" id="expenseAmount" placeholder="المبلغ" min="0" />

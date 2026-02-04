@@ -24,10 +24,11 @@
       max-width: 1000px;
       margin: 20px auto;
       margin-top: 60px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: #1b2631;
       display: flex;
       flex-direction: column;
       gap: 25px;
+      padding: 15px;
     }
 
     h1,
@@ -47,7 +48,9 @@
       background: #1f2d3a;
       color: #ecf0f1;
       border-radius: 12px;
-      padding: 15px;
+      padding: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border: 2px solid #21618c;
     }
 
     /* ===== Form ===== */
@@ -76,7 +79,7 @@
     }
 
     .form-row button {
-      background: #2e86c1;
+      background: #21618c;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -98,10 +101,12 @@
     }
 
     thead th {
-      background: #2e86c1;
+      background: #14532d;
       color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
     tbody td {
@@ -139,16 +144,12 @@
       padding: 1rem;
       border-radius: 12px;
       background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     .incomeMenu {
       padding: 1rem;
       border-radius: 12px;
       background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
 
@@ -222,19 +223,19 @@
   <section>
     <div class="t-container">
       <div class="incomeReciept">
-        <h3>💰 إضافة سند قبض</h3>
+        <h3>💰 قبض من حساب</h3>
         <div class="form-row">
 
           <!-- بيان المقبوضات -->
           <select id="incomeTitle">
             <option value="" disabled selected>اختر البيان</option>
-            <option>تحصيلات العملاء</option>
-            <option>إيرادات خارجية</option>
-            <option>رصيد افتتاحي</option>
-            <option>رأس مال</option>
-            <option>تسويات</option>
-            <option>حـ/ دائن</option>
-            <option>حصص الشركاء</option>
+            <option>تحصيل من حساب</option>
+            <option>إيراد خارجي</option>
+            <option>رصيد إفتتاحي</option>
+            <option>تسوية رصيد</option>
+            <option>أرصدة أخري دائنة</option>
+            <option>إضافة رأس مال</option>
+            <option>إضافة حصة شريك</option>
             <option value="other">أخرى</option>
           </select>
 

@@ -24,11 +24,11 @@
       max-width: 1000px;
       margin: 20px auto;
       margin-top: 60px;
-      background: #1f2d3a;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: #1b2631;
       display: flex;
       flex-direction: column;
       gap: 25px;
+      padding: 15px;
     }
 
     h1,
@@ -40,14 +40,12 @@
     }
 
     .t-container {
-      display: flex;
-      flex-direction: column;
       background: #1f2d3a;
-      justify-content: center;
-      align-items: stretch;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      color: #ecf0f1;
+      border-radius: 12px;
+      padding: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border: 2px solid #21618c;
     }
 
     .t-container h3 {
@@ -61,8 +59,6 @@
       background: #1f2d3a;
       border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     .summary-table td {
@@ -84,10 +80,12 @@
     }
 
     thead th {
-      background: #2e86c1;
-      color: #fff;
+      background: #14532d;
+      color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
     tbody td {
@@ -96,7 +94,6 @@
       color: #fff;
       font-size: 14px;
       text-align: center;
-
     }
 
     tbody tr:hover {
@@ -127,20 +124,17 @@
       border-radius: 12px;
       color: #fff;
       background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     .cashMovement {
       padding: 1rem;
       border-radius: 12px;
       background: #1f2d3a;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
     }
 
     #cashStatementTable tfoot:last-child {
       border-top: 2px solid #f4f6f8;
+      border-bottom: 1px solid #f4f6f8;
       height: 50px;
     }
 
@@ -155,14 +149,8 @@
       padding: 14px 18px;
 
       background: linear-gradient(135deg, rgba(52, 73, 94, .95), rgba(44, 62, 80, .95));
-      backdrop-filter: blur(10px);
 
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, .08);
-
-      box-shadow:
-        0 8px 25px rgba(0, 0, 0, .35),
-        inset 0 1px 0 rgba(255, 255, 255, .05);
 
       max-width: 900px;
       color: #fff;
@@ -193,7 +181,7 @@
 
 
     .filters button {
-      background: linear-gradient(135deg, #3498db, #2c80b4);
+      background: #21618c;
       color: white;
 
       border: none;
@@ -278,7 +266,7 @@
           <label>إلي تاريخ:</label>
           <input type="date" id="cashToDate" />
           <select id="cashCustomerFilter" style="min-width:150px; padding:0.5rem; font-size:1rem; text-align: center;">
-            <option value="">إختر العميل</option>
+            <option value="">إختر الحساب</option>
           </select>
           <button id="filterCashBtn">عرض الكشف</button>
         </div>

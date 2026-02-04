@@ -12,7 +12,7 @@ window.onload = function () {
 function renderCashCustomerFilter() {
   const sel = document.getElementById("cashCustomerFilter");
   if (!sel) return;
-  sel.innerHTML = `<option value="">إختر العميل</option>` +
+  sel.innerHTML = `<option value="">إختر الحساب</option>` +
     customers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
 }
 
@@ -70,7 +70,7 @@ function renderCashStatement() {
     tfoot = document.createElement("tfoot");
     tbody.parentElement.appendChild(tfoot);
   }
-  tfoot.innerHTML = `<tr style="background-color:#2196f3;font-weight:bold;">
+  tfoot.innerHTML = `<tr style="background-color:#111827;font-weight:bold;">
     <td colspan="5" style="text-align:right;">الرصيد الختامي</td>
     <td>${cumulativeBalance.toFixed(2)}</td>
   </tr>`;
