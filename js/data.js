@@ -45,11 +45,8 @@ function loadData() {
   incomes = i ? JSON.parse(i) : [];
   expenses = e ? JSON.parse(e) : [];
 
-  cash = ca
-    ? JSON.parse(ca)
-    : { opening: 0, income: 0, expenses: 0 };
+  cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
 }
-
 
 /* ===============================
    أدوات مساعدة عامة

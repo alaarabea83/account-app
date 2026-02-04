@@ -168,10 +168,16 @@ function savePurchase() {
 
   // تحديث المخزون
   items.forEach((item) => {
-    const product = products.find((p) => p.name === item.name);
-    if (product) product.qty += item.qty;
-  });
+  const product = products.find(
+    (p) => p.name.trim() === item.name.trim()
+  );
 
+  if (product) {
+    product.qty += Number(item.qty);
+  }
+});
+
+// تحديث الخزنه
   cash.expenses += paid;
 
   const invoiceData = {

@@ -65,8 +65,12 @@ function getCurrentQty(productName) {
 
   // 🟢 المشتريات
   purchases.forEach((pur) => {
-    if (pur.product === productName) {
-      qty += pur.qty;
+    if (pur.items) {
+      pur.items.forEach((item) => {
+        if (item.name === productName) {
+          qty += item.qty;
+        }
+      });
     }
   });
 
@@ -228,14 +232,25 @@ function openProductMovement(index) {
   tbody.appendChild(trOpening);
 
   // مشتريات
-  purchases
-    .filter((pur) => pur.product === p.name)
-    .forEach((pur) => {
-      currentQty += pur.qty;
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${pur.date}</td><td>مشتريات</td><td>+${pur.qty}</td><td>${currentQty}</td>`;
-      tbody.appendChild(tr);
-    });
+  purchases.forEach((pur) => {
+    if (pur.items) {
+      pur.items.forEach((item) => {
+        if (item.name === p.name) {
+          currentQty += item.qty;
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+          <td>${pur.date}</td>
+          <td>مشتريات</td>
+          <td>+${item.qty}</td>
+          <td>${currentQty}</td>
+        `;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+  });
+
 
   // مبيعات
   sales.forEach((sale) => {
