@@ -6,8 +6,8 @@
   max-width: 1000px;
   width: 90%;
   padding: 12px 20px;
-  background: #2196f3;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  background: #1b2631;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
   font-family: "cairo", sans-serif;
   overflow-x: auto;
   scrollbar-width: none;
-  border: 2px solid #000;
 }
 
 .breadcrumbs::-webkit-scrollbar {
@@ -24,7 +23,7 @@
 
 .breadcrumbs a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
   font-size: 14px;
   font-weight: bold;
   padding: 6px 10px;
