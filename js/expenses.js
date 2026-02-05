@@ -26,14 +26,12 @@ function addExpense() {
   if (customer) customer.balance += amount;
   cash.expenses += amount;
 
-  const newOrder = sales.length + purchases.length + incomes.length + expenses.length + 1;
-
   expenses.push({
     title,
     amount,
     customer: customer ? customer.name : "نقدي",
-    date: new Date().toLocaleDateString(),
-    order: newOrder
+    date: new Date().toISOString().slice(0, 10),
+    order: Date.now(),
   });
 
   expenseTitle.value = "";
@@ -66,7 +64,7 @@ window.onload = function () {
   renderExpenseCustomerSelect();
   renderExpenses();
   renderCash();
-}
+};
 
 function showModal(message, title = "تنبيه") {
   document.getElementById("modalTitle").innerText = title;
@@ -79,7 +77,6 @@ function closeModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
   const expenseSelect = document.getElementById("expenseTitle");
   const expenseModal = document.getElementById("expenseModal");
   const otherExpenseInput = document.getElementById("otherExpenseInput");
@@ -120,5 +117,4 @@ document.addEventListener("DOMContentLoaded", function () {
     expenseModal.style.display = "none";
     expenseSelect.value = "";
   };
-
 });

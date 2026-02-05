@@ -29,15 +29,12 @@ function addIncome() {
   if (customer) customer.balance -= amount;
   cash.income += amount;
 
-  const newOrder =
-    sales.length + purchases.length + incomes.length + expenses.length + 1;
-
   incomes.push({
     title,
     amount,
     customer: customer ? customer.name : "نقدي",
-    date: new Date().toLocaleDateString(),
-    order: newOrder,
+    date: new Date().toISOString().slice(0, 10),
+    order: Date.now(),
   });
 
   document.getElementById("incomeTitle").value = "";
