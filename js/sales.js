@@ -199,6 +199,7 @@ function saveSale() {
   }
 
   saveData();
+  updateBottomCashBalance();
   renderSales();
   container.innerHTML = "";
   document.querySelectorAll("input").forEach((i) => (i.value = ""));
@@ -309,6 +310,7 @@ function confirmDeleteInvoice(order) {
     sales.splice(index, 1);
 
     saveData();
+    updateBottomCashBalance();
     renderSales();
     showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
   });

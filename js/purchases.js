@@ -200,6 +200,7 @@ function savePurchase() {
   }
 
   saveData();
+  updateBottomCashBalance();
   renderPurchases();
   container.innerHTML = "";
   document.querySelectorAll("input").forEach((i) => (i.value = ""));
@@ -305,6 +306,7 @@ function confirmDeletePurchase(order) {
     purchases.splice(index, 1);
 
     saveData();
+    updateBottomCashBalance();
     renderPurchases();
     showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
   });

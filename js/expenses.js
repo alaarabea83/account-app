@@ -41,6 +41,7 @@ function addExpense() {
   expenseCustomer.value = "";
 
   saveData();
+  updateBottomCashBalance();
   renderExpenses();
   renderCash();
   renderExpenseCustomerSelect();

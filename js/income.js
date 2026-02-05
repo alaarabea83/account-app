@@ -45,6 +45,7 @@ function addIncome() {
   document.getElementById("incomeCustomer").value = "";
 
   saveData();
+  updateBottomCashBalance();
   renderIncome();
 }
 

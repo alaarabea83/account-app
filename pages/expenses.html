@@ -1,293 +1,305 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/png" href="../icons/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
+    <title>سهل لإدارة الحسابات</title>
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+        background: #1b2631;
+        margin: 0;
+      }
 
-  <title>سهل لإدارة الحسابات</title>
-  <style>
-    body {
-      font-family: "Tajawal", sans-serif;
-      background: #1b2631;
-      margin: 0;
-    }
+      h1,
+      h2,
+      h3 {
+        font-family: "Cairo", sans-serif;
+        font-weight: 700;
+        margin: 5px;
+      }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Cairo", sans-serif;
-      font-weight: 700;
-      margin: 5px;
-    }
+      h2 {
+        text-align: right;
+        color: #e0a800;
+      }
 
-    h2 {
-      text-align: right;
-      color: #e0a800;
-    }
+      section {
+        max-width: 1000px;
+        margin: 20px auto;
+        margin-top: 60px;
+        background: #1b2631;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        padding: 15px;
+      }
 
-    section {
-      max-width: 1000px;
-      margin: 20px auto;
-      margin-top: 60px;
-      background: #1b2631;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      padding: 15px;
-    }
+      .t-container {
+        background: #1f2d3a;
+        color: #ecf0f1;
+        border-radius: 12px;
+        padding: 5px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 2px solid #21618c;
+      }
 
-    .t-container {
-      background: #1f2d3a;
-      color: #ecf0f1;
-      border-radius: 12px;
-      padding: 5px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      border: 2px solid #21618c;
-    }
+      .expenseReciept {
+        padding: 1rem;
+        border-radius: 12px;
+        background: #1f2d3a;
+      }
 
-    .expenseReciept {
-      padding: 1rem;
-      border-radius: 12px;
-      background: #1f2d3a;
-    }
+      .expenseMenu {
+        padding: 1rem;
+        border-radius: 12px;
+        background: #1f2d3a;
+      }
 
-    .expenseMenu {
-      padding: 1rem;
-      border-radius: 12px;
-      background: #1f2d3a;
-    }
+      /* ===== Form ===== */
+      .form-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
 
-    /* ===== Form ===== */
-    .form-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
+      .form-row input,
+      .form-row select {
+        background: #22313f;
+        color: #ecf0f1;
+        flex: 1;
+        min-width: 180px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        font-size: 15px;
+        border-radius: 10px;
+      }
 
-    .form-row input,
-    .form-row select {
-      background: #22313f;
-      color: #ecf0f1;
-      flex: 1;
-      min-width: 180px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      border-radius: 10px;
-    }
+      input::placeholder {
+        color: #fff;
+      }
 
-    input::placeholder {
-      color: #fff;
-    }
+      .form-row button {
+        background: #21618c;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-size: 15px;
+      }
 
-    .form-row button {
-      background: #21618c;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 15px;
-    }
+      .form-row button:hover {
+        background: #21618c;
+      }
 
-    .form-row button:hover {
-      background: #21618c;
-    }
+      /* ===== Table ===== */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #1f2d3a;
+      }
 
-    /* ===== Table ===== */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #1f2d3a;
-    }
+      thead th {
+        background: #14532d;
+        color: #ecf0f1;
+        padding: 12px;
+        font-size: 14px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+      }
 
-    thead th {
-      background: #14532d;
-      color: #ecf0f1;
-      padding: 12px;
-      font-size: 14px;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-    }
+      tbody td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        text-align: center;
+      }
 
-    tbody td {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-      text-align: center;
-    }
+      tbody tr:hover {
+        background: #065bb1;
+      }
 
-    tbody tr:hover {
-      background: #065bb1;
-    }
+      .table-scroll {
+        width: 100%;
+        overflow-x: auto;
+        padding: 1px;
+      }
 
-    .table-scroll {
-      width: 100%;
-      overflow-x: auto;
-      padding: 1px;
-    }
+      .table-scroll table {
+        min-width: 900px;
+      }
 
-    .table-scroll table {
-      min-width: 900px;
-    }
+      .table-scroll::-webkit-scrollbar {
+        height: 6px;
+      }
 
-    .table-scroll::-webkit-scrollbar {
-      height: 6px;
-    }
+      .table-scroll::-webkit-scrollbar-thumb {
+        background: #ffef0e;
+        border-radius: 10px;
+      }
 
-    .table-scroll::-webkit-scrollbar-thumb {
-      background: #ffef0e;
-      border-radius: 10px;
-    }
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .6);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+      .modal-content {
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        padding: 20px;
+        border-radius: 14px;
+        width: 300px;
+        text-align: center;
+        color: #ecf0f1;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    .modal-content {
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-      padding: 20px;
-      border-radius: 14px;
-      width: 300px;
-      text-align: center;
-      color: #ecf0f1;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+      .modal-content input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px auto;
+        border-radius: 8px;
+        border: 1px solid #34495e;
+        background: #22313f;
+        color: white;
+      }
 
-    .modal-content input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px auto;
-      border-radius: 8px;
-      border: 1px solid #34495e;
-      background: #22313f;
-      color: white;
-    }
+      .modal-actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+      }
 
-    .modal-actions {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      width: 100%;
-    }
+      .modal-actions button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #3498db;
+        color: white;
+      }
+    </style>
+  </head>
 
-    .modal-actions button {
-      padding: 8px 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #3498db;
-      color: white;
-    }
-  </style>
-</head>
+  <body>
+    <nav class="breadcrumbs">
+      <a href="../index.html" class="home">الرئيسية</a>
+      <a href="../pages/customers.html" class="home">الحسابات</a>
+      <a href="../pages/products.html" class="home">المنتجات</a>
+      <a href="../pages/sales.html" class="home"> المبيعات</a>
+      <a href="../pages/purchases.html" class="home">المشتريات</a>
+      <a href="../pages/income.html" class="home">المقبوضات</a>
+      <span class="current">المدفوعات</span>
+      <a href="../pages/cash.html" class="home">الخزينة</a>
+      <a href="../pages/about.html" class="home">معلومات</a>
+    </nav>
 
-<body>
-  <nav class="breadcrumbs">
-    <a href="../index.html" class="home">الرئيسية</a>
-    <a href="../pages/customers.html" class="home">الحسابات</a>
-    <a href="../pages/products.html" class="home">المنتجات</a>
-    <a href="../pages/sales.html" class="home"> المبيعات</a>
-    <a href="../pages/purchases.html" class="home">المشتريات</a>
-    <a href="../pages/income.html" class="home">المقبوضات</a>
-    <span class="current">المدفوعات</span>
-    <a href="../pages/cash.html" class="home">الخزينة</a>
-    <a href="../pages/about.html" class="home">معلومات</a>
-  </nav>
+    <section>
+      <!-- صندوق إضافة سند الدفع -->
+      <div class="t-container">
+        <div class="expenseReciept">
+          <h3>💸 دفع لحساب</h3>
+          <div class="form-row">
+            <select id="expenseTitle">
+              <option value="" disabled selected>اختر البيان</option>
+              <option>مصروفات نثرية</option>
+              <option>مصروفات إدارية</option>
+              <option>سلفة موظف</option>
+              <option>أجور ومرتبات</option>
+              <option>بنزين أو وقود</option>
+              <option>تسوية رصيد</option>
+              <option>أرصدة أخري مدينة</option>
+              <option>توزيع أرباح</option>
+              <option>تصفية شريك</option>
+              <option value="other">أخرى</option>
+            </select>
+            <input
+              type="number"
+              id="expenseAmount"
+              placeholder="المبلغ"
+              min="0"
+            />
+            <select id="expenseCustomer"></select>
+            <button id="addExpenseBtn">إضافة</button>
+          </div>
+        </div>
+      </div>
 
-  <section>
-    <!-- صندوق إضافة سند الدفع -->
-    <div class="t-container">
-      <div class="expenseReciept">
-        <h3>💸 دفع لحساب</h3>
-        <div class="form-row">
-          <select id="expenseTitle">
-            <option value="" disabled selected>اختر البيان</option>
-            <option>مصروفات نثرية</option>
-            <option>مصروفات إدارية</option>
-            <option>سلفة موظف</option>
-            <option>أجور ومرتبات</option>
-            <option>بنزين أو وقود</option>
-            <option>تسوية رصيد</option>
-            <option>أرصدة أخري مدينة</option>
-            <option>توزيع أرباح</option>
-            <option>تصفية شريك</option>
-            <option value="other">أخرى</option>
-          </select>
-          <input type="number" id="expenseAmount" placeholder="المبلغ" min="0" />
-          <select id="expenseCustomer"></select>
-          <button id="addExpenseBtn">إضافة</button>
+      <!--  سجل المصروفات -->
+      <div class="t-container">
+        <div class="expenseMenu">
+          <h3>📋 سجل المدفوعات</h3>
+          <div class="table-scroll">
+            <table id="expenseTable">
+              <thead>
+                <tr>
+                  <th>البيان</th>
+                  <th>المبلغ</th>
+                  <th>العميل</th>
+                  <th>التاريخ</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="appModal" class="modal-overlay">
+      <div class="modal-box">
+        <h3 id="modalTitle">تنبيه</h3>
+        <p id="modalMessage"></p>
+        <button onclick="closeModal()">حسناً</button>
+      </div>
+    </div>
+
+    <!-- مودال إضافة بند أخرى للمصروفات -->
+    <div id="expenseModal" class="modal">
+      <div class="modal-content">
+        <h3>إضافة بيان مصروف</h3>
+
+        <input type="text" id="otherExpenseInput" placeholder="اكتب البيان" />
+
+        <div class="modal-actions">
+          <button id="saveExpenseBtn">حفظ</button>
+          <button id="closeExpenseModalBtn">إلغاء</button>
         </div>
       </div>
     </div>
 
-    <!--  سجل المصروفات -->
-    <div class="t-container">
-      <div class="expenseMenu">
-        <h3>📋 سجل المدفوعات</h3>
-        <div class="table-scroll">
-          <table id="expenseTable">
-            <thead>
-              <tr>
-                <th>البيان</th>
-                <th>المبلغ</th>
-                <th>العميل</th>
-                <th>التاريخ</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
+    <nav class="bottom-menu">
+      <div class="menu-item cash-item">
+        <span>💰 رصيد الخزينة:</span>
+        <span id="cashBalance">0.00</span> جنيه
       </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Modal -->
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage"></p>
-      <button onclick="closeModal()">حسناً</button>
-    </div>
-  </div>
-
-  <!-- مودال إضافة بند أخرى للمصروفات -->
-  <div id="expenseModal" class="modal">
-    <div class="modal-content">
-      <h3>إضافة بيان مصروف</h3>
-
-      <input type="text" id="otherExpenseInput" placeholder="اكتب البيان">
-
-      <div class="modal-actions">
-        <button id="saveExpenseBtn">حفظ</button>
-        <button id="closeExpenseModalBtn">إلغاء</button>
-      </div>
-    </div>
-  </div>
-
-
-  <script src="../js/data.js"></script>
-  <script src="../js/expenses.js"></script>
-</body>
-
+    <script src="../js/data.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/expenses.js"></script>
+  </body>
 </html>

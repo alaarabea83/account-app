@@ -39,6 +39,7 @@ function addCustomerHandler() {
   document.getElementById("openingBalance").value = "";
 
   saveData();
+  updateBottomCashBalance();
   renderCustomers();
   showModal("تم إضافة العميل بنجاح ✅", "نجاح");
 }
@@ -155,6 +156,7 @@ function saveCustomerEdit() {
   customer.balance += diff;
 
   saveData();
+  updateBottomCashBalance();
   renderCustomers();
   closeEditModal();
   showModal("تم تعديل بيانات العميل ✨", "نجاح");
@@ -176,6 +178,7 @@ function confirmDelete() {
 
   customers.splice(deleteIndex, 1);
   saveData();
+  updateBottomCashBalance();
   renderCustomers();
 
   closeDeleteModal();
