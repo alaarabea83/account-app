@@ -14,138 +14,183 @@
         rel="stylesheet" />
     <link rel="manifest" href="/manifest.json">
     <title>سهل لإدارة الحسابات</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Cairo", sans-serif;
-        }
+   <style>
+*{
+  box-sizing:border-box;
+  font-family:"Cairo",sans-serif;
+}
 
-        body {
-            margin: 0;
-            background: #1b2631;
-            color: #ecf0f1;
-        }
+body{
+  margin:0;
+  background:#0e1a14;
+  color:#ecfdf5;
+}
 
-        .header {
-            background: #1f2d3a;
-            padding: 16px 24px;
-            margin: 16px auto;
-            border-radius: 12px;
-            max-width: 1000px;
-        }
+/* HEADER */
+.header{
+  background:#064e3b;
+  padding:18px;
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  box-shadow:0 4px 10px rgba(0,0,0,.4);
+  margin-bottom: 40px;
+}
 
-        /* Dashboard Grid */
-        .dashboard-wrapper {
-            max-width: 1100px;
-            /* تحكم في عرض الكروت */
-            margin: auto;
-        }
+/* GRID */
+section{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  padding:20px;
+}
 
-        h1,
-        h2,
-        h3 {
-            font-family: "Cairo", sans-serif;
-            font-weight: 700;
-            margin: 5px;
-        }
+/* CARD */
+.card{
+  background:linear-gradient(145deg,#065f46,#022c22);
+  border:1px solid #10b98155;
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+  text-decoration:none;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-        .card {
-            font-family: "Tajawal", sans-serif;
-            font-weight: 500;
-        }
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
+  border-color:#10b981
+}
 
-        section {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            padding: 12px 20px;
-        }
+/* ICON */
+.card img{
+  width:55px;
+  margin-bottom:10px;
+}
 
-        .card {
-            background: #1f2d3a;
-            color: #fff;
-            border: 2px solid #21618c;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* TITLE */
+.card h3{
+  margin:6px 0;
+  font-size:18px;
+}
 
-        .card img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 0.8rem;
-        }
+/* DESCRIPTION */
+.card p{
+  font-size:13px;
+  opacity:.85;
+  line-height:1.6;
+  margin:0;
+}
+</style>
 
-        .card:hover {
-            background: #1b2631;
-        }
+<header class="header">
+سهل لإدارة الحسابات
+</header>
 
-        /* Responsive - كرتين على الموبايل */
-        @media (max-width: 600px) {
-            section {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
-</head>
+<section>
 
-<body>
-    <header class="header">
-        <h2>سهل لإدارة الحسابات</h2>
-    </header>
+<a class="card" href="pages/customers.html">
+<img src="icons/customers.png">
+<h3>العملاء</h3>
+<p>
+إضافة عميل<br>
+قائمة العملاء<br>
+كشف حساب<br>
+تعديل وحذف
+</p>
+</a>
 
-    <section>
-        <a class="card" href="pages/customers.html">
-            <img src="icons/customers.png" alt="الحسابات" />
-            الحسابات
-        </a>
-        <a class="card" href="pages/products.html">
-            <img src="icons/products.png" alt="المنتجات" />
-            المنتجات
-        </a>
-        <a class="card" href="pages/sales.html">
-            <img src="icons/sales.png" alt="المبيعات" />
-            المبيعات
-        </a>
-        <a class="card" href="pages/purchases.html">
-            <img src="icons/purchases.png" alt="المشتريات" />
-            المشتريات
-        </a>
-        <a class="card" href="pages/income.html">
-            <img src="icons/income.png" alt="المقبوضات" />
-            المقبوضات
-        </a>
-        <a class="card" href="pages/expenses.html">
-            <img src="icons/expenses.png" alt="المدفوعات" />
-            المدفوعات
-        </a>
-        <a class="card" href="pages/cash.html">
-            <img src="icons/cash.png" alt="الخزينة" />
-            الخزينة
-        </a>
-        <a class="card" href="pages/about.html">
-            <img src="icons/mobile_app.png" alt="about" />
-            التطبيق
-        </a>
-    </section>
+<a class="card" href="pages/products.html">
+<img src="icons/products.png">
+<h3>المنتجات</h3>
+<p>
+إضافة منتج<br>
+قائمة المنتجات<br>
+إدارة الأسعار<br>
+تعديل وحذف
+</p>
+</a>
+
+<a class="card" href="pages/sales.html">
+<img src="icons/sales.png">
+<h3>المبيعات</h3>
+<p>
+فاتورة بيع<br>
+تسجيل مدفوعات<br>
+متابعة العملاء
+</p>
+</a>
+
+<a class="card" href="pages/purchases.html">
+<img src="icons/purchases.png">
+<h3>المشتريات</h3>
+<p>
+فواتير شراء<br>
+إدارة الموردين<br>
+تحديث المخزون
+</p>
+</a>
+
+<a class="card" href="pages/income.html">
+<img src="icons/income.png">
+<h3>المقبوضات</h3>
+<p>
+سند قبض<br>
+تحصيل ديون<br>
+تقارير مالية
+</p>
+</a>
+
+<a class="card" href="pages/expenses.html">
+<img src="icons/expenses.png">
+<h3>المدفوعات</h3>
+<p>
+سند صرف<br>
+مصروفات الشركة<br>
+تقارير المصروفات
+</p>
+</a>
+
+<a class="card" href="pages/cash.html">
+<img src="icons/cash.png">
+<h3>الخزينة</h3>
+<p>
+رصيد الخزينة<br>
+حركة النقدية<br>
+تقارير يومية
+</p>
+</a>
+
+<a class="card" href="pages/about.html">
+<img src="icons/mobile_app.png">
+<h3>معلومات</h3>
+<p>
+عن البرنامج<br>
+التحديثات<br>
+الدعم الفني
+</p>
+</a>
+
+</section>
+
 
     <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js")
-                .then(() => console.log("SW Registered"))
-                .catch(err => console.log("SW Error", err));
-        }
+        window.addEventListener("load", () => {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("sw.js")
+                    .then(reg => console.log("SW Registered", reg))
+                    .catch(err => console.log("SW Error", err));
+            }
+        });
     </script>
+
 
 
 </body>
