@@ -69,7 +69,7 @@ function addInvoiceItem(product) {
   row.innerHTML = `
     <td>${rowNumber}</td>
     <td>${product.name}</td>
-    <td><input type="number" class="itemQty" min="1" value="1"></td>
+    <td><input type="number" class="itemQty" min="1" value=""></td>
     <td><input type="number" class="itemPrice" value="${product.price}" readonly></td>
     <td><input type="number" class="itemTotal" value="${product.price}" readonly></td>
     <td><button type="button" class="btn-delete-item">×</button></td>
@@ -202,13 +202,23 @@ function saveSale() {
     sales.push(invoiceData);
   }
 
+  function resetInvoiceForm() {
+  document.getElementById("invoiceItems").innerHTML = "";
+
+  document.getElementById("invoiceCustomer").selectedIndex = 0;
+  document.getElementById("invoiceProductSelect").selectedIndex = 0;
+
+  document.getElementById("customerBalance").value = "";
+  document.getElementById("invoiceTotal").value = "";
+  document.getElementById("grandTotal").value = "";
+  document.getElementById("paidAmount").value = "";
+  document.getElementById("remainingAmount").value = "";
+}
+
   saveData();
   updateBottomCashBalance();
   renderSales();
-  container.innerHTML = "";
-  document
-    .querySelectorAll("input[type='number']")
-    .forEach((i) => (i.value = ""));
+  resetInvoiceForm();
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
 
