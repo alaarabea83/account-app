@@ -78,14 +78,15 @@
 
     .form-row input,
     .form-row select {
-      background: #22313f;
-      color: #ecf0f1;
       flex: 1;
-      min-width: 180px;
+      background: #374151;
+      color: #ecf0f1;
+      border: 1px solid #4b5563;
+      border-radius: 8px;
       padding: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      border-radius: 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: 0.2s;
     }
 
     input::placeholder {
@@ -338,15 +339,15 @@
         <!-- حقل البحث -->
         <input type="text" id="searchProduct" placeholder="🔍 ابحث بإسم المنتج..." style="
               display: block;
-              padding: 10px;
-              border-radius: 8px;
-              border: 1px solid #ccc;
-              margin: 0 auto 15px auto;
-              width: 90%;
-              max-width: 400px;
-              font-size: 15px;
-              background-color: #22313f;
-              color: #fff;
+            padding: 10px;
+             background: #374151;
+        color: #ecf0f1;
+        border: 1px solid #4b5563;
+        border-radius: 8px;
+            margin: 0 auto 15px auto;
+            width: 90%;
+            max-width: 400px;
+            font-size: 15px;
             " />
 
         <div class="table-scroll">

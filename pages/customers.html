@@ -41,8 +41,8 @@
     }
 
     h3 {
-        color: #10b981;
-      }
+      color: #10b981;
+    }
 
     .card {
       background: #1f2d3a;
@@ -89,14 +89,15 @@
 
     .form-row input,
     .form-row select {
-      background: #22313f;
-      color: #ecf0f1;
       flex: 1;
-      min-width: 180px;
+      background: #374151;
+      color: #ecf0f1;
+      border: 1px solid #4b5563;
+      border-radius: 8px;
       padding: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      border-radius: 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: 0.2s;
     }
 
     input::placeholder {
@@ -378,14 +379,14 @@
         <input type="text" id="searchCustomer" placeholder="🔍 إبحث بإسم العميل أو الحساب..." style="
             display: block;
             padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+             background: #374151;
+        color: #ecf0f1;
+        border: 1px solid #4b5563;
+        border-radius: 8px;
             margin: 0 auto 15px auto;
             width: 90%;
             max-width: 400px;
             font-size: 15px;
-            background-color: #22313f;
-            color: #fff;
           " />
         <div class="table-scroll">
           <table id="customersTable">

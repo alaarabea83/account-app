@@ -272,7 +272,7 @@ function renderSales(data = sales) {
 
   // صف الإجمالي  //
   tbody.innerHTML += `
-    <tr style="background:#14532d;color:#fff;font-weight:bold">
+    <tr style="background:#111827;color:#fff;font-weight:bold">
       <td colspan="3">الإجمالي</td>
       <td>${sumTotal}</td>
       <td>${sumPaid}</td>
