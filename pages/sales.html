@@ -283,34 +283,33 @@
       }
 
       .btn-delete-item {
-  background-color: #e74c3c;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 25px;       /* حجم الخط واضح على الموبايل */
-  line-height: 1;        /* لضبط ارتفاع النص داخل الزر */
-  width: 32px;            /* زر مربع */
-  height: 32px;           /* زر مربع */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;             /* إلغاء البادينج الكبير */
-  transition: 0.2s;
-}
+        background-color: #e74c3c;
+        color: #000;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 25px; /* حجم الخط واضح على الموبايل */
+        line-height: 1; /* لضبط ارتفاع النص داخل الزر */
+        width: 32px; /* زر مربع */
+        height: 32px; /* زر مربع */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0; /* إلغاء البادينج الكبير */
+        transition: 0.2s;
+      }
 
-.btn-delete-item:hover {
-  opacity: 0.85;
-}
+      .btn-delete-item:hover {
+        opacity: 0.85;
+      }
 
-@media (max-width: 600px) {
-  .btn-delete-item {
-    font-size: 20px;      /* تكبير الخط على الموبايل */
-    width: 36px;
-    height: 36px;
-  }
-}
-
+      @media (max-width: 600px) {
+        .btn-delete-item {
+          font-size: 20px; /* تكبير الخط على الموبايل */
+          width: 36px;
+          height: 36px;
+        }
+      }
 
       /* ===== Responsive ===== */
       @media (max-width: 600px) {
@@ -353,31 +352,45 @@
       }
 
       .card .form-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        /* مسافة بين كل لابل وحقل */
-        flex-wrap: wrap;
-        /* عشان على الموبايل يبقى responsive */
-      }
+  display: flex;
+  align-items: center;
+  gap: 10px;        /* مسافة بين اللابل والحقل */
+  flex-wrap: wrap;   /* responsive على الموبايل */
+}
 
-      .card .form-row label {
-        width: auto;
-        font-weight: bold;
-        margin: 0;
-        /* إزالة المسافات الافتراضية */
-      }
+.card .form-row label {
+  width: 120px;      /* حجم ثابت للابل */
+  text-align: left;  /* اللابل على الشمال */
+  font-weight: bold;
+  margin: 0;
+}
 
-      .card .form-row input[type="number"] {
-        width: 80px;
-        /* حجم صغير للحقول */
-        padding: 5px 8px;
-        border-radius: 6px;
-        border: 1px solid #2c3e50;
-        background: #374151;
-        text-align: center;
-        font-size: 14px;
-      }
+.card .form-row input[type="number"] {
+  flex: 1;           /* الحقل ياخد باقي المساحة */
+  max-width: 100px;  /* أقصى عرض للحقول */
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid #2c3e50;
+  background: #374151;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* لو تحب تبقى responsive أكتر على الموبايل */
+@media (max-width: 1200) {
+  .card .form-row {
+    justify-content: flex-start;
+  }
+
+  .card .form-row label {
+    width: 100px;
+  }
+
+  .card .form-row input[type="number"] {
+    max-width: 120px;
+  }
+}
+
     </style>
   </head>
 
@@ -448,9 +461,9 @@
 
           <!-- المدفوع + المتبقي -->
           <div class="form-row">
-            <label>المدفوع:</label>
+            <label>المبلغ المدفوع:</label>
             <input type="number" id="paidAmount" />
-            <label>المتبقي:</label>
+            <label>الرصيد الجديد:</label>
             <input type="number" id="remainingAmount" readonly />
           </div>
         </div>
