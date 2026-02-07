@@ -1,14 +1,12 @@
 let editInvoiceIndex = null;
 
-// ===============================
-// عند تحميل الصفحة
-// ===============================
+// عند تحميل الصفحة //
 window.onload = function () {
   loadData();
   renderCustomerSelect();
   renderSales();
 
-  // Dropdown لاختيار المنتج مباشرة
+  // Dropdown لاختيار المنتج مباشرة //
   renderProductSelect();
 
   document.getElementById("saveInvoiceBtn").onclick = saveSale;
@@ -27,9 +25,7 @@ window.onload = function () {
     .addEventListener("input", updateRemaining);
 };
 
-// ===============================
-// عرض العملاء
-// ===============================
+// عرض العملاء //
 function renderCustomerSelect() {
   const sel = document.getElementById("invoiceCustomer");
   if (!sel) return;
@@ -40,9 +36,7 @@ function renderCustomerSelect() {
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
 
-// ===============================
-// Dropdown المنتجات أعلى الفاتورة
-// ===============================
+// Dropdown المنتجات أعلى الفاتورة //
 function renderProductSelect() {
   const sel = document.getElementById("invoiceProductSelect");
   sel.innerHTML =
@@ -57,7 +51,7 @@ function renderProductSelect() {
     this.selectedIndex = 0;
   };
 }
-
+// == إضافة منتج ==//
 function addInvoiceItem(product) {
   const tbody = document.getElementById("invoiceItems");
   const rowNumber = tbody.children.length + 1;
@@ -73,9 +67,10 @@ function addInvoiceItem(product) {
   `;
   tbody.appendChild(row);
 
-  const qtyInput = row.querySelector(".itemQty");
+  const qtyInput = row.querySelector(".itemQty"); // تعريف إضافة الكمية للفاتورة //
   const totalInput = row.querySelector(".itemTotal");
 
+  // ==  حساب إجمالي صف الفاتورة ==//
   function calcRow() {
     totalInput.value = (+qtyInput.value || 0) * (+product.price || 0);
     updateInvoiceTotal();
@@ -84,6 +79,7 @@ function addInvoiceItem(product) {
   qtyInput.addEventListener("input", calcRow);
   qtyInput.addEventListener("change", calcRow);
 
+  // حذف صف من الفاتورة //
   row.querySelector(".btn-delete-item").onclick = () => {
     row.remove();
     updateInvoiceTotal();
@@ -91,15 +87,14 @@ function addInvoiceItem(product) {
   };
 }
 
+// == تحديث رقم الصف ==//
 function updateRowNumbers() {
   const rows = document.querySelectorAll("#invoiceItems tr");
   rows.forEach((r, i) => (r.cells[0].innerText = i + 1));
 }
 
-// ===============================
-// الحسابات
-// ===============================
-// تحديث إجمالي الفاتورة
+// === الحسابات ===//
+// == تحديث إجمالي الفاتورة ==//
 function updateInvoiceTotal() {
   let total = 0;
   document.querySelectorAll("#invoiceItems tr").forEach((row) => {
@@ -107,7 +102,7 @@ function updateInvoiceTotal() {
     const price = +row.querySelector(".itemPrice").value || 0;
     total += qty * price;
 
-    // تحديث الخلية مباشرة
+    // تحديث الخلية مباشرة //
     row.querySelector(".itemTotal").value = qty * price;
   });
 
@@ -115,7 +110,7 @@ function updateInvoiceTotal() {
   updateGrandTotal();
 }
 
-// تحديث الإجمالي الكلي
+// == تحديث الإجمالي الكلي ==//
 function updateGrandTotal() {
   const balance = +document.getElementById("customerBalance").value || 0;
   const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
@@ -123,36 +118,34 @@ function updateGrandTotal() {
   updateRemaining();
 }
 
-// تحديث المتبقي بعد المدفوع
+// == تحديث المتبقي بعد المدفوع ==//
 function updateRemaining() {
   const grand = +document.getElementById("grandTotal").value || 0;
   const paid = +document.getElementById("paidAmount").value || 0;
   document.getElementById("remainingAmount").value = grand - paid;
 }
 
-// ===============================
-// حفظ الفاتورة
-// ===============================
+// === حفظ الفاتورة ===//
 function saveSale() {
   const container = document.getElementById("invoiceItems");
 
-  // ===== تحقق من وجود منتجات =====
+  // ===== تحقق من وجود منتجات ===== //
   if (!container.children.length) {
     showModal("أضف منتج واحد على الأقل");
     return;
   }
 
-  // ===== تحقق من الكميات =====
+  // ===== تحقق من الكميات ===== //
   if ([...container.querySelectorAll(".itemQty")].some((i) => +i.value <= 0)) {
     showModal("أدخل كميات صحيحة للمنتجات");
     return;
   }
 
-  // ===== إذا كان تعديل فاتورة، استرجاع المخزون والرصيد القديم =====
+  // ===== إذا كان تعديل فاتورة، استرجاع المخزون والرصيد القديم ===== //
   if (editInvoiceIndex !== null) {
     const oldInvoice = sales[editInvoiceIndex];
 
-    // استرجاع الرصيد القديم
+    // استرجاع الرصيد القديم //
     if (oldInvoice.customer !== "نقدي") {
       const cust = customers.find((c) => c.name === oldInvoice.customer);
       if (cust) {
@@ -160,17 +153,17 @@ function saveSale() {
       }
     }
 
-    // استرجاع الكميات القديمة للمخزون
+    // استرجاع الكميات القديمة للمخزون //
     oldInvoice.items.forEach((item) => {
       const product = products.find((p) => p.name === item.name);
       if (product) product.qty += item.qty;
     });
 
-    // ===== خصم المدفوع القديم من الخزنة =====
+    // ===== خصم المدفوع القديم من الخزنة ===== //
     cash.income -= oldInvoice.paid;
   }
 
-  // ===== جمع بيانات الفاتورة الجديدة =====
+  // ===== جمع بيانات الفاتورة الجديدة ===== //
   let total = 0;
   let items = [];
 
@@ -199,7 +192,7 @@ function saveSale() {
     customers[cIndex].balance = newBalance;
   }
 
-  // ===== خصم الكميات الجديدة من المخزون =====
+  // ===== خصم الكميات الجديدة من المخزون ===== //
   items.forEach((item) => {
     const product = products.find((p) => p.name === item.name);
     if (product) product.qty -= item.qty;
@@ -220,7 +213,7 @@ function saveSale() {
       editInvoiceIndex !== null ? sales[editInvoiceIndex].order : Date.now(),
   };
 
-  // ===== حفظ أو تعديل الفاتورة =====
+  // حفظ أو تعديل الفاتورة //
   if (editInvoiceIndex !== null) {
     sales[editInvoiceIndex] = invoiceData;
     editInvoiceIndex = null;
@@ -228,7 +221,7 @@ function saveSale() {
     sales.push(invoiceData);
   }
 
-  // ===== إعادة تعيين النموذج =====
+  // ===== إعادة تعيين النموذج ===== //
   container.innerHTML = "";
   document.getElementById("invoiceCustomer").selectedIndex = 0;
   document.getElementById("invoiceProductSelect").selectedIndex = 0;
@@ -244,9 +237,7 @@ function saveSale() {
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
 
-// ===============================
-// عرض الفواتير
-// ===============================
+// ==  عرض الفواتير في جدول ==//
 function renderSales(data = sales) {
   const tbody = document.querySelector("#salesTable tbody");
   tbody.innerHTML = "";
@@ -279,7 +270,7 @@ function renderSales(data = sales) {
       </tr>`;
   });
 
-  // ===== صف الإجمالي =====
+  // صف الإجمالي  //
   tbody.innerHTML += `
     <tr style="background:#14532d;color:#fff;font-weight:bold">
       <td colspan="3">الإجمالي</td>
@@ -290,9 +281,7 @@ function renderSales(data = sales) {
     </tr>`;
 }
 
-// ===============================
-// تعديل فاتورة
-// ===============================
+// تعديل فاتورة //
 function editInvoice(index) {
   const invoice = sales[index];
   editInvoiceIndex = index;
@@ -300,7 +289,7 @@ function editInvoice(index) {
   const container = document.getElementById("invoiceItems");
   container.innerHTML = "";
 
-  // ===== تعبئة العميل =====
+  // تعبئة العميل //
   document.getElementById("invoiceCustomer").value =
     invoice.customer === "نقدي"
       ? ""
@@ -311,7 +300,7 @@ function editInvoice(index) {
 
   document.getElementById("paidAmount").value = invoice.paid;
 
-  // ===== تعبئة المنتجات =====
+  // تعبئة المنتجات //
   invoice.items.forEach((item) => {
     const product = products.find((p) => p.name === item.name);
     if (!product) return;
@@ -328,9 +317,7 @@ function editInvoice(index) {
   showModal("تم تحميل الفاتورة للتعديل ✏️", "تعديل فاتورة");
 }
 
-// ===============================
-// حذف فاتورة
-// ===============================
+// حذف فاتورة //
 function confirmDeleteInvoice(order) {
   showDeleteModal("هل أنت متأكد من حذف هذه الفاتورة؟", () => {
     const index = sales.findIndex((s) => s.order === order);
@@ -383,9 +370,7 @@ function resetSalesFilter() {
   renderSales();
 }
 
-// ===============================
-// مودال عام
-// ===============================
+// ===== مودال عام ==== //
 let deleteCallback = null;
 
 function showDeleteModal(message, onConfirm) {
