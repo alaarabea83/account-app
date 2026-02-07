@@ -8,9 +8,6 @@ window.onload = function () {
   renderCustomerSelect();
   renderSales();
 
-  // حذف الزر القديم لإضافة المنتج
-  // document.getElementById("addItemBtn").onclick = addInvoiceItem;
-
   // Dropdown لاختيار المنتج مباشرة
   renderProductSelect();
 
@@ -203,17 +200,17 @@ function saveSale() {
   }
 
   function resetInvoiceForm() {
-  document.getElementById("invoiceItems").innerHTML = "";
+    document.getElementById("invoiceItems").innerHTML = "";
 
-  document.getElementById("invoiceCustomer").selectedIndex = 0;
-  document.getElementById("invoiceProductSelect").selectedIndex = 0;
+    document.getElementById("invoiceCustomer").selectedIndex = 0;
+    document.getElementById("invoiceProductSelect").selectedIndex = 0;
 
-  document.getElementById("customerBalance").value = "";
-  document.getElementById("invoiceTotal").value = "";
-  document.getElementById("grandTotal").value = "";
-  document.getElementById("paidAmount").value = "";
-  document.getElementById("remainingAmount").value = "";
-}
+    document.getElementById("customerBalance").value = "";
+    document.getElementById("invoiceTotal").value = "";
+    document.getElementById("grandTotal").value = "";
+    document.getElementById("paidAmount").value = "";
+    document.getElementById("remainingAmount").value = "";
+  }
 
   saveData();
   updateBottomCashBalance();
@@ -229,7 +226,16 @@ function renderSales(data = sales) {
   const tbody = document.querySelector("#salesTable tbody");
   tbody.innerHTML = "";
 
+  let sumTotal = 0;
+  let sumPaid = 0;
+  let sumRemain = 0;
+
   data.forEach((inv, i) => {
+
+    sumTotal += +inv.total || 0;
+    sumPaid += +inv.paid || 0;
+    sumRemain += +inv.remaining || 0;
+
     tbody.innerHTML += `
       <tr>
         <td>${i + 1}</td>
@@ -241,15 +247,25 @@ function renderSales(data = sales) {
         <td>${inv.previousBalance}</td>
         <td>${inv.newBalance}</td>
         <td>
-  <div class="action-buttons">
-    <button class="btn-edit" onclick="editInvoice(${i})">تعديل</button>
-    <button class="btn-delete" onclick="confirmDeleteInvoice(${inv.order})">حذف</button>
-  </div>
-</td>
-
+          <div class="action-buttons">
+            <button class="btn-edit" onclick="editInvoice(${i})">تعديل</button>
+            <button class="btn-delete" onclick="confirmDeleteInvoice(${inv.order})">حذف</button>
+          </div>
+        </td>
       </tr>`;
   });
+
+  // ===== صف الإجمالي =====
+  tbody.innerHTML += `
+    <tr style="background:#14532d;color:#fff;font-weight:bold">
+      <td colspan="3">الإجمالي</td>
+      <td>${sumTotal}</td>
+      <td>${sumPaid}</td>
+      <td>${sumRemain}</td>
+      <td colspan="3"></td>
+    </tr>`;
 }
+
 
 // ===============================
 // تعديل فاتورة

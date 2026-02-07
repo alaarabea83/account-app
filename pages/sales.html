@@ -87,11 +87,8 @@
       .form-row select {
         flex: 1;
         background: #374151;
-        /* رمادي متوسط */
         color: #ecf0f1;
-        /* أبيض فاتح للنص */
         border: 1px solid #4b5563;
-        /* حدود داكنة لكن واضحة */
         border-radius: 8px;
         padding: 6px 10px;
         font-size: 14px;
@@ -247,11 +244,8 @@
         padding: 6px 8px;
         border-radius: 8px;
         border: 1px solid #4b5563;
-        /* حدود رمادية داكنة */
         background: #111827;
-        /* لون مميز أقرب للكاركارد */
         color: #f9fafb;
-        /* نص أبيض فاتح */
         text-align: center;
         font-size: 14px;
         font-weight: 500;
@@ -264,17 +258,12 @@
       .itemTotal:focus {
         outline: none;
         border-color: #3b82f6;
-        /* أزرق للتوضيح عند التركيز */
         box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
       }
 
-      /* الإجمالي مميز أكثر */
       .itemTotal {
         font-weight: bold;
         color: #f1c40f;
-        /* لون ذهبي */
-        background: #111827;
-        /* أغمق شوي عشان يبرز */
       }
 
       #invoiceTable tbody tr:hover {
@@ -288,14 +277,14 @@
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 25px; /* حجم الخط واضح على الموبايل */
-        line-height: 1; /* لضبط ارتفاع النص داخل الزر */
-        width: 32px; /* زر مربع */
-        height: 32px; /* زر مربع */
+        font-size: 25px;
+        line-height: 1;
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0; /* إلغاء البادينج الكبير */
+        padding: 0;
         transition: 0.2s;
       }
 
@@ -305,13 +294,12 @@
 
       @media (max-width: 600px) {
         .btn-delete-item {
-          font-size: 20px; /* تكبير الخط على الموبايل */
+          font-size: 20px;
           width: 36px;
           height: 36px;
         }
       }
 
-      /* ===== Responsive ===== */
       @media (max-width: 600px) {
         label {
           display: block;
@@ -352,45 +340,43 @@
       }
 
       .card .form-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;        /* مسافة بين اللابل والحقل */
-  flex-wrap: wrap;   /* responsive على الموبايل */
-}
+        display: flex;
+        align-items: center;
+        gap: 10px; /* مسافة بين اللابل والحقل */
+      }
 
-.card .form-row label {
-  width: 120px;      /* حجم ثابت للابل */
-  text-align: left;  /* اللابل على الشمال */
-  font-weight: bold;
-  margin: 0;
-}
+      .card .form-row label {
+        width: 120px; /* حجم ثابت للابل */
+        text-align: left; /* اللابل على الشمال */
+        font-weight: bold;
+        margin: 0;
+      }
 
-.card .form-row input[type="number"] {
-  flex: 1;           /* الحقل ياخد باقي المساحة */
-  max-width: 100px;  /* أقصى عرض للحقول */
-  padding: 5px 8px;
-  border-radius: 6px;
-  border: 1px solid #2c3e50;
-  background: #374151;
-  text-align: center;
-  font-size: 14px;
-}
+      .card .form-row input[type="number"] {
+        flex: 1; /* الحقل ياخد باقي المساحة */
+        max-width: 100px; /* أقصى عرض للحقول */
+        padding: 5px 8px;
+        border-radius: 6px;
+        border: 1px solid #2c3e50;
+        background: #374151;
+        text-align: center;
+        font-size: 14px;
+      }
 
-/* لو تحب تبقى responsive أكتر على الموبايل */
-@media (max-width: 1200) {
-  .card .form-row {
-    justify-content: flex-start;
-  }
+      /* لو تحب تبقى responsive أكتر على الموبايل */
+      @media (max-width: 600) {
+        .card .form-row {
+          justify-content: flex-start;
+        }
 
-  .card .form-row label {
-    width: 100px;
-  }
+        .card .form-row label {
+          width: 100px;
+        }
 
-  .card .form-row input[type="number"] {
-    max-width: 120px;
-  }
-}
-
+        .card .form-row input[type="number"] {
+          max-width: 120px;
+        }
+      }
     </style>
   </head>
 
@@ -454,9 +440,9 @@
         <div class="card">
           <div class="form-row">
             <label>إجمالي الفاتورة:</label>
-            <input type="number" id="invoiceTotal" readonly />
+            <input type="number" id="invoiceTotal" value="0" readonly />
             <label>الإجمالي الكلي:</label>
-            <input type="number" id="grandTotal" readonly />
+            <input type="number" id="grandTotal" value="0" readonly />
           </div>
 
           <!-- المدفوع + المتبقي -->
@@ -464,7 +450,7 @@
             <label>المبلغ المدفوع:</label>
             <input type="number" id="paidAmount" />
             <label>الرصيد الجديد:</label>
-            <input type="number" id="remainingAmount" readonly />
+            <input type="number" id="remainingAmount" value="0" readonly />
           </div>
         </div>
 
