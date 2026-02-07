@@ -6,7 +6,7 @@ const expenseTableBody = document.querySelector("#expenseTable tbody");
 
 function renderExpenseCustomerSelect() {
   const opts =
-    `<option value="" disabled selected>اختر الحساب</option>` +
+    `<option value="" disabled selected>إختر الحساب</option>` +
     `<option value="">نقدي بدون عميل</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
   expenseCustomer.innerHTML = opts;
@@ -27,16 +27,16 @@ function addExpense() {
   cash.expenses += amount;
 
   expenses.push({
-    title,
-    amount,
     customer: customer ? customer.name : "نقدي",
+    amount,
+    title,
     date: new Date().toISOString().slice(0, 10),
     order: Date.now(),
   });
 
-  expenseTitle.value = "";
-  expenseAmount.value = "";
   expenseCustomer.value = "";
+  expenseAmount.value = "";
+  expenseTitle.value = "";
 
   saveData();
   updateBottomCashBalance();
@@ -52,7 +52,7 @@ function renderExpenses() {
 
   expenses.forEach((e) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${e.title}</td><td>${e.amount.toFixed(2)}</td><td>${e.customer}</td><td>${e.date}</td>`;
+    tr.innerHTML = `<td>${e.date}</td><td>${e.customer}</td><td>${e.amount.toFixed(2)}</td><td>${e.title}</td>`;
     expenseTableBody.appendChild(tr);
   });
 }

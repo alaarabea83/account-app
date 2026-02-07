@@ -1,310 +1,303 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="icon" type="image/png" href="../icons/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
 
-    <title>سهل لإدارة الحسابات</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      body {
-        font-family: "Tajawal", sans-serif;
-        background: #1b2631;
-        margin: 0;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
 
-      section {
-        max-width: 1000px;
-        margin: 20px auto;
-        margin-top: 60px;
-        margin-bottom: 80px;
-        background: #1b2631;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-        padding: 15px;
-      }
+  <title>سهل لإدارة الحسابات</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      background: #1b2631;
+      margin: 0;
+    }
 
-      h1,
-      h2,
-      h3 {
-        font-family: "Cairo", sans-serif;
-        font-weight: 700;
-        margin: 5px;
-      }
+    section {
+      max-width: 1000px;
+      margin: 20px auto;
+      margin-top: 60px;
+      margin-bottom: 80px;
+      background: #1b2631;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 15px;
+    }
 
-      h2 {
-        text-align: right;
-        color: #e0a800;
-      }
+    h1,
+    h2,
+    h3 {
+      font-family: "Cairo", sans-serif;
+      font-weight: 700;
+      margin: 5px;
+    }
 
-      .t-container {
-        background: #1f2d3a;
-        color: #ecf0f1;
-        border-radius: 12px;
-        padding: 5px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        border: 1px solid #10b98155;
-      }
+    h2 {
+      text-align: right;
+      color: #e0a800;
+    }
 
-      /* ===== Form ===== */
-      .form-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-bottom: 10px;
-      }
+    .t-container {
+      background: #1f2d3a;
+      color: #ecf0f1;
+      border-radius: 12px;
+      padding: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border: 1px solid #10b98155;
+    }
 
-      .form-row input,
-      .form-row select {
-        background: #22313f;
-        color: #ecf0f1;
-        flex: 1;
-        min-width: 180px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        font-size: 15px;
-        border-radius: 10px;
-      }
+    /* ===== Form ===== */
+    .form-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
 
-      input::placeholder {
-        color: #fff;
-      }
+    .form-row input,
+    .form-row select {
+      background: #22313f;
+      color: #ecf0f1;
+      flex: 1;
+      min-width: 180px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      border-radius: 10px;
+    }
 
-      .form-row button {
-        background: #21618c;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.2s;
-        font-size: 15px;
-      }
+    input::placeholder {
+      color: #fff;
+    }
 
-      .form-row button:hover {
-        background: #21618c;
-      }
+    .form-row button {
+      background: #21618c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 15px;
+    }
 
-      /* ===== Table ===== */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #1f2d3a;
-      }
+    .form-row button:hover {
+      background: #21618c;
+    }
 
-      thead th {
-        background: #14532d;
-        color: #ecf0f1;
-        padding: 12px;
-        font-size: 14px;
-        border-top: 1px solid #eee;
-        border-bottom: 1px solid #eee;
-      }
+    /* ===== Table ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1f2d3a;
+    }
 
-      tbody td {
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-        font-size: 14px;
-        text-align: center;
-        color: #fff;
-      }
+    thead th {
+      background: #14532d;
+      color: #ecf0f1;
+      padding: 12px;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
 
-      tbody tr:hover {
-        background: #065bb1;
-      }
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+      text-align: center;
+      color: #fff;
+    }
 
-      .table-scroll {
-        width: 100%;
-        overflow-x: auto;
-      }
+    tbody tr:hover {
+      background: #065bb1;
+    }
 
-      .table-scroll table {
-        min-width: 900px;
-        /* يمنع تكسير الأعمدة */
-      }
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+    }
 
-      .table-scroll::-webkit-scrollbar {
-        height: 6px;
-      }
+    .table-scroll table {
+      min-width: 900px;
+      /* يمنع تكسير الأعمدة */
+    }
 
-      .table-scroll::-webkit-scrollbar-thumb {
-        background: #e74c3c;
-        border-radius: 10px;
-      }
+    .table-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
 
-      .incomeReciept {
-        padding: 1rem;
-        border-radius: 12px;
-        background: #1f2d3a;
-      }
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: #e74c3c;
+      border-radius: 10px;
+    }
 
-      .incomeMenu {
-        padding: 1rem;
-        border-radius: 12px;
-        background: #1f2d3a;
-      }
+    .incomeReciept {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #1f2d3a;
+    }
 
-      /*   مودال بند اخري فى بيان المقبوضات */
-      .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      }
+    .incomeMenu {
+      padding: 1rem;
+      border-radius: 12px;
+      background: #1f2d3a;
+    }
 
-      .modal-content {
-        background: linear-gradient(135deg, #2c3e50, #34495e);
-        padding: 20px;
-        border-radius: 14px;
-        width: 300px;
-        text-align: center;
-        color: #ecf0f1;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+    /*   مودال بند اخري فى بيان المقبوضات */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-      .modal-content input {
-        width: 80%;
-        padding: 10px;
-        margin: 10px auto;
-        border-radius: 8px;
-        border: 1px solid #34495e;
-        background: #22313f;
-        color: white;
-      }
+    .modal-content {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      padding: 20px;
+      border-radius: 14px;
+      width: 300px;
+      text-align: center;
+      color: #ecf0f1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-      .modal-actions {
-        margin-top: 15px;
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        width: 100%;
-      }
+    .modal-content input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 8px;
+      border: 1px solid #34495e;
+      background: #22313f;
+      color: white;
+    }
 
-      .modal-actions button {
-        padding: 8px 14px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        background: #3498db;
-        color: white;
-      }
-    </style>
-  </head>
+    .modal-actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+    }
 
-  <body>
-    <nav class="breadcrumbs">
-      <a href="../index.html" class="home">الرئيسية</a>
-      <a href="../pages/customers.html" class="home">الحسابات</a>
-      <a href="../pages/products.html" class="home">المنتجات</a>
-      <a href="../pages/sales.html" class="home"> المبيعات</a>
-      <a href="../pages/purchases.html" class="home">المشتريات</a>
-      <span class="current">المقبوضات</span>
-      <a href="../pages/expenses.html" class="home">المدفوعات</a>
-      <a href="../pages/cash.html" class="home">الخزينة</a>
-      <a href="../pages/about.html" class="home">معلومات</a>
-    </nav>
+    .modal-actions button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #3498db;
+      color: white;
+    }
+  </style>
+</head>
 
-    <section>
-      <div class="t-container">
-        <div class="incomeReciept">
-          <h3>💰 قبض من حساب</h3>
-          <div class="form-row">
-            <!-- بيان المقبوضات -->
-            <select id="incomeTitle">
-              <option value="" disabled selected>اختر البيان</option>
-              <option>تحصيل من حساب</option>
-              <option>إيراد خارجي</option>
-              <option>رصيد إفتتاحي</option>
-              <option>تسوية رصيد</option>
-              <option>أرصدة أخري دائنة</option>
-              <option>إضافة رأس مال</option>
-              <option>إضافة حصة شريك</option>
-              <option value="other">أخرى</option>
-            </select>
+<body>
+  <nav class="breadcrumbs">
+    <a href="../index.html" class="home">الرئيسية</a>
+    <a href="../pages/customers.html" class="home">الحسابات</a>
+    <a href="../pages/products.html" class="home">المنتجات</a>
+    <a href="../pages/sales.html" class="home"> المبيعات</a>
+    <a href="../pages/purchases.html" class="home">المشتريات</a>
+    <span class="current">المقبوضات</span>
+    <a href="../pages/expenses.html" class="home">المدفوعات</a>
+    <a href="../pages/cash.html" class="home">الخزينة</a>
+    <a href="../pages/about.html" class="home">معلومات</a>
+  </nav>
 
-            <input
-              type="number"
-              id="incomeAmount"
-              placeholder="المبلغ"
-              min="0"
-            />
+  <section>
+    <div class="t-container">
+      <div class="incomeReciept">
+        <h3>💰 قبض من حساب</h3>
+        <div class="form-row">
+          <select id="incomeCustomer">
+            <option value="">إختر العميل</option>
+          </select>
+          <input type="number" id="incomeAmount" placeholder="المبلغ" min="0" />
+          <!-- بيان المقبوضات -->
+          <select id="incomeTitle">
+            <option value="" disabled selected>إختر البيان</option>
+            <option>قبض من حساب</option>
+            <option>تسجيل إيراد</option>
+            <option>رصيد إفتتاحي</option>
+            <option>تسوية حساب</option>
+            <option>أرصدة دائنة أخري</option>
+            <option>إيداع رأس المال</option>
+            <option>إضافة حصة شريك</option>
+            <option value="other">أخرى</option>
+          </select>
 
-            <select id="incomeCustomer">
-              <option value="">اختر العميل</option>
-            </select>
-
-            <button id="addIncomeBtn">إضافة</button>
-          </div>
+          <button id="addIncomeBtn">إضافة</button>
         </div>
-      </div>
-
-      <!-- مودال بند أخرى -->
-      <div id="titleModal" class="modal">
-        <div class="modal-content">
-          <h3>إضافة بيان إيراد</h3>
-
-          <input type="text" id="otherTitleInput" placeholder="اكتب البيان" />
-
-          <div class="modal-actions">
-            <button id="saveTitleBtn">حفظ</button>
-            <button id="closeModalBtn">إلغاء</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="t-container">
-        <div class="incomeMenu">
-          <h3>📋 سجل المقبوضات</h3>
-          <div class="table-scroll">
-            <table id="incomeTable">
-              <thead>
-                <tr>
-                  <th>البيان</th>
-                  <th>المبلغ</th>
-                  <th>العميل</th>
-                  <th>التاريخ</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div id="appModal" class="modal-overlay">
-      <div class="modal-box">
-        <h3 id="modalTitle">تنبيه</h3>
-        <p id="modalMessage"></p>
-        <button onclick="closeModal()">حسناً</button>
       </div>
     </div>
 
-    <nav class="bottom-menu">
-      <div class="menu-item cash-item">
-        <span>💰 رصيد الخزينة:</span>
-        <span id="cashBalance">0.00</span> جنيه
-      </div>
-    </nav>
+    <!-- مودال بند أخرى -->
+    <div id="titleModal" class="modal">
+      <div class="modal-content">
+        <h3>إضافة بيان إيراد</h3>
 
-    <script src="../js/data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/income.js"></script>
-  </body>
+        <input type="text" id="otherTitleInput" placeholder="اكتب البيان" />
+
+        <div class="modal-actions">
+          <button id="saveTitleBtn">حفظ</button>
+          <button id="closeModalBtn">إلغاء</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="t-container">
+      <div class="incomeMenu">
+        <h3>📋 سجل المقبوضات</h3>
+        <div class="table-scroll">
+          <table id="incomeTable">
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>العميل</th>
+                <th>المبلغ</th>
+                <th>البيان</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3 id="modalTitle">تنبيه</h3>
+      <p id="modalMessage"></p>
+      <button onclick="closeModal()">حسناً</button>
+    </div>
+  </div>
+
+  <nav class="bottom-menu">
+    <div class="menu-item cash-item">
+      <span>💰 رصيد الخزينة:</span>
+      <span id="cashBalance">0.00</span> جنيه
+    </div>
+  </nav>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/income.js"></script>
+</body>
+
 </html>

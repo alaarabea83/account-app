@@ -30,10 +30,10 @@ function addIncome() {
   cash.income += amount;
 
   incomes.push({
-    title,
-    amount,
-    customer: customer ? customer.name : "نقدي",
     date: new Date().toISOString().slice(0, 10),
+    customer: customer ? customer.name : "نقدي",
+    amount,
+    title,
     order: Date.now(),
   });
 
@@ -55,7 +55,7 @@ function renderIncome() {
 
   incomes.forEach((i) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${i.title}</td><td>${i.amount}</td><td>${i.customer}</td><td>${i.date}</td>`;
+    tr.innerHTML = `<td>${i.date}</td><td>${i.customer}</td><td>${i.amount}</td><td>${i.title}</td>`;
     tbody.appendChild(tr);
   });
 }

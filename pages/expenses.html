@@ -223,26 +223,26 @@
         <div class="expenseReciept">
           <h3>💸 دفع لحساب</h3>
           <div class="form-row">
-            <select id="expenseTitle">
-              <option value="" disabled selected>اختر البيان</option>
-              <option>مصروفات نثرية</option>
-              <option>مصروفات إدارية</option>
-              <option>سلفة موظف</option>
-              <option>أجور ومرتبات</option>
-              <option>بنزين أو وقود</option>
-              <option>تسوية رصيد</option>
-              <option>أرصدة أخري مدينة</option>
-              <option>توزيع أرباح</option>
-              <option>تصفية شريك</option>
-              <option value="other">أخرى</option>
-            </select>
+            <select id="expenseCustomer"></select>
             <input
               type="number"
               id="expenseAmount"
               placeholder="المبلغ"
               min="0"
             />
-            <select id="expenseCustomer"></select>
+            <select id="expenseTitle">
+              <option value="" disabled selected>إختر البيان</option>
+              <option>مصروفات نثرية</option>
+              <option>مصروفات إدارية</option>
+              <option>سلفة موظف</option>
+              <option>أجور ومرتبات</option>
+              <option>وقود ومحروقات</option>
+              <option>تسوية حساب</option>
+              <option>أرصدة مدينة أخري</option>
+              <option>توزيع أرباح</option>
+              <option>تصفية شريك</option>
+              <option value="other">أخرى</option>
+            </select>
             <button id="addExpenseBtn">إضافة</button>
           </div>
         </div>
@@ -256,10 +256,10 @@
             <table id="expenseTable">
               <thead>
                 <tr>
-                  <th>البيان</th>
-                  <th>المبلغ</th>
-                  <th>العميل</th>
                   <th>التاريخ</th>
+                  <th>العميل</th>
+                  <th>المبلغ</th>
+                  <th>البيان</th>
                 </tr>
               </thead>
               <tbody></tbody>
