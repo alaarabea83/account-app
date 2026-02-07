@@ -143,7 +143,7 @@ function saveSale() {
   }
 
   // ===== تحقق من الكميات =====
-  if ([...container.querySelectorAll(".itemQty")].some(i => +i.value <= 0)) {
+  if ([...container.querySelectorAll(".itemQty")].some((i) => +i.value <= 0)) {
     showModal("أدخل كميات صحيحة للمنتجات");
     return;
   }
@@ -154,24 +154,27 @@ function saveSale() {
 
     // استرجاع الرصيد القديم
     if (oldInvoice.customer !== "نقدي") {
-      const cust = customers.find(c => c.name === oldInvoice.customer);
+      const cust = customers.find((c) => c.name === oldInvoice.customer);
       if (cust) {
-        cust.balance -= (oldInvoice.total - oldInvoice.paid);
+        cust.balance -= oldInvoice.total - oldInvoice.paid;
       }
     }
 
     // استرجاع الكميات القديمة للمخزون
-    oldInvoice.items.forEach(item => {
-      const product = products.find(p => p.name === item.name);
+    oldInvoice.items.forEach((item) => {
+      const product = products.find((p) => p.name === item.name);
       if (product) product.qty += item.qty;
     });
+
+    // ===== خصم المدفوع القديم من الخزنة =====
+    cash.income -= oldInvoice.paid;
   }
 
   // ===== جمع بيانات الفاتورة الجديدة =====
   let total = 0;
   let items = [];
 
-  container.querySelectorAll("tr").forEach(row => {
+  container.querySelectorAll("tr").forEach((row) => {
     const name = row.cells[1].innerText;
     const qty = +row.querySelector(".itemQty").value || 0;
     const price = +row.querySelector(".itemPrice").value || 0;
@@ -197,8 +200,8 @@ function saveSale() {
   }
 
   // ===== خصم الكميات الجديدة من المخزون =====
-  items.forEach(item => {
-    const product = products.find(p => p.name === item.name);
+  items.forEach((item) => {
+    const product = products.find((p) => p.name === item.name);
     if (product) product.qty -= item.qty;
   });
 
@@ -213,7 +216,8 @@ function saveSale() {
     previousBalance,
     newBalance,
     date: new Date().toISOString().slice(0, 10),
-    order: editInvoiceIndex !== null ? sales[editInvoiceIndex].order : Date.now()
+    order:
+      editInvoiceIndex !== null ? sales[editInvoiceIndex].order : Date.now(),
   };
 
   // ===== حفظ أو تعديل الفاتورة =====
@@ -239,7 +243,6 @@ function saveSale() {
   renderSales();
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
-
 
 // ===============================
 // عرض الفواتير
@@ -304,10 +307,7 @@ function editInvoice(index) {
       : customers.findIndex((c) => c.name === invoice.customer);
 
   document.getElementById("customerBalance").value =
-  invoice.customer === "نقدي"
-    ? 0
-    : invoice.previousBalance;
-
+    invoice.customer === "نقدي" ? 0 : invoice.previousBalance;
 
   document.getElementById("paidAmount").value = invoice.paid;
 
