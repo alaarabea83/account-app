@@ -135,10 +135,24 @@ function updateRemaining() {
 // ===============================
 function saveSale() {
   const container = document.getElementById("invoiceItems");
+
+  // ✅ تحقق من وجود منتجات
   if (!container.children.length) {
     showModal("أضف منتج واحد على الأقل");
     return;
   }
+
+  // ✅ تحقق من الكميات
+  if ([...container.querySelectorAll(".itemQty")].some((i) => +i.value <= 0)) {
+    showModal("أدخل كميات صحيحة للمنتجات");
+    return;
+  }
+
+  // إرجاع الكميات القديمة للمخزون
+  invoice.items.forEach((item) => {
+    const product = products.find((p) => p.name === item.name);
+    if (product) product.qty += item.qty;
+  });
 
   let total = 0;
   let items = [];
@@ -231,7 +245,6 @@ function renderSales(data = sales) {
   let sumRemain = 0;
 
   data.forEach((inv, i) => {
-
     sumTotal += +inv.total || 0;
     sumPaid += +inv.paid || 0;
     sumRemain += +inv.remaining || 0;
@@ -265,7 +278,6 @@ function renderSales(data = sales) {
       <td colspan="3"></td>
     </tr>`;
 }
-
 
 // ===============================
 // تعديل فاتورة
