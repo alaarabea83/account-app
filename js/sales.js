@@ -63,27 +63,24 @@ function renderProductSelect() {
 
 function addInvoiceItem(product) {
   const tbody = document.getElementById("invoiceItems");
-  if (!tbody) return;
-
-  const row = document.createElement("tr");
   const rowNumber = tbody.children.length + 1;
 
+  const row = document.createElement("tr");
   row.innerHTML = `
     <td>${rowNumber}</td>
     <td>${product.name}</td>
-    <td><input type="number" class="itemQty" placeholder"الكمية" min="1" value=""></td>
+    <td><input type="number" class="itemQty" min="1" value="1"></td>
     <td><input type="number" class="itemPrice" value="${product.price}" readonly></td>
     <td><input type="number" class="itemTotal" value="${product.price}" readonly></td>
     <td><button type="button" class="btn-delete-item">×</button></td>
   `;
-
   tbody.appendChild(row);
 
   const qtyInput = row.querySelector(".itemQty");
-  const totalCell = row.querySelector(".itemTotal");
+  const totalInput = row.querySelector(".itemTotal");
 
   function calcRow() {
-    totalCell.innerText = (+qtyInput.value || 0) * (+product.price || 0);
+    totalInput.value = (+qtyInput.value || 0) * (+product.price || 0);
     updateInvoiceTotal();
   }
 
@@ -95,6 +92,7 @@ function addInvoiceItem(product) {
     updateRowNumbers();
   };
 }
+
 
 function updateRowNumbers() {
   const rows = document.querySelectorAll("#invoiceItems tr");
@@ -113,7 +111,7 @@ function updateInvoiceTotal() {
     total += qty * price;
 
     // تحديث الخلية مباشرة
-    row.querySelector(".itemTotal").innerText = qty * price;
+    row.querySelector(".itemTotal").value = qty * price;
   });
 
   document.getElementById("invoiceTotal").value = total;
@@ -149,17 +147,17 @@ function saveSale() {
   let total = 0;
   let items = [];
 
-  document.querySelectorAll(".invoice-item").forEach((row) => {
-    const name = row.querySelector(".itemName").value;
-    const qty = +row.querySelector(".itemQty").value;
-    const product = products.find((p) => p.name === name);
+  container.querySelectorAll("tr").forEach((row) => {
+    const name = row.cells[1].innerText; // اسم المنتج من العمود الثاني
+    const qty = +row.querySelector(".itemQty").value || 0;
+    const price = +row.querySelector(".itemPrice").value || 0;
 
-    total += qty * product.price;
+    total += qty * price;
 
     items.push({
-      name: product.name,
+      name,
       qty,
-      price: product.price,
+      price,
     });
   });
 
@@ -175,24 +173,21 @@ function saveSale() {
     customerName = c.name;
     previousBalance = c.balance;
     newBalance = c.balance + (total - paid);
+    customers[cIndex].balance = newBalance;
   }
 
-  // خصم / إضافة المخزون
+  // خصم من المخزون
   items.forEach((item) => {
     const product = products.find((p) => p.name === item.name);
     if (product) product.qty -= item.qty;
   });
-
-  if (cIndex !== "") {
-    customers[cIndex].balance = newBalance;
-  }
 
   cash.income += paid;
 
   const invoiceData = {
     customer: customerName,
     items,
-    total,
+    total,                // الآن total صحيح
     paid,
     remaining: total - paid,
     previousBalance,
@@ -212,11 +207,10 @@ function saveSale() {
   updateBottomCashBalance();
   renderSales();
   container.innerHTML = "";
-  document
-    .querySelectorAll("input[type='number']")
-    .forEach((i) => (i.value = ""));
+  document.querySelectorAll("input[type='number']").forEach((i) => (i.value = ""));
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
+
 
 // ===============================
 // عرض الفواتير
