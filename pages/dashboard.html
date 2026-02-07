@@ -1,236 +1,285 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ultimate Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ultimate Dashboard</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
+  <style>
+    .breadcrumb {
+      background: linear-gradient(135deg, #34495e, #2c3e50);
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 16px auto;
+      max-width: 1000px;
+    }
 
-:root{
- --bg:#0f172a;
- --card:#1e293b;
- --text:white;
- --accent:#38bdf8;
-}
+    .breadcrumb a {
+      color: #5dade2;
+      text-decoration: none;
+    }
 
-.light{
- --bg:#f1f5f9;
- --card:white;
- --text:#0f172a;
-}
+    .breadcrumb .active {
+      color: #bdc3c7;
+    }
 
-*{box-sizing:border-box;font-family:Cairo}
+    @media (max-width: 768px) {
+      .breadcrumb {
+        margin: 12px 12px;
+        /* مسافة من كل الجهات */
+        padding: 14px 16px;
+        /* راحة للمس */
+      }
+    }
 
-body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- transition:.3s;
-}
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: white;
+      --accent: #38bdf8;
+    }
 
-/* HEADER */
-.header{
- display:flex;
- justify-content:space-between;
- padding:15px;
- background:var(--card);
- font-size:20px;
- font-weight:700;
-}
+    .light {
+      --bg: #f1f5f9;
+      --card: white;
+      --text: #0f172a;
+    }
 
-.btn{
- background:var(--accent);
- border:none;
- padding:8px 12px;
- border-radius:8px;
- cursor:pointer;
-}
+    * {
+      box-sizing: border-box;
+      font-family: Cairo
+    }
 
-/* STATS */
-.stats{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px;
- padding:12px;
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      transition: .3s;
+    }
 
-.stat{
- background:var(--card);
- padding:15px;
- border-radius:12px;
- text-align:center;
-}
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background: var(--card);
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-.stat h2{color:var(--accent);margin:5px}
+    .btn {
+      background: var(--accent);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-/* GRID */
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
- padding:12px;
-}
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 12px;
+    }
 
-.card{
- background:var(--card);
- padding:15px;
- border-radius:14px;
- text-align:center;
- text-decoration:none;
- color:var(--text);
-}
+    .stat {
+      background: var(--card);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+    }
 
-.card:hover{transform:scale(1.05)}
+    .stat h2 {
+      color: var(--accent);
+      margin: 5px
+    }
 
-.card img{width:45px}
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 12px;
+    }
 
-/* CHART */
-.chart-box{
- background:var(--card);
- margin:12px;
- padding:12px;
- border-radius:14px;
-}
+    .card {
+      background: var(--card);
+      padding: 15px;
+      border-radius: 14px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+    }
 
-/* BOTTOM BAR */
-.bottom{
- position:fixed;
- bottom:0;
- width:100%;
- background:var(--card);
- display:flex;
- justify-content:space-around;
- padding:10px 0;
-}
+    .card:hover {
+      transform: scale(1.05)
+    }
 
-.bottom a{
- color:var(--text);
- text-decoration:none;
-}
+    .card img {
+      width: 45px
+    }
 
-</style>
+    /* CHART */
+    .chart-box {
+      background: var(--card);
+      margin: 12px;
+      padding: 12px;
+      border-radius: 14px;
+    }
+
+    /* BOTTOM BAR */
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: var(--card);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .bottom a {
+      color: var(--text);
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-لوحة التحكم
-<div>
-<button class="btn" onclick="toggleMode()">🌙</button>
-<button class="btn" onclick="backup()">💾</button>
-<button class="btn" onclick="restore()">📂</button>
-</div>
-</div>
+  <div class="header">
+    سهل لإدارة الحسابات
+    <div>
+      <button class="btn" onclick="toggleMode()">🌙</button>
+      <button class="btn" onclick="backup()">💾</button>
+      <button class="btn" onclick="restore()">📂</button>
+    </div>
+  </div>
 
-<!-- STATS -->
-<div class="stats">
-<div class="stat"><h2 id="cust">0</h2>عملاء</div>
-<div class="stat"><h2 id="inv">0</h2>فواتير مبيعات</div>
-<div class="stat"><h2 id="salesT">0</h2>مبيعات بالجنية</div>
-<div class="stat"><h2 id="profit">0</h2>أرباح</div>
-</div>
+  <nav class="breadcrumb">
+    <a href="../index.html">الرئيسية</a> /
+    <span class="active">لوحة التحكم</span>
+  </nav>
 
-<!-- CHART -->
-<div class="chart-box">
-<canvas id="chart"></canvas>
-<p style="text-align: center;">رسم بياني يوضح نسبة نمو المبيعات</p>
-</div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <h2 id="cust">0</h2>عملاء
+    </div>
+    <div class="stat">
+      <h2 id="inv">0</h2>فواتير مبيعات
+    </div>
+    <div class="stat">
+      <h2 id="salesT">0</h2>مبيعات بالجنية
+    </div>
+    <div class="stat">
+      <h2 id="profit">0</h2>أرباح
+    </div>
+  </div>
 
-<!-- MODULES -->
-<div class="grid">
+  <!-- CHART -->
+  <div class="chart-box">
+    <canvas id="chart"></canvas>
+    <p style="text-align: center;">رسم بياني يوضح نسبة نمو المبيعات</p>
+  </div>
+
+  <!-- MODULES -->
+  <div class="grid">
 
 
 
-<script>
+    <script>
 
-/* DARK MODE */
-function toggleMode(){
- document.body.classList.toggle("light");
- localStorage.setItem("mode",
-  document.body.classList.contains("light")?"light":"dark");
-}
-if(localStorage.getItem("mode")=="light"){
- document.body.classList.add("light");
-}
+      /* DARK MODE */
+      function toggleMode() {
+        document.body.classList.toggle("light");
+        localStorage.setItem("mode",
+          document.body.classList.contains("light") ? "light" : "dark");
+      }
+      if (localStorage.getItem("mode") == "light") {
+        document.body.classList.add("light");
+      }
 
-/* SAMPLE DATA */
-let customers=JSON.parse(localStorage.getItem("customers")||"[]");
-let sales=JSON.parse(localStorage.getItem("sales")||"[]");
+      /* SAMPLE DATA */
+      let customers = JSON.parse(localStorage.getItem("customers") || "[]");
+      let sales = JSON.parse(localStorage.getItem("sales") || "[]");
 
-/* DEMO DATA لو فاضي */
-if(sales.length==0){
- sales=[
-  {total:500,date:"2025-01"},
-  {total:800,date:"2025-02"},
-  {total:650,date:"2025-03"}
- ];
- localStorage.setItem("sales",JSON.stringify(sales));
-}
+      /* DEMO DATA لو فاضي */
+      if (sales.length == 0) {
+        sales = [
+          { total: 500, date: "2025-01" },
+          { total: 800, date: "2025-02" },
+          { total: 650, date: "2025-03" }
+        ];
+        localStorage.setItem("sales", JSON.stringify(sales));
+      }
 
-/* STATS */
-cust.innerText=customers.length;
-inv.innerText=sales.length;
+      /* STATS */
+      cust.innerText = customers.length;
+      inv.innerText = sales.length;
 
-let total=0;
-let months=[];
-let values=[];
+      let total = 0;
+      let months = [];
+      let values = [];
 
-sales.forEach(s=>{
- total+=s.total;
- months.push(s.date);
- values.push(s.total);
-});
+      sales.forEach(s => {
+        total += s.total;
+        months.push(s.date);
+        values.push(s.total);
+      });
 
-salesT.innerText=total;
-profit.innerText=Math.round(total*0.25);
+      salesT.innerText = total;
+      profit.innerText = Math.round(total * 0.25);
 
-/* CHART */
-new Chart(document.getElementById("chart"),{
- type:"line",
- data:{
-  labels:months,
-  datasets:[{
-   label:"المبيعات",
-   data:values
-  }]
- }
-});
+      /* CHART */
+      new Chart(document.getElementById("chart"), {
+        type: "line",
+        data: {
+          labels: months,
+          datasets: [{
+            label: "المبيعات",
+            data: values
+          }]
+        }
+      });
 
-/* BACKUP */
-function backup(){
- let data=JSON.stringify(localStorage);
- let blob=new Blob([data],{type:"application/json"});
- let a=document.createElement("a");
- a.href=URL.createObjectURL(blob);
- a.download="backup.json";
- a.click();
- alert("تم النسخ الاحتياطي");
-}
+      /* BACKUP */
+      function backup() {
+        let data = JSON.stringify(localStorage);
+        let blob = new Blob([data], { type: "application/json" });
+        let a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "backup.json";
+        a.click();
+        alert("تم النسخ الاحتياطي");
+      }
 
-/* RESTORE */
-function restore(){
- let inp=document.createElement("input");
- inp.type="file";
- inp.onchange=e=>{
-  let file=e.target.files[0];
-  let reader=new FileReader();
-  reader.onload=()=>{
-   let data=JSON.parse(reader.result);
-   for(let k in data){
-    localStorage.setItem(k,data[k]);
-   }
-   alert("تم الاستعادة");
-   location.reload();
-  };
-  reader.readAsText(file);
- };
- inp.click();
-}
+      /* RESTORE */
+      function restore() {
+        let inp = document.createElement("input");
+        inp.type = "file";
+        inp.onchange = e => {
+          let file = e.target.files[0];
+          let reader = new FileReader();
+          reader.onload = () => {
+            let data = JSON.parse(reader.result);
+            for (let k in data) {
+              localStorage.setItem(k, data[k]);
+            }
+            alert("تم الاستعادة");
+            location.reload();
+          };
+          reader.readAsText(file);
+        };
+        inp.click();
+      }
 
-</script>
+    </script>
 
 </body>
+
 </html>
