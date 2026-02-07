@@ -40,6 +40,10 @@
       margin: 5px;
     }
 
+    h3 {
+        color: #10b981;
+      }
+
     .card {
       background: #1f2d3a;
       color: #ecf0f1;
@@ -100,14 +104,15 @@
     }
 
     .form-row button {
-      background: #21618c;
-      color: #fff;
+      background: #f1c40f;
+      color: #000;
       border: none;
       padding: 10px 20px;
       border-radius: 8px;
       cursor: pointer;
       transition: 0.2s;
       font-size: 15px;
+      font-weight: bold;
     }
 
     .form-row button:hover {
@@ -143,7 +148,7 @@
     }
 
     tbody tr:hover {
-      background: #065bb1;
+      background: #1f3a5f;
     }
 
     .table-scroll {
@@ -359,7 +364,7 @@
       <div class="addCustomer">
         <h3>📝 إضافة حساب جديد</h3>
         <div class="form-row">
-          <input type="text" id="customerName" placeholder="إسم العميل او المورد او الحساب" />
+          <input type="text" id="customerName" placeholder="إسم العميل أو المورد أو الحساب" />
           <input type="number" id="openingBalance" placeholder="الرصيد الإفتتاحي" />
           <button class="btn-add" id="addCustomerBtn">✚ إضافة</button>
         </div>
@@ -370,7 +375,7 @@
       <div class="customerMenu">
         <h3>📋 قائمة الحسابات</h3>
         <!-- حقل البحث -->
-        <input type="text" id="searchCustomer" placeholder="🔍 ابحث بإسم الحساب..." style="
+        <input type="text" id="searchCustomer" placeholder="🔍 إبحث بإسم العميل أو الحساب..." style="
             display: block;
             padding: 10px;
             border-radius: 8px;
