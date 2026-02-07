@@ -31,7 +31,7 @@ function renderCustomerSelect() {
   if (!sel) return;
 
   sel.innerHTML =
-    `<option value="" disabled selected>إختر الحساب</option>` +
+    `<option value="" disabled selected>إختر الحساب أو العميل</option>` +
     `<option value="">بيع نقدي</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
@@ -40,7 +40,7 @@ function renderCustomerSelect() {
 function renderProductSelect() {
   const sel = document.getElementById("invoiceProductSelect");
   sel.innerHTML =
-    `<option value="" disabled selected>إضافة المنتجات</option>` +
+    `<option value="" disabled selected>إضافة أصناف للفاتورة</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 
   sel.onchange = function () {

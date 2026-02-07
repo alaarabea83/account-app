@@ -105,6 +105,7 @@
         background: #f1c40f;
         color: black;
         font-size: 16px;
+        font-weight: bold;
         cursor: pointer;
         transition: 0.2s;
       }
@@ -272,8 +273,8 @@
       }
 
       .btn-delete-item {
-        background-color: #e74c3c;
-        color: #000;
+        background-color: #14532d;
+        color: #fff;
         border: none;
         border-radius: 6px;
         cursor: pointer;
@@ -335,6 +336,7 @@
         background: #f1c40f;
         color: black;
         font-size: 16px;
+        font-weight: bold;
         cursor: pointer;
         transition: 0.2s;
       }
@@ -376,6 +378,28 @@
         .card .form-row input[type="number"] {
           max-width: 120px;
         }
+      }
+
+      /* للمتصفح الحديث */
+      #customerBalance::placeholder {
+        color: #ffffff; /* أبيض */
+        opacity: 1; /* للتأكد إن اللون ظاهر */
+      }
+
+      /* لمتصفح فايرفوكس القديم */
+      #customerBalance::-moz-placeholder {
+        color: #ffffff;
+        opacity: 1;
+      }
+
+      /* لمتصفح إنترنت إكسبلورر */
+      #customerBalance:-ms-input-placeholder {
+        color: #ffffff;
+      }
+
+      /* لمتصفح كروم وسفاري وأوبرا */
+      #customerBalance::-webkit-input-placeholder {
+        color: #ffffff;
       }
     </style>
   </head>
