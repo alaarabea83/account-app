@@ -84,7 +84,8 @@ function addInvoiceItem(product) {
     updateInvoiceTotal();
   }
 
-  qtyInput.oninput = calcRow;
+  qtyInput.addEventListener("input", calcRow);
+  qtyInput.addEventListener("change", calcRow);
 
   row.querySelector(".btn-delete-item").onclick = () => {
     row.remove();
@@ -93,10 +94,9 @@ function addInvoiceItem(product) {
   };
 }
 
-
 function updateRowNumbers() {
   const rows = document.querySelectorAll("#invoiceItems tr");
-  rows.forEach((r, i) => r.cells[0].innerText = i + 1);
+  rows.forEach((r, i) => (r.cells[0].innerText = i + 1));
 }
 
 // ===============================
@@ -132,7 +132,6 @@ function updateRemaining() {
   const paid = +document.getElementById("paidAmount").value || 0;
   document.getElementById("remainingAmount").value = grand - paid;
 }
-
 
 // ===============================
 // حفظ الفاتورة
@@ -187,7 +186,7 @@ function saveSale() {
   const invoiceData = {
     customer: customerName,
     items,
-    total,                // الآن total صحيح
+    total, // الآن total صحيح
     paid,
     remaining: total - paid,
     previousBalance,
@@ -207,10 +206,11 @@ function saveSale() {
   updateBottomCashBalance();
   renderSales();
   container.innerHTML = "";
-  document.querySelectorAll("input[type='number']").forEach((i) => (i.value = ""));
+  document
+    .querySelectorAll("input[type='number']")
+    .forEach((i) => (i.value = ""));
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
-
 
 // ===============================
 // عرض الفواتير
