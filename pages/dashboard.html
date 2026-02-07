@@ -117,7 +117,7 @@ body{
 <body>
 
 <div class="header">
-Ultimate Dashboard
+لوحة التحكم
 <div>
 <button class="btn" onclick="toggleMode()">🌙</button>
 <button class="btn" onclick="backup()">💾</button>
@@ -128,14 +128,15 @@ Ultimate Dashboard
 <!-- STATS -->
 <div class="stats">
 <div class="stat"><h2 id="cust">0</h2>عملاء</div>
-<div class="stat"><h2 id="inv">0</h2>فواتير</div>
-<div class="stat"><h2 id="salesT">0</h2>مبيعات</div>
+<div class="stat"><h2 id="inv">0</h2>فواتير مبيعات</div>
+<div class="stat"><h2 id="salesT">0</h2>مبيعات بالجنية</div>
 <div class="stat"><h2 id="profit">0</h2>أرباح</div>
 </div>
 
 <!-- CHART -->
 <div class="chart-box">
 <canvas id="chart"></canvas>
+<p style="text-align: center;">رسم بياني يوضح نسبة نمو المبيعات</p>
 </div>
 
 <!-- MODULES -->
@@ -228,11 +229,6 @@ function restore(){
  };
  inp.click();
 }
-
-/* تنبيه ذكي */
-setTimeout(()=>{
- alert("📌 تذكير: راجع فواتير اليوم");
-},3000);
 
 </script>
 

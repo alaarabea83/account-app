@@ -2,211 +2,229 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
-<title>سهل لإدارة الحسابات</title>
+  <title>سهل لإدارة الحسابات</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  font-family:"Cairo",sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Cairo", sans-serif;
+    }
 
-body{
-  margin:0;
-  background:linear-gradient(135deg,#0f172a,#022c22);
-  color:white;
-}
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #0f172a, #022c22);
+      color: white;
+    }
 
-/* ===== HEADER ===== */
-.header{
-  background:linear-gradient(45deg,#0d6efd,#10b981);
-  padding:22px;
-  text-align:center;
-  font-size:22px;
-  font-weight:700;
-  box-shadow:0 5px 20px rgba(0,0,0,.4);
-  letter-spacing:1px;
-}
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(45deg, #0d6efd, #10b981);
+      padding: 22px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .4);
+      letter-spacing: 1px;
+    }
 
-/* ===== GRID ===== */
-section{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:22px;
-  padding:30px 20px;
-}
+    /* ===== GRID ===== */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+      padding: 30px 20px;
+    }
 
-/* ===== CARD ===== */
-.card{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:20px;
-  padding:25px 15px;
-  text-align:center;
-  text-decoration:none;
-  color:white;
-  transition:.35s;
-  position:relative;
-  overflow:hidden;
-}
+    /* ===== CARD ===== */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 25px 15px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      transition: .35s;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Glow effect */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.15),transparent);
-  opacity:0;
-  transition:.4s;
-}
+    /* Glow effect */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .15), transparent);
+      opacity: 0;
+      transition: .4s;
+    }
 
-.card:hover::before{
-  opacity:1;
-}
+    .card:hover::before {
+      opacity: 1;
+    }
 
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 15px 35px rgba(0,0,0,.6);
-  border-color:#10b981;
-}
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .6);
+      border-color: #10b981;
+    }
 
-/* ICON */
-.card img{
-  width:65px;
-  margin-bottom:12px;
-  filter:drop-shadow(0 5px 10px rgba(0,0,0,.4));
-}
+    /* ICON */
+    .card img {
+      width: 65px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, .4));
+    }
 
-/* TITLE */
-.card h3{
-  margin:8px 0;
-  font-size:20px;
-  color:#10b981;
-}
+    /* TITLE */
+    .card h3 {
+      margin: 8px 0;
+      font-size: 20px;
+      color: #10b981;
+    }
 
-/* DESCRIPTION */
-.card p{
-  font-size:14px;
-  opacity:.9;
-  line-height:1.7;
-  margin:0;
-  color:#e5e7eb;
-}
+    /* DESCRIPTION */
+    .card p {
+      font-size: 14px;
+      opacity: .9;
+      line-height: 1.7;
+      margin: 0;
+      color: #e5e7eb;
+    }
 
-/* Mobile */
-@media(max-width:600px){
-  .header{font-size:18px}
-  .card h3{font-size:18px}
-}
+    /* Mobile */
+    @media(max-width:600px) {
+      .header {
+        font-size: 18px
+      }
 
-/* موبايل: كرتين في السطر */
-@media (max-width: 600px){
-  section{
-    grid-template-columns: repeat(2, 1fr);
-    gap:14px;
-  }
-}
+      .card h3 {
+        font-size: 18px
+      }
+    }
 
-</style>
+    /* موبايل: كرتين في السطر */
+    @media (max-width: 600px) {
+      section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="header">
-💼 سهل لإدارة الحسابات
-</header>
+  <header class="header">
+    💼 سهل لإدارة الحسابات
+  </header>
 
-<section>
+  <section>
 
-<a class="card" href="pages/customers.html">
-<img src="icons/customers.png">
-<h3>العملاء</h3>
-<p>
-إضافة عميل<br>
-قائمة العملاء<br>
-كشف حساب<br>
-تعديل وحذف
-</p>
-</a>
+    <a class="card" href="pages/customers.html">
+      <img src="icons/client.png">
+      <h3>العملاء</h3>
+      <p>
+        إضافة عميل<br>
+        إدارة العملاء<br>
+        كشف حساب<br>
+        أرصدة إفتتاحية
+      </p>
+    </a>
 
-<a class="card" href="pages/products.html">
-<img src="icons/products.png">
-<h3>المنتجات</h3>
-<p>
-إضافة منتج<br>
-إدارة المخزون<br>
-تعديل وحذف
-</p>
-</a>
+    <a class="card" href="pages/products.html">
+      <img src="icons/products.png">
+      <h3>المنتجات</h3>
+      <p>
+        إضافة صنف<br>
+        إدارة المخزون<br>
+        حركة صنف<br>
+        أرصدة إفتتاحية
+      </p>
+    </a>
 
-<a class="card" href="pages/sales.html">
-<img src="icons/sales.png">
-<h3>المبيعات</h3>
-<p>
-فاتورة بيع<br>
-بيع نقدي<br>
-بيع آجل
-</p>
-</a>
+    <a class="card" href="pages/sales.html">
+      <img src="icons/sales.png">
+      <h3>المبيعات</h3>
+      <p>
+        فاتورة بيع<br>
+        إدارة الفواتير<br>
+        بيع بالأجل
+      </p>
+    </a>
 
-<a class="card" href="pages/purchases.html">
-<img src="icons/purchases.png">
-<h3>المشتريات</h3>
-<p>
-فاتورة شراء<br>
-إدارة الفواتير<br>
-تحديث المخزون
-</p>
-</a>
+    <a class="card" href="pages/purchases.html">
+      <img src="icons/purchases.png">
+      <h3>المشتريات</h3>
+      <p>
+        فاتورة شراء<br>
+        إدارة الفواتير<br>
+        تحديث المخزون
+      </p>
+    </a>
 
-<a class="card" href="pages/income.html">
-<img src="icons/income.png">
-<h3>المقبوضات</h3>
-<p>
-سند قبض<br>
-تحصيل ديون<br>
-تقارير مالية
-</p>
-</a>
+    <a class="card" href="pages/income.html">
+      <img src="icons/income.png">
+      <h3>المقبوضات</h3>
+      <p>
+        سند قبض<br>
+        تحصيل ديون<br>
+        تقارير مالية
+      </p>
+    </a>
 
-<a class="card" href="pages/expenses.html">
-<img src="icons/expenses.png">
-<h3>المدفوعات</h3>
-<p>
-سند صرف<br>
-مصروفات<br>
-تقارير المدفوعات
-</p>
-</a>
+    <a class="card" href="pages/expenses.html">
+      <img src="icons/expenses.png">
+      <h3>المدفوعات</h3>
+      <p>
+        سند صرف<br>
+        مصروفات<br>
+        تقارير المدفوعات
+      </p>
+    </a>
 
-<a class="card" href="pages/cash.html">
-<img src="icons/cash.png">
-<h3>الخزينة</h3>
-<p>
-رصيد الخزينة<br>
-حركة النقدية<br>
-تقارير يومية
-</p>
-</a>
+    <a class="card" href="pages/cash.html">
+      <img src="icons/cash.png">
+      <h3>الخزينة</h3>
+      <p>
+        رصيد الخزينة<br>
+        حركة النقدية<br>
+        تقارير يومية
+      </p>
+    </a>
 
-<a class="card" href="pages/about.html">
-<img src="icons/mobile_app.png">
-<h3>معلومات</h3>
-<p>
-عن البرنامج<br>
-التحديثات<br>
-الدعم الفني
-</p>
-</a>
+    <a class="card" href="pages/dashboard.html">
+      <img src="icons/dashboard.png">
+      <h3>لوحة التحكم</h3>
+      <p>
+        عداد العملاء<br>
+        عداد الفواتير<br>
+        رسوم بيانية<br>
+        تقارير الأرباح
+      </p>
+    </a>
 
-</section>
+    <a class="card" href="pages/about.html">
+      <img src="icons/mobile_app.png">
+      <h3>معلومات</h3>
+      <p>
+        عن البرنامج<br>
+        التحديثات<br>
+        تواصل معنا<br>
+        الدعم الفني
+      </p>
+    </a>
+
+  </section>
 
 </body>
+
 </html>
