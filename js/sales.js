@@ -136,39 +136,49 @@ function updateRemaining() {
 function saveSale() {
   const container = document.getElementById("invoiceItems");
 
-  // ✅ تحقق من وجود منتجات
+  // ===== تحقق من وجود منتجات =====
   if (!container.children.length) {
     showModal("أضف منتج واحد على الأقل");
     return;
   }
 
-  // ✅ تحقق من الكميات
-  if ([...container.querySelectorAll(".itemQty")].some((i) => +i.value <= 0)) {
+  // ===== تحقق من الكميات =====
+  if ([...container.querySelectorAll(".itemQty")].some(i => +i.value <= 0)) {
     showModal("أدخل كميات صحيحة للمنتجات");
     return;
   }
 
-  // إرجاع الكميات القديمة للمخزون
-  invoice.items.forEach((item) => {
-    const product = products.find((p) => p.name === item.name);
-    if (product) product.qty += item.qty;
-  });
+  // ===== إذا كان تعديل فاتورة، استرجاع المخزون والرصيد القديم =====
+  if (editInvoiceIndex !== null) {
+    const oldInvoice = sales[editInvoiceIndex];
 
+    // استرجاع الرصيد القديم
+    if (oldInvoice.customer !== "نقدي") {
+      const cust = customers.find(c => c.name === oldInvoice.customer);
+      if (cust) {
+        cust.balance -= (oldInvoice.total - oldInvoice.paid);
+      }
+    }
+
+    // استرجاع الكميات القديمة للمخزون
+    oldInvoice.items.forEach(item => {
+      const product = products.find(p => p.name === item.name);
+      if (product) product.qty += item.qty;
+    });
+  }
+
+  // ===== جمع بيانات الفاتورة الجديدة =====
   let total = 0;
   let items = [];
 
-  container.querySelectorAll("tr").forEach((row) => {
-    const name = row.cells[1].innerText; // اسم المنتج من العمود الثاني
+  container.querySelectorAll("tr").forEach(row => {
+    const name = row.cells[1].innerText;
     const qty = +row.querySelector(".itemQty").value || 0;
     const price = +row.querySelector(".itemPrice").value || 0;
 
     total += qty * price;
 
-    items.push({
-      name,
-      qty,
-      price,
-    });
+    items.push({ name, qty, price });
   });
 
   const paid = +document.getElementById("paidAmount").value || 0;
@@ -186,9 +196,9 @@ function saveSale() {
     customers[cIndex].balance = newBalance;
   }
 
-  // خصم من المخزون
-  items.forEach((item) => {
-    const product = products.find((p) => p.name === item.name);
+  // ===== خصم الكميات الجديدة من المخزون =====
+  items.forEach(item => {
+    const product = products.find(p => p.name === item.name);
     if (product) product.qty -= item.qty;
   });
 
@@ -197,15 +207,16 @@ function saveSale() {
   const invoiceData = {
     customer: customerName,
     items,
-    total, // الآن total صحيح
+    total,
     paid,
     remaining: total - paid,
     previousBalance,
     newBalance,
     date: new Date().toISOString().slice(0, 10),
-    order: Date.now(),
+    order: editInvoiceIndex !== null ? sales[editInvoiceIndex].order : Date.now()
   };
 
+  // ===== حفظ أو تعديل الفاتورة =====
   if (editInvoiceIndex !== null) {
     sales[editInvoiceIndex] = invoiceData;
     editInvoiceIndex = null;
@@ -213,25 +224,22 @@ function saveSale() {
     sales.push(invoiceData);
   }
 
-  function resetInvoiceForm() {
-    document.getElementById("invoiceItems").innerHTML = "";
-
-    document.getElementById("invoiceCustomer").selectedIndex = 0;
-    document.getElementById("invoiceProductSelect").selectedIndex = 0;
-
-    document.getElementById("customerBalance").value = "";
-    document.getElementById("invoiceTotal").value = "";
-    document.getElementById("grandTotal").value = "";
-    document.getElementById("paidAmount").value = "";
-    document.getElementById("remainingAmount").value = "";
-  }
+  // ===== إعادة تعيين النموذج =====
+  container.innerHTML = "";
+  document.getElementById("invoiceCustomer").selectedIndex = 0;
+  document.getElementById("invoiceProductSelect").selectedIndex = 0;
+  document.getElementById("customerBalance").value = "";
+  document.getElementById("invoiceTotal").value = "";
+  document.getElementById("grandTotal").value = "";
+  document.getElementById("paidAmount").value = "";
+  document.getElementById("remainingAmount").value = "";
 
   saveData();
   updateBottomCashBalance();
   renderSales();
-  resetInvoiceForm();
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
+
 
 // ===============================
 // عرض الفواتير
