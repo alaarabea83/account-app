@@ -304,9 +304,10 @@ function editInvoice(index) {
       : customers.findIndex((c) => c.name === invoice.customer);
 
   document.getElementById("customerBalance").value =
-    invoice.customer === "نقدي"
-      ? 0
-      : customers.find((c) => c.name === invoice.customer).balance;
+  invoice.customer === "نقدي"
+    ? 0
+    : invoice.previousBalance;
+
 
   document.getElementById("paidAmount").value = invoice.paid;
 
