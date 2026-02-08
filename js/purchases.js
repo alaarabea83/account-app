@@ -81,8 +81,8 @@ function addRow(productIndex) {
     <td>${product.name}</td>
     <td><input type="number" class="qty" placeholder="أدخل الكمية" min="1" value=""></td>
     <td><input type="number" class="price" value="${product.buyPrice}" ></td>
-    <td class="total">0</td>
-    <td><button class="btn-delete-item">❌</button></td>
+    <td><input type="number" class="total" value="0" readonly></td>
+    <td><button class="delBtn">❌</button></td>
   `;
 
   tbody.appendChild(row);
@@ -90,12 +90,12 @@ function addRow(productIndex) {
 
   const qty = row.querySelector(".qty");
   const price = row.querySelector(".price");
-  const totalCell = row.querySelector(".total");
+  const totalInput = row.querySelector(".total");
 
   function calc() {
-    totalCell.innerText = (qty.value || 0) * (price.value || 0);
-    updateInvoiceTotal();
-  }
+  totalInput.value = (+qty.value || 0) * (+price.value || 0);
+  updateInvoiceTotal();
+}
 
   qty.oninput = calc;
   price.oninput = calc;
@@ -118,10 +118,10 @@ function updateRowNumbers() {
 function updateInvoiceTotal() {
   let total = 0;
 
-  document.querySelectorAll("#invoiceTable tbody tr")
-    .forEach(tr => {
-      total += +tr.querySelector(".total").innerText || 0;
-    });
+  document.querySelectorAll("#invoiceTable tbody tr").forEach(tr => {
+    const rowTotal = +tr.querySelector(".total").value || 0;
+    total += rowTotal;
+  });
 
   document.getElementById("invoiceTotal").value = total;
   updateGrandTotal();
