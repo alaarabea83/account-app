@@ -365,7 +365,7 @@
     }
 
     /* لو تحب تبقى responsive أكتر على الموبايل */
-    @media (max-width: 600) {
+    @media (max-width: 600px) {
       .card .form-row {
         justify-content: flex-start;
       }
@@ -415,7 +415,6 @@
     <a href="../pages/income.html" class="home">المقبوضات</a>
     <a href="../pages/expenses.html" class="home">المدفوعات</a>
     <a href="../pages/cash.html" class="home">الخزينة</a>
-    <a href="about.html" class="home">معلومات</a>
   </nav>
 
   <section>
@@ -493,6 +492,7 @@
           <input type="date" id="toDate" />
         </div>
 
+        <input type="text" id="searchSale" placeholder="بحث باسم العميل" />
         <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" onclick="filterSalesByDate()">
           🔍 بحث
         </button>
@@ -509,11 +509,11 @@
               <th>#</th>
               <th>التاريخ</th>
               <th>العميل</th>
-              <th>الإجمالي</th>
+              <th>إجمالي الفاتورة</th>
               <th>المدفوع</th>
               <th>المتبقي</th>
-              <th>السابق</th>
-              <th>الحالي</th>
+              <th>الرصيد السابق</th>
+              <th>الرصيد الحالي</th>
               <th>المزيد</th>
             </tr>
           </thead>

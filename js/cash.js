@@ -32,8 +32,8 @@ function renderCashStatement() {
   const tbody = document.querySelector("#cashStatementTable tbody");
   if (!tbody) return;
 
-  const from = document.getElementById("cashFromDate")?.value;
-  const to = document.getElementById("cashToDate")?.value;
+  const from = document.getElementById("fromDate")?.value;
+  const to = document.getElementById("toDate")?.value;
   const customerFilter = document.getElementById("cashCustomerFilter")?.value;
 
   tbody.innerHTML = "";

@@ -368,7 +368,7 @@
     }
 
     /* لو تحب تبقى responsive أكتر على الموبايل */
-    @media (max-width: 600) {
+    @media (max-width: 600px) {
       .card .form-row {
         justify-content: flex-start;
       }
@@ -434,7 +434,6 @@
     <a href="../pages/income.html" class="home">المقبوضات</a>
     <a href="../pages/expenses.html" class="home">المدفوعات</a>
     <a href="../pages/cash.html" class="home">الخزينة</a>
-    <a href="about.html" class="home">معلومات</a>
   </nav>
 
   <section>
@@ -445,7 +444,7 @@
       <div class="card">
         <div class="form-row">
           <select id="invoiceCustomer"></select>
-          <input id="customerBalance" readonly placeholder="الرصيد السابق" />
+          <input type="number" id="customerBalance" readonly placeholder="الرصيد السابق" />
         </div>
 
         <select id="productSelect">
@@ -507,10 +506,11 @@
           <label>إلى تاريخ</label>
           <input type="date" id="toDate" />
         </div>
-        <input type="text" id="searchPurchase" placeholder="بحث باسم العميل" />
+        <input type="text" id="searchPurchase" placeholder="بحث باسم المورد / العميل" />
 
-        <button id="searchBtn">بحث</button>
-        <button id="showAllBtn">عرض الكل</button>
+
+        <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" id="searchBtn">🔍 بحث</button>
+        <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" id="showAllBtn">🔄 عرض الكل</button>
 
       </div>
 
@@ -526,7 +526,7 @@
               <th>المتبقي</th>
               <th>الرصيد السابق</th>
               <th>الرصيد الجديد</th>
-              <th>إجراءات</th>
+              <th>المزيد</th>
             </tr>
           </thead>
           <tbody></tbody>

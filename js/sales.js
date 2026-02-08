@@ -34,6 +34,11 @@ window.onload = function () {
     .addEventListener("input", updateRemaining);
 };
 
+// 🔍 البحث بالاسم //
+document
+  .getElementById("searchSale")
+  .addEventListener("input", searchSales);
+
 // عرض العملاء //
 function renderCustomerSelect() {
   const sel = document.getElementById("invoiceCustomer");
@@ -378,6 +383,27 @@ function resetSalesFilter() {
   document.getElementById("toDate").value = "";
   renderSales();
 }
+
+// =====  دالة البحث بإسم العميل ==== //
+function searchSales() {
+  const text = document
+    .getElementById("searchSale")
+    .value
+    .toLowerCase();
+
+  const filtered = sales.filter(inv =>
+    inv.customer.toLowerCase().includes(text)
+  );
+
+  renderSales(filtered);
+}
+
+function showAllSales() {
+  document.getElementById("searchSale").value = "";
+  renderSales(sales);
+}
+
+
 
 // ===== مودال عام ==== //
 let deleteCallback = null;

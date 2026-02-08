@@ -1,7 +1,7 @@
 let editPurchaseIndex = null;
 let deleteCallback = null;
 
-function setTodayDate(id){
+function setTodayDate(id) {
   const today = new Date().toISOString().split("T")[0];
   document.getElementById(id).value = today;
 }
@@ -13,17 +13,24 @@ window.onload = function () {
   loadData();
   renderCustomerSelect();
   renderPurchases();
+  loadProductsToSelect();
 
-  // 👇 إضافة تاريخ اليوم
+  // 👇 تاريخ اليوم
   setTodayDate("fromDate");
   setTodayDate("toDate");
-  loadProductsToSelect();
+
+  // ربط الأزرار
+  document.getElementById("searchBtn").addEventListener("click", filterPurchases);
+  document.getElementById("showAllBtn").addEventListener("click", showAllPurchases);
+  document.getElementById("searchPurchase").addEventListener("input", filterPurchases);
+};
+  
 
   document.getElementById("saveInvoiceBtn").onclick = savePurchase;
 
-  document.getElementById("productSelect").addEventListener("change", function(){
+  document.getElementById("productSelect").addEventListener("change", function () {
     const index = this.value;
-    if(index === "") return;
+    if (index === "") return;
     addRow(index);
     this.value = "";
   });
@@ -37,23 +44,6 @@ window.onload = function () {
 
   document.getElementById("paidAmount").addEventListener("input", updateRemaining);
 
-  // ===== البحث وعرض الكل =====
-  const searchInput = document.getElementById("searchPurchase");
-  const searchBtn = document.getElementById("searchBtn");
-  const showAllBtn = document.getElementById("showAllBtn");
-
-  searchBtn.onclick = function() {
-    const val = searchInput.value.trim().toLowerCase();
-    const filtered = purchases.filter(p => p.customer.toLowerCase().includes(val));
-    renderPurchases(filtered);
-  };
-
-  showAllBtn.onclick = function() {
-    searchInput.value = "";
-    renderPurchases(purchases);
-  };
-};
-
 
 // ===============================
 // العملاء
@@ -63,26 +53,26 @@ function renderCustomerSelect() {
   sel.innerHTML =
     `<option value="" disabled selected>اختر الحساب</option>` +
     `<option value="">شراء نقدي</option>` +
-    customers.map((c,i)=>`<option value="${i}">${c.name}</option>`).join("");
+    customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
 
 // ===============================
 // المنتجات
 // ===============================
-function loadProductsToSelect(){
+function loadProductsToSelect() {
   const sel = document.getElementById("productSelect");
   sel.innerHTML =
     `<option value="">اختر منتج</option>` +
-    products.map((p,i)=>`<option value="${i}">${p.name}</option>`).join("");
+    products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 }
 
 // ===============================
 // إضافة صف
 // ===============================
-function addRow(productIndex){
+function addRow(productIndex) {
   const tbody = document.querySelector("#invoiceTable tbody");
   const product = products[productIndex];
-  if(!product) return;
+  if (!product) return;
 
   const row = document.createElement("tr");
 
@@ -102,34 +92,34 @@ function addRow(productIndex){
   const price = row.querySelector(".price");
   const totalCell = row.querySelector(".total");
 
-  function calc(){
-    totalCell.innerText = (qty.value||0)*(price.value||0);
+  function calc() {
+    totalCell.innerText = (qty.value || 0) * (price.value || 0);
     updateInvoiceTotal();
   }
 
   qty.oninput = calc;
   price.oninput = calc;
 
-  row.querySelector(".delBtn").onclick = ()=>{
+  row.querySelector(".delBtn").onclick = () => {
     row.remove();
     updateRowNumbers();
     updateInvoiceTotal();
   };
 }
 
-function updateRowNumbers(){
+function updateRowNumbers() {
   document.querySelectorAll("#invoiceTable tbody tr")
-    .forEach((tr,i)=> tr.querySelector(".rowNum").innerText = i+1);
+    .forEach((tr, i) => tr.querySelector(".rowNum").innerText = i + 1);
 }
 
 // ===============================
 // الحسابات
 // ===============================
-function updateInvoiceTotal(){
+function updateInvoiceTotal() {
   let total = 0;
 
   document.querySelectorAll("#invoiceTable tbody tr")
-    .forEach(tr=>{
+    .forEach(tr => {
       total += +tr.querySelector(".total").innerText || 0;
     });
 
@@ -160,53 +150,53 @@ function savePurchase() {
   let total = 0;
   let items = [];
 
-  rows.forEach(row=>{
+  rows.forEach(row => {
     const name = row.cells[1].innerText;
     const qty = +row.querySelector(".qty").value || 0;
     const price = +row.querySelector(".price").value || 0;
     total += qty * price;
-    items.push({name,qty,price});
+    items.push({ name, qty, price });
   });
 
   const paid = +paidAmount.value || 0;
   const cIndex = invoiceCustomer.value;
 
-  let customerName="نقدي";
-  let previousBalance=0;
-  let newBalance=total-paid;
+  let customerName = "نقدي";
+  let previousBalance = 0;
+  let newBalance = total - paid;
 
-  if(cIndex!==""){
+  if (cIndex !== "") {
     const c = customers[cIndex];
-    customerName=c.name;
-    previousBalance=c.balance||0;
-    newBalance=previousBalance-(total-paid);
-    c.balance=newBalance;
+    customerName = c.name;
+    previousBalance = c.balance || 0;
+    newBalance = previousBalance - (total - paid);
+    c.balance = newBalance;
   }
 
   // تحديث المخزون
-  items.forEach(item=>{
-    const p=products.find(x=>x.name===item.name);
-    if(p) p.qty += item.qty;
+  items.forEach(item => {
+    const p = products.find(x => x.name === item.name);
+    if (p) p.qty += item.qty;
   });
 
   cash.expenses += paid;
 
-  const invoiceData={
-    customer:customerName,
+  const invoiceData = {
+    customer: customerName,
     items,
     total,
     paid,
-    remaining:total-paid,
+    remaining: total - paid,
     previousBalance,
     newBalance,
-    date:new Date().toISOString().slice(0,10),
-    order:Date.now()
+    date: new Date().toISOString().slice(0, 10),
+    order: Date.now()
   };
 
-  if(editPurchaseIndex!==null){
-    purchases[editPurchaseIndex]=invoiceData;
-    editPurchaseIndex=null;
-  }else{
+  if (editPurchaseIndex !== null) {
+    purchases[editPurchaseIndex] = invoiceData;
+    editPurchaseIndex = null;
+  } else {
     purchases.push(invoiceData);
   }
 
@@ -214,11 +204,11 @@ function savePurchase() {
   updateBottomCashBalance();
   renderPurchases();
 
-  document.querySelector("#invoiceTable tbody").innerHTML="";
-  document.querySelectorAll("input").forEach(i=>i.value="");
-  invoiceCustomer.value="";
+  document.querySelector("#invoiceTable tbody").innerHTML = "";
+  document.querySelectorAll("input").forEach(i => i.value = "");
+  invoiceCustomer.value = "";
 
-  showModal("تم حفظ الفاتورة بنجاح ✅","نجاح");
+  showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
 
 // ===============================
@@ -231,7 +221,7 @@ function renderPurchases(list = purchases) {
   list.forEach((p, i) => {
     tbody.innerHTML += `
       <tr>
-        <td>${i+1}</td>
+        <td>${i + 1}</td>
         <td>${p.date}</td>
         <td>${p.customer}</td>
         <td>${p.total}</td>
@@ -255,51 +245,51 @@ function renderPurchases(list = purchases) {
 // ===============================
 // تعديل
 // ===============================
-function editPurchase(index){
-  const inv=purchases[index];
-  editPurchaseIndex=index;
+function editPurchase(index) {
+  const inv = purchases[index];
+  editPurchaseIndex = index;
 
-  document.querySelector("#invoiceTable tbody").innerHTML="";
+  document.querySelector("#invoiceTable tbody").innerHTML = "";
 
   invoiceCustomer.value =
-    inv.customer==="نقدي" ? "" :
-    customers.findIndex(c=>c.name===inv.customer);
+    inv.customer === "نقدي" ? "" :
+      customers.findIndex(c => c.name === inv.customer);
 
-  customerBalance.value=inv.previousBalance;
-  paidAmount.value=inv.paid;
+  customerBalance.value = inv.previousBalance;
+  paidAmount.value = inv.paid;
 
-  inv.items.forEach(item=>{
-    const i=products.findIndex(p=>p.name===item.name);
+  inv.items.forEach(item => {
+    const i = products.findIndex(p => p.name === item.name);
     addRow(i);
 
-    const r=document.querySelector("#invoiceTable tbody tr:last-child");
-    r.querySelector(".qty").value=item.qty;
-    r.querySelector(".price").value=item.price;
-    r.querySelector(".total").innerText=item.qty*item.price;
+    const r = document.querySelector("#invoiceTable tbody tr:last-child");
+    r.querySelector(".qty").value = item.qty;
+    r.querySelector(".price").value = item.price;
+    r.querySelector(".total").innerText = item.qty * item.price;
   });
 
   updateInvoiceTotal();
-  showModal("تم تحميل الفاتورة للتعديل ✏️","تعديل");
+  showModal("تم تحميل الفاتورة للتعديل ✏️", "تعديل");
 }
 
 // ===============================
 // حذف
 // ===============================
-function confirmDeletePurchase(order){
+function confirmDeletePurchase(order) {
   showDeleteModal("هل أنت متأكد من حذف الفاتورة؟", () => {
     const i = purchases.findIndex(p => p.order === order);
-    if(i === -1) return;
+    if (i === -1) return;
 
     // تحديث المخزون
     purchases[i].items.forEach(item => {
       const prod = products.find(p => p.name === item.name);
-      if(prod) prod.qty -= item.qty;
+      if (prod) prod.qty -= item.qty;
     });
 
     // تحديث رصيد العميل
-    if(purchases[i].customer !== "نقدي"){
+    if (purchases[i].customer !== "نقدي") {
       const cust = customers.find(c => c.name === purchases[i].customer);
-      if(cust) cust.balance = purchases[i].previousBalance;
+      if (cust) cust.balance = purchases[i].previousBalance;
     }
 
     // تحديث الخزينة
@@ -309,40 +299,82 @@ function confirmDeletePurchase(order){
     saveData();
     updateBottomCashBalance();
     renderPurchases();
-    showModal("تم حذف الفاتورة بنجاح ✅","نجاح");
+    showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
   });
 }
+
+// دوال البحث
+function searchPurchases() {
+  const text = document
+    .getElementById("searchPurchase")
+    .value
+    .toLowerCase();
+
+  const filtered = purchases.filter(inv =>
+    (inv.customer || "").toLowerCase().includes(text)
+  );
+
+  renderPurchases(filtered);
+}
+
+function filterPurchases() {
+  const fromVal = document.getElementById("fromDate").value;
+  const toVal = document.getElementById("toDate").value;
+  const searchVal = document.getElementById("searchPurchase").value.trim().toLowerCase();
+
+  const from = fromVal ? new Date(fromVal) : null;
+  const to = toVal ? new Date(toVal) : null;
+
+  const filtered = purchases.filter((p) => {
+    const date = new Date(p.date);
+    const matchDate = (!from || date >= from) && (!to || date <= to);
+    const matchName =
+      !searchVal ||
+      (p.customer && p.customer.toLowerCase().includes(searchVal));
+    return matchDate && matchName;
+  });
+
+  renderPurchases(filtered);
+}
+
+function showAllPurchases() {
+  document.getElementById("fromDate").value = "";
+  document.getElementById("toDate").value = "";
+  document.getElementById("searchPurchase").value = "";
+  renderPurchases();
+}
+
 
 
 // ===============================
 // مودالات
 // ===============================
-function showDeleteModal(msg,onConfirm){
-  appModal.style.display="flex";
-  modalTitle.innerText="تأكيد الحذف";
-  modalMessage.innerText=msg;
-  modalConfirmBtn.style.display="flex";
-  modalCancelBtn.style.display="flex";
-  modalOkBtn.style.display="none";
-  deleteCallback=onConfirm;
+function showDeleteModal(msg, onConfirm) {
+  appModal.style.display = "flex";
+  modalTitle.innerText = "تأكيد الحذف";
+  modalMessage.innerText = msg;
+  modalConfirmBtn.style.display = "flex";
+  modalCancelBtn.style.display = "flex";
+  modalOkBtn.style.display = "none";
+  deleteCallback = onConfirm;
 }
 
-modalConfirmBtn.onclick=()=>{ if(deleteCallback) deleteCallback(); closeModal(); }
-modalCancelBtn.onclick=closeModal;
+modalConfirmBtn.onclick = () => { if (deleteCallback) deleteCallback(); closeModal(); }
+modalCancelBtn.onclick = closeModal;
 
 
-function showModal(msg,title="تنبيه"){
-  appModal.style.display="flex";
-  modalTitle.innerText=title;
-  modalMessage.innerText=msg;
-  modalConfirmBtn.style.display="none";
-  modalCancelBtn.style.display="none";
-  modalOkBtn.style.display="flex";
+function showModal(msg, title = "تنبيه") {
+  appModal.style.display = "flex";
+  modalTitle.innerText = title;
+  modalMessage.innerText = msg;
+  modalConfirmBtn.style.display = "none";
+  modalCancelBtn.style.display = "none";
+  modalOkBtn.style.display = "flex";
 }
 
-modalOkBtn.onclick=closeModal;
+modalOkBtn.onclick = closeModal;
 
-function closeModal(){
-  appModal.style.display="none";
-  deleteCallback=null;
+function closeModal() {
+  appModal.style.display = "none";
+  deleteCallback = null;
 }
