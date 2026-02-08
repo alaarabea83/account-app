@@ -10,3 +10,22 @@ window.addEventListener("DOMContentLoaded", () => {
   loadData();                  // تحميل البيانات أولاً
   updateBottomCashBalance();   // تحديث الرصيد
 });
+
+
+function showConfirm(message, onConfirm) {
+  document.getElementById("modalTitle").innerText = "تأكيد الحذف";
+  document.getElementById("modalMessage").innerText = message;
+
+  document.getElementById("modalOkBtn").style.display = "none";
+  document.getElementById("modalConfirmBtn").style.display = "inline-block";
+  document.getElementById("modalCancelBtn").style.display = "inline-block";
+
+  document.getElementById("appModal").style.display = "flex";
+
+  document.getElementById("modalConfirmBtn").onclick = () => {
+    closeModal();
+    onConfirm();
+  };
+
+  document.getElementById("modalCancelBtn").onclick = closeModal;
+}

@@ -3,129 +3,119 @@
 
 <head>
   <meta charset="UTF-8" />
+  <title>سهل لإدارة الحسابات - المشتريات</title>
+
   <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link rel="stylesheet" href="../css/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
     rel="stylesheet" />
 
-  <title>سهل لإدارة الحسابات</title>
+  <link rel="stylesheet" href="../css/style.css" />
+
   <style>
     body {
-      font-family: "Tajawal", sans-serif;
+      font-family: Tajawal;
       background: #1b2631;
       margin: 0;
+      color: white;
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Cairo", sans-serif;
-      font-weight: 700;
-      margin: 5px;
-    }
-
-    h3 {
-        color: #10b981;
-      }
-
-    /* ===== Layout ===== */
+    /* Containers */
     section {
       max-width: 1000px;
-      margin: 20px auto;
-      margin-top: 60px;
-      margin-bottom: 80px;
-      background: #1b2631;
+      margin: 60px auto 80px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       gap: 25px;
-      padding: 15px;
     }
 
     .t-container {
       background: #1f2d3a;
-      color: #ecf0f1;
       border-radius: 12px;
-      padding: 5px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 15px;
       border: 1px solid #10b98155;
     }
 
-    /* ===== Form ===== */
+    /* Headings */
+    h3 {
+      font-family: Cairo;
+      color: #10b981;
+      margin: 5px 0 15px;
+    }
+
+    /* Form */
     .form-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content: center;
       margin-bottom: 10px;
     }
 
     .form-row input,
-      .form-row select {
-        flex: 1;
-        background: #374151;
-        color: #ecf0f1;
-        border: 1px solid #4b5563;
-        border-radius: 8px;
-        padding: 10px;
-        font-size: 14px;
-        box-sizing: border-box;
-        transition: 0.2s;
-      }
+    .form-row select {
+      flex: 1;
+      background: #374151;
+      color: white;
+      border: 1px solid #4b5563;
+      border-radius: 8px;
+      padding: 10px;
+    }
 
     .form-row button {
       background: #f1c40f;
-      color: #000;
       border: none;
       padding: 10px 20px;
       border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 15px;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .form-row button:hover {
-      background: #1f3a5f;
+    #productSelect {
+      width: 100%;
+      background: #374151;
+      color: #ecf0f1;
+      border: 1px solid #4b5563;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
     }
 
-    /* ===== Table ===== */
+    /* Table */
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #1f2d3a;
+      background: #111827;
     }
 
-    thead th {
-      background: #14532d;
-      color: #fff;
-      padding: 12px;
-      font-size: 14px;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-    }
-
-    tbody td {
+    th {
+      background: #1f2937;
       padding: 10px;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
+    }
+
+    td {
+      padding: 8px;
       text-align: center;
     }
 
-    tbody tr:hover {
-      background: #065bb1;
+    tr:hover {
+      background: #1e293b;
     }
 
     .table-scroll {
       width: 100%;
       overflow-x: auto;
+      /* التمرير الأفقي */
     }
 
     .table-scroll table {
-      min-width: 900px;
-      /* يمنع تكسير الأعمدة */
+      min-width: 1000px;
+      /* على الأقل أكبر من الحاوية */
+      border-collapse: collapse;
     }
 
     .table-scroll::-webkit-scrollbar {
@@ -137,56 +127,16 @@
       border-radius: 10px;
     }
 
-    /* حاوية الأزرار داخل جدول الفواتير */
-    td>.btn-delete,
-    td>.btn-edit {
-      margin: 0 3px;
-      /* مسافة بسيطة بين الأزرار */
-      min-width: 40px;
-      /* يمنع الأزرار من الضيق الشديد */
-      flex: unset;
-      /* لا تمتد على الكمبيوتر */
-    }
-
-    /* لجعلها مرنة على الموبايل */
-    @media (max-width: 600px) {
-
-      td>.btn-delete,
-      td>.btn-edit {
-        flex: 1 1 auto;
-        /* تسمح للأزرار بالتمدد على الموبايل */
-        margin-bottom: 5px;
-        /* مسافة أسفل كل زر لو wrap */
-      }
-    }
-
-    .btn-edit {
-      background: #f1c40f;
-      color: #000;
-      border: none;
-      padding: 5px 10px;
+    #invoiceTable input {
+      width: 80px;
+      background: #0f172a;
+      color: white;
+      border: 1px solid #334155;
       border-radius: 6px;
-      cursor: pointer;
+      padding: 5px;
     }
 
-    .btn-delete {
-      background: #e74c3c;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-edit:hover {
-      opacity: 0.85;
-    }
-
-    .btn-delete:hover {
-      opacity: 0.85;
-    }
-
-    /* ===== Modal ===== */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -194,247 +144,134 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
     }
 
     .modal-box {
-      background: #fff;
+      background: white;
+      color: black;
       padding: 25px;
       border-radius: 12px;
+      text-align: center;
       width: 90%;
       max-width: 400px;
-      text-align: center;
-      margin: 25px;
     }
 
-    .modal-box h3 {
-      margin-top: 0;
-    }
-
-    .modal-box button {
-      margin-top: 15px;
-      padding: 10px 25px;
-      border: none;
-      background: #2e86c1;
-      color: #fff;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    @media screen and (max-width: 600px) {
-      label {
-        display: block;
-        text-align: right;
-        width: 100%;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-sizing: border-box;
-      }
-    }
-
-    @media screen and (max-width: 600px) {
-
-      /* فورم إضافة المنتج في فاتورة المبيعات فقط */
-      #invoiceItems .form-row {
-        display: flex;
-        justify-content: center;
-        /* سنتر أفقي */
-        align-items: center;
-        /* سنتر رأسي */
-        gap: 8px;
+    /* Mobile */
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
       }
 
-      #invoiceItems .form-row select,
-      #invoiceItems .form-row input {
-        max-width: 50%;
+      #invoiceTable input {
+        width: 60px;
       }
-    }
-
-    .invoice-section {
-      padding: 1rem;
-      border-radius: 12px;
-    }
-
-    .previousInvoices {
-      padding: 1rem;
-      border-radius: 12px;
     }
   </style>
 </head>
 
 <body>
+  <!-- ===== Navigation ===== -->
   <nav class="breadcrumbs">
-    <a href="../index.html" class="home">الرئيسية</a>
-    <a href="../pages/customers.html" class="home">الحسابات</a>
-    <a href="../pages/products.html" class="home">المنتجات</a>
-    <a href="../pages/sales.html" class="home"> المبيعات</a>
-    <span class="current">المشتريات</span>
-    <a href="../pages/income.html" class="home">المقبوضات</a>
-    <a href="../pages/expenses.html" class="home">المدفوعات</a>
-    <a href="../pages/cash.html" class="home">الخزينة</a>
-    <a href="about.html" class="home">معلومات</a>
+    <a href="../index.html">الرئيسية</a>
+    <a href="customers.html">الحسابات</a>
+    <a href="products.html">المنتجات</a>
+    <a href="sales.html">المبيعات</a>
+    <span>المشتريات</span>
   </nav>
 
   <section>
+    <!-- ================= New Invoice ================= -->
     <div class="t-container">
-      <div " class=" invoice-section">
-        <h3 style="text-align: right;">🧾 فاتورة شراء جديدة</h3>
+      <h3>🧾 فاتورة شراء جديدة</h3>
 
-        <!-- صف اختيار العميل + رصيده + إضافة منتج -->
-        <div class="form-row">
-          <select id="invoiceCustomer"></select>
+      <div class="form-row">
+        <select id="invoiceCustomer"></select>
+        <input id="customerBalance" readonly placeholder="الرصيد السابق" />
+      </div>
 
-          <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
+      <select id="productSelect">
+        <option value="">اختر منتج</option>
+      </select>
 
-          <button type="button" id="addItemBtn">✚ إضافة منتج</button>
-        </div>
+      <table id="invoiceTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>المنتج</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الإجمالي</th>
+            <th>❌</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-        <!-- حاوية ديناميكية لصفوف المنتجات -->
-        <div id="invoiceItems"></div>
+      <div class="form-row">
+        <input id="invoiceTotal" readonly placeholder="إجمالي الفاتورة" />
+        <input id="grandTotal" readonly placeholder="الإجمالي الكلي" />
+      </div>
 
-        <!-- إجمالي الفاتورة + الإجمالي الكلي -->
-        <div class="form-row">
-          <label for="invoiceTotal">إجمالي الفاتورة:</label>
-          <input type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" readonly />
+      <div class="form-row">
+        <input id="paidAmount" type="number" placeholder="المبلغ المدفوع" />
+        <input id="remainingAmount" readonly placeholder="المتبقي" />
+      </div>
 
-          <label for="grandTotal">الإجمالي الكلي:</label>
-          <input type="number" id="grandTotal" placeholder="الإجمالي الكلي" readonly />
-        </div>
-
-        <!-- المدفوع + المتبقي -->
-        <div class="form-row">
-          <label for="paidAmount">المبلغ المدفوع:</label>
-          <input type="number" id="paidAmount" placeholder="المبلغ المدفوع" />
-
-          <label for="remainingAmount">المتبقي:</label>
-          <input type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
-        </div>
-
-        <!-- زر حفظ الفاتورة -->
-        <div class="form-row">
-          <button type="button" id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
-        </div>
+      <div class="form-row">
+        <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
       </div>
     </div>
 
-    <style>
-      /* كل الحقول الرقمية صغيرة العرض */
-      input[type="number"] {
-        width: 80px;
-        box-sizing: border-box;
-      }
-
-      /* تخفيف المسافات بين اللابل والحقل */
-      .form-row label {
-        margin-right: 50px;
-        min-width: 50px;
-      }
-    </style>
-
+    <!-- ================= Previous Invoices ================= -->
     <div class="t-container">
-      <div class="previousInvoices">
-        <h3 style="text-align: right">📋 الفواتير السابقة</h3>
-        <div class="form-row" style="gap: 10px; align-items: end">
-          <div>
-            <label>من تاريخ</label>
-            <input type="date" id="fromDate" />
-          </div>
+      <h3>📋 الفواتير السابقة</h3>
 
-          <div>
-            <label>إلى تاريخ</label>
-            <input type="date" id="toDate" />
-          </div>
+      <div class="form-row">
+        <input type="date" id="fromDate" />
+        <input type="date" id="toDate" />
+        <input type="text" id="searchPurchase" placeholder="بحث باسم العميل" />
 
-          <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" onclick="filterSalesByDate()">
-            🔍 بحث
-          </button>
-          <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" type="button"
-            onclick="resetSalesFilter()">
-            🔄 عرض الكل
-          </button>
-        </div>
+        <button id="searchBtn">بحث</button>
+        <button id="showAllBtn">عرض الكل</button>
 
-        <div class="table-scroll">
-          <table id="salesTable">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>التاريخ</th>
-                <th>العميل</th>
-                <th>إجمالي الفاتورة</th>
-                <th>المدفوع</th>
-                <th>المتبقي</th>
-                <th>الرصيد السابق</th>
-                <th>الرصيد الجديد</th>
-                <th>إجراءات</th>
-              </tr>
-            </thead>
+      </div>
 
-            <tbody></tbody>
-          </table>
-        </div>
+      <div class="table-scroll">
+        <table id="purchasesTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>التاريخ</th>
+              <th>العميل</th>
+              <th>إجمالي الفاتورة</th>
+              <th>المدفوع</th>
+              <th>المتبقي</th>
+              <th>الرصيد السابق</th>
+              <th>الرصيد الجديد</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- ======== مودال عصري عام وحذف ===== -->
-  <div id="appModal" class="modal-overlay" style="display: none">
+  <!-- ===== Modal ===== -->
+  <div id="appModal" class="modal-overlay">
     <div class="modal-box">
-      <div class="modal-icon" style="font-size: 48px; color: #e74c3c; margin-bottom: 10px">
-        ⚠️
-      </div>
       <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage">الرسالة هنا</p>
-      <div class="modal-actions" style="display: flex; gap: 8px; justify-content: center">
-        <!-- أزرار تأكيد الحذف -->
-        <button id="modalCancelBtn" style="
-              padding: 6px 10px;
-              font-size: 12px;
-              border-radius: 6px;
-              border: none;
-              background: #ecf0f1;
-              color: #333;
-              cursor: pointer;
-            ">
-          إلغاء
-        </button>
-
-        <button id="modalConfirmBtn" style="
-              padding: 6px 10px;
-              font-size: 12px;
-              border-radius: 6px;
-              border: none;
-              background: #e74c3c;
-              color: #fff;
-              cursor: pointer;
-            ">
-          حذف
-        </button>
-
-        <!-- زر حسناً للرسائل العادية -->
-        <button id="modalOkBtn" style="
-              margin: 0 auto;
-              padding: 10px 25px;
-              border-radius: 10px;
-              border: none;
-              background: #2e86c1;
-              color: #fff;
-              cursor: pointer;
-              display: none;
-            ">
-          حسناً
-        </button>
-      </div>
+      <p id="modalMessage"></p>
+      <button id="modalCancelBtn">إلغاء</button>
+      <button id="modalConfirmBtn">حذف</button>
+      <button id="modalOkBtn">حسناً</button>
     </div>
   </div>
 
-<nav class="bottom-menu">
-    <div class="menu-item cash-item">
-      <span>💰 رصيد الخزينة:</span>
-      <span id="cashBalance">0.00</span> جنيه
-    </div>
+  <!-- ===== Cash Bar ===== -->
+  <nav class="bottom-menu">
+    💰 رصيد الخزينة: <span id="cashBalance">0.00</span> جنيه
   </nav>
-
 
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>
