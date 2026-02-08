@@ -1,9 +1,18 @@
 let editInvoiceIndex = null;
 
+function setTodayDate(id){
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById(id).value = today;
+}
+
 // عند تحميل الصفحة //
 window.onload = function () {
   loadData();
   renderCustomerSelect();
+
+  // 👇 إضافة تاريخ اليوم
+  setTodayDate("fromDate");
+  setTodayDate("toDate");
   renderSales();
 
   // Dropdown لاختيار المنتج مباشرة //
