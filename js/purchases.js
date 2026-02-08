@@ -1,6 +1,11 @@
 let editPurchaseIndex = null;
 let deleteCallback = null;
 
+function setTodayDate(id){
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById(id).value = today;
+}
+
 // ===============================
 // عند تحميل الصفحة
 // ===============================
@@ -8,6 +13,10 @@ window.onload = function () {
   loadData();
   renderCustomerSelect();
   renderPurchases();
+
+  // 👇 إضافة تاريخ اليوم
+  setTodayDate("fromDate");
+  setTodayDate("toDate");
   loadProductsToSelect();
 
   document.getElementById("saveInvoiceBtn").onclick = savePurchase;

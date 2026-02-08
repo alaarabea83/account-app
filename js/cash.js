@@ -1,5 +1,14 @@
+
+function setTodayDate(id){
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById(id).value = today;
+}
+
 window.onload = function () {
   loadData();
+// 👇 إضافة تاريخ اليوم
+  setTodayDate("fromDate");
+  setTodayDate("toDate");
 
   renderCashCustomerFilter(); // عرض العملاء في فلتر كشف الخزنة
   renderCashStatement(); // عرض كشف الخزنة عند التحميل
