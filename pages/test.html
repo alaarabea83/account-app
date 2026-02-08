@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>سهل لإدارة الحسابات - المشتريات</title>
+
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    body {
+      font-family: "Tajawal", sans-serif;
+      background: #1b2631;
+      margin: 0;
+    }
+
+    /* =========================
+   THEME VARIABLES
+========================= */
+:root {
+  --bg-main: #1b2631;
+  --bg-card: #1f2937;
+  --bg-input: #374151;
+
+  --color-primary: #10b981;
+  --color-warning: #f1c40f;
+  --color-danger: #e74c3c;
+  --color-info: #0d6efd;
+
+  --text-main: #ecf0f1;
+  --text-dark: #000;
+  --text-light: #fff;
+
+  --border: #4b5563;
+
+  --radius: 10px;
+  --shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* ===== Light Mode (اختياري) ===== */
+.light-mode {
+  --bg-main: #f5f7fa;
+  --bg-card: #ffffff;
+  --bg-input: #f1f3f5;
+
+  --text-main: #222;
+  --border: #d1d5db;
+}
+
+/* =========================
+   BASE
+========================= */
+body {
+  font-family: "Tajawal", sans-serif;
+  background: var(--bg-main);
+  margin: 0;
+  color: var(--text-main);
+}
+
+h1,h2,h3 {
+  font-family: "Cairo", sans-serif;
+  margin: 5px;
+}
+
+h3 { color: var(--color-primary); }
+
+/* =========================
+   LAYOUT
+========================= */
+section {
+  max-width: 1000px;
+  margin: 60px auto 80px;
+  background: var(--bg-card);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.t-container,
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 12px;
+  border: 1px solid #10b98155;
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   FORM
+========================= */
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  background: var(--bg-input);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+
+.card .form-row {
+  align-items: center;
+}
+
+.card label {
+  width: 120px;
+  font-weight: bold;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: .2s;
+}
+
+button:hover { opacity: .9; }
+
+#saveInvoiceBtn,
+.btn-edit {
+  background: var(--color-warning);
+  color: var(--text-dark);
+}
+
+.btn-delete {
+  background: var(--color-danger);
+  color: var(--text-light);
+}
+
+.delBtn {
+  background: #14532d;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  font-size: 22px;
+}
+
+/* =========================
+   TABLE
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+}
+
+thead th {
+  background: #14532d;
+  color: white;
+  padding: 12px;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+
+tbody tr:hover {
+  background: #1f3a5f;
+  color: white;
+}
+
+#invoiceTable tbody tr:hover {
+  background: transparent;
+  color: inherit;
+}
+
+/* Scroll */
+.table-scroll {
+  overflow: auto;
+}
+
+.table-scroll thead {
+  position: sticky;
+  top: 0;
+}
+
+/* =========================
+   INPUTS (Invoice)
+========================= */
+.qty,.price,.total {
+  width: 75px;
+  padding: 6px;
+  border-radius: var(--radius);
+  background: #111827;
+  color: white;
+  text-align: center;
+}
+
+.total {
+  color: var(--color-warning);
+  font-weight: bold;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* =========================
+   SELECT
+========================= */
+#productSelect {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:600px) {
+
+  label {
+    width: 100%;
+    text-align: right;
+  }
+
+  .card label {
+    width: 100px;
+  }
+
+  .card input[type="number"] {
+    max-width: 120px;
+  }
+
+  #invoiceItems .form-row input,
+  #invoiceItems .form-row select {
+    max-width: 50%;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- ===== Navigation ===== -->
+  <nav class="breadcrumbs">
+    <a href="../index.html" class="home">الرئيسية</a>
+    <a href="../pages/customers.html" class="home">الحسابات</a>
+    <a href="../pages/products.html" class="home">المنتجات</a>
+    <a href="../pages/sales.html" class="home"> المبيعات</a>
+    <span class="current">المشتريات</span>
+    <a href="../pages/income.html" class="home">المقبوضات</a>
+    <a href="../pages/expenses.html" class="home">المدفوعات</a>
+    <a href="../pages/cash.html" class="home">الخزينة</a>
+  </nav>
+
+  <section>
+    <!-- ================= New Invoice ================= -->
+    <div class="t-container">
+      <h3>🧾 فاتورة شراء جديدة</h3>
+
+      <div class="card">
+        <div class="form-row">
+          <select id="invoiceCustomer"></select>
+          <input type="number" id="customerBalance" readonly placeholder="الرصيد السابق" />
+        </div>
+
+        <select id="productSelect">
+          <option value="">اختر منتج</option>
+        </select>
+      </div>
+
+      <div class="card table-container">
+        <div class="table-scroll">
+          <table id="invoiceTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th>الإجمالي</th>
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="form-row">
+          <label>إجمالي الفاتورة:</label>
+          <input type="number" id="invoiceTotal" placeholder="0" readonly />
+          <label>الإجمالي الكلي:</label>
+          <input type="number" id="grandTotal" placeholder="0" readonly />
+        </div>
+
+        <!-- المدفوع + المتبقي -->
+        <div class="form-row">
+          <label>المبلغ المدفوع:</label>
+          <input type="number" id="paidAmount" placeholder="أدخل المبلغ" />
+          <label>الرصيد الجديد:</label>
+          <input type="number" id="remainingAmount" placeholder="0" readonly />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
+      </div>
+    </div>
+
+    <!-- ================= Previous Invoices ================= -->
+    <div class="t-container">
+      <h3>📋 الفواتير السابقة</h3>
+
+      <div class="form-row">
+        <div>
+          <label>من تاريخ</label>
+          <input type="date" id="fromDate" />
+        </div>
+
+        <div>
+          <label>إلى تاريخ</label>
+          <input type="date" id="toDate" />
+        </div>
+        <input type="text" id="searchPurchase" placeholder="بحث باسم المورد / العميل" />
+
+
+        <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" id="searchBtn">🔍 بحث</button>
+        <button style="padding: 8px 16px; font-size: 14px; border-radius: 8px" id="showAllBtn">🔄 عرض الكل</button>
+
+      </div>
+
+      <div class="table-scroll">
+        <table id="purchasesTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>التاريخ</th>
+              <th>العميل</th>
+              <th>إجمالي الفاتورة</th>
+              <th>المدفوع</th>
+              <th>المتبقي</th>
+              <th>الرصيد السابق</th>
+              <th>الرصيد الجديد</th>
+              <th>المزيد</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Modal ===== -->
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3 id="modalTitle">تنبيه</h3>
+      <p id="modalMessage"></p>
+      <button id="modalCancelBtn">إلغاء</button>
+      <button id="modalConfirmBtn">حذف</button>
+      <button id="modalOkBtn">حسناً</button>
+    </div>
+  </div>
+
+  <!-- ===== Cash Bar ===== -->
+  <nav class="bottom-menu">
+    💰 رصيد الخزينة: <span id="cashBalance">0.00</span> جنيه
+  </nav>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/purchases.js"></script>
+</body>
+
+</html>
