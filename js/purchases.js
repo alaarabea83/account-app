@@ -232,8 +232,8 @@ function renderPurchases(list = purchases) {
         <td>${p.newBalance || 0}</td>
 
         <td>
-          <button class="btn-edit" onclick="editPurchase(${i})">✏️</button>
-          <button class="btn-delete" onclick="confirmDeletePurchase(${p.order})">🗑</button>
+          <button class="btn-edit" onclick="editPurchase(${i})">تعديل</button>
+          <button class="btn-delete" onclick="confirmDeletePurchase(${p.order})">حذف</button>
         </td>
       </tr>
     `;

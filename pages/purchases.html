@@ -17,41 +17,70 @@
 
   <style>
     body {
-      font-family: Tajawal;
+      font-family: "Tajawal", sans-serif;
       background: #1b2631;
       margin: 0;
-      color: white;
     }
 
-    /* Containers */
+    h1,
+    h2,
+    h3 {
+      font-family: "Cairo", sans-serif;
+      font-weight: 700;
+      margin: 5px;
+    }
+
+    h3 {
+      color: #10b981;
+    }
+
+    /* ===== Layout ===== */
     section {
       max-width: 1000px;
-      margin: 60px auto 80px;
-      padding: 15px;
+      margin: 60px auto 20px;
+      margin-bottom: 80px;
+      background: #1f2937;
       display: flex;
       flex-direction: column;
       gap: 25px;
+      padding: 15px;
     }
 
     .t-container {
-      background: #1f2d3a;
+      background: #1f2937;
+      color: #ecf0f1;
       border-radius: 12px;
-      padding: 15px;
+      padding: 5px;
       border: 1px solid #10b98155;
     }
 
-    /* Headings */
-    h3 {
-      font-family: Cairo;
-      color: #10b981;
-      margin: 5px 0 15px;
+    .card {
+      background: #1f2937;
+      /* رمادي داكن أنيق */
+      margin: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid #10b98155;
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.35),
+        0 4px 10px rgba(0, 0, 0, 0.25);
     }
 
-    /* Form */
+    .table-container {
+      max-height: 220px;
+      overflow: auto;
+      border-radius: 10px;
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.35),
+        0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== Form ===== */
     .form-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      justify-content: center;
       margin-bottom: 10px;
     }
 
@@ -59,63 +88,74 @@
     .form-row select {
       flex: 1;
       background: #374151;
-      color: white;
-      border: 1px solid #4b5563;
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    .form-row button {
-      background: #f1c40f;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #productSelect {
-      width: 100%;
-      background: #374151;
       color: #ecf0f1;
       border: 1px solid #4b5563;
       border-radius: 8px;
       padding: 10px;
       font-size: 14px;
-      margin-bottom: 10px;
+      box-sizing: border-box;
+      transition: 0.2s;
     }
 
-    /* Table */
+    .form-row button {
+      background: #f1c40f;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .form-row button:hover {
+      opacity: 0.9;
+    }
+
+    /* ===== Table ===== */
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #111827;
-    }
-
-    th {
       background: #1f2937;
-      padding: 10px;
     }
 
-    td {
-      padding: 8px;
+    thead th {
+      background: #14532d;
+      color: #fff;
+      padding: 12px;
+      font-size: 14px;
+      border-top: 1px;
+      border-bottom: 1px;
+    }
+
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #000;
+      font-size: 14px;
       text-align: center;
     }
 
-    tr:hover {
-      background: #1e293b;
+    tbody tr:hover {
+      background: #1f3a5f;
+      /* أخضر أفتح */
+      color: #fff;
     }
 
+    /* ===== Scrollable Table ===== */
     .table-scroll {
       width: 100%;
-      overflow-x: auto;
-      /* التمرير الأفقي */
+      overflow: auto;
     }
 
     .table-scroll table {
-      min-width: 1000px;
-      /* على الأقل أكبر من الحاوية */
-      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .table-scroll thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
     .table-scroll::-webkit-scrollbar {
@@ -127,16 +167,45 @@
       border-radius: 10px;
     }
 
-    #invoiceTable input {
-      width: 80px;
-      background: #0f172a;
-      color: white;
-      border: 1px solid #334155;
-      border-radius: 6px;
-      padding: 5px;
+    /* ===== Buttons ===== */
+
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
     }
 
-    /* Modal */
+    .btn-edit {
+      background: #f1c40f;
+      color: #000;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-delete {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-edit:hover,
+    .btn-delete:hover {
+      opacity: 0.85;
+    }
+
+    /* أزرار داخل الجدول */
+    td>.btn-delete,
+    td>.btn-edit {
+      margin: 0 3px;
+      min-width: 40px;
+    }
+
+    /* ===== Modal ===== */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -144,27 +213,212 @@
       display: none;
       align-items: center;
       justify-content: center;
+      z-index: 1000;
     }
 
     .modal-box {
-      background: white;
-      color: black;
+      background: #fff;
       padding: 25px;
       border-radius: 12px;
-      text-align: center;
       width: 90%;
       max-width: 400px;
+      text-align: center;
+      margin: 25px;
     }
 
-    /* Mobile */
+    .modal-box button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      border: none;
+      background: #2e86c1;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* ===== Invoice Inputs ===== */
+    .itemQty,
+    .itemPrice,
+    .itemTotal {
+      width: 75px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background: #111827;
+      color: #f9fafb;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    /* عند التركيز */
+    .itemQty:focus,
+    .itemPrice:focus,
+    .itemTotal:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+
+    .itemTotal {
+      font-weight: bold;
+      color: #f1c40f;
+    }
+
+    #invoiceTable tbody tr:hover {
+      background-color: transparent;
+      color: inherit;
+    }
+
+    .btn-delete-item {
+      background-color: #14532d;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 25px;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: 0.2s;
+    }
+
+    .btn-delete-item:hover {
+      opacity: 0.85;
+    }
+
     @media (max-width: 600px) {
-      .form-row {
-        flex-direction: column;
+      .btn-delete-item {
+        font-size: 20px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      label {
+        display: block;
+        text-align: right;
+        width: 100%;
       }
 
-      #invoiceTable input {
-        width: 60px;
+      td>.btn-delete,
+      td>.btn-edit {
+        flex: 1 1 auto;
+        margin-bottom: 5px;
       }
+
+      #invoiceItems .form-row {
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+
+      #invoiceItems .form-row select,
+      #invoiceItems .form-row input {
+        max-width: 50%;
+      }
+    }
+
+    /* ===== زر الحفظ ===== */
+    #saveInvoiceBtn {
+      background: #f1c40f;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .card .form-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      /* مسافة بين اللابل والحقل */
+    }
+
+    .card .form-row label {
+      width: 120px;
+      /* حجم ثابت للابل */
+      text-align: left;
+      /* اللابل على الشمال */
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .card .form-row input[type="number"] {
+      flex: 1;
+      /* الحقل ياخد باقي المساحة */
+      max-width: 100px;
+      /* أقصى عرض للحقول */
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #4b5563;
+      background: #374151;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* لو تحب تبقى responsive أكتر على الموبايل */
+    @media (max-width: 600) {
+      .card .form-row {
+        justify-content: flex-start;
+      }
+
+      .card .form-row label {
+        width: 100px;
+      }
+
+      .card .form-row input[type="number"] {
+        max-width: 120px;
+      }
+    }
+
+    /* للمتصفح الحديث */
+    #customerBalance::placeholder {
+      color: #ffffff;
+      /* أبيض */
+      opacity: 1;
+      /* للتأكد إن اللون ظاهر */
+    }
+
+    /* لمتصفح فايرفوكس القديم */
+    #customerBalance::-moz-placeholder {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    /* لمتصفح إنترنت إكسبلورر */
+    #customerBalance:-ms-input-placeholder {
+      color: #ffffff;
+    }
+
+    /* لمتصفح كروم وسفاري وأوبرا */
+    #customerBalance::-webkit-input-placeholder {
+      color: #ffffff;
+    }
+
+    #productSelect {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 10px;
+      border: none;
+      background: #374151;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #productSelect:focus {
+      box-shadow: 0 0 0 2px #0d6efd;
     }
   </style>
 </head>
@@ -172,11 +426,15 @@
 <body>
   <!-- ===== Navigation ===== -->
   <nav class="breadcrumbs">
-    <a href="../index.html">الرئيسية</a>
-    <a href="customers.html">الحسابات</a>
-    <a href="products.html">المنتجات</a>
-    <a href="sales.html">المبيعات</a>
-    <span>المشتريات</span>
+    <a href="../index.html" class="home">الرئيسية</a>
+    <a href="../pages/customers.html" class="home">الحسابات</a>
+    <a href="../pages/products.html" class="home">المنتجات</a>
+    <a href="../pages/sales.html" class="home"> المبيعات</a>
+    <span class="current">المشتريات</span>
+    <a href="../pages/income.html" class="home">المقبوضات</a>
+    <a href="../pages/expenses.html" class="home">المدفوعات</a>
+    <a href="../pages/cash.html" class="home">الخزينة</a>
+    <a href="about.html" class="home">معلومات</a>
   </nav>
 
   <section>
@@ -184,37 +442,50 @@
     <div class="t-container">
       <h3>🧾 فاتورة شراء جديدة</h3>
 
-      <div class="form-row">
-        <select id="invoiceCustomer"></select>
-        <input id="customerBalance" readonly placeholder="الرصيد السابق" />
+      <div class="card">
+        <div class="form-row">
+          <select id="invoiceCustomer"></select>
+          <input id="customerBalance" readonly placeholder="الرصيد السابق" />
+        </div>
+
+        <select id="productSelect">
+          <option value="">اختر منتج</option>
+        </select>
       </div>
 
-      <select id="productSelect">
-        <option value="">اختر منتج</option>
-      </select>
-
-      <table id="invoiceTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>المنتج</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th>الإجمالي</th>
-            <th>❌</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-
-      <div class="form-row">
-        <input id="invoiceTotal" readonly placeholder="إجمالي الفاتورة" />
-        <input id="grandTotal" readonly placeholder="الإجمالي الكلي" />
+      <div class="card table-container">
+        <div class="table-scroll">
+          <table id="invoiceTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>السعر</th>
+                <th>الإجمالي</th>
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="form-row">
-        <input id="paidAmount" type="number" placeholder="المبلغ المدفوع" />
-        <input id="remainingAmount" readonly placeholder="المتبقي" />
+      <div class="card">
+        <div class="form-row">
+          <label>إجمالي الفاتورة:</label>
+          <input type="number" id="invoiceTotal" placeholder="0" readonly />
+          <label>الإجمالي الكلي:</label>
+          <input type="number" id="grandTotal" placeholder="0" readonly />
+        </div>
+
+        <!-- المدفوع + المتبقي -->
+        <div class="form-row">
+          <label>المبلغ المدفوع:</label>
+          <input type="number" id="paidAmount" placeholder="أدخل المبلغ" />
+          <label>الرصيد الجديد:</label>
+          <input type="number" id="remainingAmount" placeholder="0" readonly />
+        </div>
       </div>
 
       <div class="form-row">
