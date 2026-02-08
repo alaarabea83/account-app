@@ -51,7 +51,7 @@ window.onload = function () {
 function renderCustomerSelect() {
   const sel = document.getElementById("invoiceCustomer");
   sel.innerHTML =
-    `<option value="" disabled selected>اختر الحساب</option>` +
+    `<option value="" disabled selected>إختر الحساب</option>` +
     `<option value="">شراء نقدي</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
@@ -79,10 +79,10 @@ function addRow(productIndex) {
   row.innerHTML = `
     <td class="rowNum"></td>
     <td>${product.name}</td>
-    <td><input type="number" class="qty" min="1" value="1"></td>
-    <td><input type="number" class="price"></td>
+    <td><input type="number" class="qty" placeholder="أدخل الكمية" min="1" value=""></td>
+    <td><input type="number" class="price" value="${product.buyPrice}" ></td>
     <td class="total">0</td>
-    <td><button class="delBtn">❌</button></td>
+    <td><button class="btn-delete-item">❌</button></td>
   `;
 
   tbody.appendChild(row);
