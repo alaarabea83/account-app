@@ -187,14 +187,18 @@
 
     button {
       border: none;
-      padding: 14px;
+      padding: 14px 18px;
       border-radius: 12px;
-      background: red;
+      background: linear-gradient(45deg, #6366f1, #8b5cf6);
       color: white;
       font-weight: bold;
       font-size: 16px;
       cursor: pointer;
+      width: auto;
+      max-width: 120px;
+      margin: 10px auto;
     }
+
 
     /* ===== Search ===== */
     #searchCustomer {
@@ -321,6 +325,10 @@
       button {
         width: auto;
       }
+
+      button {
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -357,7 +365,7 @@
         <div class="form-row">
           <input type="text" id="customerName" placeholder="إسم العميل أو الحساب" />
           <input type="number" id="openingBalance" placeholder="الرصيد الافتتاحي" />
-          <button id="addCustomerBtn">حفظ</button>
+          <button id="addCustomerBtn">💾 حفظ</button>
         </div>
       </div>
 
