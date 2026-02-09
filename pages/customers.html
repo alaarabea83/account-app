@@ -189,7 +189,7 @@
       border: none;
       padding: 14px;
       border-radius: 12px;
-      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      background: red;
       color: white;
       font-weight: bold;
       font-size: 16px;
@@ -205,6 +205,8 @@
     /* Wrapper للجداول مع overflow */
     .table-scroll {
       overflow-x: auto;
+      overflow-y: auto;
+      max-height: 400px;
       -webkit-overflow-scrolling: touch;
       /* Smooth scroll on iOS */
       border-radius: 12px;
@@ -256,6 +258,8 @@
     }
 
     th {
+      position: sticky;
+      top: 0;
       background: #312e81;
       padding: 12px;
     }
@@ -394,13 +398,23 @@
     <div class="modal-card">
       <h3>تعديل الحساب</h3>
 
-      <input type="text" id="editCustomerName" placeholder="اسم العميل" />
-      <input type="number" id="editOpeningBalance" placeholder="الرصيد" />
+      <div class="form-group">
+        <label for="editCustomerName">اسم العميل</label>
+        <input type="text" id="editCustomerName" />
+      </div>
 
-      <button onclick="saveCustomerEdit()">حفظ</button>
-      <button onclick="closeEditModal()">إلغاء</button>
+      <div class="form-group">
+        <label for="editOpeningBalance">الرصيد الافتتاحي</label>
+        <input type="number" id="editOpeningBalance" />
+      </div>
+
+      <div class="modal-actions">
+        <button onclick="saveCustomerEdit()">حفظ</button>
+        <button onclick="closeEditModal()">إلغاء</button>
+      </div>
     </div>
   </div>
+
 
   <!-- Delete Modal -->
   <div id="deleteModal" class="modal-overlay">
@@ -439,7 +453,7 @@
     </div>
   </div>
 
-  <!-- Scripts الأصلية -->
+  <!-- Scripts -->
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>
   <script src="../js/customers.js"></script>
