@@ -44,19 +44,17 @@
     }
 
     .t-container {
-      background: #1f2d3a;
+      background: #1e293b;
       color: #ecf0f1;
       border-radius: 12px;
       padding: 5px;
-      border: 1px solid #10b98155;
     }
 
     .card {
-      background: #1f2d3a;
+      background: #1e293b;
       margin: 10px;
       padding: 12px;
       border-radius: 14px;
-      border: 1px solid #10b98155;
       box-shadow:
         0 10px 25px rgba(0, 0, 0, 0.35),
         0 4px 10px rgba(0, 0, 0, 0.25);
@@ -83,7 +81,7 @@
     .form-row input,
     .form-row select {
       flex: 1;
-      background: #374151;
+      background: #1e293b;
       color: #ecf0f1;
       border: 1px solid #4b5563;
       border-radius: 8px;
@@ -113,7 +111,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #1f2d3a;
+      background: #1e293b;
     }
 
     thead th {
@@ -127,7 +125,7 @@
 
     tbody td {
       padding: 10px;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #4b5563;
       font-size: 14px;
       text-align: center;
     }
@@ -334,13 +332,6 @@
       font-weight: bold;
     }
 
-    .card .form-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      /* مسافة بين اللابل والحقل */
-    }
-
     .card .form-row label {
       width: 120px;
       /* حجم ثابت للابل */
@@ -352,22 +343,14 @@
 
     .card .form-row input[type="number"] {
       flex: 1;
-      /* الحقل ياخد باقي المساحة */
       max-width: 100px;
-      /* أقصى عرض للحقول */
       padding: 10px;
       border-radius: 6px;
       border: 1px solid #4b5563;
-      background: #374151;
+      background: #1e293b;
       text-align: center;
       font-size: 14px;
     }
-
-    /* لو تحب تبقى responsive أكتر على الموبايل */
-    @media (max-width: 600px) {
-      .card .form-row {
-        justify-content: flex-start;
-      }
 
       .card .form-row label {
         width: 100px;
@@ -376,7 +359,6 @@
       .card .form-row input[type="number"] {
         max-width: 120px;
       }
-    }
 
     /* للمتصفح الحديث */
     #customerBalance::placeholder {
