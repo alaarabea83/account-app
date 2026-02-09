@@ -218,7 +218,6 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
-
     table {
       width: 100%;
       min-width: 600px;
@@ -242,6 +241,102 @@
       background: #334155;
       cursor: pointer;
       transition: 0.2s;
+    }
+
+    /* خلية الأزرار */
+    .actions {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* شكل الزر العام */
+    .btn {
+      border: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    /* تعديل */
+    .btn-edit {
+      background: linear-gradient(45deg, #f59e0b, #fbbf24);
+    }
+
+    .btn-edit:hover {
+      transform: scale(1.05);
+      opacity: .9;
+    }
+
+    /* حذف */
+    .btn-delete {
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+    }
+
+    .btn-delete:hover {
+      transform: scale(1.05);
+    }
+
+    /* كشف حساب */
+    .btn-info {
+      background: linear-gradient(45deg, #3b82f6, #06b6d4);
+    }
+
+    .btn-info:hover {
+      transform: scale(1.05);
+    }
+
+    /* منطقة الأزرار */
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* شكل زر عام */
+    .modal-actions .btn {
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      min-width: 90px;
+      transition: .2s;
+    }
+
+    /* حفظ */
+    .btn-save {
+      background: linear-gradient(45deg, #22c55e, #16a34a);
+    }
+
+    /* حذف */
+    .btn-delete {
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+    }
+
+    /* إلغاء / إغلاق */
+    .btn-cancel {
+      background: linear-gradient(45deg, #64748b, #475569);
+    }
+
+    /* تنبيه */
+    .btn-info {
+      background: linear-gradient(45deg, #3b82f6, #06b6d4);
+    }
+
+    /* Hover effect */
+    .modal-actions .btn:hover {
+      transform: scale(1.07);
+      opacity: .9;
     }
 
 
@@ -320,6 +415,9 @@
     <a href="income.html">💰 المقبوضات</a>
     <a href="expenses.html">💸 المدفوعات</a>
     <a href="cash.html">🏦 الخزينة</a>
+
+    <a href="dashboard.html">📊 لوحة التحكم</a>
+    <a href="about.html">ℹ️ معلومات</a>
   </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
@@ -366,7 +464,10 @@
     <div class="modal-card">
       <h3 id="modalTitle">تنبيه</h3>
       <p id="modalMessage"></p>
-      <button onclick="closeModal()">حسناً</button>
+      <div class="modal-actions">
+        <button class="btn btn-info" onclick="closeModal()">حسناً</button>
+      </div>
+
     </div>
   </div>
 
@@ -386,9 +487,10 @@
       </div>
 
       <div class="modal-actions">
-        <button onclick="saveCustomerEdit()">حفظ</button>
-        <button onclick="closeEditModal()">إلغاء</button>
+        <button class="btn btn-save" onclick="saveCustomerEdit()">حفظ</button>
+        <button class="btn btn-cancel" onclick="closeEditModal()">إلغاء</button>
       </div>
+
     </div>
   </div>
 
@@ -399,8 +501,11 @@
       <h3>تأكيد الحذف</h3>
       <p>هل أنت متأكد؟</p>
 
-      <button onclick="confirmDelete()">حذف</button>
-      <button onclick="closeDeleteModal()">إلغاء</button>
+      <div class="modal-actions">
+        <button class="btn btn-delete" onclick="confirmDelete()">حذف</button>
+        <button class="btn btn-cancel" onclick="closeDeleteModal()">إلغاء</button>
+      </div>
+
     </div>
   </div>
 
@@ -426,7 +531,10 @@
         </table>
       </div>
 
-      <button onclick="closeStatementModal()">إغلاق</button>
+      <div class="modal-actions">
+        <button class="btn btn-cancel" onclick="closeStatementModal()">إغلاق</button>
+      </div>
+
     </div>
   </div>
 
