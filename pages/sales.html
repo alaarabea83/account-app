@@ -266,7 +266,7 @@
     }
 
     .btn-delete-item {
-      background-color: #14532d;
+      background-color: #1b2631;
       color: #fff;
       border: none;
       border-radius: 6px;
@@ -352,13 +352,20 @@
       font-size: 14px;
     }
 
-      .card .form-row label {
-        width: 100px;
+    /* لو تحب تبقى responsive أكتر على الموبايل */
+    @media (max-width: 600px) {
+      .card .form-row {
+        justify-content: flex-start;
       }
+    }
 
-      .card .form-row input[type="number"] {
-        max-width: 120px;
-      }
+    .card .form-row label {
+      width: 100px;
+    }
+
+    .card .form-row input[type="number"] {
+      max-width: 120px;
+    }
 
     /* للمتصفح الحديث */
     #customerBalance::placeholder {
