@@ -45,7 +45,7 @@
       top: 0;
       right: 0;
       left: 0;
-      height: 80px;
+      height: 60px;
       background: var(--card);
       color: white;
       display: flex;
@@ -64,7 +64,6 @@
     /* ===== Menu Button ===== */
     .menu-toggle {
       position: fixed;
-      top: 12px;
       right: 12px;
       z-index: 1001;
       background: #252581;
@@ -78,9 +77,8 @@
     /* ===== Sidebar ===== */
     .sidebar {
       position: fixed;
-      top: 80px;
+      top: 60px;
       right: -260px;
-      /* مخفية بالكامل */
       width: 260px;
       height: 100%;
       background: #111827;
@@ -113,15 +111,6 @@
       color: white;
     }
 
-    .mode-btn {
-      margin-top: auto;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-    }
-
     /* ===== Overlay ===== */
     #overlay {
       position: fixed;
@@ -137,14 +126,11 @@
 
     /* ===== Main ===== */
     .main {
-      padding: 70px 12px 20px;
+      padding: 80px 15px 20px;
     }
 
     /* ===== Section ===== */
     section {
-      max-width: 1100px;
-      margin: auto;
-      margin-top: 50px;
       display: flex;
       flex-direction: column;
       gap: 18px;
@@ -153,7 +139,7 @@
     /* ===== Cards ===== */
     .card {
       background: var(--card);
-      padding: 16px;
+      padding: 20px;
       border-radius: 16px;
     }
 
@@ -199,6 +185,9 @@
       margin: 5px auto;
     }
 
+    button:hover {
+      background: linear-gradient(45deg, #4f46e5, #7c3aed);
+    }
 
     /* ===== Search ===== */
     #searchCustomer {
@@ -208,52 +197,27 @@
     /* ===== Table ===== */
     /* Wrapper للجداول مع overflow */
     .table-scroll {
-      overflow-x: auto;
-      overflow-y: auto;
+      overflow: auto;
       max-height: 400px;
-      -webkit-overflow-scrolling: touch;
-      /* Smooth scroll on iOS */
-      border-radius: 12px;
-      margin-top: 10px;
+      border-radius: 14px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Hide default scrollbar for most browsers */
+    /* Webkit */
     .table-scroll::-webkit-scrollbar {
+      width: 10px;
       height: 10px;
-      /* عرض scrollbar أفقي */
-    }
-
-    /* شكل السكروول */
-    .table-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, #6366f1, #8b5cf6);
-      border-radius: 12px;
+      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
     }
 
-    .table-scroll::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(90deg, #8b5cf6, #6366f1);
+    .table-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    /* Firefox */
-    .table-scroll {
-      scrollbar-width: thin;
-      scrollbar-color: #6366f1 rgba(255, 255, 255, 0.1);
-    }
-
-    /* Optional: Shadow inside the scroll wrapper for nicer effect */
-    .table-scroll::before,
-    .table-scroll::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 20px;
-      pointer-events: none;
-    }
 
     table {
       width: 100%;
@@ -321,7 +285,7 @@
 
       .main {
         margin-right: 260px;
-        padding: 40px;
+        padding: 80px 25px;
       }
 
       .form-row {
@@ -342,22 +306,20 @@
 
 <body>
   <div class="header">
-    <h1> قسم الحسابات</h1>
+    <h1> إدارة الحسابات</h1>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </div>
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-
     <a href="../index.html">🏠 الرئيسية</a>
+    <a href="customers.html">👥 الحسابات</a>
     <a href="products.html">📦 المنتجات</a>
     <a href="sales.html">🛒 المبيعات</a>
     <a href="purchases.html">🧾 المشتريات</a>
     <a href="income.html">💰 المقبوضات</a>
     <a href="expenses.html">💸 المدفوعات</a>
     <a href="cash.html">🏦 الخزينة</a>
-
-    <button onclick="toggleMode()" class="mode-btn">🌙 تغيير الوضع</button>
   </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
@@ -372,7 +334,7 @@
         <div class="form-row">
           <input type="text" id="customerName" placeholder="إسم العميل أو الحساب" />
           <input type="number" id="openingBalance" placeholder="الرصيد الافتتاحي" />
-          <button id="addCustomerBtn">💾 حفظ</button>
+          <button id="addCustomerBtn">حفظ</button>
         </div>
       </div>
 
