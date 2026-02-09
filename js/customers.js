@@ -103,7 +103,7 @@ function renderCustomers(searchQuery = "") {
   totalRow.style.color = "#fff";
 
   totalRow.innerHTML = `
-    <td colspan="2">الإجمالي</td>
+    <td colspan="2">إجمالي أرصدة العملاء</td>
     <td>${totalBalance.toFixed(2)}</td>
     <td></td>
   `;
