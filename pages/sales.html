@@ -82,16 +82,34 @@
       top: 60px;
       right: -260px;
       width: 260px;
-      height: 100%;
+
+      /* خلي الارتفاع على قد الشاشة */
+      height: calc(100vh - 60px);
+
       background: #111827;
       border-left: 3px solid #38bdf8;
       padding: 20px;
+
       display: flex;
       flex-direction: column;
       gap: 8px;
+
       transition: .3s;
       z-index: 1001;
+
+      /* أهم سطر */
+      overflow-y: auto;
     }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+
 
     .sidebar.show {
       right: 0
@@ -233,7 +251,8 @@
     }
 
     tr {
-      background: #1e293b;;
+      background: #1e293b;
+      ;
     }
 
     tr:hover {
@@ -311,7 +330,7 @@
       background: #22c55e;
       color: black;
       width: 100%;
-      max-width: 30%;
+      max-width: 50%;
       padding: 12px;
       font-size: 16px;
       margin: 10px auto
@@ -361,9 +380,10 @@
 
     <!-- رصيد الخزينة -->
     <div class="menu-item cash-item">
-      <span>💰 رصيد الخزينة:</span>
-      <span id="cashBalance">0.00</span> جنيه
+      💰 رصيد الخزينة:
+      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
     </div>
+
 
     <a href="../index.html">🏠 الرئيسية</a>
     <a href="customers.html">👥 الحسابات</a>
@@ -397,23 +417,23 @@
         </select>
       </div>
       <!-- جدول المنتجات -->
-    <div class="card table-container">
-      <div class="table-scroll">
-        <table id="invoiceTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>المنتج</th>
-              <th>الكمية</th>
-              <th>سعر البيع</th>
-              <th>الإجمالي</th>
-              <th>حذف</th>
-            </tr>
-          </thead>
-          <tbody id="invoiceItems"></tbody>
-        </table>
+      <div class="card table-container">
+        <div class="table-scroll">
+          <table id="invoiceTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>سعر البيع</th>
+                <th>الإجمالي</th>
+                <th>حذف</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceItems"></tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- إجمالي الفاتورة + الإجمالي الكلي -->
@@ -429,9 +449,9 @@
         <input type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
       </div>
       <!-- زر حفظ الفاتورة -->
-    <div class="form-row">
-      <button id="saveInvoiceBtn">حفظ الفاتورة</button>
-    </div>
+      <div class="form-row">
+        <button id="saveInvoiceBtn">حفظ الفاتورة</button>
+      </div>
     </div>
     </div>
 
