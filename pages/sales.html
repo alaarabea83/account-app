@@ -58,18 +58,18 @@
 
     .header h1 {
       font-size: 18px;
-      margin: 100px;
+      margin: 55px;
     }
 
     /* ===== Menu Button ===== */
     .menu-toggle {
       position: fixed;
       right: 12px;
-      background: #252581;
-      color: yellow;
+      background: #2563eb;
+      color: black;
       border: none;
       padding: 8px 12px;
-      border-radius: 18px;
+      border-radius: 8px;
       font-size: 20px;
       cursor: pointer;
     }
@@ -134,6 +134,7 @@
       background: #0f172a;
       display: flex;
       flex-direction: column;
+      
       gap: 25px;
       padding: 15px;
     }
@@ -143,26 +144,20 @@
       background: #1e293b;
       color: #ecf0f1;
       border-radius: 12px;
-      padding: 5px;
+      padding: px;
     }
 
     .card {
       background: #1e293b;
       margin: 10px;
-      padding: 12px;
+      padding: 5px;
       border-radius: 14px;
-      box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.35),
-        0 4px 10px rgba(0, 0, 0, 0.25);
     }
 
     .table-container {
       max-height: 220px;
       overflow: auto;
       border-radius: 10px;
-      box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.35),
-        0 4px 10px rgba(0, 0, 0, 0.25);
     }
 
     /* ===== Form ===== */
@@ -171,6 +166,7 @@
       gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
       margin-bottom: 10px;
     }
 
@@ -211,7 +207,7 @@
     }
 
     thead th {
-      background: #14532d;
+      background: #0f172a;
       color: #fff;
       padding: 12px;
       font-size: 14px;
@@ -248,13 +244,19 @@
       z-index: 1;
     }
 
+    /* Webkit */
     .table-scroll::-webkit-scrollbar {
-      height: 6px;
+      width: 10px;
+      height: 10px;
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #e74c3c;
+      background: linear-gradient(45deg, #6366f1, #8b5cf6);
       border-radius: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
     }
 
     /* ===== Buttons ===== */
@@ -362,7 +364,7 @@
     }
 
     .btn-delete-item {
-      background-color: #1b2631;
+      background-color: #fff;
       color: #fff;
       border: none;
       border-radius: 6px;
@@ -417,7 +419,7 @@
 
     /* ===== زر الحفظ ===== */
     #saveInvoiceBtn {
-      background: #f1c40f;
+      background: #2563eb;
       color: #000;
       border: none;
       padding: 10px 20px;
@@ -526,7 +528,7 @@
 
   <div class="header">
     <h1> إدارة المبيعات</h1>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ القائمة</button>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </div>
 
   <!-- Sidebar -->
@@ -647,7 +649,7 @@
               <th>المتبقي</th>
               <th>الرصيد السابق</th>
               <th>الرصيد الحالي</th>
-              <th>المزيد</th>
+              <th>إجراءات</th>
             </tr>
           </thead>
 
