@@ -81,24 +81,37 @@
       top: 60px;
       right: -260px;
       width: 260px;
-      height: 100%;
+
+      /* خلي الارتفاع على قد الشاشة */
+      height: calc(100vh - 60px);
+
       background: #111827;
       border-left: 3px solid #38bdf8;
       padding: 20px;
-      transition: 0.3s;
-      z-index: 1002;
+
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+
+      transition: .3s;
+      z-index: 1001;
+
+      /* أهم سطر */
+      overflow-y: auto;
     }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+
 
     .sidebar.show {
-      right: 0;
-    }
-
-    .sidebar h2 {
-      text-align: center;
-      color: #a78bfa;
+      right: 0
     }
 
     .sidebar a {
@@ -106,6 +119,11 @@
       color: #cbd5f5;
       padding: 12px;
       border-radius: 10px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #a78bfa;
     }
 
     .sidebar a:hover {
@@ -117,13 +135,13 @@
     #overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, .5);
       display: none;
       z-index: 1000;
     }
 
     #overlay.show {
-      display: block;
+      display: block
     }
 
     /* ===== Main ===== */
@@ -212,7 +230,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      background: #22c55e;
       border-radius: 10px;
     }
 
@@ -229,7 +247,7 @@
     th {
       position: sticky;
       top: 0;
-      background: #0f172a;
+      background: red;
       padding: 12px;
     }
 

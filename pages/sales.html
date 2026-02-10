@@ -325,17 +325,6 @@
       font-weight: bold;
     }
 
-    /* ===== Save Button ===== */
-    #saveInvoiceBtn {
-      background: #22c55e;
-      color: black;
-      width: 100%;
-      max-width: 50%;
-      padding: 12px;
-      font-size: 16px;
-      margin: 10px auto
-    }
-
     /* ===== Responsive ===== */
     @media(max-width:768px) {
 
@@ -362,6 +351,61 @@
 
       section {
         margin-right: 260px;
+      }
+    }
+
+    /* ===== Desktop ===== */
+    .card .numbers-grid {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      /* يسمح بالتفاف عند المساحة الصغيرة */
+    }
+
+    .card .numbers-grid input {
+      flex: 1;
+      max-width: 200px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid #fff;
+      background: #1e293b;
+      color: #ecf0f1;
+    }
+
+    /* زر الحفظ */
+    #saveInvoiceBtn {
+      width: 100%;
+      max-width: 200px;
+      margin: 15px auto 0;
+      display: block;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* ===== Mobile ===== */
+    @media (max-width: 600px) {
+      .card .numbers-grid input {
+        max-width: 40%;
+        /* يمنع الخروج من حدود الخلية */
+        padding: 6px;
+        /* أقل من الكمبيوتر */
+        font-size: 14px;
+        /* أصغر شوية */
+        box-sizing: border-box;
+      }
+
+      #saveInvoiceBtn {
+        width: 100%;
+        /* الزر يمتد بالكامل داخل card */
+        max-width: 100%;
       }
     }
   </style>
@@ -438,22 +482,18 @@
 
     <!-- إجمالي الفاتورة + الإجمالي الكلي -->
     <div class="card">
-      <div class="form-row">
+      <div class="numbers-grid">
         <input type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" readonly />
         <input type="number" id="grandTotal" placeholder="الإجمالي الكلي" readonly />
-      </div>
-
-      <!-- المدفوع + المتبقي -->
-      <div class="form-row">
         <input type="number" id="paidAmount" placeholder="المبلغ المدفوع" />
         <input type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
       </div>
-      <!-- زر حفظ الفاتورة -->
+
       <div class="form-row">
-        <button id="saveInvoiceBtn">حفظ الفاتورة</button>
+        <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
       </div>
     </div>
-    </div>
+
 
     <div class="card">
       <h3>📋 الفواتير السابقة</h3>
