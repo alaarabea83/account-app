@@ -178,4 +178,22 @@
   color: #facc15;
 }
 
+.sidebar {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  width: 260px;
+  height: calc(100vh - 60px);
+
+  background: #111827;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+body.no-scroll{
+  overflow: hidden;
+}
 
