@@ -53,7 +53,7 @@ function renderCustomerSelect() {
 function renderProductSelect() {
   const sel = document.getElementById("invoiceProductSelect");
   sel.innerHTML =
-    `<option value="" disabled selected>أضف منتجات</option>` +
+    `<option value="" disabled selected>أضف منتج</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 
   sel.onchange = function () {
