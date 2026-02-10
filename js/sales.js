@@ -74,7 +74,7 @@ function addInvoiceItem(product) {
   row.innerHTML = `
     <td>${rowNumber}</td>
     <td>${product.name}</td>
-    <td><input type="number" class="itemQty" placeholder="أدخل الكمية" min="1" value=""></td>
+    <td><input type="number" class="itemQty" placeholder="الكمية" min="1" value=""></td>
     <td><input type="number" class="itemPrice" value="${product.price}" readonly></td>
     <td><input type="number" class="itemTotal" value="${product.price}" readonly></td>
     <td><button type="button" class="btn-delete-item">❌</button></td>

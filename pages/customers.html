@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <link rel="stylesheet" href="../css/style.css" />
   <title>سهل لإدارة الحسابات</title>
 
   <link rel="icon" type="image/png" href="../icons/logo.png" />
@@ -58,7 +59,7 @@
 
     .header h1 {
       font-size: 18px;
-      margin: 50px;
+      margin: 100px;
     }
 
     /* ===== Menu Button ===== */
@@ -82,6 +83,7 @@
       width: 260px;
       height: 100%;
       background: #111827;
+      border-left: 3px solid #38bdf8;
       padding: 20px;
       transition: 0.3s;
       z-index: 1002;
@@ -402,23 +404,30 @@
 <body>
   <div class="header">
     <h1> إدارة الحسابات</h1>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ القائمة</button>
   </div>
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <a href="../index.html">🏠 الرئيسية</a>
-    <a href="customers.html">👥 الحسابات</a>
-    <a href="products.html">📦 المنتجات</a>
-    <a href="sales.html">🛒 المبيعات</a>
-    <a href="purchases.html">🧾 المشتريات</a>
-    <a href="income.html">💰 المقبوضات</a>
-    <a href="expenses.html">💸 المدفوعات</a>
-    <a href="cash.html">🏦 الخزينة</a>
 
-    <a href="dashboard.html">📊 لوحة التحكم</a>
-    <a href="about.html">ℹ️ معلومات</a>
+  <!-- رصيد الخزينة -->
+  <div class="menu-item cash-item">
+    <span>💰 رصيد الخزينة:</span>
+    <span id="cashBalance">0.00</span> جنيه
   </div>
+
+  <a href="../index.html">🏠 الرئيسية</a>
+  <a href="customers.html">👥 الحسابات</a>
+  <a href="products.html">📦 المنتجات</a>
+  <a href="sales.html">🛒 المبيعات</a>
+  <a href="purchases.html">🧾 المشتريات</a>
+  <a href="income.html">💰 المقبوضات</a>
+  <a href="expenses.html">💸 المدفوعات</a>
+  <a href="cash.html">🏦 الخزينة</a>
+  <a href="dashboard.html">📊 لوحة التحكم</a>
+  <a href="about.html">ℹ️ معلومات</a>
+
+</div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 

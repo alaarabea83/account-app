@@ -13,28 +13,123 @@
 
   <title>سهل لإدارة الحسابات</title>
   <style>
+    /* ===== Colors ===== */
+    :root {
+      --primary: #6366f1;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+    }
+
+    .light {
+      --bg: #f1f5f9;
+      --card: #fff;
+      --text: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* ===== Body (Mobile First) ===== */
     body {
-      font-family: "Tajawal", sans-serif;
-      background: #0f172a;
       margin: 0;
+      font-family: Tajawal;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Cairo", sans-serif;
-      font-weight: 700;
-      margin: 5px;
+    .header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 60px;
+      background: var(--card);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      z-index: 1002;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     }
 
-    h3 {
-      color: #38bdf8;
+    .header h1 {
+      font-size: 18px;
+      margin: 100px;
+    }
+
+    /* ===== Menu Button ===== */
+    .menu-toggle {
+      position: fixed;
+      right: 12px;
+      background: #252581;
+      color: yellow;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 18px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      right: -260px;
+      width: 260px;
+      height: 100%;
+      background: #111827;
+      border-left: 3px solid #38bdf8;
+      padding: 20px;
+      transition: 0.3s;
+      z-index: 1002;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar.show {
+      right: 0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #a78bfa;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #cbd5f5;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .sidebar a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ===== Overlay ===== */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1000;
+    }
+
+    #overlay.show {
+      display: block;
     }
 
     /* ===== Layout ===== */
     section {
-      max-width: 1000px;
-      margin: 60px auto 20px;
+      max-width: 1300px;
+      margin: 60px auto 20px 0;
+      /* شمال 15px */
       margin-bottom: 80px;
       background: #0f172a;
       display: flex;
@@ -42,6 +137,7 @@
       gap: 25px;
       padding: 15px;
     }
+
 
     .t-container {
       background: #1e293b;
@@ -390,20 +486,73 @@
     #customerBalance::-webkit-input-placeholder {
       color: #ffffff;
     }
+
+    /* ===== Desktop ===== */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .sidebar {
+        right: 0;
+      }
+
+      #overlay {
+        display: none !important;
+      }
+
+      .main {
+        margin-right: 260px;
+        padding: 80px 25px;
+      }
+
+      .form-row {
+        flex-direction: row;
+      }
+
+      input,
+      button {
+        width: auto;
+      }
+
+      button {
+        margin: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <nav class="breadcrumbs">
-    <a href="../index.html" class="home">الرئيسية</a>
-    <a href="../pages/customers.html" class="home">الحسابات</a>
-    <a href="../pages/products.html" class="home">المنتجات</a>
-    <span class="current">المبيعات</span>
-    <a href="../pages/purchases.html" class="home"> المشتريات</a>
-    <a href="../pages/income.html" class="home">المقبوضات</a>
-    <a href="../pages/expenses.html" class="home">المدفوعات</a>
-    <a href="../pages/cash.html" class="home">الخزينة</a>
-  </nav>
+
+  <div class="header">
+    <h1> إدارة المبيعات</h1>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ القائمة</button>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+
+  <!-- رصيد الخزينة -->
+  <div class="menu-item cash-item">
+    <span>💰 رصيد الخزينة:</span>
+    <span id="cashBalance">0.00</span> جنيه
+  </div>
+
+  <a href="../index.html">🏠 الرئيسية</a>
+  <a href="customers.html">👥 الحسابات</a>
+  <a href="products.html">📦 المنتجات</a>
+  <a href="sales.html">🛒 المبيعات</a>
+  <a href="purchases.html">🧾 المشتريات</a>
+  <a href="income.html">💰 المقبوضات</a>
+  <a href="expenses.html">💸 المدفوعات</a>
+  <a href="cash.html">🏦 الخزينة</a>
+  <a href="dashboard.html">📊 لوحة التحكم</a>
+  <a href="about.html">ℹ️ معلومات</a>
+
+</div>
+
+
+  <div id="overlay" onclick="toggleSidebar()"></div>
 
   <section>
     <div class="t-container">
@@ -559,16 +708,20 @@
     </div>
   </div>
 
-  <nav class="bottom-menu">
-    <div class="menu-item cash-item">
-      <span>💰 رصيد الخزينة:</span>
-      <span id="cashBalance">0.00</span> جنيه
-    </div>
-  </nav>
-
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>
   <script src="../js/sales.js"></script>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+      document.getElementById("overlay").classList.toggle("show");
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("light");
+    }
+  </script>
 </body>
 
 </html>
