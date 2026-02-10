@@ -111,29 +111,24 @@
 }
 
 .cash-item {
-  background: linear-gradient(135deg,#1d4ed8,#2563eb);
-  color: black;
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
+  color: white;
   font-weight: bold;
-  margin-bottom: 15px;
-  line-height: 1.6;
-  border-bottom: 2px solid white;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
-
-/* البادج */
+/* البادج نفسه */
 .cash-badge {
-  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  background: linear-gradient(135deg,#1d4ed8,#2563eb);
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 13px;
   margin-right: 6px;
 
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   display: inline-block;
 }
+
 
 /* منع سكرول الصفحة خلف القائمة الجانبية */
 .sidebar {

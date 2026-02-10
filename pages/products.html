@@ -70,12 +70,14 @@
       position: fixed;
       right: 12px;
       z-index: 1001;
-      background: yellow;
+      background: linear-gradient(135deg,#2563eb,#1d4ed8);
       color: black;
       border: none;
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     /* ===== Sidebar ===== */
@@ -181,6 +183,7 @@
       border: 1px solid #fff;
       background: var(--card);
       color: var(--text);
+      border-color: var(--primary);
       font-size: 14px;
       width: 100%;
     }
@@ -195,7 +198,7 @@
       border: none;
       padding: 14px 18px;
       border-radius: 12px;
-      background: #2563eb;
+      background: linear-gradient(135deg,#22c55e,#16a34a);
       color: black;
       font-weight: bold;
       font-size: 16px;
@@ -205,18 +208,15 @@
       margin: 5px auto;
     }
 
-    .form-row button:hover {
-      background: linear-gradient(45deg, #4f46e5, #7c3aed);
-    }
-
     /* ===== Search ===== */
     #searchProduct {
       margin-bottom: 15px;
       padding: 10px;
       border-radius: 8px;
       background: var(--card);
-      border: 1px solid #4b5563;
+      border: 1px solid #fff;
       color: #fff;
+      border-color: var(--primary);
     }
 
     /* ===== Table ===== */
@@ -235,7 +235,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #22c55e;
+      background: linear-gradient(45deg, #3b82f6, #06b6d4);
       border-radius: 10px;
     }
 
@@ -252,7 +252,8 @@
     th {
       position: sticky;
       top: 0;
-      background: red;
+      background: linear-gradient(135deg,#1f2937,#111827);
+      color: #e5e7eb;
       padding: 12px;
       text-align: center;
     }
@@ -499,7 +500,7 @@
         </select>
         <input id="productPrice" type="number" placeholder="سعر البيع" />
         <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
-        <button id="addProductBtn">حفظ</button>
+        <button id="addProductBtn">💾 حفظ</button>
       </div>
     </div>
 

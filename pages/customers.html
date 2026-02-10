@@ -67,7 +67,7 @@
       position: fixed;
       right: 12px;
       z-index: 1001;
-      background: yellow;
+      background: linear-gradient(135deg,#2563eb,#1d4ed8);
       color: black;
       border: none;
       padding: 10px 14px;
@@ -167,6 +167,7 @@
       background: transparent;
       color: var(--text);
       font-size: 16px;
+      border-color: var(--primary);
     }
 
     input:focus {
@@ -208,7 +209,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #22c55e;
+      background: linear-gradient(45deg, #3b82f6, #06b6d4);
       border-radius: 10px;
     }
 
@@ -225,7 +226,8 @@
     th {
       position: sticky;
       top: 0;
-      background: red;
+      background: linear-gradient(135deg,#1f2937,#111827);
+      color: #e5e7eb;
       padding: 12px;
     }
 
@@ -281,11 +283,11 @@
     }
 
     /* كشف حساب */
-    .btn-info {
+    .btn-primary {
       background: linear-gradient(45deg, #3b82f6, #06b6d4);
     }
 
-    .btn-info:hover {
+    .btn-primary:hover {
       transform: scale(1.05);
     }
 
@@ -431,9 +433,9 @@
         <h3>📝 إضافة حساب جديد</h3>
 
         <div class="form-row">
-          <input type="text" id="customerName" placeholder="إسم العميل أو الحساب" />
-          <input type="number" id="openingBalance" placeholder="الرصيد الافتتاحي" />
-          <button id="addCustomerBtn">حفظ</button>
+          <input type="text" id="customerName" placeholder="الحساب أو العميل أو المورد" />
+          <input type="number" id="openingBalance" placeholder="الرصيد الإفتتاحي" />
+          <button id="addCustomerBtn">💾 حفظ</button>
         </div>
       </div>
 

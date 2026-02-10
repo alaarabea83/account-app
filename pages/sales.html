@@ -54,7 +54,6 @@
       padding: 0 15px;
       z-index: 1002;
       box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
-      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .header h1 {
@@ -66,14 +65,15 @@
     .menu-toggle {
       position: fixed;
       right: 12px;
-      top: 12px;
-      background: yellow;
+      background: linear-gradient(135deg,#2563eb,#1d4ed8);
       color: black;
+      z-index: 1001;
       border: none;
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 8px;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     /* ===== Sidebar ===== */
@@ -162,7 +162,6 @@
       padding: 20px;
       border-radius: 16px;
       margin: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     /* ===== Forms ===== */
@@ -183,7 +182,7 @@
       min-width: 140px;
       background: #1e293b;
       color: white;
-      border: 1px solid var(--border);
+      border-color: var(--primary);
       border-radius: 8px;
       padding: 10px;
     }
@@ -224,7 +223,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #22c55e;
+      background: linear-gradient(45deg, #3b82f6, #06b6d4);
       border-radius: 10px;
     }
 
@@ -241,9 +240,10 @@
     thead th {
       position: sticky;
       top: 0;
-      background: red;
+      background: linear-gradient(135deg,#1f2937,#111827);
       z-index: 10;
       padding: 12px;
+      color:#e5e7eb;
     }
 
     td {
@@ -362,7 +362,6 @@
       gap: 10px;
       justify-content: space-between;
       flex-wrap: wrap;
-      /* يسمح بالتفاف عند المساحة الصغيرة */
     }
 
     .card .numbers-grid input {
@@ -386,7 +385,7 @@
       font-size: 16px;
       border-radius: 8px;
       border: none;
-      background: linear-gradient(135deg,#22c55e,#16a34a);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
       color: black;
       cursor: pointer;
       font-weight: bold;
@@ -406,7 +405,6 @@
 
       #saveInvoiceBtn {
         width: 100%;
-        /* الزر يمتد بالكامل داخل card */
         max-width: 100%;
       }
     }
@@ -483,10 +481,10 @@
     <!-- إجمالي الفاتورة + الإجمالي الكلي -->
     <div class="card">
       <div class="numbers-grid">
-        <input type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" readonly />
-        <input type="number" id="grandTotal" placeholder="الإجمالي الكلي" readonly />
-        <input style="border-color: #2563eb;" type="number" id="paidAmount" placeholder="المبلغ المدفوع" />
-        <input type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
+        <input style="border: 7px solid #e74c3c;" type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" readonly />
+        <input style="border: 7px solid #e74c3c;" type="number" id="grandTotal" placeholder="الإجمالي الكلي" readonly />
+        <input style="border: 7px solid #2563eb;" type="number" id="paidAmount" placeholder="المبلغ المدفوع" />
+        <input style="border: 7px solid yellow;" type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
       </div>
 
       <div class="form-row">
