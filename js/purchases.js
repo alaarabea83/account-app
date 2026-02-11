@@ -24,25 +24,25 @@ window.onload = function () {
   document.getElementById("showAllBtn").addEventListener("click", showAllPurchases);
   document.getElementById("searchPurchase").addEventListener("input", filterPurchases);
 };
-  
 
-  document.getElementById("saveInvoiceBtn").onclick = savePurchase;
 
-  document.getElementById("productSelect").addEventListener("change", function () {
-    const index = this.value;
-    if (index === "") return;
-    addRow(index);
-    this.value = "";
-  });
+document.getElementById("saveInvoiceBtn").onclick = savePurchase;
 
-  document.getElementById("invoiceCustomer").addEventListener("change", function () {
-    const index = this.value;
-    document.getElementById("customerBalance").value =
-      index === "" ? 0 : customers[index]?.balance || 0;
-    updateGrandTotal();
-  });
+document.getElementById("productSelect").addEventListener("change", function () {
+  const index = this.value;
+  if (index === "") return;
+  addRow(index);
+  this.value = "";
+});
 
-  document.getElementById("paidAmount").addEventListener("input", updateRemaining);
+document.getElementById("invoiceCustomer").addEventListener("change", function () {
+  const index = this.value;
+  document.getElementById("customerBalance").value =
+    index === "" ? 0 : customers[index]?.balance || 0;
+  updateGrandTotal();
+});
+
+document.getElementById("paidAmount").addEventListener("input", updateRemaining);
 
 
 // ===============================
@@ -62,7 +62,7 @@ function renderCustomerSelect() {
 function loadProductsToSelect() {
   const sel = document.getElementById("productSelect");
   sel.innerHTML =
-    `<option value="">اختر منتج</option>` +
+    `<option value="">أضف منتج</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 }
 
@@ -79,7 +79,7 @@ function addRow(productIndex) {
   row.innerHTML = `
     <td class="rowNum"></td>
     <td>${product.name}</td>
-    <td><input type="number" class="qty" placeholder="أدخل الكمية" min="1" value=""></td>
+    <td><input type="number" class="qty" placeholder="الكمية" min="1" value=""></td>
     <td><input type="number" class="price" value="${product.buyPrice}" ></td>
     <td><input type="number" class="total" value="0" readonly></td>
     <td><button class="delBtn">❌</button></td>
@@ -93,9 +93,9 @@ function addRow(productIndex) {
   const totalInput = row.querySelector(".total");
 
   function calc() {
-  totalInput.value = (+qty.value || 0) * (+price.value || 0);
-  updateInvoiceTotal();
-}
+    totalInput.value = (+qty.value || 0) * (+price.value || 0);
+    updateInvoiceTotal();
+  }
 
   qty.oninput = calc;
   price.oninput = calc;
@@ -231,8 +231,10 @@ function renderPurchases(list = purchases) {
         <td>${p.newBalance || 0}</td>
 
         <td>
+        <div class="action-buttons">
           <button class="btn-edit" onclick="editPurchase(${i})">تعديل</button>
           <button class="btn-delete" onclick="confirmDeletePurchase(${p.order})">حذف</button>
+          </div>
         </td>
       </tr>
     `;
