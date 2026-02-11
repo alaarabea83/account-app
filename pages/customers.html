@@ -156,25 +156,42 @@
     /* ===== Forms ===== */
     .form-row {
       display: flex;
-      flex-direction: column;
       gap: 12px;
+      width: 100%;
+    }
 
+    .form-row input {
+      flex: 1;
+      /* كل حقل ياخد نص المساحة */
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--primary);
+      background: transparent;
+      color: var(--text);
+      font-size: 16px;
+      box-sizing: border-box;
     }
 
     input {
       width: 100%;
       padding: 14px;
       border-radius: 12px;
-      border: 1px solid #fff;
+      border: 1px solid var(--primary);
       background: transparent;
       color: var(--text);
       font-size: 16px;
-      border-color: var(--primary);
+      box-sizing: border-box;
     }
 
     input:focus {
       outline: none;
       border-color: var(--primary);
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        flex-direction: column;
+      }
     }
 
     button {
@@ -193,7 +210,10 @@
 
     /* ===== Search ===== */
     #searchCustomer {
+      width: 100%;
       margin-bottom: 15px;
+      box-sizing: border-box;
+      /* مهم */
     }
 
     /* ===== Table ===== */
@@ -228,7 +248,7 @@
     th {
       position: sticky;
       top: 0;
-      background: linear-gradient(135deg, #1f2937, #111827);
+      background: linear-gradient(135deg, #1f2937, blue);
       color: #e5e7eb;
       padding: 12px;
     }
@@ -271,22 +291,31 @@
     .action-btn.view {
       background: #22c55e;
       color: #000;
-      border-color: #16a34a;
-      /* أخضر غامق شوية */
+      font-weight: bold;
+    }
+
+    .action-btn.view:hover {
+      background: #16a34a;
     }
 
     .action-btn.edit {
-      background: #38bdf8;
+      background: #f1c40f;
       color: #000;
-      border-color: #0ea5e9;
-      /* أزرق غامق */
+      font-weight: bold;
+    }
+
+    .action-btn.edit:hover {
+      background: #e0a800;
     }
 
     .action-btn.delete {
-      background: #f87171;
-      color: #000;
-      border-color: #ef4444;
-      /* أحمر */
+      background: #e74c3c;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .action-btn.delete:hover {
+      background: #a71d2a;
     }
 
     /* منطقة الأزرار */
