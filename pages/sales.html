@@ -406,11 +406,8 @@
     @media (max-width: 600px) {
       .card .numbers-grid input {
         max-width: 40%;
-        /* يمنع الخروج من حدود الخلية */
         padding: 6px;
-        /* أقل من الكمبيوتر */
         font-size: 14px;
-        /* أصغر شوية */
         box-sizing: border-box;
       }
 
@@ -419,6 +416,29 @@
         max-width: 100%;
       }
     }
+
+    @media(max-width:768px){
+
+  .form-row{
+    flex-direction: column;
+    align-items: center; /* بدل stretch */
+    margin: 10px auto;   /* توسيط البلوك نفسه */
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-row input,
+  .form-row select{
+    width: 100%;
+    max-width: 350px; /* يخليهم في النص */
+  }
+
+  .form-row button{
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
   </style>
 
 </head>
