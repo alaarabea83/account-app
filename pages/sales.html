@@ -65,7 +65,7 @@
     .menu-toggle {
       position: fixed;
       right: 12px;
-      background: linear-gradient(135deg,#2563eb,#1d4ed8);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: black;
       z-index: 1001;
       border: none;
@@ -82,23 +82,18 @@
       top: 60px;
       right: -260px;
       width: 260px;
-
-      /* خلي الارتفاع على قد الشاشة */
       height: calc(100vh - 60px);
-
       background: #111827;
       border-left: 3px solid #38bdf8;
       padding: 20px;
-
       display: flex;
       flex-direction: column;
       gap: 8px;
-
       transition: .3s;
       z-index: 1001;
-
-      /* أهم سطر */
       overflow-y: auto;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
     }
 
     .sidebar::-webkit-scrollbar {
@@ -256,10 +251,10 @@
     thead th {
       position: sticky;
       top: 0;
-      background: linear-gradient(135deg,#1f2937,#111827);
+      background: linear-gradient(135deg, #1f2937, #111827);
       z-index: 10;
       padding: 12px;
-      color:#e5e7eb;
+      color: #e5e7eb;
     }
 
     td {
@@ -497,10 +492,12 @@
     <!-- إجمالي الفاتورة + الإجمالي الكلي -->
     <div class="card">
       <div class="numbers-grid">
-        <input style="border: 7px solid #e74c3c;" type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" readonly />
+        <input style="border: 7px solid #e74c3c;" type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة"
+          readonly />
         <input style="border: 7px solid #e74c3c;" type="number" id="grandTotal" placeholder="الإجمالي الكلي" readonly />
         <input style="border: 7px solid #2563eb;" type="number" id="paidAmount" placeholder="المبلغ المدفوع" />
-        <input style="border: 7px solid yellow;" type="number" id="remainingAmount" placeholder="الرصيد الجديد" readonly />
+        <input style="border: 7px solid yellow;" type="number" id="remainingAmount" placeholder="الرصيد الجديد"
+          readonly />
       </div>
 
       <div class="form-row">
