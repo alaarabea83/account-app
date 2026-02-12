@@ -14,6 +14,7 @@ window.onload = function () {
   setTodayDate("fromDate");
   setTodayDate("toDate");
   renderSales();
+  filterSalesByDate();
 
   // Dropdown لاختيار المنتج مباشرة //
   renderProductSelect();
@@ -38,6 +39,31 @@ window.onload = function () {
 document
   .getElementById("searchSale")
   .addEventListener("input", searchSales);
+
+  // فلترة تلقائية عند تغيير التاريخ
+document.getElementById("fromDate").addEventListener("change", filterSalesByDate);
+document.getElementById("toDate").addEventListener("change", filterSalesByDate);
+
+// فلترة تلقائية مع البحث بالاسم
+document.getElementById("searchSale").addEventListener("input", function () {
+  const text = this.value.trim().toLowerCase();
+  const filtered = sales.filter(s => {
+    const invDate = s.date.slice(0, 10);
+    const today = new Date().toISOString().slice(0, 10);
+
+    // فلترة حسب التاريخ
+    const from = document.getElementById("fromDate").value || today;
+    const to = document.getElementById("toDate").value || today;
+    const matchDate = invDate >= from && invDate <= to;
+
+    // فلترة حسب الاسم
+    const matchName = !text || (s.customer && s.customer.toLowerCase().includes(text));
+
+    return matchDate && matchName;
+  });
+
+  renderSales(filtered);
+});
 
 // عرض العملاء //
 function renderCustomerSelect() {
@@ -363,16 +389,19 @@ function filterSalesByDate() {
   const fromVal = document.getElementById("fromDate").value;
   const toVal = document.getElementById("toDate").value;
 
-  const from = fromVal ? new Date(fromVal) : null;
-  const to = toVal ? new Date(toVal) : null;
+  // تاريخ اليوم بصيغة yyyy-mm-dd
+  const today = new Date().toISOString().slice(0, 10);
+
+  // لو المستخدم لم يحدد تاريخ → استخدم اليوم
+  const from = fromVal || today;
+  const to = toVal || today;
 
   const filtered = sales.filter((invoice) => {
     if (!invoice.date) return false;
-    const d = new Date(invoice.date);
 
-    if (from && d < from) return false;
-    if (to && d > to) return false;
-    return true;
+    const invDate = invoice.date.slice(0, 10); // تجاهل الوقت لو موجود
+
+    return invDate >= from && invDate <= to;
   });
 
   renderSales(filtered);
