@@ -1,6 +1,6 @@
 let editInvoiceIndex = null;
 
-function setTodayDate(id){
+function setTodayDate(id) {
   const today = new Date().toISOString().split("T")[0];
   document.getElementById(id).value = today;
 }
@@ -45,7 +45,7 @@ function renderCustomerSelect() {
   if (!sel) return;
 
   sel.innerHTML =
-  `<option value="" disabled selected>إختر الحساب</option>` +
+    `<option value="" disabled selected>إختر الحساب</option>` +
     `<option value="">بيع نقدي</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
@@ -286,7 +286,7 @@ function renderSales(data = sales) {
 
   // صف الإجمالي  //
   tbody.innerHTML += `
-    <tr style="background:#111827;color:#fff;font-weight:bold">
+    <tr style="background:#111827;color:#fbbf24;font-weight:bold">
       <td colspan="3">الإجمالي</td>
       <td>${sumTotal}</td>
       <td>${sumPaid}</td>

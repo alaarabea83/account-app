@@ -100,7 +100,7 @@ function renderCustomers(searchQuery = "") {
   const totalRow = document.createElement("tr");
   totalRow.style.background = "#111827";
   totalRow.style.fontWeight = "bold";
-  totalRow.style.color = "#fff";
+  totalRow.style.color = "#fbbf24";
 
   totalRow.innerHTML = `
     <td colspan="2">إجمالي أرصدة العملاء</td>

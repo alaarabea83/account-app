@@ -14,6 +14,7 @@ window.onload = function () {
   renderCustomerSelect();
   renderPurchases();
   loadProductsToSelect();
+  filterPurchases();
 
   // 👇 تاريخ اليوم
   setTodayDate("fromDate");
@@ -24,6 +25,11 @@ window.onload = function () {
   document.getElementById("showAllBtn").addEventListener("click", showAllPurchases);
   document.getElementById("searchPurchase").addEventListener("input", filterPurchases);
 };
+
+document.getElementById("fromDate").addEventListener("change", filterPurchases);
+document.getElementById("toDate").addEventListener("change", filterPurchases);
+document.getElementById("searchPurchase").addEventListener("input", filterPurchases);
+
 
 
 document.getElementById("saveInvoiceBtn").onclick = savePurchase;
@@ -62,7 +68,7 @@ function renderCustomerSelect() {
 function loadProductsToSelect() {
   const sel = document.getElementById("productSelect");
   sel.innerHTML =
-    `<option value="">أضف منتجات للفاتورة</option>` +
+    `<option value="">أضف منتج</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 }
 
@@ -229,16 +235,34 @@ function renderPurchases(list = purchases) {
         <td>${p.remaining}</td>
         <td>${p.previousBalance || 0}</td>
         <td>${p.newBalance || 0}</td>
-
         <td>
-        <div class="action-buttons">
-          <button class="btn-edit" onclick="editPurchase(${i})">تعديل</button>
-          <button class="btn-delete" onclick="confirmDeletePurchase(${p.order})">حذف</button>
+          <div class="action-buttons">
+            <button class="btn-edit" onclick="editPurchase(${i})">تعديل</button>
+            <button class="btn-delete" onclick="confirmDeletePurchase(${p.order})">حذف</button>
           </div>
         </td>
       </tr>
     `;
   });
+
+  // 👇 نحسب الإجمالي هنا
+  calculateTotals(list);
+}
+
+function calculateTotals(list) {
+  let total = 0;
+  let paid = 0;
+  let remain = 0;
+
+  list.forEach(p => {
+    total += Number(p.total || 0);
+    paid += Number(p.paid || 0);
+    remain += Number(p.remaining || 0);
+  });
+
+  document.getElementById("sumTotal").textContent = total.toFixed(2);
+  document.getElementById("sumPaid").textContent = paid.toFixed(2);
+  document.getElementById("sumRemain").textContent = remain.toFixed(2);
 }
 
 // ===============================
@@ -303,47 +327,51 @@ function confirmDeletePurchase(order) {
 }
 
 // دوال البحث
-function searchPurchases() {
-  const text = document
-    .getElementById("searchPurchase")
-    .value
-    .toLowerCase();
-
-  const filtered = purchases.filter(inv =>
-    (inv.customer || "").toLowerCase().includes(text)
-  );
-
-  renderPurchases(filtered);
-}
-
 function filterPurchases() {
+
   const fromVal = document.getElementById("fromDate").value;
   const toVal = document.getElementById("toDate").value;
   const searchVal = document.getElementById("searchPurchase").value.trim().toLowerCase();
 
-  const from = fromVal ? new Date(fromVal) : null;
-  const to = toVal ? new Date(toVal) : null;
+  // تاريخ اليوم
+  const today = new Date().toISOString().split("T")[0];
 
-  const filtered = purchases.filter((p) => {
-    const date = new Date(p.date);
-    const matchDate = (!from || date >= from) && (!to || date <= to);
+  const from = fromVal || today;
+  const to = toVal || today;
+
+  const filtered = purchases.filter(p => {
+
+    const invDate = p.date.split("T")[0]; // لو التاريخ فيه وقت
+
+    const matchDate =
+      invDate >= from &&
+      invDate <= to;
+
     const matchName =
       !searchVal ||
       (p.customer && p.customer.toLowerCase().includes(searchVal));
+
     return matchDate && matchName;
   });
 
   renderPurchases(filtered);
 }
 
-function showAllPurchases() {
-  document.getElementById("fromDate").value = "";
-  document.getElementById("toDate").value = "";
-  document.getElementById("searchPurchase").value = "";
-  renderPurchases();
-}
 
+// فلترة مباشرة أثناء الكتابة
+document.getElementById("searchPurchase")
+  .addEventListener("input", filterPurchases);
 
+// فلترة عند تغيير التاريخ
+document.getElementById("fromDate")
+  .addEventListener("change", filterPurchases);
+
+document.getElementById("toDate")
+  .addEventListener("change", filterPurchases);
+
+// زر البحث (لو موجود)
+document.getElementById("searchBtn")
+  .addEventListener("click", filterPurchases);
 
 // ===============================
 // مودالات

@@ -100,7 +100,7 @@
     }
 
     .sidebar::-webkit-scrollbar {
-      width: 6px;
+      width: px;
     }
 
     .sidebar::-webkit-scrollbar-thumb {
@@ -236,12 +236,12 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: yellow;
+      background: #334155;
       border-radius: 10px;
     }
 
     .table-scroll::-webkit-scrollbar-track {
-      background: #1e293b;
+      background: #0f172a;
     }
 
     table {
@@ -275,6 +275,13 @@
       cursor: pointer;
       transition: 0.2s;
     }
+
+    tfoot tr {
+      background: linear-gradient(135deg, #1f2937, #111827);
+      color: #fbbf24;
+      font-size: 16px;
+    }
+
 
     /* ===== Buttons ===== */
     .action-buttons {
@@ -539,6 +546,18 @@
             </tr>
           </thead>
           <tbody></tbody>
+
+          <!-- صف الإجمالي -->
+          <tfoot>
+            <tr style="background:#0f172a; font-weight:bold; color:#fbbf24;">
+              <td colspan="3">الإجمالي</td>
+              <td id="sumTotal">0</td>
+              <td id="sumPaid">0</td>
+              <td id="sumRemain">0</td>
+              <td colspan="3"></td>
+            </tr>
+          </tfoot>
+        </table>
         </table>
       </div>
     </div>

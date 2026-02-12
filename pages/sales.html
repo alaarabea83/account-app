@@ -233,12 +233,12 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: yellow;
+      background: #334155;
       border-radius: 10px;
     }
 
     .table-scroll::-webkit-scrollbar-track {
-      background: #1e293b;
+      background: #0f172a;
     }
 
     table {
@@ -270,6 +270,12 @@
       background: #334155;
       cursor: pointer;
       transition: 0.2s;
+    }
+
+    tfoot tr {
+      background: linear-gradient(135deg, #1f2937, #111827);
+      color: #fbbf24;
+      font-size: 16px;
     }
 
     /* ===== Buttons ===== */
@@ -336,18 +342,6 @@
       font-weight: bold;
     }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 768px) {
-      .form-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .form-row button {
-        width: 100%;
-      }
-    }
-
     /* ===== Desktop ===== */
     @media (min-width: 768px) {
       .menu-toggle {
@@ -386,30 +380,6 @@
       #saveInvoiceBtn {
         width: 100%;
         max-width: 100%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .form-row {
-        flex-direction: column;
-        align-items: center;
-        /* بدل stretch */
-        margin: 10px auto;
-        /* توسيط البلوك نفسه */
-        width: 100%;
-        max-width: 500px;
-      }
-
-      .form-row input,
-      .form-row select {
-        width: 100%;
-        max-width: 350px;
-        /* يخليهم في النص */
-      }
-
-      .form-row button {
-        width: 100%;
-        max-width: 350px;
       }
     }
   </style>
@@ -472,20 +442,20 @@
         </div>
       </div>
 
-        <div class="form-row">
-          <label>إجمالي الفاتورة:</label>
-          <input type="number" id="invoiceTotal" placeholder="0" readonly />
-          <label>الإجمالي الكلي:</label>
-          <input type="number" id="grandTotal" placeholder="0" readonly />
-          <label>المبلغ المدفوع:</label>
-          <input type="number" id="paidAmount" placeholder="0" />
-          <label>الرصيد الجديد:</label>
-          <input type="number" id="remainingAmount" placeholder="0" readonly />
-        </div>
+      <div class="form-row">
+        <label>إجمالي الفاتورة:</label>
+        <input type="number" id="invoiceTotal" placeholder="0" readonly />
+        <label>الإجمالي الكلي:</label>
+        <input type="number" id="grandTotal" placeholder="0" readonly />
+        <label>المبلغ المدفوع:</label>
+        <input type="number" id="paidAmount" placeholder="0" />
+        <label>الرصيد الجديد:</label>
+        <input type="number" id="remainingAmount" placeholder="0" readonly />
+      </div>
 
-        <div class="form-row">
-          <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
-        </div>
+      <div class="form-row">
+        <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
+      </div>
     </div>
 
     <div class="card">
