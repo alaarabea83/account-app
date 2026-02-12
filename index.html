@@ -28,7 +28,7 @@
         background: #0f172a;
         backdrop-filter: blur(12px);
         padding: 22px;
-        text-align: center;
+        text-align: right;
         font-size: 22px;
         font-weight: 700;
         border-radius: 12px;
@@ -51,7 +51,6 @@
       /* ===== CARD ===== */
       .card {
         background: #1e293b;
-        backdrop-filter: blur(10px);
         border-radius: 20px;
         padding: 25px 15px;
         text-align: center;
@@ -60,31 +59,6 @@
         transition: 0.35s;
         position: relative;
         overflow: hidden;
-      }
-
-      /* Glow effect */
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(255, 255, 255, 0.15),
-          transparent
-        );
-        opacity: 0;
-        transition: 0.4s;
-      }
-
-      .card:hover::before {
-        opacity: 1;
-      }
-
-      .card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        border-color: #10b981;
       }
 
       /* ICON */
@@ -136,7 +110,6 @@
 
     <section>
       <a class="card" href="pages/customers.html">
-        <img src="icons/accounting.png" />
         <h3>الحسابات</h3>
         <p>
           إضافة حساب<br />
@@ -147,7 +120,6 @@
       </a>
 
       <a class="card" href="pages/products.html">
-        <img src="icons/barcode-reader.png" />
         <h3>المنتجات</h3>
         <p>
           إضافة منتج<br />
@@ -158,7 +130,6 @@
       </a>
 
       <a class="card" href="pages/sales.html">
-        <img src="icons/sales.png" />
         <h3>المبيعات</h3>
         <p>
           فاتورة بيع<br />
@@ -169,7 +140,6 @@
       </a>
 
       <a class="card" href="pages/purchases.html">
-        <img src="icons/purchases.png" />
         <h3>المشتريات</h3>
         <p>
           فاتورة شراء<br />
@@ -180,7 +150,6 @@
       </a>
 
       <a class="card" href="pages/income.html">
-        <img src="icons/income.png" />
         <h3>المقبوضات</h3>
         <p>
           سند قبض<br />
@@ -191,7 +160,6 @@
       </a>
 
       <a class="card" href="pages/expenses.html">
-        <img src="icons/expenses.png" />
         <h3>المدفوعات</h3>
         <p>
           سند صرف<br />
@@ -202,7 +170,6 @@
       </a>
 
       <a class="card" href="pages/cash.html">
-        <img src="icons/cash.png" />
         <h3>الخزينة</h3>
         <p>
           رصيد الخزينة<br />
@@ -213,8 +180,7 @@
       </a>
 
       <a class="card" href="pages/dashboard.html">
-        <img src="icons/dashboard.png" />
-        <h3>لوحة التحكم</h3>
+        <h3>التقارير</h3>
         <p>
           عداد العملاء<br />
           عداد الفواتير<br />
@@ -224,13 +190,12 @@
       </a>
 
       <a class="card" href="pages/about.html">
-        <img src="icons/mobile_app.png" />
         <h3>معلومات</h3>
         <p>
           عن البرنامج<br />
           التحديثات<br />
-          تواصل معنا<br />
-          الدعم الفني
+          الدعم الفني<br />
+          تواصل معنا
         </p>
       </a>
     </section>

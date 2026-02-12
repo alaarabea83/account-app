@@ -70,10 +70,10 @@
       position: fixed;
       right: 12px;
       z-index: 1001;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      background: #0a570a;
       color: white;
       border: none;
-      padding: 10px 14px;
+      padding: 8px 14px;
       border-radius: 8px;
       font-size: 20px;
       cursor: pointer;
@@ -335,6 +335,7 @@
       max-width: 600px;
       max-height: 80vh;
       overflow-y: auto;
+      scrollbar-width: none;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
@@ -347,7 +348,6 @@
       font-family: 'Cairo', sans-serif;
       line-height: 1.6;
     }
-
 
     .success-box {
       text-align: center;
@@ -373,18 +373,17 @@
       gap: 4px;
       justify-content: center;
       flex-wrap: nowrap;
-      /* يمنع اللف */
     }
 
     .actions button {
-      flex: 0 0 auto;
-      padding: 6px 10px;
+      min-width: 70px;
+      height: 32px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 8px;
-      border: none;
-      margin: 2px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: 0.2s;
+      font-size: 14px;
       white-space: nowrap;
     }
 
@@ -424,7 +423,6 @@
         font-size: 12px;
       }
     }
-
 
     /* الزر الرئيسي داخل المودال */
     .modal-card button {
@@ -506,14 +504,14 @@
       <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
     </div>
 
-    <a href="../index.html">🏠 الرئيسية</a>
+    <a href="../index.html">🏠 لوحة التحكم</a>
     <a href="customers.html">👥 الحسابات</a>
     <a href="products.html">📦 المخزون</a>
     <a href="sales.html">🛒 فواتير البيع</a>
     <a href="purchases.html">🧾 فواتير الشراء</a>
     <a href="income.html">💰 المقبوضات</a>
     <a href="expenses.html">💸 المدفوعات</a>
-    <a href="cash.html">🏦 الخزينة</a>
+    <a href="cash.html">🏦 حركة الخزينة</a>
 
   </div>
 
@@ -625,8 +623,7 @@
   </div>
 
   <!-- Product Movement Modal -->
-  <div id="productMovementModal" class="modal-overlay"
-    style="display: none; justify-content: center; align-items: center">
+  <div id="productMovementModal" class="modal-overlay">
     <div class="modal-card">
       <h3>حركة الصنف</h3>
       <p id="movementProductName" style="
