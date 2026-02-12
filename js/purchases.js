@@ -62,7 +62,7 @@ function renderCustomerSelect() {
 function loadProductsToSelect() {
   const sel = document.getElementById("productSelect");
   sel.innerHTML =
-    `<option value="">أضف منتج</option>` +
+    `<option value="">أضف منتجات للفاتورة</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 }
 

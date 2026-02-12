@@ -45,7 +45,8 @@ function renderCustomerSelect() {
   if (!sel) return;
 
   sel.innerHTML =
-    `<option value="" selected>بيع نقدي</option>` +
+  `<option value="" disabled selected>إختر الحساب</option>` +
+    `<option value="">بيع نقدي</option>` +
     customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
 }
 

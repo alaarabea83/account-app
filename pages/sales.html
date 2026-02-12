@@ -238,7 +238,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
+      background: #0f172a;
     }
 
     table {
@@ -250,7 +250,7 @@
     thead th {
       position: sticky;
       top: 0;
-      background: linear-gradient(135deg, #1f2937, green);
+      background: linear-gradient(135deg, #1f2937, blue);
       z-index: 10;
       padding: 12px;
       color: #e5e7eb;
@@ -448,16 +448,13 @@
       <div class="form-row">
         <select id="invoiceCustomer"></select>
         <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
-      </div>
-
-      <!-- Dropdown لإضافة المنتجات -->
-      <div class="form-row">
         <select id="invoiceProductSelect">
           <option value="" disabled selected>أضف منتج</option>
         </select>
       </div>
+
       <!-- جدول المنتجات -->
-      <div class="card table-container">
+      <div class="table-container">
         <div class="table-scroll">
           <table id="invoiceTable">
             <thead>
@@ -482,15 +479,12 @@
           <input type="number" id="invoiceTotal" placeholder="0" readonly />
           <label>الإجمالي الكلي:</label>
           <input type="number" id="grandTotal" placeholder="0" readonly />
-        </div>
-
-        <!-- المدفوع + المتبقي -->
-        <div class="form-row">
           <label>المبلغ المدفوع:</label>
-          <input type="number" id="paidAmount" placeholder="أدخل المبلغ المدفوع" />
+          <input type="number" id="paidAmount" placeholder="0" />
           <label>الرصيد الجديد:</label>
           <input type="number" id="remainingAmount" placeholder="0" readonly />
         </div>
+
         <div class="form-row">
           <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
         </div>
@@ -510,7 +504,7 @@
           <input type="date" id="toDate" />
         </div>
 
-        <input type="text" id="searchSale" placeholder="بحث باسم العميل" />
+        <input type="text" id="searchSale" placeholder="بحث بإسم العميل" />
         <button onclick="filterSalesByDate()">🔍 بحث</button>
       </div>
 
