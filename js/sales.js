@@ -67,20 +67,65 @@ document.getElementById("searchSale").addEventListener("input", function () {
 
 // عرض العملاء //
 function renderCustomerSelect() {
-  const sel = document.getElementById("invoiceCustomer");
-  if (!sel) return;
+  const list = document.getElementById("customerDropdown");
+  const input = document.getElementById("customerInput");
 
-  sel.innerHTML =
-    `<option value="" disabled selected>إختر الحساب</option>` +
-    `<option value="">بيع نقدي</option>` +
-    customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
+  if (!list || !input) return;
+
+  list.innerHTML = "";
+
+  // خيار نقدي
+  const cashDiv = document.createElement("div");
+  cashDiv.className = "dropdown-item";
+  cashDiv.innerText = "بيع نقدي";
+  cashDiv.onclick = () => {
+    input.value = "بيع نقدي";
+    document.getElementById("customerBalance").value = 0;
+    list.style.display = "none";
+    updateGrandTotal();
+  };
+  list.appendChild(cashDiv);
+
+  // العملاء
+  customers.forEach((c, i) => {
+    const div = document.createElement("div");
+    div.className = "dropdown-item";
+    div.innerText = c.name;
+
+    div.onclick = () => {
+      input.value = c.name;
+      input.dataset.index = i;
+
+      document.getElementById("customerBalance").value =
+        c.balance || 0;
+
+      list.style.display = "none";
+      updateGrandTotal();
+    };
+
+    list.appendChild(div);
+  });
+
+  // فتح القائمة
+  input.onclick = () => {
+    list.style.display =
+      list.style.display === "block" ? "none" : "block";
+  };
+
+  // غلق عند الضغط خارجها
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !list.contains(e.target)) {
+      list.style.display = "none";
+    }
+  });
 }
+
 
 // Dropdown المنتجات أعلى الفاتورة //
 function renderProductSelect() {
   const sel = document.getElementById("invoiceProductSelect");
   sel.innerHTML =
-    `<option value="" disabled selected>أضف منتجات للفاتورة</option>` +
+    `<option value="" disabled selected>أضف أصناف للفاتورة</option>` +
     products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
 
   sel.onchange = function () {
@@ -218,7 +263,9 @@ function saveSale() {
   });
 
   const paid = +document.getElementById("paidAmount").value || 0;
-  const cIndex = document.getElementById("invoiceCustomer").value;
+  const input = document.getElementById("customerInput");
+const cIndex = input.dataset.index ?? "";
+
 
   let customerName = "نقدي";
   let previousBalance = 0;
@@ -263,7 +310,9 @@ function saveSale() {
 
   // ===== إعادة تعيين النموذج ===== //
   container.innerHTML = "";
-  document.getElementById("invoiceCustomer").selectedIndex = 0;
+  const ci = document.getElementById("customerInput");
+ci.value = "";
+ci.dataset.index = "";
   document.getElementById("invoiceProductSelect").selectedIndex = 0;
   document.getElementById("customerBalance").value = "";
   document.getElementById("invoiceTotal").value = "";

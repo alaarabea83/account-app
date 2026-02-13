@@ -382,6 +382,35 @@
         max-width: 100%;
       }
     }
+
+    .custom-select {
+      position: relative;
+      flex: 1;
+    }
+
+    .dropdown-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      scrollbar-width: none;
+      background: #1e293b;
+      border: 1px solid #4b5563;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+
+    .dropdown-item {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+      background: #14532d;
+    }
   </style>
 </head>
 
@@ -416,8 +445,13 @@
     <div class="card">
       <h3>🧾 فاتورة بيع جديده</h3>
       <div class="form-row">
-        <select id="invoiceCustomer"></select>
-        <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
+
+        <div class="custom-select">
+          <input type="text" id="customerInput" placeholder="اختر الحساب" readonly>
+          <div id="customerDropdown" class="dropdown-list"></div>
+          <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
+        </div>
+
         <select id="invoiceProductSelect">
           <option value="" disabled selected>أضف منتج</option>
         </select>
