@@ -204,7 +204,7 @@ function initProductSearch() {
     filtered.forEach(product => {
       const div = document.createElement("div");
       div.className = "dropdown-item";
-      div.innerText = `${product.name}`;
+      div.innerText = `${product.name} - ${product.qty ?? 0} متوفر`;
 
       div.onclick = () => {
         input.value = product.name;
