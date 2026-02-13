@@ -477,7 +477,7 @@ function confirmDeleteInvoice(order) {
 
     saveData();
     updateBottomCashBalance();
-    renderSales();
+    filterSalesByDate();
     showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
   });
 }
