@@ -414,50 +414,6 @@
     .dropdown-item:hover {
       background: #14532d;
     }
-
-    .product-select-box {
-  position: relative;
-  width: 100%;
-}
-
-#productSearch {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: white;
-  font-size: 14px;
-}
-
-.dropdown-list {
-  position: absolute;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  background: #1e293b;
-  border-radius: 10px;
-  margin-top: 5px;
-  display: none;
-  z-index: 999;
-}
-
-.dropdown-item {
-  padding: 10px;
-  cursor: pointer;
-  color: white;
-}
-
-.dropdown-item:hover {
-  background: #38bdf8;
-}
-
-#stockInfo {
-  margin-top: 6px;
-  font-size: 13px;
-  color: #facc15;
-}
-
   </style>
 </head>
 
@@ -490,30 +446,19 @@
   <section>
     <!-- اختيار العميل + رصيد -->
     <div class="card">
-      
       <h3>🧾 فاتورة بيع جديده</h3>
       <div class="form-row">
 
         <div class="custom-select">
           <input type="text" id="customerInput" placeholder="ابحث عن عميل...">
           <div id="customerDropdown" class="dropdown-list"></div>
-          <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
+          <input type="number" id="customerBalance" placeholder="الرصيد السابق" />
         </div>
 
-        <div class="product-select-box">
-  <input
-    type="text"
-    id="productSearch"
-    placeholder="ابحث عن منتج..."
-    autocomplete="off"
-  />
-
-  <div id="productDropdown" class="dropdown-list"></div>
-
-  <!-- عرض رصيد المخزون -->
-  <div id="stockInfo"></div>
-</div>
-
+        <div class="custom-select">
+          <input type="text" id="productInput" placeholder="أضف منتج...">
+          <div id="productDropdown" class="dropdown-list"></div>
+        </div>
 
       </div>
 

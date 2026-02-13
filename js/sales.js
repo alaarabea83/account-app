@@ -9,61 +9,37 @@ function setTodayDate(id) {
 window.onload = function () {
   loadData();
   renderCustomerSelect();
+  renderProductSelect();
 
-  // 👇 إضافة تاريخ اليوم
   setTodayDate("fromDate");
   setTodayDate("toDate");
+
   renderSales();
   filterSalesByDate();
-  initProductSearch();
 
   document.getElementById("saveInvoiceBtn").onclick = saveSale;
 
-  document
-    .getElementById("invoiceCustomer")
-    .addEventListener("change", function () {
-      const index = this.value;
-      document.getElementById("customerBalance").value =
-        index === "" ? 0 : customers[index].balance || 0;
-      updateGrandTotal();
+  const paidInput = document.getElementById("paidAmount");
+  if (paidInput) {
+    ["input","keyup","change"].forEach(evt=>{
+      paidInput.addEventListener(evt,updateRemaining);
     });
+  }
+
+  // 🔍 البحث
+  document
+    .getElementById("searchSale")
+    .addEventListener("input", searchSales);
+
+  // فلترة التاريخ
+  document
+    .getElementById("fromDate")
+    .addEventListener("change", filterSalesByDate);
 
   document
-    .getElementById("paidAmount")
-    .addEventListener("input", updateRemaining);
+    .getElementById("toDate")
+    .addEventListener("change", filterSalesByDate);
 };
-
-// 🔍 البحث بالاسم //
-document.getElementById("searchSale").addEventListener("input", searchSales);
-
-// فلترة تلقائية عند تغيير التاريخ
-document
-  .getElementById("fromDate")
-  .addEventListener("change", filterSalesByDate);
-document.getElementById("toDate").addEventListener("change", filterSalesByDate);
-
-// فلترة تلقائية مع البحث بالاسم
-document.getElementById("searchSale").addEventListener("input", function () {
-  const text = this.value.trim().toLowerCase();
-  const filtered = sales.filter((s) => {
-    const invDate = s.date.slice(0, 10);
-    const today = new Date().toISOString().slice(0, 10);
-
-    // فلترة حسب التاريخ
-    const from = document.getElementById("fromDate").value || today;
-    const to = document.getElementById("toDate").value || today;
-    const matchDate = invDate >= from && invDate <= to;
-
-    // فلترة حسب الاسم
-    const matchName =
-      !text || (s.customer && s.customer.toLowerCase().includes(text));
-
-    return matchDate && matchName;
-  });
-
-  renderSales(filtered);
-});
-
 // عرض العملاء //
 function renderCustomerSelect() {
   const list = document.getElementById("customerDropdown");
@@ -93,7 +69,9 @@ function renderCustomerSelect() {
 
     // العملاء
     customers
-      .filter((c) => c.name.toLowerCase().includes(filter.toLowerCase()))
+      .filter(c =>
+        c.name.toLowerCase().includes(filter.toLowerCase())
+      )
       .forEach((c, i) => {
         const div = document.createElement("div");
         div.className = "dropdown-item";
@@ -134,114 +112,99 @@ function renderCustomerSelect() {
   });
 }
 
-// Dropdown المنتجات أعلى الفاتورة //
 function renderProductSelect() {
-  const sel = document.getElementById("invoiceProductSelect");
+  const list = document.getElementById("productDropdown");
+  const input = document.getElementById("productInput");
 
-  sel.innerHTML =
-    `<option disabled selected>أضف أصناف للفاتورة</option>` +
-    products.map((p, i) =>
-      `<option value="${i}">${p.name}</option>`
-    ).join("");
+  if (!list || !input) return;
 
-  sel.onchange = function () {
-    const product = products[this.value];
-    if (!product) return;
+  function renderList(filter = "") {
+    list.innerHTML = "";
 
-    addInvoiceItem(product);
-    this.selectedIndex = 0;
-  };
+    products
+      .filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+      .forEach((p, i) => {
+        const div = document.createElement("div");
+        div.className = "dropdown-item";
+        div.innerText = p.name;
+
+        div.onclick = () => {
+          addInvoiceItem(p); // يضيف المنتج للفاتورة
+          input.value = "";
+          list.style.display = "none";
+        };
+
+        list.appendChild(div);
+      });
+  }
+
+  // أول تحميل
+  renderList();
+
+  // فتح القائمة عند التركيز
+  input.addEventListener("focus", () => {
+    list.style.display = "block";
+    renderList(input.value);
+  });
+
+  // البحث أثناء الكتابة
+  input.addEventListener("input", () => {
+    list.style.display = "block";
+    renderList(input.value);
+  });
+
+  // غلق عند الضغط خارجها
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !list.contains(e.target)) {
+      list.style.display = "none";
+    }
+  });
 }
+
 
 // == إضافة منتج ==//
 function addInvoiceItem(product) {
   const tbody = document.getElementById("invoiceItems");
+
+  // لو المنتج موجود بالفعل → زود الكمية
+  const existingRow = [...tbody.querySelectorAll("tr")].find(
+    r => r.cells[1].innerText === product.name
+  );
+
+  if (existingRow) {
+    const qtyInput = existingRow.querySelector(".itemQty");
+    qtyInput.value = (+qtyInput.value || 0) + 1;
+    updateInvoiceTotal();
+    return;
+  }
+
   const rowNumber = tbody.children.length + 1;
 
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>${rowNumber}</td>
     <td>${product.name}</td>
-    <td><input type="number" class="itemQty" placeholder="الكمية" min="1" value=""></td>
+    <td><input type="number" class="itemQty" min="1" value="1"></td>
     <td><input type="number" class="itemPrice" value="${product.price}" readonly></td>
-    <td><input type="number" class="itemTotal" value="${product.price}" readonly></td>
+    <td><input type="number" class="itemTotal" readonly></td>
     <td><button type="button" class="btn-delete-item">❌</button></td>
   `;
+
   tbody.appendChild(row);
 
-  const qtyInput = row.querySelector(".itemQty"); // تعريف إضافة الكمية للفاتورة //
-  const totalInput = row.querySelector(".itemTotal");
+  row.querySelector(".itemQty")
+     .addEventListener("input", updateInvoiceTotal);
 
-  // ==  حساب إجمالي صف الفاتورة ==//
-  function calcRow() {
-    totalInput.value = (+qtyInput.value || 0) * (+product.price || 0);
-    updateInvoiceTotal();
-  }
-
-  qtyInput.addEventListener("input", calcRow);
-  qtyInput.addEventListener("change", calcRow);
-
-  // حذف صف من الفاتورة //
   row.querySelector(".btn-delete-item").onclick = () => {
     row.remove();
-    updateInvoiceTotal();
     updateRowNumbers();
+    updateInvoiceTotal();
   };
+
+  updateInvoiceTotal();
 }
 
-function initProductSearch() {
-  const input = document.getElementById("productSearch");
-  const list = document.getElementById("productDropdown");
-  const stockInfo = document.getElementById("stockInfo");
 
-  function render(filter = "") {
-    list.innerHTML = "";
-
-    const filtered = products.filter(p =>
-      p.name.toLowerCase().includes(filter.toLowerCase())
-    );
-
-    filtered.forEach(product => {
-      const div = document.createElement("div");
-      div.className = "dropdown-item";
-      div.innerText = `${product.name} - ${product.qty ?? 0} متوفر`;
-
-      // استخدام click + touch
-      function selectItem() {
-        input.value = product.name;
-        list.style.display = "none";
-
-        stockInfo.innerText = "المتوفر في المخزون: " + (product.qty ?? 0);
-
-        addInvoiceItem(product);
-      }
-
-      div.addEventListener("click", selectItem);
-      div.addEventListener("touchstart", selectItem);
-
-      list.appendChild(div);
-    });
-
-    list.style.display = filtered.length ? "block" : "none";
-  }
-
-  // البحث عند الكتابة أو التركيز
-  input.addEventListener("input", () => render(input.value));
-  input.addEventListener("focus", () => render(input.value));
-
-  // إغلاق القائمة عند الضغط خارجها (يشمل اللمس)
-  document.addEventListener("click", e => {
-    if (!input.contains(e.target) && !list.contains(e.target)) {
-      list.style.display = "none";
-    }
-  });
-
-  document.addEventListener("touchstart", e => {
-    if (!input.contains(e.target) && !list.contains(e.target)) {
-      list.style.display = "none";
-    }
-  });
-}
 
 // == تحديث رقم الصف ==//
 function updateRowNumbers() {
@@ -251,35 +214,59 @@ function updateRowNumbers() {
 
 // === الحسابات ===//
 // == تحديث إجمالي الفاتورة ==//
+
+
 function updateInvoiceTotal() {
   let total = 0;
+
   document.querySelectorAll("#invoiceItems tr").forEach((row) => {
     const qty = +row.querySelector(".itemQty").value || 0;
     const price = +row.querySelector(".itemPrice").value || 0;
-    total += qty * price;
 
-    // تحديث الخلية مباشرة //
-    row.querySelector(".itemTotal").value = qty * price;
+    total += qty * price;
+    row.querySelector(".itemTotal").value = (qty * price).toFixed(2);
   });
 
-  document.getElementById("invoiceTotal").value = total;
+  document.getElementById("invoiceTotal").value =
+    total.toFixed(2);
+
   updateGrandTotal();
+  updateRemaining(); // فقط هنا
 }
 
 // == تحديث الإجمالي الكلي ==//
 function updateGrandTotal() {
-  const balance = +document.getElementById("customerBalance").value || 0;
-  const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
-  document.getElementById("grandTotal").value = balance + invoiceTotal;
-  updateRemaining();
+  const balance =
+    Number(document.getElementById("customerBalance").value) || 0;
+
+  const invoiceTotal =
+    Number(document.getElementById("invoiceTotal").value) || 0;
+
+  const grand = balance + invoiceTotal;
+
+  document.getElementById("grandTotal").value =
+    grand.toFixed(2);
 }
+
 
 // == تحديث المتبقي بعد المدفوع ==//
 function updateRemaining() {
-  const grand = +document.getElementById("grandTotal").value || 0;
-  const paid = +document.getElementById("paidAmount").value || 0;
-  document.getElementById("remainingAmount").value = grand - paid;
+  const grand = Number(
+    document.getElementById("grandTotal").value
+  ) || 0;
+
+  const paid = Number(
+    document.getElementById("paidAmount").value
+  ) || 0;
+
+  const remaining = grand - paid;
+
+  document.getElementById("remainingAmount").value =
+    remaining.toFixed(2);
 }
+
+
+
 
 // === حفظ الفاتورة ===//
 function saveSale() {
@@ -383,7 +370,6 @@ function saveSale() {
   const ci = document.getElementById("customerInput");
   ci.value = "";
   ci.dataset.index = "";
-  document.getElementById("invoiceProductSelect").selectedIndex = 0;
   document.getElementById("customerBalance").value = "";
   document.getElementById("invoiceTotal").value = "";
   document.getElementById("grandTotal").value = "";
@@ -448,16 +434,7 @@ function editInvoice(index) {
   const container = document.getElementById("invoiceItems");
   container.innerHTML = "";
 
-  // تعبئة العميل //
-  document.getElementById("invoiceCustomer").value =
-    invoice.customer === "نقدي"
-      ? ""
-      : customers.findIndex((c) => c.name === invoice.customer);
 
-  document.getElementById("customerBalance").value =
-    invoice.customer === "نقدي" ? 0 : invoice.previousBalance;
-
-  document.getElementById("paidAmount").value = invoice.paid;
 
   // تعبئة المنتجات //
   invoice.items.forEach((item) => {
@@ -534,10 +511,13 @@ function resetSalesFilter() {
 
 // =====  دالة البحث بإسم العميل ==== //
 function searchSales() {
-  const text = document.getElementById("searchSale").value.toLowerCase();
+  const text = document
+    .getElementById("searchSale")
+    .value
+    .toLowerCase();
 
-  const filtered = sales.filter((inv) =>
-    inv.customer.toLowerCase().includes(text),
+  const filtered = sales.filter(inv =>
+    inv.customer.toLowerCase().includes(text)
   );
 
   renderSales(filtered);
@@ -547,6 +527,8 @@ function showAllSales() {
   document.getElementById("searchSale").value = "";
   renderSales(sales);
 }
+
+
 
 // ===== مودال عام ==== //
 let deleteCallback = null;
