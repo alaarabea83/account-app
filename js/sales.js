@@ -435,52 +435,63 @@ function editInvoice(index) {
   const container = document.getElementById("invoiceItems");
   container.innerHTML = "";
 
+  // ===== العميل =====
+  const customerInput = document.getElementById("customerInput");
+  const customerBalance = document.getElementById("customerBalance");
 
+  customerInput.value = invoice.customer;
 
-  // تعبئة المنتجات //
+  const cIndex = customers.findIndex(c => c.name === invoice.customer);
+
+  if (cIndex !== -1) {
+    customerInput.dataset.index = cIndex;
+    customerBalance.value = invoice.previousBalance || 0;
+  } else {
+    customerInput.dataset.index = "";
+    customerBalance.value = 0;
+  }
+
+  // ===== المنتجات =====
   invoice.items.forEach((item) => {
-    const product = products.find((p) => p.name === item.name);
-    if (!product) return;
-    addInvoiceItem(product); // استخدم الدالة الجديدة
-    const row = container.lastElementChild;
+    const row = document.createElement("tr");
 
-    row.querySelector(".itemQty").value = item.qty;
-    row.querySelector(".itemTotal").value = item.qty * product.price;
+    row.innerHTML = `
+      <td></td>
+      <td>${item.name}</td>
+      <td><input type="number" class="itemQty" value="${item.qty}"></td>
+      <td><input type="number" class="itemPrice" value="${item.price}" readonly></td>
+      <td><input type="number" class="itemTotal" value="${item.qty * item.price}" readonly></td>
+      <td><button type="button" class="btn-delete-item">❌</button></td>
+    `;
+
+    container.appendChild(row);
+
+    row.querySelector(".itemQty")
+       .addEventListener("input", updateInvoiceTotal);
+
+    row.querySelector(".btn-delete-item").onclick = () => {
+      row.remove();
+      updateRowNumbers();
+      updateInvoiceTotal();
+    };
   });
+
+  updateRowNumbers();
+
+  // ===== المدفوع والمتبقي =====
+  document.getElementById("paidAmount").value = invoice.paid;
+  document.getElementById("remainingAmount").value = invoice.remaining;
 
   updateInvoiceTotal();
   updateGrandTotal();
+  updateRemaining();
 
   showModal("تم تحميل الفاتورة للتعديل ✏️", "تعديل فاتورة");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+document.getElementById("customerInput").focus();
 }
 
-// حذف فاتورة //
-function confirmDeleteInvoice(order) {
-  showDeleteModal("هل أنت متأكد من حذف هذه الفاتورة؟", () => {
-    const index = sales.findIndex((s) => s.order === order);
-    if (index === -1) return;
-
-    const invoice = sales[index];
-
-    invoice.items.forEach((item) => {
-      const product = products.find((p) => p.name === item.name);
-      if (product) product.qty += item.qty;
-    });
-
-    if (invoice.customer !== "نقدي") {
-      const customer = customers.find((c) => c.name === invoice.customer);
-      if (customer) customer.balance -= invoice.total - invoice.paid;
-    }
-
-    cash.income -= invoice.paid;
-    sales.splice(index, 1);
-
-    saveData();
-    updateBottomCashBalance();
-    filterSalesByDate();
-    showModal("تم حذف الفاتورة بنجاح ✅", "نجاح");
-  });
-}
 
 function filterSalesByDate() {
   const fromVal = document.getElementById("fromDate").value;
