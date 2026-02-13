@@ -196,7 +196,7 @@
     .form-row input:focus,
     .form-row select:focus {
       outline: none;
-      border-color: var(--primary);
+      border-color: red;
     }
 
     button {
@@ -211,6 +211,31 @@
       width: auto;
       max-width: 120px;
       margin: 5px auto;
+    }
+
+    #customerBalance {
+      background: #0f172a;
+      border: 1px solid #3b82f6;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+
+      .form-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-row input,
+      .form-row select {
+        width: 100%;
+      }
+
+      #customerBalance {
+        max-width: 100%;
+        text-align: center;
+      }
+
     }
 
     /* ===== Table ===== */
@@ -452,7 +477,8 @@
         <div style="flex: 1;" class="custom-select">
           <input type="text" id="customerInput" placeholder="ابحث عن عميل..." />
           <div id="customerDropdown" class="dropdown-list"></div>
-          <input style="max-width: 200px; text-align: center;" type="number" id="customerBalance" placeholder="الرصيد السابق" />
+          <input style="max-width: 200px; text-align: center;" type="number" id="customerBalance"
+            placeholder="الرصيد السابق" />
         </div>
       </div>
       <div class="form-row">
