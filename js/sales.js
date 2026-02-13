@@ -15,9 +15,7 @@ window.onload = function () {
   setTodayDate("toDate");
   renderSales();
   filterSalesByDate();
-
-  // Dropdown لاختيار المنتج مباشرة //
-  renderProductSelect();
+  initProductSearch();
 
   document.getElementById("saveInvoiceBtn").onclick = saveSale;
 
@@ -36,18 +34,18 @@ window.onload = function () {
 };
 
 // 🔍 البحث بالاسم //
-document
-  .getElementById("searchSale")
-  .addEventListener("input", searchSales);
+document.getElementById("searchSale").addEventListener("input", searchSales);
 
-  // فلترة تلقائية عند تغيير التاريخ
-document.getElementById("fromDate").addEventListener("change", filterSalesByDate);
+// فلترة تلقائية عند تغيير التاريخ
+document
+  .getElementById("fromDate")
+  .addEventListener("change", filterSalesByDate);
 document.getElementById("toDate").addEventListener("change", filterSalesByDate);
 
 // فلترة تلقائية مع البحث بالاسم
 document.getElementById("searchSale").addEventListener("input", function () {
   const text = this.value.trim().toLowerCase();
-  const filtered = sales.filter(s => {
+  const filtered = sales.filter((s) => {
     const invDate = s.date.slice(0, 10);
     const today = new Date().toISOString().slice(0, 10);
 
@@ -57,7 +55,8 @@ document.getElementById("searchSale").addEventListener("input", function () {
     const matchDate = invDate >= from && invDate <= to;
 
     // فلترة حسب الاسم
-    const matchName = !text || (s.customer && s.customer.toLowerCase().includes(text));
+    const matchName =
+      !text || (s.customer && s.customer.toLowerCase().includes(text));
 
     return matchDate && matchName;
   });
@@ -72,45 +71,60 @@ function renderCustomerSelect() {
 
   if (!list || !input) return;
 
-  list.innerHTML = "";
+  function renderList(filter = "") {
+    list.innerHTML = "";
 
-  // خيار نقدي
-  const cashDiv = document.createElement("div");
-  cashDiv.className = "dropdown-item";
-  cashDiv.innerText = "بيع نقدي";
-  cashDiv.onclick = () => {
-    input.value = "بيع نقدي";
-    document.getElementById("customerBalance").value = 0;
-    list.style.display = "none";
-    updateGrandTotal();
-  };
-  list.appendChild(cashDiv);
+    // بيع نقدي
+    if ("بيع نقدي".includes(filter)) {
+      const cashDiv = document.createElement("div");
+      cashDiv.className = "dropdown-item";
+      cashDiv.innerText = "بيع نقدي";
 
-  // العملاء
-  customers.forEach((c, i) => {
-    const div = document.createElement("div");
-    div.className = "dropdown-item";
-    div.innerText = c.name;
+      cashDiv.onclick = () => {
+        input.value = "بيع نقدي";
+        input.dataset.index = "";
+        customerBalance.value = 0;
+        list.style.display = "none";
+        updateGrandTotal();
+      };
 
-    div.onclick = () => {
-      input.value = c.name;
-      input.dataset.index = i;
+      list.appendChild(cashDiv);
+    }
 
-      document.getElementById("customerBalance").value =
-        c.balance || 0;
+    // العملاء
+    customers
+      .filter((c) => c.name.toLowerCase().includes(filter.toLowerCase()))
+      .forEach((c, i) => {
+        const div = document.createElement("div");
+        div.className = "dropdown-item";
+        div.innerText = c.name;
 
-      list.style.display = "none";
-      updateGrandTotal();
-    };
+        div.onclick = () => {
+          input.value = c.name;
+          input.dataset.index = i;
+          customerBalance.value = c.balance || 0;
+          list.style.display = "none";
+          updateGrandTotal();
+        };
 
-    list.appendChild(div);
+        list.appendChild(div);
+      });
+  }
+
+  // أول تحميل
+  renderList();
+
+  // فتح القائمة عند التركيز
+  input.addEventListener("focus", () => {
+    list.style.display = "block";
+    renderList(input.value);
   });
 
-  // فتح القائمة
-  input.onclick = () => {
-    list.style.display =
-      list.style.display === "block" ? "none" : "block";
-  };
+  // البحث أثناء الكتابة
+  input.addEventListener("input", () => {
+    list.style.display = "block";
+    renderList(input.value);
+  });
 
   // غلق عند الضغط خارجها
   document.addEventListener("click", (e) => {
@@ -120,22 +134,25 @@ function renderCustomerSelect() {
   });
 }
 
-
 // Dropdown المنتجات أعلى الفاتورة //
 function renderProductSelect() {
   const sel = document.getElementById("invoiceProductSelect");
+
   sel.innerHTML =
-    `<option value="" disabled selected>أضف أصناف للفاتورة</option>` +
-    products.map((p, i) => `<option value="${i}">${p.name}</option>`).join("");
+    `<option disabled selected>أضف أصناف للفاتورة</option>` +
+    products.map((p, i) =>
+      `<option value="${i}">${p.name}</option>`
+    ).join("");
 
   sel.onchange = function () {
-    const pIndex = this.value;
-    const product = products[pIndex];
+    const product = products[this.value];
     if (!product) return;
+
     addInvoiceItem(product);
     this.selectedIndex = 0;
   };
 }
+
 // == إضافة منتج ==//
 function addInvoiceItem(product) {
   const tbody = document.getElementById("invoiceItems");
@@ -171,6 +188,56 @@ function addInvoiceItem(product) {
     updateRowNumbers();
   };
 }
+
+function initProductSearch() {
+  const input = document.getElementById("productSearch");
+  const list = document.getElementById("productDropdown");
+  const stockInfo = document.getElementById("stockInfo");
+
+  function render(filter = "") {
+    list.innerHTML = "";
+
+    const filtered = products.filter(p =>
+      p.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    filtered.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "dropdown-item";
+      div.innerText = `${product.name}`;
+
+      div.onclick = () => {
+        input.value = product.name;
+        list.style.display = "none";
+
+        // عرض المخزون
+        stockInfo.innerText = "المتوفر في المخزون: " + (product.qty ?? 0);
+
+        // إضافة للفاتورة
+        addInvoiceItem(product);
+      };
+
+      list.appendChild(div);
+    });
+  }
+
+  input.addEventListener("input", () => {
+    list.style.display = "block";
+    render(input.value);
+  });
+
+  input.addEventListener("focus", () => {
+    list.style.display = "block";
+    render(input.value);
+  });
+
+  document.addEventListener("click", e => {
+    if (!input.contains(e.target) && !list.contains(e.target)) {
+      list.style.display = "none";
+    }
+  });
+}
+
 
 // == تحديث رقم الصف ==//
 function updateRowNumbers() {
@@ -264,8 +331,7 @@ function saveSale() {
 
   const paid = +document.getElementById("paidAmount").value || 0;
   const input = document.getElementById("customerInput");
-const cIndex = input.dataset.index ?? "";
-
+  const cIndex = input.dataset.index ?? "";
 
   let customerName = "نقدي";
   let previousBalance = 0;
@@ -311,8 +377,8 @@ const cIndex = input.dataset.index ?? "";
   // ===== إعادة تعيين النموذج ===== //
   container.innerHTML = "";
   const ci = document.getElementById("customerInput");
-ci.value = "";
-ci.dataset.index = "";
+  ci.value = "";
+  ci.dataset.index = "";
   document.getElementById("invoiceProductSelect").selectedIndex = 0;
   document.getElementById("customerBalance").value = "";
   document.getElementById("invoiceTotal").value = "";
@@ -464,13 +530,10 @@ function resetSalesFilter() {
 
 // =====  دالة البحث بإسم العميل ==== //
 function searchSales() {
-  const text = document
-    .getElementById("searchSale")
-    .value
-    .toLowerCase();
+  const text = document.getElementById("searchSale").value.toLowerCase();
 
-  const filtered = sales.filter(inv =>
-    inv.customer.toLowerCase().includes(text)
+  const filtered = sales.filter((inv) =>
+    inv.customer.toLowerCase().includes(text),
   );
 
   renderSales(filtered);
@@ -480,8 +543,6 @@ function showAllSales() {
   document.getElementById("searchSale").value = "";
   renderSales(sales);
 }
-
-
 
 // ===== مودال عام ==== //
 let deleteCallback = null;
