@@ -206,38 +206,42 @@ function initProductSearch() {
       div.className = "dropdown-item";
       div.innerText = `${product.name} - ${product.qty ?? 0} متوفر`;
 
-      div.onclick = () => {
+      // استخدام click + touch
+      function selectItem() {
         input.value = product.name;
         list.style.display = "none";
 
-        // عرض المخزون
         stockInfo.innerText = "المتوفر في المخزون: " + (product.qty ?? 0);
 
-        // إضافة للفاتورة
         addInvoiceItem(product);
-      };
+      }
+
+      div.addEventListener("click", selectItem);
+      div.addEventListener("touchstart", selectItem);
 
       list.appendChild(div);
     });
+
+    list.style.display = filtered.length ? "block" : "none";
   }
 
-  input.addEventListener("input", () => {
-    list.style.display = "block";
-    render(input.value);
-  });
+  // البحث عند الكتابة أو التركيز
+  input.addEventListener("input", () => render(input.value));
+  input.addEventListener("focus", () => render(input.value));
 
-  input.addEventListener("focus", () => {
-    list.style.display = "block";
-    render(input.value);
-  });
-
+  // إغلاق القائمة عند الضغط خارجها (يشمل اللمس)
   document.addEventListener("click", e => {
     if (!input.contains(e.target) && !list.contains(e.target)) {
       list.style.display = "none";
     }
   });
-}
 
+  document.addEventListener("touchstart", e => {
+    if (!input.contains(e.target) && !list.contains(e.target)) {
+      list.style.display = "none";
+    }
+  });
+}
 
 // == تحديث رقم الصف ==//
 function updateRowNumbers() {
