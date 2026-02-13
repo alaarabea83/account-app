@@ -215,8 +215,10 @@
 
     #customerBalance {
       background: #0f172a;
-      border: 1px solid #0a570a;
+      border: 1px solid blue;
       font-weight: bold;
+      max-width: 300px;
+      text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -476,8 +478,7 @@
         <div style="flex: 1;" class="custom-select">
           <input type="text" id="customerInput" placeholder="ابحث عن عميل..." />
           <div style="max-width: 73.5%;" id="customerDropdown" class="dropdown-list"></div>
-          <input style="max-width: 300px; text-align: center;" type="number" id="customerBalance"
-            placeholder="الرصيد السابق" readonly />
+          <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
         </div>
       </div>
       <div class="form-row">
