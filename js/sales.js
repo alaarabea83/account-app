@@ -14,7 +14,7 @@ window.onload = function () {
   setTodayDate("fromDate");
   setTodayDate("toDate");
 
-  renderSales();
+  // اعرض فواتير اليوم فقط
   filterSalesByDate();
 
   document.getElementById("saveInvoiceBtn").onclick = saveSale;
@@ -40,6 +40,7 @@ window.onload = function () {
     .getElementById("toDate")
     .addEventListener("change", filterSalesByDate);
 };
+
 // عرض العملاء //
 function renderCustomerSelect() {
   const list = document.getElementById("customerDropdown");
@@ -378,7 +379,7 @@ function saveSale() {
 
   saveData();
   updateBottomCashBalance();
-  renderSales();
+  filterSalesByDate();
   showModal("تم حفظ الفاتورة بنجاح ✅", "نجاح");
 }
 

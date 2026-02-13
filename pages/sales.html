@@ -156,6 +156,7 @@
       padding: 20px;
       border-radius: 16px;
       margin: 5px;
+      border: 1px solid blue;
     }
 
     /* ===== Forms ===== */
@@ -448,18 +449,17 @@
     <div class="card">
       <h3>🧾 فاتورة بيع جديده</h3>
       <div class="form-row">
-
-        <div class="custom-select">
-          <input type="text" id="customerInput" placeholder="ابحث عن عميل...">
+        <div style="flex: 1;" class="custom-select">
+          <input type="text" id="customerInput" placeholder="ابحث عن عميل..." />
           <div id="customerDropdown" class="dropdown-list"></div>
-          <input type="number" id="customerBalance" placeholder="الرصيد السابق" />
+          <input style="max-width: 200px; text-align: center;" type="number" id="customerBalance" placeholder="الرصيد السابق" />
         </div>
-
-        <div class="custom-select">
-          <input type="text" id="productInput" placeholder="أضف منتج...">
+      </div>
+      <div class="form-row">
+        <div style="flex: 1" class="custom-select">
+          <input type="text" id="productInput" placeholder="أضف منتج..." />
           <div id="productDropdown" class="dropdown-list"></div>
         </div>
-
       </div>
 
       <!-- جدول المنتجات -->
