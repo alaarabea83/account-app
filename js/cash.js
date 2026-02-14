@@ -123,19 +123,18 @@ function renderCashStatement() {
 }
 
 function renderCash(finalBalance = null) {
-  document.getElementById("cashOpening").innerText = (
-    cash.opening || 0
-  ).toFixed(2);
-  document.getElementById("cashIncome").innerText = (cash.income || 0).toFixed(
-    2,
-  );
-  document.getElementById("cashExpenses").innerText = (
-    cash.expenses || 0
-  ).toFixed(2);
-
   const final =
     finalBalance !== null
       ? finalBalance
       : (cash.opening || 0) + (cash.income || 0) - (cash.expenses || 0);
+
+  // تحديث جدول الملخص
+  document.getElementById("cashOpening").innerText = (cash.opening || 0).toFixed(2);
+  document.getElementById("cashIncome").innerText = (cash.income || 0).toFixed(2);
+  document.getElementById("cashExpenses").innerText = (cash.expenses || 0).toFixed(2);
   document.getElementById("cashFinal").innerText = final.toFixed(2);
+
+  // 🔥 تحديث sidebar مباشرة
+  document.getElementById("cashBalance").textContent = final.toFixed(2) + " جنيه";
 }
+

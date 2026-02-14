@@ -14,42 +14,147 @@
   <title>سهل لإدارة الحسابات</title>
 
   <style>
+    /* ===== Variables ===== */
+    :root {
+      --primary: #6366f1;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+    }
+
+    /* Light Mode */
+    .light {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+    }
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: "Tajawal", sans-serif;
-      background: #0f172a;
       margin: 0;
+      font-family: Tajawal, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 60px;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      z-index: 1002;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .header h1 {
+      font-size: 18px;
+      margin: 50px;
+    }
+
+    /* ===== Menu Toggle ===== */
+    .menu-toggle {
+      position: fixed;
+      right: 12px;
+      background: #0a570a;
+      color: white;
+      z-index: 1001;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      right: -260px;
+      width: 260px;
+      height: calc(100vh - 60px);
+      background: #111827;
+      border-left: 3px solid #38bdf8;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+
+    .sidebar.show {
+      right: 0;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #cbd5f5;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #a78bfa;
+    }
+
+    .sidebar a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ===== Overlay ===== */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1000;
+    }
+
+    #overlay.show {
+      display: block;
     }
 
     section {
-      max-width: 1000px;
-      margin: 20px auto;
-      margin-top: 60px;
-      margin-bottom: 80px;
       background: #0f172a;
+      max-width: 1300px;
+      margin: 60px auto 20px;
+      padding: 15px;
       display: flex;
       flex-direction: column;
-      gap: 25px;
-      padding: 15px;
+      gap: 10px;
     }
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Cairo", sans-serif;
-      font-weight: 700;
-      margin: 5px;
-    }
-
-    h3 {
-        color: #38bdf8;
-      }
 
     .t-container {
       background: #1e293b;
-      color: #ecf0f1;
-      border-radius: 12px;
-      padding: 5px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      padding: 20px;
+      border-radius: 16px;
+      margin: 5px;
+      border: 1px solid blue;
     }
 
     .t-container h3 {
@@ -72,7 +177,7 @@
 
     .summary-table td:first-child {
       font-weight: bold;
-      background: #1e293b;
+      background: linear-gradient(135deg, #1f2937, green);
       width: 50%;
     }
 
@@ -83,7 +188,7 @@
     }
 
     thead th {
-      background: #14532d;
+      background: linear-gradient(135deg, #1f2937, blue);
       color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
@@ -91,7 +196,7 @@
 
     tbody td {
       padding: 10px;
-      border-bottom: 1px solid #4b5563;
+      background: linear-gradient(135deg, #1f2937, green);
       color: #fff;
       font-size: 14px;
       text-align: center;
@@ -124,7 +229,7 @@
       padding: 1rem;
       border-radius: 12px;
       color: #fff;
-      background: #1e293b;
+      background: linear-gradient(135deg, #1f2937, green);
     }
 
     .cashMovement {
@@ -148,7 +253,7 @@
       margin: 20px auto;
       padding: 14px 18px;
 
-      background: #1b2631;
+      background: linear-gradient(135deg, green, green);
 
       border-radius: 14px;
 
@@ -181,8 +286,8 @@
 
 
     .filters button {
-      background: #f1c40f;
-      color: 000;
+      background: #0f172a;
+      color: #fff;
       font-weight: bold;
 
       border: none;
@@ -214,21 +319,70 @@
         width: 80%;
       }
     }
+
+    /* ===== Desktop ===== */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .sidebar {
+        right: 0;
+      }
+
+      #overlay {
+        display: none !important;
+      }
+
+      section {
+        margin-right: 260px;
+        /* مساحة السايدبار */
+        margin-left: auto;
+      }
+
+      .form-row {
+        flex-direction: row;
+      }
+
+      input,
+      button {
+        width: auto;
+      }
+
+      button {
+        margin: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <nav class="breadcrumbs">
-    <a href="../index.html" class="home">الرئيسية</a>
-    <a href="../pages/customers.html" class="home">الحسابات</a>
-    <a href="../pages/products.html" class="home">المنتجات</a>
-    <a href="../pages/sales.html" class="home">المبيعات</a>
-    <a href="../pages/purchases.html" class="home">المشتريات</a>
-    <a href="../pages/income.html" class="home">المقبوضات</a>
-    <a href="../pages/expenses.html" class="home">المدفوعات</a>
-    <span class="current">الخزينة</span>
-    <a href="../pages/about.html" class="home">معلومات</a>
-  </nav>
+  <div class="header">
+    <h1>حركة الخزينة</h1>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+
+    <!-- رصيد الخزينة -->
+    <div class="menu-item cash-item">
+      💰 رصيد الخزينة:
+      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+    </div>
+
+    <a href="../index.html">🏠 لوحة التحكم</a>
+    <a href="customers.html">👥 الحسابات</a>
+    <a href="products.html">📦 المخزون</a>
+    <a href="sales.html">🛒 فواتير البيع</a>
+    <a href="purchases.html">🧾 فواتير الشراء</a>
+    <a href="income.html">💰 المقبوضات</a>
+    <a href="expenses.html">💸 المدفوعات</a>
+    <a href="cash.html">🏦 حركة الخزينة</a>
+
+  </div>
+
+  <div id="overlay" onclick="toggleSidebar()"></div>
 
   <section>
     <div class="t-container">
@@ -292,8 +446,17 @@
       </div>
     </div>
   </section>
+
   <script src="../js/data.js"></script>
   <script src="../js/cash.js"></script>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+      document.getElementById("overlay").classList.toggle("show");
+    }
+  </script>
+
 </body>
 
 </html>
