@@ -11,12 +11,21 @@
             background: #0f172a;
             color: white;
             padding: 20px;
+            margin: 0;
         }
 
+        /* حاوية الجدول */
+        .table-container {
+            width: 100%;
+            overflow-x: auto; /* يضيف تمرير أفقي عند الحاجة */
+        }
+
+        /* الجدول */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            min-width: 600px; /* اختياري: يخلي الجدول لا يصغر جدا */
         }
 
         th,
@@ -34,87 +43,155 @@
             font-weight: bold;
             color: #fbbf24;
         }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto; /* التمرير الأفقي */
+
+            /* WebKit scroll style */
+            scrollbar-width: thin;
+            scrollbar-color: #fbbf24 #1e293b;
+        }
+
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #fbbf24;
+            border-radius: 10px;
+            border: 2px solid #1e293b;
+        }
+
+        /* الفلتر */
+        .filter-container {
+            margin-top: 10px;
+        }
+
+        input[type="date"] {
+            padding: 6px;
+            margin-left: 10px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            background-color: #fbbf24;
+            color: #111827;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #fcd34d;
+        }
     </style>
 </head>
 
 <body>
+
     <h1>الأرباح</h1>
     <p>صافي الربح: <span id="totalProfit">0</span> جنيه</p>
 
-    <table id="profitTable">
-        <thead>
-            <tr>
-                <th>م</th>
-                <th>التاريخ</th>
-                <th>العميل</th>
-                <th>إجمالي الفاتورة</th>
-                <th>تكلفة الفاتورة</th>
-                <th>الربح</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5">الإجمالي الكلي</td>
-                <td id="sumProfit">0</td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="filter-container">
+        <label>من: <input type="date" id="fromDate"></label>
+        <label>إلى: <input type="date" id="toDate"></label>
+        <button id="filterBtn">فلترة</button>
+    </div>
 
-    <script src="../js/"></script>
+    <div class="table-container">
+
+        <table id="profitTable">
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>التاريخ</th>
+                    <th>العميل</th>
+                    <th>إجمالي الفاتورة</th>
+                    <th>تكلفة الفاتورة</th>
+                    <th>الربح</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">الإجمالي الكلي</td>
+                    <td id="sumProfit">0</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="../js/sales.js"></script>
     <script src="../js/purchases.js"></script>
 
     <script>
-        // === بيانات حقيقية من تطبيقك ===
-        // sales = فواتير المبيعات
-        // products = بيانات المنتجات مع buyPrice وسعر البيع
-        // لنفترض أنها موجودة عندك في localStorage أو من كودك الحالي
-        // مثال:
-        // const sales = JSON.parse(localStorage.getItem('sales')) || [];
-        // const products = JSON.parse(localStorage.getItem('products')) || [];
-
-        // لعرض التجربة بدون قاعدة بيانات، نستخدم مثال:
         const sales = JSON.parse(localStorage.getItem('sales')) || [];
         const products = JSON.parse(localStorage.getItem('products')) || [];
 
-
-
-        function calculateProfit() {
-            let totalProfit = 0;
+        function renderProfitReport(from, to) {
             const tbody = document.querySelector("#profitTable tbody");
             tbody.innerHTML = "";
+            const today = new Date().toISOString().slice(0, 10);
+            from = from || today;
+            to = to || today;
 
-            sales.forEach((inv, i) => {
+            let totalProfit = 0;
+
+            const filteredSales = sales.filter(inv => {
+                const invDate = inv.date.slice(0, 10);
+                return invDate >= from && invDate <= to;
+            });
+
+            filteredSales.forEach((inv, i) => {
                 let total = 0, cost = 0;
-
                 inv.items.forEach(item => {
                     const product = products.find(p => p.name === item.name);
                     const buyPrice = product ? product.buyPrice : 0;
                     total += item.qty * item.price;
                     cost += item.qty * buyPrice;
                 });
-
                 const profit = total - cost;
                 totalProfit += profit;
 
                 tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td>
-          <td>${inv.date}</td>
-          <td>${inv.customer}</td>
-          <td>${total.toFixed(2)}</td>
-          <td>${cost.toFixed(2)}</td>
-          <td>${profit.toFixed(2)}</td>
-        </tr>
-      `;
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${inv.date}</td>
+                        <td>${inv.customer}</td>
+                        <td>${total.toFixed(2)}</td>
+                        <td>${cost.toFixed(2)}</td>
+                        <td>${profit.toFixed(2)}</td>
+                    </tr>
+                `;
             });
 
             document.getElementById("totalProfit").textContent = totalProfit.toFixed(2);
             document.getElementById("sumProfit").textContent = totalProfit.toFixed(2);
         }
 
-        window.onload = calculateProfit;
+        window.onload = function () {
+            const today = new Date().toISOString().slice(0, 10);
+            document.getElementById("fromDate").value = today;
+            document.getElementById("toDate").value = today;
+            renderProfitReport();
+
+            // زر الفلترة
+            document.getElementById("filterBtn").onclick = function () {
+                const from = document.getElementById("fromDate").value;
+                const to = document.getElementById("toDate").value;
+                renderProfitReport(from, to);
+            };
+        };
     </script>
+
 </body>
 
 </html>
