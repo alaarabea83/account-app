@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Ultimate Dashboard</title>
+
+  <title>Dashboard V2</title>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -48,26 +49,20 @@
       --text: #0f172a;
     }
 
-    * {
-      box-sizing: border-box;
-      font-family: Cairo
-    }
-
     body {
       margin: 0;
+      font-family: Cairo;
       background: var(--bg);
       color: var(--text);
       transition: .3s;
     }
 
-    /* HEADER */
     .header {
       display: flex;
       justify-content: space-between;
       padding: 15px;
       background: var(--card);
-      font-size: 20px;
-      font-weight: 700;
+      font-weight: bold;
     }
 
     .btn {
@@ -78,7 +73,6 @@
       cursor: pointer;
     }
 
-    /* STATS */
     .stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -95,35 +89,9 @@
 
     .stat h2 {
       color: var(--accent);
-      margin: 5px
+      margin: 5px;
     }
 
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 12px;
-    }
-
-    .card {
-      background: var(--card);
-      padding: 15px;
-      border-radius: 14px;
-      text-align: center;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .card:hover {
-      transform: scale(1.05)
-    }
-
-    .card img {
-      width: 45px
-    }
-
-    /* CHART */
     .chart-box {
       background: var(--card);
       margin: 12px;
@@ -131,20 +99,79 @@
       border-radius: 14px;
     }
 
-    /* BOTTOM BAR */
-    .bottom {
+    /* مودال الخسارة العصري */
+    .loss-modal {
       position: fixed;
-      bottom: 0;
+      top: 0;
+      left: 0;
       width: 100%;
-      background: var(--card);
+      height: 100%;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(6px);
       display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
+      z-index: 9999;
     }
 
-    .bottom a {
-      color: var(--text);
-      text-decoration: none;
+    .loss-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .loss-box {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .6);
+      animation: pop .4s ease;
+      border: 1px solid #334155;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(.7);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .loss-icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .loss-box h2 {
+      color: #ef4444;
+      margin-bottom: 10px;
+    }
+
+    .loss-box p {
+      color: #cbd5f5;
+      margin-bottom: 20px;
+    }
+
+    .loss-box button {
+      background: #ef4444;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .loss-box button:hover {
+      background: #dc2626;
     }
   </style>
 </head>
@@ -152,7 +179,7 @@
 <body>
 
   <div class="header">
-    سهل لإدارة الحسابات
+    لوحة التحكم
     <div>
       <button class="btn" onclick="toggleMode()">🌙</button>
       <button class="btn" onclick="backup()">💾</button>
@@ -165,120 +192,262 @@
     <span class="active">التقارير</span>
   </nav>
 
-  <!-- STATS -->
+  <!-- العدادات -->
   <div class="stats">
+
     <div class="stat">
-      <h2 id="cust">0</h2>عملاء
+      <h2 id="cust">0</h2>
+      العملاء
     </div>
+
     <div class="stat">
-      <h2 id="inv">0</h2>فواتير
+      <h2 id="inv">0</h2>
+      الفواتير
     </div>
+
     <div class="stat">
-      <h2 id="salesT">0</h2>مبيعات
+      <h2 id="salesT">0</h2>
+      المبيعات
     </div>
+
     <div class="stat">
-      <h2 id="profit">0</h2>أرباح
+      <h2 id="profit">0</h2>
+      الربح الكلي
     </div>
+
+    <div class="stat">
+      <h2 id="profitDay">0</h2>
+      ربح اليوم
+    </div>
+
+    <div class="stat">
+      <h2 id="profitMonth">0</h2>
+      ربح الشهر
+    </div>
+
   </div>
 
-  <!-- CHART -->
+  <!-- الرسم البياني -->
   <div class="chart-box">
     <canvas id="chart"></canvas>
-    <p style="text-align: center;">رسم بياني يوضح نسبة نمو المبيعات</p>
   </div>
 
-  <!-- MODULES -->
-  <div class="grid">
+  <!-- مودال الخسارة -->
+  <div id="lossModal" class="loss-modal">
+    <div class="loss-box">
+      <div class="loss-icon">⚠️</div>
+      <h2>تنبيه خسارة</h2>
+      <p id="lossText">يوجد خسارة في الأرباح</p>
 
+      <button onclick="closeLossModal()">حسناً</button>
+    </div>
+  </div>
 
+  <script>
 
-    <script>
+    /////////////////////////
+    // تحميل البيانات
+    /////////////////////////
 
-      /* DARK MODE */
-      function toggleMode() {
-        document.body.classList.toggle("light");
-        localStorage.setItem("mode",
-          document.body.classList.contains("light") ? "light" : "dark");
+    const customers = JSON.parse(localStorage.getItem("customers")) || [];
+    const sales = JSON.parse(localStorage.getItem("sales")) || [];
+    const purchases = JSON.parse(localStorage.getItem("purchases")) || [];
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+    /////////////////////////
+    // العدادات
+    /////////////////////////
+
+    cust.innerText = customers.length;
+    inv.innerText = sales.length;
+
+    /////////////////////////
+    // إجمالي المبيعات
+    /////////////////////////
+
+    let totalSales = 0;
+
+    sales.forEach(inv => {
+      if (inv.items) {
+        inv.items.forEach(i => {
+          totalSales += i.price * i.qty;
+        });
+      } else {
+        totalSales += Number(inv.total || 0);
       }
-      if (localStorage.getItem("mode") == "light") {
-        document.body.classList.add("light");
-      }
+    });
 
-      /* SAMPLE DATA */
-      let customers = JSON.parse(localStorage.getItem("customers") || "[]");
-      let sales = JSON.parse(localStorage.getItem("sales") || "[]");
+    salesT.innerText = totalSales.toFixed(2);
 
-      /* DEMO DATA لو فاضي */
-      if (sales.length == 0) {
-        sales = [
-          { total: 500, date: "2025-01" },
-          { total: 800, date: "2025-02" },
-          { total: 650, date: "2025-03" }
-        ];
-        localStorage.setItem("sales", JSON.stringify(sales));
-      }
+    /////////////////////////
+    // حساب الربح الحقيقي
+    /////////////////////////
 
-      /* STATS */
-      cust.innerText = customers.length;
-      inv.innerText = sales.length;
+    function calcProfit(filterFn) {
 
-      let total = 0;
-      let months = [];
-      let values = [];
+      let profit = 0;
 
-      sales.forEach(s => {
-        total += s.total;
-        months.push(s.date);
-        values.push(s.total);
+      sales.filter(filterFn).forEach(inv => {
+        let t = 0, c = 0;
+
+        inv.items?.forEach(item => {
+          const pr = products.find(p => p.name == item.name);
+          const buy = pr ? Number(pr.buyPrice || 0) : 0;
+
+          t += item.price * item.qty;
+          c += buy * item.qty;
+        });
+
+        profit += (t - c);
       });
 
-      salesT.innerText = total;
-      profit.innerText = Math.round(total * 0.25);
+      const exp = expenses
+        .filter(filterFn)
+        .reduce((s, e) => s + Number(e.amount || 0), 0);
 
-      /* CHART */
-      new Chart(document.getElementById("chart"), {
-        type: "line",
-        data: {
-          labels: months,
-          datasets: [{
-            label: "المبيعات",
-            data: values
-          }]
-        }
+      return profit - exp;
+    }
+
+    /////////////////////////
+    // فلترة زمنية
+    /////////////////////////
+
+    const today = new Date();
+
+    const isToday = d => {
+      const x = new Date(d);
+      return x.toDateString() == today.toDateString();
+    };
+
+    const isMonth = d => {
+      const x = new Date(d);
+      return x.getMonth() == today.getMonth()
+        && x.getFullYear() == today.getFullYear();
+    };
+
+    /////////////////////////
+    // عرض الأرباح
+    /////////////////////////
+
+    profit.innerText = calcProfit(() => true).toFixed(2);
+    profitDay.innerText = calcProfit(s => isToday(s.date)).toFixed(2);
+    profitMonth.innerText = calcProfit(s => isMonth(s.date)).toFixed(2);
+
+    /////////////////////////
+    // تنبيه خسارة
+    /////////////////////////
+
+    if (calcProfit(() => true) < 0) {
+      showLossModal(calcProfit(() => true));
+    }
+
+
+    /////////////////////////
+    // رسم بياني 6 شهور
+    /////////////////////////
+
+    const monthNames = [
+      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+    ];
+
+    let labels = [];
+    let data = [];
+
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date();
+      d.setMonth(d.getMonth() - i);
+
+      const m = d.getMonth();
+      const y = d.getFullYear();
+
+      const p = calcProfit(s => {
+        const x = new Date(s.date);
+        return x.getMonth() == m && x.getFullYear() == y;
       });
 
-      /* BACKUP */
-      function backup() {
-        let data = JSON.stringify(localStorage);
-        let blob = new Blob([data], { type: "application/json" });
-        let a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "backup.json";
-        a.click();
-        alert("تم النسخ الاحتياطي");
-      }
+      labels.push(monthNames[m]);
+      data.push(p.toFixed(2));
+    }
 
-      /* RESTORE */
-      function restore() {
-        let inp = document.createElement("input");
-        inp.type = "file";
-        inp.onchange = e => {
-          let file = e.target.files[0];
-          let reader = new FileReader();
-          reader.onload = () => {
-            let data = JSON.parse(reader.result);
-            for (let k in data) {
-              localStorage.setItem(k, data[k]);
-            }
-            alert("تم الاستعادة");
-            location.reload();
-          };
-          reader.readAsText(file);
+    new Chart(chart, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "الأرباح الشهرية",
+          data: data
+        }]
+      }
+    });
+
+    /////////////////////////
+    // الوضع الليلي
+    /////////////////////////
+
+    function toggleMode() {
+      document.body.classList.toggle("light");
+      localStorage.setItem("mode",
+        document.body.classList.contains("light") ? "light" : "dark");
+    }
+
+    if (localStorage.getItem("mode") == "light") {
+      document.body.classList.add("light");
+    }
+
+    /////////////////////////
+    // Backup
+    /////////////////////////
+
+    function backup() {
+      let data = JSON.stringify(localStorage);
+      let blob = new Blob([data]);
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "backup.json";
+      a.click();
+    }
+
+    /////////////////////////
+    // Restore
+    /////////////////////////
+
+    function restore() {
+      let i = document.createElement("input");
+      i.type = "file";
+
+      i.onchange = e => {
+        let f = e.target.files[0];
+        let r = new FileReader();
+
+        r.onload = () => {
+          let d = JSON.parse(r.result);
+          for (let k in d) {
+            localStorage.setItem(k, d[k]);
+          }
+          location.reload();
         };
-        inp.click();
-      }
 
-    </script>
+        r.readAsText(f);
+      };
+
+      i.click();
+    }
+
+    function showLossModal(value){
+document.getElementById("lossText").innerText =
+`يوجد خسارة بقيمة ${value.toFixed(2)} جنيه`;
+
+document.getElementById("lossModal").classList.add("show");
+}
+
+function closeLossModal(){
+document.getElementById("lossModal").classList.remove("show");
+}
+
+
+  </script>
 
 </body>
 
