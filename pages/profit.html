@@ -1,143 +1,120 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>صفحة الأرباح</title>
-<style>
-  body { font-family: Cairo, sans-serif; margin:0; padding:20px; background:#0f172a; color:white; }
-  h1 { text-align:center; margin-bottom:20px; }
-  table { width:100%; border-collapse: collapse; margin-bottom:20px; }
-  th, td { border:1px solid #4b5563; padding:8px; text-align:center; }
-  th { background:#1e293b; }
-  tr:nth-child(even) { background:#111827; }
-  tr.total-row { background:#fbbf24; color:#111827; font-weight:bold; }
-  input, select { padding:6px; margin:2px; border-radius:6px; border:none; }
-  .filters { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:15px; }
-  button { padding:6px 12px; border:none; border-radius:6px; background:#3b82f6; color:white; cursor:pointer; }
-  button:hover { background:#2563eb; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الأرباح</title>
+    <style>
+        body {
+            font-family: "Cairo", sans-serif;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #4b5563;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #1e293b;
+        }
+
+        tfoot td {
+            font-weight: bold;
+            color: #fbbf24;
+        }
+    </style>
 </head>
+
 <body>
+    <h1>الأرباح</h1>
+    <p>صافي الربح: <span id="totalProfit">0</span> جنيه</p>
 
-<h1>الأرباح - تقرير شامل</h1>
+    <table id="profitTable">
+        <thead>
+            <tr>
+                <th>م</th>
+                <th>التاريخ</th>
+                <th>العميل</th>
+                <th>إجمالي الفاتورة</th>
+                <th>تكلفة الفاتورة</th>
+                <th>الربح</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">الإجمالي الكلي</td>
+                <td id="sumProfit">0</td>
+            </tr>
+        </tfoot>
+    </table>
 
-<div class="filters">
-  <label>من: <input type="date" id="fromDate"></label>
-  <label>إلى: <input type="date" id="toDate"></label>
-  <input type="text" id="searchInput" placeholder="بحث بالعميل أو البيان">
-  <button id="filterBtn">تصفية</button>
-  <button id="resetBtn">إظهار الكل</button>
-</div>
+    <script src="../js/"></script>
+    <script src="../js/purchases.js"></script>
 
-<table id="profitTable">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>التاريخ</th>
-      <th>النوع</th>
-      <th>العميل / البيان</th>
-      <th>المبلغ</th>
-      <th>البيان</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-  <tfoot>
-    <tr class="total-row">
-      <td colspan="4">الإجمالي</td>
-      <td id="totalAmount">0</td>
-      <td>صافي الربح = <span id="netProfit">0</span></td>
-    </tr>
-  </tfoot>
-</table>
+    <script>
+        // === بيانات حقيقية من تطبيقك ===
+        // sales = فواتير المبيعات
+        // products = بيانات المنتجات مع buyPrice وسعر البيع
+        // لنفترض أنها موجودة عندك في localStorage أو من كودك الحالي
+        // مثال:
+        // const sales = JSON.parse(localStorage.getItem('sales')) || [];
+        // const products = JSON.parse(localStorage.getItem('products')) || [];
 
-<script src="../js/data.js"></script>
-  <script src="../js/common.js"></script>
+        // لعرض التجربة بدون قاعدة بيانات، نستخدم مثال:
+        const sales = JSON.parse(localStorage.getItem('sales')) || [];
+        const products = JSON.parse(localStorage.getItem('products')) || [];
 
-<script>
-function formatNumber(num){ return Number(num).toFixed(2); }
 
-function renderProfitTable() {
-  const tbody = document.querySelector("#profitTable tbody");
-  tbody.innerHTML = "";
 
-  const from = document.getElementById("fromDate").value || new Date().toISOString().slice(0,10);
-  const to = document.getElementById("toDate").value || new Date().toISOString().slice(0,10);
-  const search = document.getElementById("searchInput").value.toLowerCase();
+        function calculateProfit() {
+            let totalProfit = 0;
+            const tbody = document.querySelector("#profitTable tbody");
+            tbody.innerHTML = "";
 
-  let allItems = [];
+            sales.forEach((inv, i) => {
+                let total = 0, cost = 0;
 
-  // مبيعات
-  sales.forEach(s => {
-    const date = s.date.split("T")[0];
-    if(date >= from && date <= to) {
-      if(!search || s.customer.toLowerCase().includes(search)) {
-        allItems.push({ type:"مبيعات", customer:s.customer, amount:s.total, date, note:"فاتورة بيع" });
-      }
-    }
-  });
+                inv.items.forEach(item => {
+                    const product = products.find(p => p.name === item.name);
+                    const buyPrice = product ? product.buyPrice : 0;
+                    total += item.qty * item.price;
+                    cost += item.qty * buyPrice;
+                });
 
-  // مشتريات
-  purchases.forEach(p => {
-    const date = p.date.split("T")[0];
-    if(date >= from && date <= to) {
-      if(!search || p.customer.toLowerCase().includes(search)) {
-        allItems.push({ type:"مشتريات", customer:p.customer, amount:p.total, date, note:"فاتورة شراء" });
-      }
-    }
-  });
+                const profit = total - cost;
+                totalProfit += profit;
 
-  // مصروفات
-  expenses.forEach(e => {
-    const date = e.date.split("T")[0];
-    if(date >= from && date <= to) {
-      if(!search || e.customer.toLowerCase().includes(search) || e.title.toLowerCase().includes(search)) {
-        allItems.push({ type:"مصروفات", customer:e.customer, amount:e.amount, date, note:e.title });
-      }
-    }
-  });
+                tbody.innerHTML += `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${inv.date}</td>
+          <td>${inv.customer}</td>
+          <td>${total.toFixed(2)}</td>
+          <td>${cost.toFixed(2)}</td>
+          <td>${profit.toFixed(2)}</td>
+        </tr>
+      `;
+            });
 
-  // ترتيب حسب التاريخ
-  allItems.sort((a,b)=> a.date.localeCompare(b.date));
+            document.getElementById("totalProfit").textContent = totalProfit.toFixed(2);
+            document.getElementById("sumProfit").textContent = totalProfit.toFixed(2);
+        }
 
-  let totalAmount = 0;
-  let totalSales = 0;
-  let totalPurchases = 0;
-  let totalExpenses = 0;
-
-  allItems.forEach((item,i)=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${i+1}</td>
-      <td>${item.date}</td>
-      <td>${item.type}</td>
-      <td>${item.customer}</td>
-      <td>${formatNumber(item.amount)}</td>
-      <td>${item.note}</td>
-    `;
-    tbody.appendChild(tr);
-
-    if(item.type === "مبيعات") { totalSales += item.amount; }
-    else if(item.type === "مشتريات") { totalPurchases += item.amount; }
-    else if(item.type === "مصروفات") { totalExpenses += item.amount; }
-  });
-
-  totalAmount = totalSales - totalPurchases - totalExpenses;
-
-  document.getElementById("totalAmount").textContent = formatNumber(totalSales + totalPurchases + totalExpenses);
-  document.getElementById("netProfit").textContent = formatNumber(totalAmount);
-}
-
-document.getElementById("filterBtn").addEventListener("click", renderProfitTable);
-document.getElementById("resetBtn").addEventListener("click", ()=>{
-  document.getElementById("fromDate").value = "";
-  document.getElementById("toDate").value = "";
-  document.getElementById("searchInput").value = "";
-  renderProfitTable();
-});
-
-window.onload = renderProfitTable;
-</script>
-
+        window.onload = calculateProfit;
+    </script>
 </body>
+
 </html>
