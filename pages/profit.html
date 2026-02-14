@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة الأرباح</title>
+    <title>تقارير الأرباح</title>
     <style>
         body {
             font-family: "Cairo", sans-serif;
@@ -14,18 +14,26 @@
             margin: 0;
         }
 
-        /* حاوية الجدول */
-        .table-container {
-            width: 100%;
-            overflow-x: auto; /* يضيف تمرير أفقي عند الحاجة */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        /* الجدول */
+        .table-container {
+            width: 100%;
+            max-height: 400px;
+            /* أقصى ارتفاع للجداول */
+            overflow-y: auto;
+            /* يضيف scroll عمودي إذا زاد المحتوى */
+            overflow-x: auto;
+            /* للحالات اللي فيها أعمدة كثيرة */
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            min-width: 600px; /* اختياري: يخلي الجدول لا يصغر جدا */
+            margin-top: 10px;
+            min-width: 600px;
         }
 
         th,
@@ -44,15 +52,6 @@
             color: #fbbf24;
         }
 
-        .table-container {
-            width: 100%;
-            overflow-x: auto; /* التمرير الأفقي */
-
-            /* WebKit scroll style */
-            scrollbar-width: thin;
-            scrollbar-color: #fbbf24 #1e293b;
-        }
-
         .table-container::-webkit-scrollbar {
             height: 8px;
         }
@@ -68,9 +67,9 @@
             border: 2px solid #1e293b;
         }
 
-        /* الفلتر */
         .filter-container {
-            margin-top: 10px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         input[type="date"] {
@@ -92,13 +91,88 @@
         button:hover {
             background-color: #fcd34d;
         }
+
+        /* مودال */
+        #expensesModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        #expensesModalContent {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 70vh;
+            /* ارتفاع المودال */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #expensesModalContent h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #expensesContent {
+            overflow-y: auto;
+            /* تفعيل التمرير العمودي */
+            margin-top: 10px;
+            flex: 1;
+            /* يشغل المساحة المتبقية */
+        }
+
+        #expensesContent::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #expensesContent::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+
+        #expensesContent::-webkit-scrollbar-thumb {
+            background-color: #fbbf24;
+            border-radius: 10px;
+            border: 2px solid #1e293b;
+        }
+
+        #expensesContent table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #expensesContent th,
+        #expensesContent td {
+            border: 1px solid #4b5563;
+            padding: 6px;
+            text-align: center;
+        }
+
+        #expensesContent th {
+            background: #0f172a;
+        }
+
+        #closeModalBtn {
+            margin-top: 10px;
+            align-self: center;
+            background-color: #fbbf24;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1>الأرباح</h1>
-    <p>صافي الربح: <span id="totalProfit">0</span> جنيه</p>
+    <h1>تقارير الأرباح</h1>
 
     <div class="filter-container">
         <label>من: <input type="date" id="fromDate"></label>
@@ -106,8 +180,8 @@
         <button id="filterBtn">فلترة</button>
     </div>
 
+    <h2 style="margin-bottom: 3px;">تقرير أرباح المبيعات اليومي</h2>
     <div class="table-container">
-
         <table id="profitTable">
             <thead>
                 <tr>
@@ -129,26 +203,55 @@
         </table>
     </div>
 
-    <script src="../js/sales.js"></script>
-    <script src="../js/purchases.js"></script>
+    <h2 style="margin-bottom: 3px;">تقرير صافي الربح اليومي</h2>
+    <div class="table-container">
+        <table id="netProfitTable">
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>التاريخ</th>
+                    <th>إجمالي الربح</th>
+                    <th>إجمالي المصروفات</th>
+                    <th>صافي الربح</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td>الإجمالي</td>
+                    <td>-</td>
+                    <td id="totalProfitSum">0</td>
+                    <td id="totalExpensesSum">0</td>
+                    <td id="netProfitSum">0</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <button id="showExpensesBtn">عرض المصروفات المسجلة</button>
+
+    <!-- مودال المصروفات -->
+    <div id="expensesModal">
+        <div id="expensesModalContent">
+            <h3>المصروفات المسجلة</h3>
+            <div id="expensesContent"></div>
+            <button id="closeModalBtn">إغلاق</button>
+        </div>
+    </div>
 
     <script>
+        // بيانات حقيقية موجودة في localStorage
         const sales = JSON.parse(localStorage.getItem('sales')) || [];
         const products = JSON.parse(localStorage.getItem('products')) || [];
+        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-        function renderProfitReport(from, to) {
+        const fromDateInput = document.getElementById("fromDate");
+        const toDateInput = document.getElementById("toDate");
+
+        function renderProfitTable(filteredSales) {
             const tbody = document.querySelector("#profitTable tbody");
             tbody.innerHTML = "";
-            const today = new Date().toISOString().slice(0, 10);
-            from = from || today;
-            to = to || today;
-
             let totalProfit = 0;
-
-            const filteredSales = sales.filter(inv => {
-                const invDate = inv.date.slice(0, 10);
-                return invDate >= from && invDate <= to;
-            });
 
             filteredSales.forEach((inv, i) => {
                 let total = 0, cost = 0;
@@ -173,23 +276,126 @@
                 `;
             });
 
-            document.getElementById("totalProfit").textContent = totalProfit.toFixed(2);
             document.getElementById("sumProfit").textContent = totalProfit.toFixed(2);
         }
 
-        window.onload = function () {
-            const today = new Date().toISOString().slice(0, 10);
-            document.getElementById("fromDate").value = today;
-            document.getElementById("toDate").value = today;
-            renderProfitReport();
+        function renderNetProfitTable(filteredSales, filteredExpenses) {
+            const tbody = document.querySelector("#netProfitTable tbody");
+            tbody.innerHTML = "";
 
-            // زر الفلترة
-            document.getElementById("filterBtn").onclick = function () {
-                const from = document.getElementById("fromDate").value;
-                const to = document.getElementById("toDate").value;
-                renderProfitReport(from, to);
-            };
-        };
+            // اجمع المصروفات حسب اليوم
+            const expensesByDate = {};
+            filteredExpenses.forEach(e => {
+                if (!expensesByDate[e.date]) expensesByDate[e.date] = 0;
+                expensesByDate[e.date] += e.amount;
+            });
+
+            // اجمع الأرباح حسب اليوم
+            const profitByDate = {};
+            filteredSales.forEach(inv => {
+                if (!profitByDate[inv.date]) profitByDate[inv.date] = 0;
+                inv.items.forEach(item => {
+                    const product = products.find(p => p.name === item.name);
+                    const buyPrice = product ? product.buyPrice : 0;
+                    profitByDate[inv.date] += item.qty * (item.price - buyPrice);
+                });
+            });
+
+            let totalProfitSum = 0, totalExpensesSum = 0, netProfitSum = 0;
+            let idx = 1;
+
+            const allDates = Array.from(new Set([...Object.keys(profitByDate), ...Object.keys(expensesByDate)])).sort();
+
+            allDates.forEach(date => {
+                const profit = profitByDate[date] || 0;
+                const exp = expensesByDate[date] || 0;
+                const net = profit - exp;
+
+                totalProfitSum += profit;
+                totalExpensesSum += exp;
+                netProfitSum += net;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${idx++}</td>
+                        <td>${date}</td>
+                        <td>${profit.toFixed(2)}</td>
+                        <td>${exp.toFixed(2)}</td>
+                        <td>${net.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById("totalProfitSum").textContent = totalProfitSum.toFixed(2);
+            document.getElementById("totalExpensesSum").textContent = totalExpensesSum.toFixed(2);
+            document.getElementById("netProfitSum").textContent = netProfitSum.toFixed(2);
+        }
+
+        function filterAndRender() {
+            const from = fromDateInput.value || "1970-01-01";
+            const to = toDateInput.value || "9999-12-31";
+
+            const filteredSales = sales.filter(s => s.date.slice(0, 10) >= from && s.date.slice(0, 10) <= to);
+            const filteredExpenses = expenses.filter(e => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to);
+
+            renderProfitTable(filteredSales);
+            renderNetProfitTable(filteredSales, filteredExpenses);
+        }
+
+        document.getElementById("filterBtn").addEventListener("click", filterAndRender);
+
+        // مودال عرض المصروفات
+        const expensesModal = document.getElementById("expensesModal");
+        const expensesContent = document.getElementById("expensesContent");
+        const showExpensesBtn = document.getElementById("showExpensesBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        showExpensesBtn.addEventListener("click", () => {
+            const from = fromDateInput.value || "1970-01-01";
+            const to = toDateInput.value || "9999-12-31";
+
+            const filteredExpenses = expenses.filter(e => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to);
+
+            if (!filteredExpenses.length) {
+                expensesContent.innerHTML = "<p style='text-align:center'>لا توجد مصروفات مسجلة</p>";
+            } else {
+                let html = `<table>
+                                <thead>
+                                    <tr>
+                                        <th>م</th>
+                                        <th>التاريخ</th>
+                                        <th>البند</th>
+                                        <th>المبلغ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                filteredExpenses.forEach((e, i) => {
+                    html += `<tr>
+                                <td>${i + 1}</td>
+                                <td>${e.date}</td>
+                                <td>${e.title}</td>
+                                <td>${e.amount.toFixed(2)}</td>
+                             </tr>`;
+                });
+                html += "</tbody></table>";
+                expensesContent.innerHTML = html;
+            }
+
+            expensesModal.style.display = "flex";
+        });
+
+        closeModalBtn.addEventListener("click", () => {
+            expensesModal.style.display = "none";
+        });
+
+        // تعيين تواريخ اليوم بشكل افتراضي
+        const today = new Date().toISOString().slice(0, 10);
+        fromDateInput.value = today;
+        toDateInput.value = today;
+
+        // استدعاء العرض عند تحميل الصفحة
+        window.onload = filterAndRender;
+
     </script>
 
 </body>
