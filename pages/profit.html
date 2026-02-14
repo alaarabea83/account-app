@@ -23,8 +23,11 @@
             font-size: 20px;
             font-weight: bold;
             z-index: 1000;
-            border-bottom: 1px solid #334155;
             text-align: center;
+        }
+
+        h4 {
+            margin-bottom: 10px;
         }
 
         /* MAIN */
@@ -39,14 +42,17 @@
             height: 1px;
             background: linear-gradient(to left, transparent, #334155, transparent);
             margin-bottom: 20px;
+            margin-top: 35px;
         }
 
         /* breadcrumb */
         .breadcrumb {
+            position: fixed;
+            left: 0;
+            right: 0;
             background: linear-gradient(135deg, #34495e, #2c3e50);
             padding: 12px 20px;
-            border-radius: 12px;
-            margin: 16px auto;
+            margin: 0 auto;
             max-width: 1000px;
             text-align: center;
         }
@@ -111,16 +117,20 @@
         }
 
         button {
-            padding: 8px 14px;
-            border-radius: 6px;
+            width: 100%;
+            max-width: 200px;
+            margin: 15px auto 0;
+            display: block;
+            padding: 12px;
+            font-size: 16px;
             border: none;
-            background: #fbbf24;
-            font-weight: bold;
+            border-radius: 8px;
+            background: #21618c;
+            color: white;
             cursor: pointer;
-        }
-
-        button:hover {
-            background: #fcd34d;
+            font-weight: bold;
+            padding: 8px 14px;
+            cursor: pointer;
         }
 
         /* مودال */
@@ -151,6 +161,18 @@
             overflow-y: auto;
             flex: 1;
         }
+
+        /* Scrollbar */
+        #expensesContent::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        #expensesContent::-webkit-scrollbar-thumb {
+            background: green;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 
@@ -173,7 +195,7 @@
             <button id="filterBtn">فلترة</button>
         </div>
 
-        <h2 style="background:#e74c3c;text-align:center;">تقرير ربح المبيعات</h2>
+        <h4>تقرير ربح المبيعات</h4>
 
         <div class="table-container">
             <table id="profitTable">
@@ -197,7 +219,7 @@
             </table>
         </div>
 
-        <h2 style="background:#e74c3c;text-align:center;">تقرير صافي الربح</h2>
+        <h4>تقرير صافي الربح</h4>
 
         <div class="table-container">
             <table id="netProfitTable">
@@ -223,7 +245,7 @@
             </table>
         </div>
 
-        <button style="background:#e74c3c;color:white;width:100%;" id="showExpensesBtn">
+        <button style="background:#e74c3c;color:white;width:100%; margin-top: 10px;" id="showExpensesBtn">
             عرض المصروفات المسجلة
         </button>
 
