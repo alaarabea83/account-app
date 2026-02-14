@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة الأرباح</title>
+<style>
+  body { font-family: Cairo, sans-serif; margin:0; padding:20px; background:#0f172a; color:white; }
+  h1 { text-align:center; margin-bottom:20px; }
+  table { width:100%; border-collapse: collapse; margin-bottom:20px; }
+  th, td { border:1px solid #4b5563; padding:8px; text-align:center; }
+  th { background:#1e293b; }
+  tr:nth-child(even) { background:#111827; }
+  tr.total-row { background:#fbbf24; color:#111827; font-weight:bold; }
+  input, select { padding:6px; margin:2px; border-radius:6px; border:none; }
+  .filters { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:15px; }
+  button { padding:6px 12px; border:none; border-radius:6px; background:#3b82f6; color:white; cursor:pointer; }
+  button:hover { background:#2563eb; }
+</style>
+</head>
+<body>
+
+<h1>الأرباح - تقرير شامل</h1>
+
+<div class="filters">
+  <label>من: <input type="date" id="fromDate"></label>
+  <label>إلى: <input type="date" id="toDate"></label>
+  <input type="text" id="searchInput" placeholder="بحث بالعميل أو البيان">
+  <button id="filterBtn">تصفية</button>
+  <button id="resetBtn">إظهار الكل</button>
+</div>
+
+<table id="profitTable">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>التاريخ</th>
+      <th>النوع</th>
+      <th>العميل / البيان</th>
+      <th>المبلغ</th>
+      <th>البيان</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+  <tfoot>
+    <tr class="total-row">
+      <td colspan="4">الإجمالي</td>
+      <td id="totalAmount">0</td>
+      <td>صافي الربح = <span id="netProfit">0</span></td>
+    </tr>
+  </tfoot>
+</table>
+
+<script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+
+<script>
+function formatNumber(num){ return Number(num).toFixed(2); }
+
+function renderProfitTable() {
+  const tbody = document.querySelector("#profitTable tbody");
+  tbody.innerHTML = "";
+
+  const from = document.getElementById("fromDate").value || new Date().toISOString().slice(0,10);
+  const to = document.getElementById("toDate").value || new Date().toISOString().slice(0,10);
+  const search = document.getElementById("searchInput").value.toLowerCase();
+
+  let allItems = [];
+
+  // مبيعات
+  sales.forEach(s => {
+    const date = s.date.split("T")[0];
+    if(date >= from && date <= to) {
+      if(!search || s.customer.toLowerCase().includes(search)) {
+        allItems.push({ type:"مبيعات", customer:s.customer, amount:s.total, date, note:"فاتورة بيع" });
+      }
+    }
+  });
+
+  // مشتريات
+  purchases.forEach(p => {
+    const date = p.date.split("T")[0];
+    if(date >= from && date <= to) {
+      if(!search || p.customer.toLowerCase().includes(search)) {
+        allItems.push({ type:"مشتريات", customer:p.customer, amount:p.total, date, note:"فاتورة شراء" });
+      }
+    }
+  });
+
+  // مصروفات
+  expenses.forEach(e => {
+    const date = e.date.split("T")[0];
+    if(date >= from && date <= to) {
+      if(!search || e.customer.toLowerCase().includes(search) || e.title.toLowerCase().includes(search)) {
+        allItems.push({ type:"مصروفات", customer:e.customer, amount:e.amount, date, note:e.title });
+      }
+    }
+  });
+
+  // ترتيب حسب التاريخ
+  allItems.sort((a,b)=> a.date.localeCompare(b.date));
+
+  let totalAmount = 0;
+  let totalSales = 0;
+  let totalPurchases = 0;
+  let totalExpenses = 0;
+
+  allItems.forEach((item,i)=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${i+1}</td>
+      <td>${item.date}</td>
+      <td>${item.type}</td>
+      <td>${item.customer}</td>
+      <td>${formatNumber(item.amount)}</td>
+      <td>${item.note}</td>
+    `;
+    tbody.appendChild(tr);
+
+    if(item.type === "مبيعات") { totalSales += item.amount; }
+    else if(item.type === "مشتريات") { totalPurchases += item.amount; }
+    else if(item.type === "مصروفات") { totalExpenses += item.amount; }
+  });
+
+  totalAmount = totalSales - totalPurchases - totalExpenses;
+
+  document.getElementById("totalAmount").textContent = formatNumber(totalSales + totalPurchases + totalExpenses);
+  document.getElementById("netProfit").textContent = formatNumber(totalAmount);
+}
+
+document.getElementById("filterBtn").addEventListener("click", renderProfitTable);
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  document.getElementById("fromDate").value = "";
+  document.getElementById("toDate").value = "";
+  document.getElementById("searchInput").value = "";
+  renderProfitTable();
+});
+
+window.onload = renderProfitTable;
+</script>
+
+</body>
+</html>
