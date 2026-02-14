@@ -21,34 +21,37 @@
 
     body {
       margin: 0;
-      background: #0f172a;
+      background: #1e1e1e;
       color: #ecf0f1;
     }
 
     .header {
-      background: #0f172a;
-      padding: 15px;
-      margin: 16px auto;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      max-width: 1000px;
+      background: #e74c3c;
+      /* أزرق عصري */
+      color: white;
+      backdrop-filter: blur(12px);
+      padding: 22px;
+      text-align: right;
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .breadcrumb {
-      background: linear-gradient(135deg, #34495e, #2c3e50);
+      background: #e74c3c;
       padding: 12px 20px;
       border-radius: 12px;
       margin: 16px auto;
       max-width: 1000px;
+      text-align: center;
     }
 
     .breadcrumb a {
-      color: #5dade2;
+      color: yellow;
       text-decoration: none;
-    }
-
-    .breadcrumb .active {
-      color: #bdc3c7;
     }
 
     @media (max-width: 768px) {
@@ -60,15 +63,6 @@
       }
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Cairo", sans-serif;
-      font-weight: 700;
-      margin: 5px;
-      color: #ecf0f1;
-    }
-
     .container {
       max-width: 1000px;
       margin: 0 auto;
@@ -76,19 +70,17 @@
       margin-bottom: 25px;
       padding: 20px;
       border-radius: 12px;
-      background: #0f172a;
+      background: #1e1e1e;
     }
 
     section {
       display: block;
       text-align: center;
-      color: #bdc3c7;
+      color: #fff;
       font-size: small;
       max-width: 1000px;
-      background: #1e293b;
+      background: #e74c3c;
       padding: 20px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .65),
-        0 8px 18px rgba(0, 0, 0, .45);
       border-radius: 12px;
     }
 
@@ -97,18 +89,19 @@
       align-items: center;
       justify-content: center;
       margin-top: 10px;
-      width: 42px;
+      width: 250px;
       height: 42px;
-      background: #25D366;
+      background: #1ebe5d;
       color: #fff;
-      border-radius: 50%;
       font-size: 22px;
+      border-radius: 8px;
       text-decoration: none;
       transition: 0.3s;
+      padding: 25px;
     }
 
     .whatsapp-footer:hover {
-      background: #1ebe5d;
+      background: #158f46;
     }
 
     .footer {
@@ -116,7 +109,7 @@
       margin: 16px auto;
       padding: 16px;
       text-align: center;
-      background: #2196f3;
+      background: #e74c3c;
       color: black;
       border-radius: 16px;
     }
@@ -131,7 +124,7 @@
 
 <body>
   <header class="header">
-    <h3>سهل لإدارة الحسابات</h3>
+    سهل لإدارة الحسابات
   </header>
 
   <nav class="breadcrumb">
@@ -155,7 +148,7 @@
       <h5>تطوير: علاء </h5>
       <h4>لتفعيل الإشتراك يمكنك مراسلتنا عن طريق واتس آب</h4>
       <a href="https://wa.me/201019065615" class="whatsapp-footer" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+        <i class="fab fa-whatsapp"> إضغط للتواصل معنا</i>
       </a>
     </section>
   </div>

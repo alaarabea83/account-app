@@ -46,7 +46,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       height: 60px;
-      background: var(--card);
+      background: #e74c3c;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -83,7 +83,6 @@
       width: 260px;
       height: calc(100vh - 60px);
       background: #111827;
-      border-left: 3px solid #38bdf8;
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -351,7 +350,7 @@
 
 <body>
   <div class="header">
-    <h1>المقبوضات</h1>
+    <h1>الإيرادات</h1>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </div>
 
@@ -380,7 +379,7 @@
   <section>
     <div class="t-container">
       <div class="incomeReciept">
-        <h3>💰 قبض من حساب</h3>
+        <h3>💰 تسجيل الإيرادات الخارجية</h3>
         <div class="form-row">
           <select id="incomeCustomer">
             <option value="">إختر الحساب</option>
@@ -420,7 +419,7 @@
 
     <div class="t-container">
       <div class="incomeMenu">
-        <h3>📋 سجل المقبوضات</h3>
+        <h3>📋 سجل الإيرادات الخارجية</h3>
         <div class="table-scroll">
           <table id="incomeTable">
             <thead>
