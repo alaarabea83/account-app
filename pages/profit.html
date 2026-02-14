@@ -5,28 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تقارير الأرباح</title>
+
     <style>
         body {
             font-family: "Cairo", sans-serif;
             background: #0f172a;
             color: white;
-            padding: 20px;
             margin: 0;
         }
 
-        h1 {
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            background: #1e293b;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1000;
+            border-bottom: 1px solid #334155;
             text-align: center;
+        }
+
+        /* MAIN */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* فاصل ناعم */
+        .main-content::before {
+            content: "";
+            display: block;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #334155, transparent);
             margin-bottom: 20px;
         }
 
+        /* breadcrumb */
+        .breadcrumb {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin: 16px auto;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .breadcrumb a {
+            color: #5dade2;
+            text-decoration: none;
+        }
+
+        /* جداول */
         .table-container {
             width: 100%;
             max-height: 400px;
-            /* أقصى ارتفاع للجداول */
-            overflow-y: auto;
-            /* يضيف scroll عمودي إذا زاد المحتوى */
-            overflow-x: auto;
-            /* للحالات اللي فيها أعمدة كثيرة */
+            overflow: auto;
         }
 
         table {
@@ -52,24 +86,21 @@
             color: #fbbf24;
         }
 
+        /* Scrollbar */
         .table-container::-webkit-scrollbar {
             height: 8px;
-        }
-
-        .table-container::-webkit-scrollbar-track {
-            background: #1e293b;
-            border-radius: 10px;
+            width: 8px;
         }
 
         .table-container::-webkit-scrollbar-thumb {
-            background-color: #fbbf24;
+            background: green;
             border-radius: 10px;
-            border: 2px solid #1e293b;
         }
 
+        /* فلتر */
         .filter-container {
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         input[type="date"] {
@@ -80,16 +111,16 @@
         }
 
         button {
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 6px;
             border: none;
-            background-color: #fbbf24;
-            color: #111827;
+            background: #fbbf24;
+            font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #fcd34d;
+            background: #fcd34d;
         }
 
         /* مودال */
@@ -100,10 +131,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, .7);
             justify-content: center;
             align-items: center;
-            z-index: 10000;
         }
 
         #expensesModalContent {
@@ -113,122 +143,91 @@
             width: 90%;
             max-width: 500px;
             max-height: 70vh;
-            /* ارتفاع المودال */
             display: flex;
             flex-direction: column;
         }
 
-        #expensesModalContent h3 {
-            margin-top: 0;
-            text-align: center;
-        }
-
         #expensesContent {
             overflow-y: auto;
-            /* تفعيل التمرير العمودي */
-            margin-top: 10px;
             flex: 1;
-            /* يشغل المساحة المتبقية */
-        }
-
-        #expensesContent::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        #expensesContent::-webkit-scrollbar-track {
-            background: #1e293b;
-            border-radius: 10px;
-        }
-
-        #expensesContent::-webkit-scrollbar-thumb {
-            background-color: #fbbf24;
-            border-radius: 10px;
-            border: 2px solid #1e293b;
-        }
-
-        #expensesContent table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        #expensesContent th,
-        #expensesContent td {
-            border: 1px solid #4b5563;
-            padding: 6px;
-            text-align: center;
-        }
-
-        #expensesContent th {
-            background: #0f172a;
-        }
-
-        #closeModalBtn {
-            margin-top: 10px;
-            align-self: center;
-            background-color: #fbbf24;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>تقارير الأرباح</h1>
+    <header class="header">
+        سهل لإدارة الحسابات
+    </header>
 
-    <div class="filter-container">
-        <label>من: <input type="date" id="fromDate"></label>
-        <label>إلى: <input type="date" id="toDate"></label>
-        <button id="filterBtn">فلترة</button>
-    </div>
+    <nav class="breadcrumb">
+        <a href="../index.html">الرئيسية</a> /
+        <span>تقارير الأرباح</span>
+    </nav>
 
-    <h2 style="margin-bottom: 3px;">تقرير أرباح المبيعات اليومي</h2>
-    <div class="table-container">
-        <table id="profitTable">
-            <thead>
-                <tr>
-                    <th>م</th>
-                    <th>التاريخ</th>
-                    <th>العميل</th>
-                    <th>إجمالي الفاتورة</th>
-                    <th>تكلفة الفاتورة</th>
-                    <th>الربح</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">الإجمالي الكلي</td>
-                    <td id="sumProfit">0</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+    <main class="main-content">
 
-    <h2 style="margin-bottom: 3px;">تقرير صافي الربح اليومي</h2>
-    <div class="table-container">
-        <table id="netProfitTable">
-            <thead>
-                <tr>
-                    <th>م</th>
-                    <th>التاريخ</th>
-                    <th>إجمالي الربح</th>
-                    <th>إجمالي المصروفات</th>
-                    <th>صافي الربح</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <td>الإجمالي</td>
-                    <td>-</td>
-                    <td id="totalProfitSum">0</td>
-                    <td id="totalExpensesSum">0</td>
-                    <td id="netProfitSum">0</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+        <div class="filter-container">
+            <label>من: <input type="date" id="fromDate"></label>
+            <label>إلى: <input type="date" id="toDate"></label>
+            <button id="filterBtn">فلترة</button>
+        </div>
 
-    <button id="showExpensesBtn">عرض المصروفات المسجلة</button>
+        <h2 style="background:#e74c3c;text-align:center;">تقرير ربح المبيعات</h2>
+
+        <div class="table-container">
+            <table id="profitTable">
+                <thead>
+                    <tr>
+                        <th>م</th>
+                        <th>التاريخ</th>
+                        <th>العميل</th>
+                        <th>إجمالي الفاتورة</th>
+                        <th>تكلفة الفاتورة</th>
+                        <th>الربح</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">الإجمالي الكلي</td>
+                        <td id="sumProfit">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <h2 style="background:#e74c3c;text-align:center;">تقرير صافي الربح</h2>
+
+        <div class="table-container">
+            <table id="netProfitTable">
+                <thead>
+                    <tr>
+                        <th>م</th>
+                        <th>التاريخ</th>
+                        <th>إجمالي الربح</th>
+                        <th>إجمالي المصروفات</th>
+                        <th>صافي الربح</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td>الإجمالي</td>
+                        <td>-</td>
+                        <td id="totalProfitSum">0</td>
+                        <td id="totalExpensesSum">0</td>
+                        <td id="netProfitSum">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <button style="background:#e74c3c;color:white;width:100%;" id="showExpensesBtn">
+            عرض المصروفات المسجلة
+        </button>
+
+    </main>
 
     <!-- مودال المصروفات -->
     <div id="expensesModal">

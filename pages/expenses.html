@@ -352,7 +352,7 @@
 
 <body>
   <div class="header">
-    <h1>المدفوعات</h1>
+    <h1>المصروفات</h1>
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
   </div>
 
@@ -379,10 +379,10 @@
   <div id="overlay" onclick="toggleSidebar()"></div>
 
     <section>
-      <!-- صندوق إضافة سند الدفع -->
+      <!-- صندوق إضافة سند الصرف -->
       <div class="t-container">
         <div class="expenseReciept">
-          <h3>💸 دفع لحساب</h3>
+          <h3>💸 تسجيل مصروف</h3>
           <div class="form-row">
             <select id="expenseCustomer"></select>
             <input
@@ -395,13 +395,15 @@
               <option value="" disabled selected>إختر البيان</option>
               <option>مصروفات نثرية</option>
               <option>مصروفات إدارية</option>
-              <option>سلفة موظف</option>
+              <option>مصروفات تسويقية</option>
+              <option>مصروفات دعاية وإعلان</option>
+              <option>سلف العاملين</option>
               <option>أجور ومرتبات</option>
               <option>وقود ومحروقات</option>
-              <option>تسوية حساب</option>
-              <option>أرصدة مدينة أخري</option>
-              <option>توزيع أرباح</option>
-              <option>تصفية شريك</option>
+              <option>إيجارات</option>
+              <option>نقل ومواصلات</option>
+              <option>إكراميات</option>
+              <option>رسوم أخري</option>
               <option value="other">أخرى</option>
             </select>
             <button id="addExpenseBtn">✚ إضافة</button>
@@ -412,7 +414,7 @@
       <!--  سجل المصروفات -->
       <div class="t-container">
         <div class="expenseMenu">
-          <h3>📋 سجل المدفوعات</h3>
+          <h3>📋 سجل المصروفات</h3>
           <div class="table-scroll">
             <table id="expenseTable">
               <thead>

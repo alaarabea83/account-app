@@ -179,7 +179,7 @@
 <body>
 
   <div class="header">
-    لوحة التحكم
+    سهل لإدارة الحسابات
     <div>
       <button class="btn" onclick="toggleMode()">🌙</button>
       <button class="btn" onclick="backup()">💾</button>
@@ -435,16 +435,16 @@
       i.click();
     }
 
-    function showLossModal(value){
-document.getElementById("lossText").innerText =
-`يوجد خسارة بقيمة ${value.toFixed(2)} جنيه`;
+    function showLossModal(value) {
+      document.getElementById("lossText").innerText =
+        `يوجد خسارة بقيمة ${value.toFixed(2)} جنيه`;
 
-document.getElementById("lossModal").classList.add("show");
-}
+      document.getElementById("lossModal").classList.add("show");
+    }
 
-function closeLossModal(){
-document.getElementById("lossModal").classList.remove("show");
-}
+    function closeLossModal() {
+      document.getElementById("lossModal").classList.remove("show");
+    }
 
 
   </script>
