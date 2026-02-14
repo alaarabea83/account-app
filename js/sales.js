@@ -39,6 +39,14 @@ window.onload = function () {
     .addEventListener("change", filterSalesByDate);
 };
 
+document.getElementById("invoiceItems").addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-delete-item")) {
+    e.target.closest("tr").remove();
+    updateRowNumbers();
+    updateInvoiceTotal();
+  }
+});
+
 // عرض العملاء //
 function renderCustomerSelect() {
   const list = document.getElementById("customerDropdown");
@@ -187,17 +195,10 @@ function addInvoiceItem(product) {
   `;
 
   tbody.appendChild(row);
-
-  document
-    .getElementById("invoiceItems")
-    .addEventListener("click", function (e) {
-      if (e.target.classList.contains("btn-delete-item")) {
-        const row = e.target.closest("tr");
-        row.remove();
-        updateRowNumbers();
-        updateInvoiceTotal();
-      }
-    });
+  // ✅ ربط تحديث الحساب عند تغيير الكمية
+  const qtyInput = row.querySelector(".itemQty");
+  qtyInput.addEventListener("input", updateInvoiceTotal);
+  qtyInput.addEventListener("change", updateInvoiceTotal);
 
   updateInvoiceTotal();
 }
@@ -215,29 +216,30 @@ function updateInvoiceTotal() {
   let total = 0;
 
   document.querySelectorAll("#invoiceItems tr").forEach((row) => {
-    const qty = +row.querySelector(".itemQty").value || 0;
-    const price = +row.querySelector(".itemPrice").value || 0;
+    const qty = parseFloat(row.querySelector(".itemQty").value) || 0;
+    const price = parseFloat(row.querySelector(".itemPrice").value) || 0;
 
-    total += qty * price;
-    row.querySelector(".itemTotal").value = (qty * price).toFixed(2);
+    const rowTotal = qty * price;
+
+    row.querySelector(".itemTotal").value = rowTotal.toFixed(2);
+    total += rowTotal;
   });
 
   document.getElementById("invoiceTotal").value = total.toFixed(2);
 
   updateGrandTotal();
-  updateRemaining(); // فقط هنا
 }
 
 // == تحديث الإجمالي الكلي ==//
 function updateGrandTotal() {
-  const balance = Number(document.getElementById("customerBalance").value) || 0;
-
-  const invoiceTotal =
-    Number(document.getElementById("invoiceTotal").value) || 0;
+  const balance = +document.getElementById("customerBalance").value || 0;
+  const invoiceTotal = +document.getElementById("invoiceTotal").value || 0;
 
   const grand = balance + invoiceTotal;
 
   document.getElementById("grandTotal").value = grand.toFixed(2);
+
+  updateRemaining();
 }
 
 // == تحديث المتبقي بعد المدفوع ==//
@@ -391,7 +393,7 @@ function renderSales(data = sales) {
         <td>${inv.newBalance}</td>
         <td>
           <div class="action-buttons">
-            <button class="btn-edit" onclick="editInvoice(${i})">تعديل</button>
+            <button class="btn-edit" onclick="editInvoice(${inv.order})">تعديل</button>
             <button class="btn-delete" onclick="confirmDeleteInvoice(${inv.order})">حذف</button>
           </div>
         </td>
@@ -410,7 +412,10 @@ function renderSales(data = sales) {
 }
 
 // تعديل فاتورة //
-function editInvoice(index) {
+function editInvoice(order) {
+  const index = sales.findIndex((s) => s.order === order);
+  if (index === -1) return;
+
   const invoice = sales[index];
   editInvoiceIndex = index;
 
