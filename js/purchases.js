@@ -88,7 +88,7 @@ function addRow(productIndex) {
     <td><input type="number" class="qty" placeholder="الكمية" min="1" value=""></td>
     <td><input type="number" class="price" value="${product.buyPrice}" ></td>
     <td><input type="number" class="total" value="0" readonly></td>
-    <td><button class="delBtn">❌</button></td>
+    <td><button class="delBtn">حذف</button></td>
   `;
 
   tbody.appendChild(row);
