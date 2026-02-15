@@ -1,233 +1,232 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>سهل لإدارة الحسابات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
 
-    <style>
-      * {
-        box-sizing: border-box;
-        font-family: "cairo", sans-serif;
-      }
+  <title>سهل لإدارة الحسابات</title>
 
-      body {
-        margin: 0;
-      }
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "cairo", sans-serif;
+    }
 
-      body {
-        background: #0F172A;
-      }
+    body {
+      margin: 0;
+    }
 
+    body {
+      background: #0F172A;
+    }
+
+    .header {
+      background: #0e7490;
+    }
+
+    .card {
+      background: #0e7490;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .4);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      backdrop-filter: blur(12px);
+      padding: 22px;
+      text-align: right;
+      font-size: 22px;
+      font-weight: 700;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      color: white;
+    }
+
+    /* ===== GRID ===== */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+      padding: 30px 20px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      border-radius: 10px;
+      padding: 25px 15px;
+      text-align: center;
+      text-decoration: none;
+      transition: 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* TITLE */
+    .card h3 {
+      margin: 8px 0;
+      font-size: 20px;
+    }
+
+    /* DESCRIPTION */
+    .card p {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
       .header {
-        background: #0e7490;
+        font-size: 18px;
       }
 
-      .card {
-  background: linear-gradient(145deg,#1fa3b8,#178a9a);
-  color: white;
-  box-shadow: 0 10px 25px rgba(0,0,0,.4);
-}
-
-      /* ===== HEADER ===== */
-      .header {
-        backdrop-filter: blur(12px);
-        padding: 22px;
-        text-align: right;
-        font-size: 22px;
-        font-weight: 700;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        color: white;
-      }
-
-      /* ===== GRID ===== */
-      section {
-        max-width: 1200px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-        gap: 22px;
-        padding: 30px 20px;
-      }
-
-      /* ===== CARD ===== */
-      .card {
-        border-radius: 10px;
-        padding: 25px 15px;
-        text-align: center;
-        text-decoration: none;
-        transition: 0.35s;
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* TITLE */
       .card h3 {
-        margin: 8px 0;
-        font-size: 20px;
+        font-size: 18px;
       }
+    }
 
-      /* DESCRIPTION */
-      .card p {
-        font-size: 14px;
-        opacity: 0.9;
-        line-height: 1.7;
-        margin: 0;
+    /* موبايل: كرتين في السطر */
+    @media (max-width: 600px) {
+      section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
       }
+    }
+  </style>
+</head>
 
-      /* Mobile */
-      @media (max-width: 600px) {
-        .header {
-          font-size: 18px;
-        }
+<body>
+  <header class="header">سهل لإدارة الحسابات</header>
 
-        .card h3 {
-          font-size: 18px;
-        }
-      }
+  <section>
+    <a class="card" href="pages/customers.html">
+      <h3>الحسابات</h3>
+      <p>
+        إضافة حساب<br />
+        إدارة العملاء<br />
+        كشف حساب<br />
+        أرصدة إفتتاحية
+      </p>
+    </a>
 
-      /* موبايل: كرتين في السطر */
-      @media (max-width: 600px) {
-        section {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 14px;
-        }
-      }
-    </style>
-  </head>
+    <a class="card" href="pages/products.html">
+      <h3>المنتجات</h3>
+      <p>
+        إضافة منتج<br />
+        إدارة المخزون<br />
+        حركة صنف<br />
+        أرصدة إفتتاحية
+      </p>
+    </a>
 
-  <body>
-    <header class="header">سهل لإدارة الحسابات</header>
+    <a class="card" href="pages/sales.html">
+      <h3>المبيعات</h3>
+      <p>
+        فاتورة بيع<br />
+        بيع نقدي<br />
+        بيع بالأجل<br />
+        إدارة الفواتير
+      </p>
+    </a>
 
-    <section>
-      <a class="card" href="pages/customers.html">
-        <h3>الحسابات</h3>
-        <p>
-          إضافة حساب<br />
-          إدارة العملاء<br />
-          كشف حساب<br />
-          أرصدة إفتتاحية
-        </p>
-      </a>
+    <a class="card" href="pages/purchases.html">
+      <h3>المشتريات</h3>
+      <p>
+        فاتورة شراء<br />
+        تحديث المخزون<br />
+        تحديث الموردين<br />
+        إدارة الفواتير
+      </p>
+    </a>
 
-      <a class="card" href="pages/products.html">
-        <h3>المنتجات</h3>
-        <p>
-          إضافة منتج<br />
-          إدارة المخزون<br />
-          حركة صنف<br />
-          أرصدة إفتتاحية
-        </p>
-      </a>
+    <a class="card" href="pages/income.html">
+      <h3>القبض</h3>
+      <p>
+        سند قبض<br />
+        تحصيل ديون<br />
+        تدفقات نقدية<br />
+        إضافة رأس مال
+      </p>
+    </a>
 
-      <a class="card" href="pages/sales.html">
-        <h3>المبيعات</h3>
-        <p>
-          فاتورة بيع<br />
-          بيع نقدي<br />
-          بيع بالأجل<br />
-          إدارة الفواتير
-        </p>
-      </a>
+    <a class="card" href="pages/expenses.html">
+      <h3>الدفع</h3>
+      <p>
+        سند دفع<br />
+        دفع مستحقات<br />
+        رسوم وإيجارات<br />
+        سلف العاملين
+      </p>
+    </a>
 
-      <a class="card" href="pages/purchases.html">
-        <h3>المشتريات</h3>
-        <p>
-          فاتورة شراء<br />
-          تحديث المخزون<br />
-          تحديث الموردين<br />
-          إدارة الفواتير
-        </p>
-      </a>
+    <a class="card" href="pages/income.html">
+      <h3>الإيرادات</h3>
+      <p>
+        تسجيل إيراد<br />
+        إيرادات خارجية<br />
+        سجل إيرادات<br />
+        تحديث الأرباح
+      </p>
+    </a>
 
-      <a class="card" href="pages/income.html">
-        <h3>القبض</h3>
-        <p>
-          سند قبض<br />
-          تحصيل ديون<br />
-          تدفقات نقدية<br />
-          إضافة رأس مال
-        </p>
-      </a>
+    <a class="card" href="pages/expenses.html">
+      <h3>المصروفات</h3>
+      <p>
+        تسجيل مصروف<br />
+        أجور ومرتبات<br />
+        رسوم وإيجارات<br />
+        سلف العاملين
+      </p>
+    </a>
 
-      <a class="card" href="pages/expenses.html">
-        <h3>الدفع</h3>
-        <p>
-          سند دفع<br />
-          دفع مستحقات<br />
-          رسوم وإيجارات<br />
-          سلف العاملين
-        </p>
-      </a>
+    <a class="card" href="pages/cash.html">
+      <h3>الخزينة</h3>
+      <p>
+        رصيد الخزينة<br />
+        حركة النقدية<br />
+        تقارير يومية<br />
+        تقارير شهرية
+      </p>
+    </a>
 
-      <a class="card" href="pages/income.html">
-        <h3>الإيرادات</h3>
-        <p>
-          تسجيل إيراد<br />
-          إيرادات خارجية<br />
-          سجل إيرادات<br />
-          تحديث الأرباح
-        </p>
-      </a>
+    <a class="card" href="pages/profit.html">
+      <h3>الأرباح</h3>
+      <p>
+        مجمل الربح<br />
+        صافي الربح<br />
+        تقرير يومي<br />
+        تقرير شهري
+      </p>
+    </a>
 
-      <a class="card" href="pages/expenses.html">
-        <h3>المصروفات</h3>
-        <p>
-          تسجيل مصروف<br />
-          أجور ومرتبات<br />
-          رسوم وإيجارات<br />
-          سلف العاملين
-        </p>
-      </a>
+    <a class="card" href="pages/dashboard.html">
+      <h3>التقارير</h3>
+      <p>
+        عداد العملاء<br />
+        عداد الفواتير<br />
+        رسوم بيانية<br />
+        تقارير الأرباح
+      </p>
+    </a>
 
-      <a class="card" href="pages/cash.html">
-        <h3>الخزينة</h3>
-        <p>
-          رصيد الخزينة<br />
-          حركة النقدية<br />
-          تقارير يومية<br />
-          تقارير شهرية
-        </p>
-      </a>
+    <a class="card" href="pages/about.html">
+      <h3>معلومات</h3>
+      <p>
+        عن البرنامج<br />
+        التحديثات<br />
+        الدعم الفني<br />
+        تواصل معنا
+      </p>
+    </a>
+  </section>
+</body>
 
-      <a class="card" href="pages/profit.html">
-        <h3>الأرباح</h3>
-        <p>
-          مجمل الربح<br />
-          صافي الربح<br />
-          تقرير يومي<br />
-          تقرير شهري
-        </p>
-      </a>
-
-      <a class="card" href="pages/dashboard.html">
-        <h3>التقارير</h3>
-        <p>
-          عداد العملاء<br />
-          عداد الفواتير<br />
-          رسوم بيانية<br />
-          تقارير الأرباح
-        </p>
-      </a>
-
-      <a class="card" href="pages/about.html">
-        <h3>معلومات</h3>
-        <p>
-          عن البرنامج<br />
-          التحديثات<br />
-          الدعم الفني<br />
-          تواصل معنا
-        </p>
-      </a>
-    </section>
-  </body>
 </html>
