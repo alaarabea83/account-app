@@ -20,12 +20,6 @@
       --text: #f1f5f9;
     }
 
-    .light {
-      --bg: #f1f5f9;
-      --card: #fff;
-      --text: #0f172a;
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -34,12 +28,6 @@
     body {
       margin: 0;
       font-family: Tajawal;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    body {
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -177,7 +165,7 @@
       padding: 14px;
       border-radius: 12px;
       border: 1px solid blue;
-      background: transparent;
+      background: #0e7490;
       color: white;
       font-size: 16px;
     }
@@ -191,8 +179,8 @@
       border: none;
       padding: 14px 18px;
       border-radius: 12px;
-      background: #21618c;
-      color: white;
+      background: #0e7490;
+      color: var(--text);
       font-weight: bold;
       font-size: 16px;
       cursor: pointer;
@@ -205,7 +193,7 @@
       padding: 12px;
       border-radius: 8px;
       border: 1px solid blue;
-      background: var(--card);
+      background: #0e7490;
       color: var(--text);
       font-size: 14px;
       width: 100%;
@@ -521,7 +509,7 @@
       <h5>📝 إضافة منتج جديد</h5>
       <div class="form-row">
         <input id="productName" placeholder="إسم المنتج" />
-        <input id="productQty" type="number" placeholder="قم بتسجيل الكمية الإفتتاحية (ان وجدت)" />
+        <input id="productQty" type="number" placeholder="ادخل الكمية الإفتتاحية (ان وجدت)" />
         <select id="productUnit">
           <option>قطعة</option>
           <option>علبة</option>
