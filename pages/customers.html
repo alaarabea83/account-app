@@ -79,7 +79,7 @@
       width: 260px;
       height: calc(100vh - 60px);
       background: #0F172A;
-      padding: 20px;
+      padding: 20px 20px 40px 20px; /* زيادة padding-bottom لتظهر آخر عنصر */
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -112,7 +112,7 @@
     .sidebar div {
       display: block;
       width: 100%;
-      padding: 20px 20px 40px 20px; /* زيادة padding-bottom لتظهر آخر عنصر */
+      padding: 12px;
       background: #1e293b;
       border-radius: 8px;
       text-align: center;
@@ -541,6 +541,15 @@
       <span>فواتير الشراء</span>
     </a>
 
+    <a href="income.html" class="sidebar-link">
+      <img src="../icons/income-512.png" width="32" height="32" alt="Income Icon">
+      <span>المقبوضات</span>
+    </a>
+
+    <a href="expenses.html" class="sidebar-link">
+      <img src="../icons/accounting-512.png" width="32" height="32" alt="Expenses Icon">
+      <span>المدفوعات</span>
+    </a>
     <a href="income.html" class="sidebar-link">
       <img src="../icons/income.png" width="32" height="32" alt="Income Icon">
       <span>الإيرادات</span>
