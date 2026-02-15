@@ -77,66 +77,94 @@
     }
 
     /* ===== Sidebar ===== */
+    /* ===== Sidebar ===== */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    right: 0; /* دائم الظهور على الكمبيوتر */
+    width: 260px;
+    height: calc(100vh - 60px);
+    background: #0F172A;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.3s;
+    z-index: 1001;
+    overflow-y: auto;
+    font-family: "Cairo", sans-serif;
+    font-weight: 600;
+    border-left: 1px solid #334155;
+}
+
+/* Scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #38bdf8;
+    border-radius: 10px;
+}
+
+/* تظهر عند toggle على الموبايل */
+.sidebar.show {
+    right: 0;
+}
+
+/* روابط وأزرار داخل السايدبار */
+.sidebar a,
+.sidebar button,
+.sidebar div {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #1e293b;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar button:hover {
+    background: #334155;
+}
+
+/* عناوين داخل السايدبار */
+.sidebar h2 {
+    text-align: center;
+    color: #a78bfa;
+    margin-bottom: 10px;
+}
+
+/* ===== Overlay ===== */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+#overlay.show {
+    display: block;
+}
+
+/* ===== Mobile ===== */
+@media(max-width:768px) {
     .sidebar {
-      position: fixed;
-      top: 60px;
-      right: -260px;
-      width: 260px;
-      height: calc(100vh - 60px);
-      background: #0f172a;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: 0.3s;
-      z-index: 1001;
-      overflow-y: auto;
-      font-family: "Cairo", sans-serif;
-      font-weight: 600;
-    }
-
-    .sidebar::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #38bdf8;
-      border-radius: 10px;
+        right: -260px; /* مخفي افتراضيًا */
     }
 
     .sidebar.show {
-      right: 0;
+        right: 0; /* يظهر عند الضغط على التوجل */
     }
+}
 
-    .sidebar a {
-      text-decoration: none;
-      color: #cbd5f5;
-      padding: 12px;
-      border-radius: 10px;
-    }
-
-    .sidebar h2 {
-      text-align: center;
-      color: #a78bfa;
-    }
-
-    .sidebar a:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    /* ===== Overlay ===== */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 1000;
-    }
-
-    #overlay.show {
-      display: block;
-    }
 
     section {
       background: #0f172a;

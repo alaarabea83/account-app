@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -21,82 +21,189 @@
             margin: 0;
         }
 
-        /* HEADER */
+        /* ===== Header ===== */
         .header {
-            position: sticky;
-            top: 0;
-            background: #0e7490;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            z-index: 1000;
-            text-align: center;
-        }
-
-        h4 {
-            margin-bottom: 10px;
-        }
-
-        /* MAIN */
-        .main-content {
-            padding: 20px;
-        }
-
-        /* فاصل ناعم */
-        .main-content::before {
-            content: "";
-            display: block;
-            height: 1px;
-            background: linear-gradient(to left, transparent, #334155, transparent);
-            margin-bottom: 20px;
-            margin-top: 60px;
-        }
-
-        /* breadcrumb */
-        .breadcrumb {
             position: fixed;
-            left: 0;
+            inset: 0 0 auto 0;
+            height: 60px;
+            background: #0e7490;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 15px;
+            z-index: 1002;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 0;
+            order: 2;
+            /* يخليه ناحية اليمين */
+        }
+
+        .menu-toggle {
+            background: white;
+            color: #000;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+
+            order: 1;
+            /* يخليه ناحية الشمال */
+        }
+
+        /* ===== Sidebar ===== */
+        .sidebar {
+            position: fixed;
+            top: 60px;
             right: 0;
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 12px 20px;
-            margin: 0 auto;
-            max-width: 100%;
+            width: 260px;
+            height: calc(100vh - 60px);
+            background: #0f172a;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1001;
+            transition: 0.3s;
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* عناصر القائمة */
+        .sidebar a,
+        .sidebar button,
+        .sidebar div {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #1e293b;
+            border-radius: 8px;
             text-align: center;
-        }
-
-        .breadcrumb a {
-            color: #5dade2;
+            color: white;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
         }
 
-        /* جداول */
+        .sidebar a:hover,
+        .sidebar button:hover {
+            background: #334155;
+        }
+
+        /* ===== Overlay ===== */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+        #overlay.show {
+            display: block;
+        }
+
+        /* ===== MAIN ===== */
+        .main-content {
+            margin-top: 70px;
+            margin-right: 300px;
+            /* مساحة للسايدبار */
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        /* ===== Filters ===== */
+        .filter-container {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-container label {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+            gap: 5px;
+        }
+
+        .filter-container input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+        }
+
+        /* ===== Buttons ===== */
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        /* زر الفلترة */
+        #filterBtn {
+            background: #2563eb;
+            color: white;
+        }
+
+        #filterBtn:hover {
+            background: #1d4ed8;
+        }
+
+        /* ===== Expenses Button ===== */
+        .expenses-btn {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #showExpensesBtn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ===== Table ===== */
         .table-container {
             width: 100%;
             max-height: 400px;
             overflow: auto;
+            background: #020617;
+            border-radius: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            min-width: 600px;
+            min-width: 700px;
+            /* يجبر الاسكرول */
         }
 
         th,
         td {
-            border: 1px solid #4b5563;
-            padding: 8px;
+            border: 1px solid #334155;
+            padding: 10px;
             text-align: center;
         }
 
         th {
             background: #1e293b;
-        }
-
-        tfoot td {
-            font-weight: bold;
-            color: #fbbf24;
         }
 
         /* Scrollbar */
@@ -110,51 +217,12 @@
             border-radius: 10px;
         }
 
-        /* فلتر */
-        .filter-container {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        input[type="date"] {
-            flex: 1;
-            padding: 6px;
-            margin-left: 10px;
-            border-radius: 6px;
-            border: none;
-        }
-
-        button {
-            width: 100%;
-            max-width: 200px;
-            margin: 15px auto 0;
-            display: block;
-            padding: 12px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background: #21618c;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            padding: 8px 14px;
-            cursor: pointer;
-        }
-
-        /* مودال */
+        /* ===== Modal ===== */
         #expensesModal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .7);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
         }
@@ -162,48 +230,105 @@
         #expensesModalContent {
             background: #1e293b;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 14px;
             width: 90%;
             max-width: 500px;
-            max-height: 70vh;
             display: flex;
             flex-direction: column;
+            gap: 15px;
         }
 
-        #expensesContent {
+        /* حاوية سكرول للجدول داخل المودال */
+        .expenses-table-wrap {
+            max-height: 300px;
             overflow-y: auto;
-            flex: 1;
+            overflow-x: auto;
+            border-radius: 10px;
         }
 
-        /* Scrollbar */
-        #expensesContent::-webkit-scrollbar {
+        /* شكل السكرول */
+        .expenses-table-wrap::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
 
-        #expensesContent::-webkit-scrollbar-thumb {
+        .expenses-table-wrap::-webkit-scrollbar-thumb {
             background: #334155;
             border-radius: 10px;
+        }
+
+        /* يخلي سكرول أفقي لو الأعمدة كتير */
+        .expenses-table-wrap table {
+            min-width: 600px;
+        }
+
+        /* ===== Modal Buttons شكل شيك ===== */
+        .modal-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-save {
+            background: #22c55e;
+            color: white;
+        }
+
+        .btn-close {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* ===== Mobile ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                right: -300px;
+            }
+
+            .sidebar.show {
+                right: 0;
+            }
+
+            .main-content {
+                margin-right: 0;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <header class="header">
-        سهل لإدارة الحسابات
+        <h1>فواتير الشراء</h1>
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     </header>
 
-    <nav class="breadcrumb">
-        <a href="../index.html">الرئيسية</a> /
-        <span>تقارير الأرباح</span>
-    </nav>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!-- رصيد الخزينة -->
+        <div class="menu-item cash-item">
+            💰 رصيد الخزينة:
+            <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+        </div>
+
+        <a href="../index.html">🏠 لوحة التحكم</a>
+        <a href="customers.html">👥 الحسابات</a>
+        <a href="products.html">📦 المخزون</a>
+        <a href="sales.html">🛒 فواتير البيع</a>
+        <a href="purchases.html">🧾 فواتير الشراء</a>
+        <a href="income.html">💰 المقبوضات</a>
+        <a href="expenses.html">💸 المدفوعات</a>
+        <a href="cash.html">🏦 حركة الخزينة</a>
+    </div>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
 
     <main class="main-content">
-
         <div class="filter-container">
-            <label>من تاريخ: <input type="date" id="fromDate"></label>
-            <label>إلي تاريخ: <input type="date" id="toDate"></label>
+            <label>من تاريخ: <input type="date" id="fromDate" /></label>
+            <label>إلي تاريخ: <input type="date" id="toDate" /></label>
             <button id="filterBtn">فلترة</button>
         </div>
 
@@ -257,10 +382,9 @@
             </table>
         </div>
 
-        <button style="background:#e74c3c;color:white;width:100%; margin-top: 10px;" id="showExpensesBtn">
+        <button style="background: #e74c3c; color: white; width: 100%; margin-top: 10px" id="showExpensesBtn">
             عرض المصروفات المسجلة
         </button>
-
     </main>
 
     <!-- مودال المصروفات -->
@@ -271,6 +395,21 @@
             <button id="closeModalBtn">إغلاق</button>
         </div>
     </div>
+
+    <script>
+
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+
+        function toggleSidebar() {
+            sidebar.classList.toggle("show");
+            overlay.classList.toggle("show");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("light");
+        }
+    </script>
 
     <script>
         // بيانات حقيقية موجودة في localStorage
@@ -298,15 +437,15 @@
                 totalProfit += profit;
 
                 tbody.innerHTML += `
-                    <tr>
-                        <td>${i + 1}</td>
-                        <td>${inv.date}</td>
-                        <td>${inv.customer}</td>
-                        <td>${total.toFixed(2)}</td>
-                        <td>${cost.toFixed(2)}</td>
-                        <td>${profit.toFixed(2)}</td>
-                    </tr>
-                `;
+                      <tr>
+                          <td>${i + 1}</td>
+                          <td>${inv.date}</td>
+                          <td>${inv.customer}</td>
+                          <td>${total.toFixed(2)}</td>
+                          <td>${cost.toFixed(2)}</td>
+                          <td>${profit.toFixed(2)}</td>
+                      </tr>
+                  `;
             });
 
             document.getElementById("sumProfit").textContent = totalProfit.toFixed(2);
@@ -349,14 +488,14 @@
                 netProfitSum += net;
 
                 tbody.innerHTML += `
-                    <tr>
-                        <td>${idx++}</td>
-                        <td>${date}</td>
-                        <td>${profit.toFixed(2)}</td>
-                        <td>${exp.toFixed(2)}</td>
-                        <td>${net.toFixed(2)}</td>
-                    </tr>
-                `;
+                      <tr>
+                          <td>${idx++}</td>
+                          <td>${date}</td>
+                          <td>${profit.toFixed(2)}</td>
+                          <td>${exp.toFixed(2)}</td>
+                          <td>${net.toFixed(2)}</td>
+                      </tr>
+                  `;
             });
 
             document.getElementById("totalProfitSum").textContent = totalProfitSum.toFixed(2);
@@ -384,53 +523,69 @@
         const closeModalBtn = document.getElementById("closeModalBtn");
 
         showExpensesBtn.addEventListener("click", () => {
+
             const from = fromDateInput.value || "1970-01-01";
             const to = toDateInput.value || "9999-12-31";
 
-            const filteredExpenses = expenses.filter(e => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to);
+            const filteredExpenses = expenses.filter(e =>
+                e.date.slice(0, 10) >= from &&
+                e.date.slice(0, 10) <= to
+            );
 
             if (!filteredExpenses.length) {
-                expensesContent.innerHTML = "<p style='text-align:center'>لا توجد مصروفات مسجلة</p>";
+                expensesContent.innerHTML =
+                    "<p style='text-align:center'>لا توجد مصروفات مسجلة</p>";
             } else {
-                let html = `<table>
-                                <thead>
-                                    <tr>
-                                        <th>م</th>
-                                        <th>التاريخ</th>
-                                        <th>البند</th>
-                                        <th>المبلغ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>`;
+
+                let html = `
+        <div class="expenses-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>التاريخ</th>
+                    <th>البند</th>
+                    <th>المبلغ</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
+
                 filteredExpenses.forEach((e, i) => {
-                    html += `<tr>
-                                <td>${i + 1}</td>
-                                <td>${e.date}</td>
-                                <td>${e.title}</td>
-                                <td>${e.amount.toFixed(2)}</td>
-                             </tr>`;
+                    html += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${e.date}</td>
+                <td>${e.title}</td>
+                <td>${e.amount.toFixed(2)}</td>
+            </tr>`;
                 });
-                html += "</tbody></table>";
+
+                html += `
+            </tbody>
+        </table>
+        </div>`;
+
                 expensesContent.innerHTML = html;
             }
 
             expensesModal.style.display = "flex";
         });
 
+        // زر الإغلاق
         closeModalBtn.addEventListener("click", () => {
             expensesModal.style.display = "none";
         });
 
-        // تعيين تواريخ اليوم بشكل افتراضي
+        // تعيين تواريخ اليوم افتراضياً
         const today = new Date().toISOString().slice(0, 10);
         fromDateInput.value = today;
         toDateInput.value = today;
 
-        // استدعاء العرض عند تحميل الصفحة
+        // تشغيل الفلترة عند فتح الصفحة
         window.onload = filterAndRender;
 
     </script>
-
 </body>
 
 </html>
