@@ -191,7 +191,7 @@ function addInvoiceItem(product) {
     <td><input type="number" class="itemQty" min="1" value="1"></td>
     <td><input type="number" class="itemPrice" value="${product.price}" readonly></td>
     <td><input type="number" class="itemTotal" readonly></td>
-    <td><button type="button" class="btn-delete-item">❌</button></td>
+    <td><button type="button" class="btn-delete-item">حذف</button></td>
   `;
 
   tbody.appendChild(row);
@@ -402,7 +402,7 @@ function renderSales(data = sales) {
 
   // صف الإجمالي  //
   tbody.innerHTML += `
-    <tr style="background:#111827;color:#fbbf24;font-weight:bold">
+    <tr style="background:#111827;color:#fbbf24;font-weight:bold;height:40px">
       <td colspan="3">الإجمالي</td>
       <td>${sumTotal}</td>
       <td>${sumPaid}</td>
