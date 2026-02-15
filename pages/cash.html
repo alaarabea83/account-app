@@ -83,7 +83,7 @@
       right: -260px;
       width: 260px;
       height: calc(100vh - 60px);
-      background: #111827;
+      background: #0f172a;
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -187,7 +187,7 @@
 
     thead th {
       background: #0f172a;
-      border: 1px solid;
+      border: 1px solid #21618c;
       color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
@@ -196,10 +196,16 @@
     tbody td {
       padding: 10px;
       background: #1e293b;
-      border: 1px solid;
+      border: 1px solid #21618c;
       color: #fff;
       font-size: 14px;
       text-align: center;
+    }
+
+    #cashStatementTable tfoot:last-child {
+      border-bottom: 1px solid #21618c;
+      color: yellow;
+      height: 40px;
     }
 
     .t-scroll {
@@ -232,11 +238,6 @@
       padding: 1rem;
       border-radius: 12px;
       background: linear-gradient(135deg, #1f2937, green);
-    }
-
-    #cashStatementTable tfoot:last-child {
-      border-bottom: 1px solid #000;
-      height: 50px;
     }
 
     .filters {
