@@ -17,15 +17,14 @@
 
   <style>
     .breadcrumb {
-      background: linear-gradient(135deg, #34495e, #2c3e50);
+      background: #0f172a;
       padding: 12px 20px;
-      border-radius: 12px;
-      margin: 16px auto;
-      max-width: 1000px;
+      max-width: 100%;
+      text-align: center;
     }
 
     .breadcrumb a {
-      color: #5dade2;
+      color: yellow;
       text-decoration: none;
     }
 
@@ -35,7 +34,6 @@
 
     @media (max-width: 768px) {
       .breadcrumb {
-        margin: 12px 12px;
         /* مسافة من كل الجهات */
         padding: 14px 16px;
         /* راحة للمس */
@@ -186,11 +184,6 @@
 
   <div class="header">
     سهل لإدارة الحسابات
-    <div>
-      <button class="btn" onclick="toggleMode()">🌙</button>
-      <button class="btn" onclick="backup()">💾</button>
-      <button class="btn" onclick="restore()">📂</button>
-    </div>
   </div>
 
   <nav class="breadcrumb">

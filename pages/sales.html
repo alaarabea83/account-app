@@ -77,26 +77,30 @@
     }
 
     /* ===== Sidebar ===== */
-    /* ===== Sidebar ===== */
     .sidebar {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      /* دائم الظهور على الكمبيوتر */
-      width: 260px;
-      height: calc(100vh - 60px);
-      background: #0F172A;
-      padding: 20px 20px 40px 20px; /* زيادة padding-bottom لتظهر آخر عنصر */
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: 0.3s;
-      z-index: 1001;
-      overflow-y: auto;
-      font-family: "Cairo", sans-serif;
-      font-weight: 600;
-      border-left: 1px solid #334155;
-    }
+        position: fixed;
+        top: 60px;
+        right: 0;
+        /* دائم الظهور على الكمبيوتر */
+        width: 260px;
+        height: calc(100dvh - 60px);
+        /* بدل 100vh */
+        background: #0f172a;
+        padding: 20px 20px 40px 20px;
+        /* زيادة padding-bottom لتظهر آخر عنصر */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s;
+        z-index: 1001;
+        overflow-y: auto;
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        border-left: 1px solid #334155;
+        box-sizing: border-box;
+        /* مهم جداً */
+        padding-bottom: 40px;
+      }
 
     /* Scrollbar */
     .sidebar::-webkit-scrollbar {
@@ -502,60 +506,126 @@
   </div>
 
   <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
+      <!-- رصيد الخزينة -->
+      <div class="menu-item cash-item">
+        💰 رصيد الخزينة:
+        <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+      </div>
 
-    <!-- رصيد الخزينة -->
-    <div class="menu-item cash-item">
-      💰 رصيد الخزينة:
-      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+      <a href="../index.html" class="sidebar-link">
+        <img
+          src="../icons/home.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>الصفحة الرئيسية</span>
+      </a>
+
+      <a href="customers.html" class="sidebar-link">
+        <img
+          src="../icons/customer-512.png"
+          width="32"
+          height="32"
+          alt="Customers Icon"
+        />
+        <span>الحسابات والعملاء</span>
+      </a>
+
+      <a href="products.html" class="sidebar-link">
+        <img
+          src="../icons/products.png"
+          width="32"
+          height="32"
+          alt="Products Icon"
+        />
+        <span>الأصناف والمخزون</span>
+      </a>
+
+      <a href="sales.html" class="sidebar-link">
+        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
+        <span>فواتير البيع</span>
+      </a>
+
+      <a href="purchases.html" class="sidebar-link">
+        <img
+          src="../icons/purchases.png"
+          width="32"
+          height="32"
+          alt="Purchases Icon"
+        />
+        <span>فواتير الشراء</span>
+      </a>
+
+      <a href="#" class="sidebar-link">
+        <img
+          src="../icons/income-512.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>قبض من حساب</span>
+      </a>
+
+      <a href="#" class="sidebar-link">
+        <img
+          src="../icons/accounting-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>دفع لحساب</span>
+      </a>
+      <a href="income.html" class="sidebar-link">
+        <img
+          src="../icons/income.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>تسجيل الإيرادات الخارجيه</span>
+      </a>
+
+      <a href="expenses.html" class="sidebar-link">
+        <img
+          src="../icons/expenses.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>تسجيل المصروفات</span>
+      </a>
+      <a href="cash.html" class="sidebar-link">
+        <img
+          src="../icons/icon-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>حركة الخزينة</span>
+      </a>
+
+      <a href="profit.html" class="sidebar-link">
+        <img
+          src="../icons/profit.png"
+          width="32"
+          height="32"
+          alt="Profit Icon"
+        />
+        <span>تقارير الأرباح</span>
+      </a>
+
+      <a href="../pages/dashboard.html" class="sidebar-link">
+        <img
+          src="../icons/dashboard.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>لوحة التحكم</span>
+      </a>
     </div>
-
-    <a href="../index.html" class="sidebar-link">
-      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
-      <span>الرئيسية</span>
-    </a>
-
-    <a href="customers.html" class="sidebar-link">
-      <img src="../icons/customers.png" width="32" height="32" alt="Customers Icon">
-      <span>الحسابات</span>
-    </a>
-
-    <a href="products.html" class="sidebar-link">
-      <img src="../icons/products.png" width="32" height="32" alt="Products Icon">
-      <span>المخزون</span>
-    </a>
-
-    <a href="sales.html" class="sidebar-link">
-      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon">
-      <span>فواتير البيع</span>
-    </a>
-
-    <a href="purchases.html" class="sidebar-link">
-      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon">
-      <span>فواتير الشراء</span>
-    </a>
-
-    <a href="income.html" class="sidebar-link">
-      <img src="../icons/income.png" width="32" height="32" alt="Income Icon">
-      <span>الإيرادات</span>
-    </a>
-
-    <a href="expenses.html" class="sidebar-link">
-      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon">
-      <span>المصروفات</span>
-    </a>
-
-    <a href="profit.html" class="sidebar-link">
-      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon">
-      <span>تقارير الأرباح</span>
-    </a>
-
-    <a href="../pages/dashboard.html" class="sidebar-link">
-      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
-      <span>لوحة التحكم</span>
-    </a>
-
-  </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 
