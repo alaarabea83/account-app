@@ -1,18 +1,17 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="icon" type="image/png" href="../icons/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
 
-    <title>سهل لإدارة الحسابات</title>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <title>سهل لإدارة الحسابات</title>
   <style>
     /* ===== Variables ===== */
     :root {
@@ -78,92 +77,122 @@
 
     /* ===== Sidebar ===== */
     /* ===== Sidebar ===== */
-.sidebar {
-    position: fixed;
-    top: 60px;
-    right: 0; /* دائم الظهور على الكمبيوتر */
-    width: 260px;
-    height: calc(100vh - 60px);
-    background: #0F172A;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: 0.3s;
-    z-index: 1001;
-    overflow-y: auto;
-    font-family: "Cairo", sans-serif;
-    font-weight: 600;
-    border-left: 1px solid #334155;
-}
-
-/* Scrollbar */
-.sidebar::-webkit-scrollbar {
-    width: 8px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background: #38bdf8;
-    border-radius: 10px;
-}
-
-/* تظهر عند toggle على الموبايل */
-.sidebar.show {
-    right: 0;
-}
-
-/* روابط وأزرار داخل السايدبار */
-.sidebar a,
-.sidebar button,
-.sidebar div {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: #1e293b;
-    border-radius: 8px;
-    text-align: center;
-    color: white;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.sidebar a:hover,
-.sidebar button:hover {
-    background: #334155;
-}
-
-/* عناوين داخل السايدبار */
-.sidebar h2 {
-    text-align: center;
-    color: #a78bfa;
-    margin-bottom: 10px;
-}
-
-/* ===== Overlay ===== */
-#overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 1000;
-}
-
-#overlay.show {
-    display: block;
-}
-
-/* ===== Mobile ===== */
-@media(max-width:768px) {
     .sidebar {
-        right: -260px; /* مخفي افتراضيًا */
+      position: fixed;
+      top: 60px;
+      right: 0;
+      /* دائم الظهور على الكمبيوتر */
+      width: 260px;
+      height: calc(100vh - 60px);
+      background: #0F172A;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
+      border-left: 1px solid #334155;
     }
 
-    .sidebar.show {
-        right: 0; /* يظهر عند الضغط على التوجل */
+    /* Scrollbar */
+    .sidebar::-webkit-scrollbar {
+      width: 8px;
     }
-}
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+
+    /* تظهر عند toggle على الموبايل */
+    .sidebar.show {
+      right: 0;
+    }
+
+    /* روابط وأزرار داخل السايدبار */
+    .sidebar a,
+    .sidebar button,
+    .sidebar div {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover,
+    .sidebar button:hover {
+      background: #334155;
+    }
+
+    /* عناوين داخل السايدبار */
+    .sidebar h2 {
+      text-align: center;
+      color: #a78bfa;
+      margin-bottom: 10px;
+    }
+
+    /* ===== Overlay ===== */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1000;
+    }
+
+    #overlay.show {
+      display: block;
+    }
+
+    /* روابط السايدبار */
+    .sidebar-link {
+      display: flex;
+      flex-direction: column;
+      /* عمودياً */
+      align-items: center;
+      /* تمركز النص تحت الأيقونة */
+      justify-content: center;
+      gap: 6px;
+      /* مسافة متساوية بين الأيقونة والنص */
+      padding: 12px;
+      text-decoration: none;
+      color: #cbd5f5;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .sidebar-link img {
+      display: block;
+    }
+
+    .sidebar-link:hover {
+      background: var(--primary, #2563eb);
+      color: white;
+    }
+
+
+    /* ===== Mobile ===== */
+    @media(max-width:768px) {
+      .sidebar {
+        right: -260px;
+        /* مخفي افتراضيًا */
+      }
+
+      .sidebar.show {
+        right: 0;
+        /* يظهر عند الضغط على التوجل */
+      }
+    }
 
 
     section {
@@ -386,106 +415,138 @@
       <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
     </div>
 
-    <a href="../index.html">🏠 لوحة التحكم</a>
-    <a href="customers.html">👥 الحسابات</a>
-    <a href="products.html">📦 المخزون</a>
-    <a href="sales.html">🛒 فواتير البيع</a>
-    <a href="purchases.html">🧾 فواتير الشراء</a>
-    <a href="income.html">💰 المقبوضات</a>
-    <a href="expenses.html">💸 المدفوعات</a>
-    <a href="cash.html">🏦 حركة الخزينة</a>
+    <a href="../index.html" class="sidebar-link">
+      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
+      <span>الرئيسية</span>
+    </a>
+
+    <a href="customers.html" class="sidebar-link">
+      <img src="../icons/customers.png" width="32" height="32" alt="Customers Icon">
+      <span>الحسابات</span>
+    </a>
+
+    <a href="products.html" class="sidebar-link">
+      <img src="../icons/products.png" width="32" height="32" alt="Products Icon">
+      <span>المخزون</span>
+    </a>
+
+    <a href="sales.html" class="sidebar-link">
+      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon">
+      <span>فواتير البيع</span>
+    </a>
+
+    <a href="purchases.html" class="sidebar-link">
+      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon">
+      <span>فواتير الشراء</span>
+    </a>
+
+    <a href="income.html" class="sidebar-link">
+      <img src="../icons/income.png" width="32" height="32" alt="Income Icon">
+      <span>الإيرادات</span>
+    </a>
+
+    <a href="expenses.html" class="sidebar-link">
+      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon">
+      <span>المصروفات</span>
+    </a>
+
+    <a href="profit.html" class="sidebar-link">
+      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon">
+      <span>تقارير الأرباح</span>
+    </a>
+
+    <a href="../pages/dashboard.html" class="sidebar-link">
+      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
+      <span>لوحة التحكم</span>
+    </a>
 
   </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 
-    <section>
-      <!-- صندوق إضافة سند الصرف -->
-      <div class="t-container">
-        <div class="expenseReciept">
-          <h5>💸 تسجيل المصروفات</h5>
-          <div class="form-row">
-            <select id="expenseCustomer"></select>
-            <input
-              type="number"
-              id="expenseAmount"
-              placeholder="المبلغ"
-              min="0"
-            />
-            <select id="expenseTitle">
-              <option value="" disabled selected>إختر البيان</option>
-              <option>مصروفات نثرية</option>
-              <option>مصروفات إدارية</option>
-              <option>مصروفات تسويقية</option>
-              <option>مصروفات دعاية وإعلان</option>
-              <option>سلف العاملين</option>
-              <option>أجور ومرتبات</option>
-              <option>وقود ومحروقات</option>
-              <option>إيجارات</option>
-              <option>نقل ومواصلات</option>
-              <option>إكراميات</option>
-              <option>رسوم أخري</option>
-              <option value="other">أخرى</option>
-            </select>
-            <button id="addExpenseBtn">✚ إضافة</button>
-          </div>
-        </div>
-      </div>
-
-      <!--  سجل المصروفات -->
-      <div class="t-container">
-        <div class="expenseMenu">
-          <h5>📋 سجل المصروفات</h5>
-          <div class="table-scroll">
-            <table id="expenseTable">
-              <thead>
-                <tr>
-                  <th>التاريخ</th>
-                  <th>الحساب</th>
-                  <th>المبلغ</th>
-                  <th>البيان</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="appModal" class="modal-overlay">
-      <div class="modal-box">
-        <h3 id="modalTitle">تنبيه</h3>
-        <p id="modalMessage"></p>
-        <button onclick="closeModal()">حسناً</button>
-      </div>
-    </div>
-
-    <!-- مودال إضافة بند أخرى للمصروفات -->
-    <div id="expenseModal" class="modal">
-      <div class="modal-content">
-        <h>إضافة بيان مصروف</h>
-
-        <input type="text" id="otherExpenseInput" placeholder="اكتب البيان" />
-
-        <div class="modal-actions">
-          <button id="saveExpenseBtn">حفظ</button>
-          <button id="closeExpenseModalBtn">إلغاء</button>
+  <section>
+    <!-- صندوق إضافة سند الصرف -->
+    <div class="t-container">
+      <div class="expenseReciept">
+        <h5>💸 تسجيل المصروفات</h5>
+        <div class="form-row">
+          <select id="expenseCustomer"></select>
+          <input type="number" id="expenseAmount" placeholder="المبلغ" min="0" />
+          <select id="expenseTitle">
+            <option value="" disabled selected>إختر البيان</option>
+            <option>مصروفات نثرية</option>
+            <option>مصروفات إدارية</option>
+            <option>مصروفات تسويقية</option>
+            <option>مصروفات دعاية وإعلان</option>
+            <option>سلف العاملين</option>
+            <option>أجور ومرتبات</option>
+            <option>وقود ومحروقات</option>
+            <option>إيجارات</option>
+            <option>نقل ومواصلات</option>
+            <option>إكراميات</option>
+            <option>رسوم أخري</option>
+            <option value="other">أخرى</option>
+          </select>
+          <button id="addExpenseBtn">✚ إضافة</button>
         </div>
       </div>
     </div>
 
-    <script src="../js/data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/expenses.js"></script>
+    <!--  سجل المصروفات -->
+    <div class="t-container">
+      <div class="expenseMenu">
+        <h5>📋 سجل المصروفات</h5>
+        <div class="table-scroll">
+          <table id="expenseTable">
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>الحساب</th>
+                <th>المبلغ</th>
+                <th>البيان</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
+  <!-- Modal -->
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3 id="modalTitle">تنبيه</h3>
+      <p id="modalMessage"></p>
+      <button onclick="closeModal()">حسناً</button>
+    </div>
+  </div>
+
+  <!-- مودال إضافة بند أخرى للمصروفات -->
+  <div id="expenseModal" class="modal">
+    <div class="modal-content">
+      <h>إضافة بيان مصروف</h>
+
+      <input type="text" id="otherExpenseInput" placeholder="اكتب البيان" />
+
+      <div class="modal-actions">
+        <button id="saveExpenseBtn">حفظ</button>
+        <button id="closeExpenseModalBtn">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/expenses.js"></script>
+
+  <script>
     function toggleSidebar() {
       document.getElementById("sidebar").classList.toggle("show");
       document.getElementById("overlay").classList.toggle("show");
     }
   </script>
 
-  </body>
+</body>
+
 </html>

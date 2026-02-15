@@ -108,6 +108,33 @@
             display: block;
         }
 
+        /* روابط السايدبار */
+        .sidebar-link {
+            display: flex;
+            flex-direction: column;
+            /* عمودياً */
+            align-items: center;
+            /* تمركز النص تحت الأيقونة */
+            justify-content: center;
+            gap: 6px;
+            /* مسافة متساوية بين الأيقونة والنص */
+            padding: 12px;
+            text-decoration: none;
+            color: #cbd5f5;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .sidebar-link img {
+            display: block;
+        }
+
+        .sidebar-link:hover {
+            background: var(--primary, #2563eb);
+            color: white;
+        }
+
+
         /* ===== MAIN ===== */
         .main-content {
             margin-top: 70px;
@@ -307,20 +334,58 @@
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
+
         <!-- رصيد الخزينة -->
         <div class="menu-item cash-item">
             💰 رصيد الخزينة:
             <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
         </div>
 
-        <a href="../index.html">🏠 لوحة التحكم</a>
-        <a href="customers.html">👥 الحسابات</a>
-        <a href="products.html">📦 المخزون</a>
-        <a href="sales.html">🛒 فواتير البيع</a>
-        <a href="purchases.html">🧾 فواتير الشراء</a>
-        <a href="income.html">💰 المقبوضات</a>
-        <a href="expenses.html">💸 المدفوعات</a>
-        <a href="cash.html">🏦 حركة الخزينة</a>
+        <a href="../index.html" class="sidebar-link">
+            <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
+            <span>الرئيسية</span>
+        </a>
+
+        <a href="customers.html" class="sidebar-link">
+            <img src="../icons/customers.png" width="32" height="32" alt="Customers Icon">
+            <span>الحسابات</span>
+        </a>
+
+        <a href="products.html" class="sidebar-link">
+            <img src="../icons/products.png" width="32" height="32" alt="Products Icon">
+            <span>المخزون</span>
+        </a>
+
+        <a href="sales.html" class="sidebar-link">
+            <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon">
+            <span>فواتير البيع</span>
+        </a>
+
+        <a href="purchases.html" class="sidebar-link">
+            <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon">
+            <span>فواتير الشراء</span>
+        </a>
+
+        <a href="income.html" class="sidebar-link">
+            <img src="../icons/income.png" width="32" height="32" alt="Income Icon">
+            <span>الإيرادات</span>
+        </a>
+
+        <a href="expenses.html" class="sidebar-link">
+            <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon">
+            <span>المصروفات</span>
+        </a>
+
+        <a href="profit.html" class="sidebar-link">
+            <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon">
+            <span>تقارير الأرباح</span>
+        </a>
+
+        <a href="../pages/dashboard.html" class="sidebar-link">
+            <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon">
+            <span>لوحة التحكم</span>
+        </a>
+
     </div>
 
     <div id="overlay" onclick="toggleSidebar()"></div>
