@@ -368,19 +368,3 @@ window.onload = function () {
     updateDash();
     fillDrv();
 };
-
-// ================= DARK MODE =================
-function toggleDark() {
-    document.body.classList.toggle("dark");
-
-    if (document.body.classList.contains("dark")) {
-        localStorage.darkMode = "on";
-    } else {
-        localStorage.darkMode = "off";
-    }
-}
-
-// تحميل الحالة المحفوظة
-if (localStorage.darkMode === "on") {
-    document.body.classList.add("dark");
-}
