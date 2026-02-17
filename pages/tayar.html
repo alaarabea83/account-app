@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -8,10 +9,8 @@
     <title>سهل لإدارة الحسابات</title>
 
     <link rel="icon" type="image/png" href="../icons/logo.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+        rel="stylesheet" />
 
     <style>
         :root {
@@ -376,6 +375,21 @@
         </div>
     </div>
 
+    <div id="cashModal" class="modal">
+        <div class="modal-content">
+            <h3>استلام نقدية من طيار</h3>
+
+            <select id="cashDriver"></select>
+            <input id="cashAmount" type="number" placeholder="المبلغ">
+
+            <button onclick="receiveCash()">تأكيد الاستلام</button>
+            <button onclick="cashModal.style.display='none'" style="background:#ef4444;">
+                إلغاء
+            </button>
+        </div>
+    </div>
+
+
     <!-- DASHBOARD -->
     <div id="dash" class="section active">
         <div class="stat">
@@ -394,6 +408,11 @@
             <input id="opening" type="number" placeholder="رصيد افتتاحي / سلفة" />
             <button id="addDriverBtn">حفظ الطيار</button>
         </div>
+
+        <button onclick="openCashModal()" style="background:#22c55e;">
+            استلام نقدية من طيار
+        </button>
+
 
         <div class="card-2">
             <h3>جدول الطيارين</h3>
@@ -443,8 +462,6 @@
                         <th>طيار</th>
                         <th>قيمة</th>
                         <th>الحالة</th>
-                        <th>المستلم</th>
-                        <th>تحديث</th>
                         <th>إلغاء</th>
                     </tr>
                     <tbody id="ordersTable"></tbody>
@@ -472,7 +489,6 @@
                         <th>طيار</th>
                         <th>قيمة</th>
                         <th>حالة</th>
-                        <th>المستلم</th>
                     </tr>
                     <tbody id="reportTable"></tbody>
                 </table>
