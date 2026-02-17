@@ -16,20 +16,20 @@ const reportTable = document.getElementById("reportTable");
 
 let DB = JSON.parse(
     localStorage.V12DB ||
-    `{"drivers":[],"orders":[],"cash":0,"clients":[],"cashLog":[]}`,
+    `{"drivers":[],"orders":[],"cash":0,"clients":[]}`,
 );
 
 // ... مودالات وكده ...
 
 // ==================== حساب رصيد الطيار ====================
 function updateDriverBalances() {
-    // نرجّع الرصيد الافتتاحي
-    DB.drivers.forEach((d) => (d.balance = d.opening || 0));
+    DB.drivers.forEach((d) => {
+        d.balance = d.opening || 0; // نبدأ بالرصيد الابتدائي
+    });
 
-    // نضيف قيمة الأوردرات المسلمة
     DB.orders.forEach((o) => {
-        if (o.driver !== null && !o.canceled && o.status === "تم التسليم") {
-            DB.drivers[o.driver].balance += o.amount;
+        if (o.driver !== null && !o.canceled) {
+            DB.drivers[o.driver].balance += o.amount - o.paid;
         }
     });
 }
@@ -47,22 +47,7 @@ function show(id) {
 }
 function save() {
     localStorage.V12DB = JSON.stringify(DB);
-    refreshUI();
-}
-
-function refreshUI() {
-    updateDriverBalances();
-    renderDrivers();
-    renderOrders();
     updateDash();
-
-    // لو كشف الحساب مفتوح يحدث نفسه
-    if (
-        accountDriverModal.style.display === "flex" &&
-        currentAccountIndex !== null
-    ) {
-        showAccount(currentAccountIndex);
-    }
 }
 
 // مودالات الطيارين
@@ -71,10 +56,10 @@ const deleteDriverModal = document.getElementById("deleteDriverModal");
 const accountDriverModal = document.getElementById("accountDriverModal");
 let editIndex = null,
     deleteIndex = null;
-let currentAccountIndex = null;
 
 // ==================== DRIVERS ====================
 function renderDrivers() {
+    updateDriverBalances();
     driversTable.innerHTML = "";
 
     let totalBalance = 0; // لمجموع الرصيد الحالي
@@ -127,6 +112,7 @@ document.getElementById("addDriverBtn").onclick = function () {
     dPhone.value = "";
     opening.value = "";
     save();
+    renderDrivers();
     showModal("تم إضافة الطيار بنجاح ✅");
 };
 
@@ -135,8 +121,7 @@ function openEditDriverModal(i) {
     editIndex = i;
     document.getElementById("editName").value = DB.drivers[i].name;
     document.getElementById("editPhone").value = DB.drivers[i].phone;
-    document.getElementById("editBalance").value =
-        DB.drivers[i].opening || 0;
+    document.getElementById("editBalance").value = DB.drivers[i].balance;
     editDriverModal.style.display = "flex";
 }
 
@@ -147,6 +132,7 @@ document.getElementById("saveEditDriver").onclick = function () {
     d.opening = Number(document.getElementById("editBalance").value); // ← الآن يغير الرصيد الابتدائي فقط
     save();
     updateDriverBalances();
+    renderDrivers();
     editDriverModal.style.display = "none";
     showModal("تم تعديل بيانات الطيار بنجاح ✅");
 };
@@ -163,64 +149,21 @@ document.getElementById("confirmDeleteDriver").onclick = function () {
     });
     DB.drivers.splice(idx, 1);
     save();
+    renderDrivers();
     deleteDriverModal.style.display = "none";
     showModal("تم حذف الطيار بنجاح ✅");
 };
 
 // كشف حساب الطيار
 function showAccount(i) {
-    currentAccountIndex = i;
     let drv = DB.drivers[i];
-
-    // بداية الجدول
-    let content = `
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>رقم الأوردر</th>
-            <th>العميل</th>
-            <th>العنوان</th>
-            <th>المبلغ</th>
-            <th>الحالة</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
-
-    let totalAmount = 0;
-
+    let content = "<b>الأوردرات:</b><br>";
     DB.orders.forEach((o) => {
         if (o.driver === i) {
-            totalAmount += o.amount;
-
-            content += `<tr>
-        <td>${o.orderNum}</td>
-        <td>${o.customer}</td>
-        <td>${o.address}</td>
-        <td>${o.amount}</td>
-        <td style="color:${o.status === "تم التسليم" ? "#22c55e" : o.status === "خرج للتوصيل" ? "#f59e0b" : "#ef4444"}">
-          ${o.status}
-        </td>
-      </tr>`;
+            content += `رقم:${o.orderNum} | عميل:${o.customer} | مبلغ:${o.amount} | حالة:${o.status} | مستلم:${o.paid}<br>`;
         }
     });
-
-    // صف الإجمالي
-    content += `<tr style="font-weight:bold; background:#f0f0f0; color:#111;">
-    <td colspan="3">الإجمالي</td>
-    <td>${totalAmount}</td>
-    <td></td>
-  </tr>`;
-
-    content += `
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <b>رصيد الطيار الحالي: ${drv.balance}</b>
-  `;
-
+    content += `<br><b>رصيد الطيار الحالي: ${drv.balance}</b>`;
     document.getElementById("accountContent").innerHTML = content;
     accountDriverModal.style.display = "flex";
 }
@@ -242,6 +185,7 @@ document.getElementById("addOrderBtn").onclick = function () {
         amount: Number(amt.value),
         driver: Number(drv.value),
         status: "خرج للتوصيل",
+        paid: 0,
         canceled: false,
         date: new Date().toISOString(),
     };
@@ -261,10 +205,12 @@ function renderOrders() {
     let date = filterDate.value || new Date().toISOString().slice(0, 10);
 
     let totalAmount = 0;
+    let totalPaid = 0;
 
     DB.orders.forEach((o) => {
         if (o.date.startsWith(date)) {
             totalAmount += o.amount;
+            totalPaid += o.paid;
             ordersTable.innerHTML += `<tr>
         <td>${o.orderNum}</td>
         <td>${o.customer}</td>
@@ -278,6 +224,8 @@ function renderOrders() {
             <option value="لم يتم التسليم" ${o.status === "لم يتم التسليم" ? "selected" : ""}>لم يتم التسليم</option>
           </select>
         </td>
+        <td><input type="number" value="${o.paid}" onchange="updatePaid(${o.orderNum},this.value)"></td>
+        <td><button onclick="updateOrder(${o.orderNum})">تحديث</button></td>
         <td><button onclick="cancelOrder(${o.orderNum})" style="background:#EF4444;">إلغاء</button></td>
       </tr>`;
         }
@@ -288,6 +236,7 @@ function renderOrders() {
     <td colspan="4">الإجمالي</td>
     <td>${totalAmount}</td>
     <td></td>
+    <td>${totalPaid}</td>
     <td colspan="2"></td>
   </tr>`;
 }
@@ -301,12 +250,25 @@ function updateStatus(num, newStatus) {
         showModal("تم تحديث حالة الأوردر ✅");
     }
 }
+function updatePaid(num, value) {
+    let o = DB.orders.find((x) => x.orderNum === num);
+    if (o) {
+        o.paid = Number(value); // نحدث قيمة المستلم فقط
+        save();
+        renderDrivers(); // ← هيحسب الرصيد تلقائيًا
+        renderOrders();
+        updateDash();
+        showModal("تم تحديث المستلم ✅");
+    }
+}
 
 function cancelOrder(num) {
     let o = DB.orders.find((x) => x.orderNum === num);
     if (o && !o.canceled) {
         o.canceled = true;
-        if (o.driver !== null) save();
+        if (o.driver !== null) DB.drivers[o.driver].balance -= o.amount;
+        DB.cash -= o.paid;
+        save();
         renderOrders();
         showModal("تم إلغاء الأوردر وإلغاء أثره المالي ✅");
     }
@@ -315,19 +277,13 @@ function cancelOrder(num) {
 // ==================== DASHBOARD ====================
 function updateDash() {
     let today = new Date().toISOString().slice(0, 10);
-
-    // عدد أوردرات اليوم
     dOrders.innerText = DB.orders.filter(
         (o) => o.date.startsWith(today) && !o.canceled,
     ).length;
-
-    // تحصيل اليوم الحقيقي
-    dCash.innerText = DB.cashLog
-        .filter((c) => c.date.startsWith(today))
-        .reduce((a, b) => a + b.amount, 0);
-
-    // رصيد الخزنة
-    dSafe.innerText = (DB.cash || 0) + " ج";
+    dCash.innerText = DB.orders
+        .filter((o) => o.date.startsWith(today) && !o.canceled)
+        .reduce((a, b) => a + b.paid, 0);
+    dSafe.innerText = DB.cash;
 }
 
 // ==================== REPORTS ====================
@@ -345,6 +301,7 @@ function dailyReport() {
 <td>${o.driver !== null ? DB.drivers[o.driver]?.name : "-"}</td>
 <td>${o.amount}</td>
 <td>${o.status}</td>
+<td>${o.paid}</td>
 </tr>`;
         }
     });
@@ -365,6 +322,7 @@ function monthlyReport() {
 <td>${o.driver !== null ? DB.drivers[o.driver]?.name : "-"}</td>
 <td>${o.amount}</td>
 <td>${o.status}</td>
+<td>${o.paid}</td>
 </tr>`;
         }
     });
@@ -410,46 +368,3 @@ window.onload = function () {
     updateDash();
     fillDrv();
 };
-
-const cashModal = document.getElementById("cashModal");
-
-function openCashModal() {
-    let sel = document.getElementById("cashDriver");
-    sel.innerHTML = "";
-
-    DB.drivers.forEach((d, i) => {
-        sel.innerHTML += `<option value="${i}">
-      ${d.name} (رصيده: ${d.balance})
-    </option>`;
-    });
-
-    document.getElementById("cashAmount").value = "";
-    cashModal.style.display = "flex";
-}
-
-function receiveCash() {
-    let i = Number(document.getElementById("cashDriver").value);
-    let amt = Number(document.getElementById("cashAmount").value);
-
-    if (!amt || amt <= 0) return;
-
-    if (amt > DB.drivers[i].balance) {
-        showModal("المبلغ أكبر من مديونية الطيار");
-        return;
-    }
-
-    // تسجيل الحركة
-    DB.cashLog.push({
-        driver: i,
-        amount: amt,
-        date: new Date().toISOString(),
-    });
-
-    DB.drivers[i].opening = (DB.drivers[i].opening || 0) - amt;
-
-    DB.cash += amt;
-
-    save();
-    cashModal.style.display = "none";
-    showModal("تم استلام النقدية بنجاح ✅");
-}
