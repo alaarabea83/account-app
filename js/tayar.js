@@ -121,7 +121,7 @@ function openEditDriverModal(i) {
     editIndex = i;
     document.getElementById("editName").value = DB.drivers[i].name;
     document.getElementById("editPhone").value = DB.drivers[i].phone;
-    document.getElementById("editBalance").value = DB.drivers[i].balance;
+    document.getElementById("editBalance").value = DB.drivers[i].opening || 0;
     editDriverModal.style.display = "flex";
 }
 
@@ -136,6 +136,30 @@ document.getElementById("saveEditDriver").onclick = function () {
     editDriverModal.style.display = "none";
     showModal("تم تعديل بيانات الطيار بنجاح ✅");
 };
+
+document.getElementById("zeroDriverBalance").onclick = function () {
+    if (editIndex === null) return;
+
+    let d = DB.drivers[editIndex];
+
+    // نصفر السلفة
+    d.opening = -d.balance;
+
+    // نلغي أي مستلم مرتبط بالأوردرات
+    DB.orders.forEach(o => {
+        if (o.driver === editIndex) {
+            o.paid = 0;
+        }
+    });
+
+    save();
+    renderDrivers();
+    renderOrders();
+
+    editDriverModal.style.display = "none";
+    showModal("تم تصفير رصيد الطيار ✅");
+};
+
 
 // حذف الطيار
 function openDeleteDriverModal(i) {
