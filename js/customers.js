@@ -80,6 +80,12 @@ function renderCustomers(searchQuery = "") {
         currentBalance += e.amount;
       });
 
+    receipts
+      .filter((r) => r.customer === c.name)
+      .forEach((r) => {
+        currentBalance -= r.amount;
+      });
+
     totalBalance += currentBalance; // 👈 نجمع الإجمالي
 
     const tr = document.createElement("tr");
@@ -248,6 +254,16 @@ function openStatementModal(index) {
         debit: e.amount,
         credit: 0,
         order: e.order,
+      })),
+
+    ...receipts
+      .filter((r) => r.customer === customer.name)
+      .map((r) => ({
+        date: r.date,
+        desc: r.title || "سند قبض",
+        debit: 0,
+        credit: r.amount,
+        order: r.order,
       })),
   ];
 

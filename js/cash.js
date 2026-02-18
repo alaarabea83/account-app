@@ -74,6 +74,15 @@ function renderCashStatement() {
       credit: e.amount,
       customer: e.customer || "",
     })),
+
+    ...receipts.map((r) => ({
+    date: r.date,
+    timestamp: r.order || 0,
+    desc: r.title || "سند قبض",
+    debit: r.amount,
+    credit: 0,
+    customer: r.customer,
+  })),
   ];
 
   // 🔥 الترتيب حسب التاريخ ثم وقت العملية

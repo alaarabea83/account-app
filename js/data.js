@@ -8,6 +8,7 @@ let sales = [];
 let purchases = [];
 let incomes = [];
 let expenses = [];
+let receipts = [];
 
 let cash = {
   opening: 0,
@@ -27,6 +28,7 @@ function saveData() {
   localStorage.setItem("incomes", JSON.stringify(incomes));
   localStorage.setItem("expenses", JSON.stringify(expenses));
   localStorage.setItem("cash", JSON.stringify(cash));
+  localStorage.setItem("receipts", JSON.stringify(receipts));
 }
 
 function loadData() {
@@ -37,6 +39,7 @@ function loadData() {
   const i = localStorage.getItem("incomes");
   const e = localStorage.getItem("expenses");
   const ca = localStorage.getItem("cash");
+  const r = localStorage.getItem("receipts");
 
   customers = c ? JSON.parse(c) : [];
   products = p ? JSON.parse(p) : [];
@@ -44,6 +47,7 @@ function loadData() {
   purchases = pu ? JSON.parse(pu) : [];
   incomes = i ? JSON.parse(i) : [];
   expenses = e ? JSON.parse(e) : [];
+  receipts = r ? JSON.parse(r) : [];
 
   cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
 }

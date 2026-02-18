@@ -354,37 +354,67 @@
 
     // ======================= إضافة المقبوض =====================
     function addReceipt() {
-      const titleSelect = document.getElementById("receiptTitle");
-      let title = titleSelect.value;
-      const amount = +document.getElementById("receiptAmount").value;
-      const customerIndex = parseInt(document.getElementById("receiptCustomer").value);
-      const customer = customerIndex >= 0 ? customers[customerIndex] : null;
+  const title = document.getElementById("receiptTitle").value;
+  const amount = +document.getElementById("receiptAmount").value;
+  const idx = +document.getElementById("receiptCustomer").value;
 
-      if (!title || !amount) { alert("اكمل البيانات"); return; }
-      if (amount <= 0) { alert("المبلغ يجب ان يكون >0"); return; }
+  if (!title || !amount) {
+    alert("أكمل البيانات");
+    return;
+  }
 
-      const prev = customer ? customer.balance : 0;
-      const remaining = prev - amount;
-      if (customer) customer.balance = remaining;
-      cash.income += amount;
+  let customer = null;
 
-      const receipt = { date: new Date().toISOString().slice(0, 10), customer: customer ? customer.name : "نقدي", prevBalance: prev, amount, remaining, title, order: Date.now() };
-      receipts.push(receipt);
+  if (idx >= 0) {
+    customer = customers[idx];
+  }
 
-      // تسجيل الحركة للخزنة
-      cashEntries.push({ date: receipt.date, customer: receipt.customer, desc: receipt.title, debit: amount, credit: 0, order: receipt.order });
+  const date = new Date().toISOString().slice(0,10);
 
-      saveData();
+  // ✅ 1- خصم من رصيد العميل
+  let prevBalance = 0;
+  let remaining = 0;
 
-      document.getElementById("receiptAmount").value = "";
-      document.getElementById("receiptCustomer").value = "";
-      titleSelect.value = "";
-      document.getElementById("prevBalance").value = "";
-      document.getElementById("remainingBalance").value = "";
+  if(customer){
+    prevBalance = customer.balance || 0;
+    remaining = prevBalance - amount;
+    customer.balance = remaining;
+  }
 
-      renderReceipt();
-      renderCashStatement();
-    }
+  // ✅ 2- إضافة للخزنة
+  cash.income = (cash.income || 0) + amount;
+
+  // ✅ 3- تسجيل المقبوض
+  const receipt = {
+    date,
+    customer: customer ? customer.name : "نقدي",
+    amount,
+    title,
+    prevBalance,
+    remaining,
+    order: Date.now()
+  };
+
+  receipts.push(receipt);
+
+  // 🔥 تسجيل حركة في الخزنة
+  cashEntries.push({
+    date,
+    desc: title,
+    customer: receipt.customer,
+    debit: amount,
+    credit: 0,
+    order: receipt.order
+  });
+
+  saveData();
+
+  renderReceipt();
+  renderCashStatement();
+
+  alert("تمت الإضافة بنجاح");
+}
+
 
     // ======================= عرض المقبوضات =====================
     function renderReceipt(filterFn = null) {
