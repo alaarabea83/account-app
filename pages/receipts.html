@@ -31,14 +31,29 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
+      border-radius: 0 0 15px 15px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .header h1 {
       font-family: "Tajawal", sans-serif;
       font-size: 24px;
+    }
+
+    .header-right button {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: 0.3s;
+    }
+
+    .header-right button:hover {
+      background: rgba(255, 255, 255, 0.4);
     }
 
     .form-container {
@@ -82,26 +97,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .table-wrapper::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    .table-wrapper::-webkit-scrollbar-track {
-      background: #0F172A;
-      border-radius: 5px;
-    }
-
-    .table-wrapper::-webkit-scrollbar-thumb {
-      background: #3B82F6;
-      border-radius: 5px;
-    }
-
-    .table-wrapper::-webkit-scrollbar-thumb:hover {
-      background: #60A5FA;
-    }
-
-    table {
+    .table-wrapper table {
       width: 100%;
       border-collapse: collapse;
     }
@@ -129,31 +125,46 @@
       background: #21618C;
     }
 
-    .filter-container {
-      max-width: 950px;
-      margin: 20px auto;
-      background: #2E3A59;
-      padding: 15px 20px;
-      border-radius: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      align-items: center;
-      justify-content: flex-start;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    .table-wrapper::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
     }
 
-    .filter-container input,
-    .filter-container select {
-      padding: 10px 12px;
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #0F172A;
+      border-radius: 5px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #3B82F6;
+      border-radius: 5px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #60A5FA;
+    }
+
+    .filter-container {
+      max-width: 950px;
+      margin: 10px auto;
+      background: #1E293B;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-container select,
+    .filter-container input {
+      width: auto;
+      flex: 1;
+      padding: 10px;
       border-radius: 8px;
       border: 1px solid #fff;
       background: #1E293B;
       color: #F8F9FA;
       font-size: 16px;
-      flex: 1;
-      min-width: 120px;
-      transition: 0.3s;
     }
 
     .filter-container input:focus,
@@ -231,7 +242,13 @@
 <body>
 
   <header class="header">
-    <h1>المقبوضات</h1>
+    <div class="header-left">
+      <h1>المقبوضات</h1>
+    </div>
+    <div class="header-right">
+      <button><i class="fa fa-bell"></i></button>
+      <button><i class="fa fa-user"></i></button>
+    </div>
   </header>
 
   <div class="form-container">
@@ -241,7 +258,7 @@
     </select>
 
     <label>الرصيد السابق</label>
-    <input type="text" id="prevBalance" disabled>
+    <input type="text" id="prevBalance" disabled placeholder="الرصيد السابق">
 
     <label>البند / البيان</label>
     <select id="receiptTitle">
@@ -252,17 +269,17 @@
     </select>
 
     <label>المبلغ</label>
-    <input type="number" id="receiptAmount">
+    <input type="number" id="receiptAmount" placeholder="ادخل المبلغ">
 
     <label>المتبقي بعد الدفع</label>
-    <input type="text" id="remainingBalance" disabled>
+    <input type="text" id="remainingBalance" disabled placeholder="المتبقي بعد الدفع">
 
     <button id="addReceiptBtn">إضافة المقبوض</button>
   </div>
 
   <div class="filter-container">
-    <input type="date" id="fromDate">
-    <input type="date" id="toDate">
+    <input type="date" id="fromDate" placeholder="من تاريخ">
+    <input type="date" id="toDate" placeholder="إلى تاريخ">
     <select id="filterCustomer">
       <option value="">الكل</option>
     </select>
@@ -295,7 +312,7 @@
   <div class="modal" id="titleModal">
     <div class="modal-content">
       <h3>أضف بيان جديد</h3>
-      <input type="text" id="otherTitleInput">
+      <input type="text" id="otherTitleInput" placeholder="اكتب البيان هنا">
       <div>
         <button class="save-btn" id="saveTitleBtn">حفظ</button>
         <button class="close-btn" id="closeModalBtn">إلغاء</button>
@@ -304,41 +321,38 @@
   </div>
 
   <script>
-    // ===== البيانات =====
-    let customers = [];
-    let receipts = [];
-    let cash = { opening: 0, income: 0, expenses: 0 };
+    let customers = [], receipts = [], cashEntries = [], cash = { opening: 0, income: 0, expenses: 0 };
 
-    // ===== تحميل وحفظ البيانات =====
+    // ======================= تحميل وحفظ =====================
     function loadData() {
       const c = localStorage.getItem("customers");
       const r = localStorage.getItem("receipts");
+      const ce = localStorage.getItem("cashEntries");
       const ca = localStorage.getItem("cash");
-
       customers = c ? JSON.parse(c) : [];
       receipts = r ? JSON.parse(r) : [];
+      cashEntries = ce ? JSON.parse(ce) : [];
       cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
     }
 
     function saveData() {
       localStorage.setItem("receipts", JSON.stringify(receipts));
+      localStorage.setItem("cashEntries", JSON.stringify(cashEntries));
       localStorage.setItem("cash", JSON.stringify(cash));
     }
 
-    // ===== اختيار العملاء =====
+    // ======================= العملاء =====================
     function renderCustomerSelect() {
       const sel = document.getElementById("receiptCustomer");
       const filterSel = document.getElementById("filterCustomer");
-      sel.innerHTML =
-        `<option value="" disabled selected>اختر الحساب</option>` +
+      sel.innerHTML = `<option value="" disabled selected>اختر الحساب</option>` +
         `<option value="-1">نقدي بدون عميل</option>` +
         customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
-      filterSel.innerHTML =
-        `<option value="">الكل</option>` +
-        customers.map((c, i) => `<option value="${c.name}">${c.name}</option>`).join("");
+      filterSel.innerHTML = `<option value="">الكل</option>` +
+        customers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
     }
 
-    // ===== إضافة المقبوض =====
+    // ======================= إضافة المقبوض =====================
     function addReceipt() {
       const titleSelect = document.getElementById("receiptTitle");
       let title = titleSelect.value;
@@ -346,26 +360,20 @@
       const customerIndex = parseInt(document.getElementById("receiptCustomer").value);
       const customer = customerIndex >= 0 ? customers[customerIndex] : null;
 
-      if (!title || !amount) { alert("من فضلك أكمل جميع البيانات"); return; }
-      if (amount <= 0) { alert("المبلغ يجب أن يكون أكبر من صفر"); return; }
+      if (!title || !amount) { alert("اكمل البيانات"); return; }
+      if (amount <= 0) { alert("المبلغ يجب ان يكون >0"); return; }
 
-      const prev = customer ? customer.balance || 0 : 0;
+      const prev = customer ? customer.balance : 0;
       const remaining = prev - amount;
-
       if (customer) customer.balance = remaining;
       cash.income += amount;
 
-      const receipt = {
-        date: new Date().toISOString().slice(0, 10),
-        customer: customer ? customer.name : "نقدي",
-        prevBalance: prev,
-        amount,
-        remaining: remaining,
-        title,
-        order: Date.now()
-      };
-
+      const receipt = { date: new Date().toISOString().slice(0, 10), customer: customer ? customer.name : "نقدي", prevBalance: prev, amount, remaining, title, order: Date.now() };
       receipts.push(receipt);
+
+      // تسجيل الحركة للخزنة
+      cashEntries.push({ date: receipt.date, customer: receipt.customer, desc: receipt.title, debit: amount, credit: 0, order: receipt.order });
+
       saveData();
 
       document.getElementById("receiptAmount").value = "";
@@ -375,25 +383,24 @@
       document.getElementById("remainingBalance").value = "";
 
       renderReceipt();
-      updateCashBalance();
+      renderCashStatement();
     }
 
-    // ===== عرض المقبوضات =====
+    // ======================= عرض المقبوضات =====================
     function renderReceipt(filterFn = null) {
       const tbody = document.querySelector("#receiptTable tbody");
       tbody.innerHTML = "";
       let total = 0;
-      receipts.filter(r => filterFn ? filterFn(r) : true)
-        .forEach(r => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${r.date}</td><td>${r.customer}</td><td>${r.prevBalance.toFixed(2)}</td><td>${r.amount.toFixed(2)}</td><td>${r.remaining.toFixed(2)}</td><td>${r.title}</td>`;
-          tbody.appendChild(tr);
-          total += r.amount;
-        });
+      receipts.filter(r => filterFn ? r && filterFn(r) : true).forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${r.date}</td><td>${r.customer}</td><td>${r.prevBalance}</td><td>${r.amount}</td><td>${r.remaining}</td><td>${r.title}</td>`;
+        tbody.appendChild(tr);
+        total += r.amount;
+      });
       document.getElementById("receiptTotal").innerText = total.toFixed(2);
     }
 
-    // ===== مودال "أخرى" =====
+    // ======================= مودال أخرى =====================
     const titleSelect = document.getElementById("receiptTitle");
     const modal = document.getElementById("titleModal");
     const saveBtn = document.getElementById("saveTitleBtn");
@@ -401,53 +408,33 @@
     const otherInput = document.getElementById("otherTitleInput");
 
     titleSelect.addEventListener("change", function () {
-      if (this.value === "أخرى") {
-        modal.style.display = "flex";
-        otherInput.value = "";
-        otherInput.focus();
-      }
+      if (this.value === "أخرى") { modal.style.display = "flex"; otherInput.value = ""; otherInput.focus(); }
     });
+    saveBtn.onclick = function () { let val = otherInput.value.trim(); if (!val) return; let opt = document.createElement("option"); opt.text = val; opt.value = val; titleSelect.add(opt); titleSelect.value = val; modal.style.display = "none"; }
+    closeBtn.onclick = function () { modal.style.display = "none"; titleSelect.value = ""; }
 
-    saveBtn.onclick = function () {
-      let val = otherInput.value.trim();
-      if (!val) return;
-      let opt = document.createElement("option");
-      opt.text = val; opt.value = val;
-      titleSelect.add(opt);
-      titleSelect.value = val;
-      modal.style.display = "none";
-    };
-
-    closeBtn.onclick = function () {
-      modal.style.display = "none";
-      titleSelect.value = "";
-    };
-
-    // ===== عند اختيار العميل =====
+    // ======================= الرصيد السابق والمتبقي =====================
     document.getElementById("receiptCustomer").addEventListener("change", function () {
       const idx = parseInt(this.value);
       const customer = idx >= 0 ? customers[idx] : null;
-      const prev = customer ? customer.balance || 0 : 0;
+      const prev = customer ? customer.balance : 0;
       document.getElementById("prevBalance").value = prev.toFixed(2);
       const amount = +document.getElementById("receiptAmount").value || 0;
       document.getElementById("remainingBalance").value = (prev - amount).toFixed(2);
     });
 
-    // ===== عند تغيير المبلغ =====
     document.getElementById("receiptAmount").addEventListener("input", function () {
-      const customerIndex = parseInt(document.getElementById("receiptCustomer").value);
-      const customer = customerIndex >= 0 ? customers[customerIndex] : null;
-      const prev = customer ? customer.balance || 0 : 0;
-      const remaining = prev - (+this.value || 0);
-      document.getElementById("remainingBalance").value = remaining.toFixed(2);
+      const idx = parseInt(document.getElementById("receiptCustomer").value);
+      const customer = idx >= 0 ? customers[idx] : null;
+      const prev = customer ? customer.balance : 0;
+      document.getElementById("remainingBalance").value = (prev - (+this.value || 0)).toFixed(2);
     });
 
-    // ===== فلترة الجدول =====
+    // ======================= فلترة الجدول =====================
     document.getElementById("filterBtn").addEventListener("click", function () {
       const from = document.getElementById("fromDate").value;
       const to = document.getElementById("toDate").value;
       const cust = document.getElementById("filterCustomer").value;
-
       renderReceipt(r => {
         if (from && r.date < from) return false;
         if (to && r.date > to) return false;
@@ -456,24 +443,35 @@
       });
     });
 
-    // ===== عند تحميل الصفحة =====
+    // ======================= كشف الخزنة =====================
+    function renderCashStatement() {
+      const tbody = document.querySelector("#cashStatementTable tbody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      let cumulative = cash.opening || 0;
+      cashEntries.sort((a, b) => new Date(a.date) - new Date(b.date) || (a.order || 0) - (b.order || 0));
+      cashEntries.forEach(e => {
+        cumulative += (e.debit || 0) - (e.credit || 0);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${e.date}</td><td>${e.customer}</td><td>${e.desc}</td><td>${(e.debit || 0).toFixed(2)}</td><td>${(e.credit || 0).toFixed(2)}</td><td>${cumulative.toFixed(2)}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ======================= تحميل الصفحة =====================
     window.onload = function () {
       loadData();
       renderCustomerSelect();
       renderReceipt();
+
       document.getElementById("addReceiptBtn").onclick = addReceipt;
 
       const today = new Date().toISOString().split("T")[0];
       document.getElementById("fromDate").value = today;
       document.getElementById("toDate").value = today;
     };
-
-    // ===== تحديث الرصيد الكلي =====
-    function updateCashBalance() {
-      const final = (cash.opening || 0) + (cash.income || 0) - (cash.expenses || 0);
-      console.log("رصيد الخزنة النهائي:", final);
-    }
   </script>
 
 </body>
+
 </html>
