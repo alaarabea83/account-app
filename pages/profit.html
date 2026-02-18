@@ -176,8 +176,14 @@
             transition: 0.3s;
         }
 
+        h5 {
+            border-bottom: 1px solid #22c55e;
+            border-width: thick;
+            text-align: center;
+            width: fit-content;
+        }
+
         /* ===== Filters ===== */
-        /* ===== Filter Card ===== */
         .filter-container {
             background: #1e293b;
             padding: 20px;
@@ -522,10 +528,11 @@
         </div>
 
         <div style="
-        color: blue;
+        color: #fff;
         width: fit-content;
         margin-top: 10px;
-        text-decoration: underline;
+        border-bottom: 1px solid #22c55e;
+        border-width: thick;
         cursor: pointer;
         " id="showExpensesBtn">
             المصروفات المسجلة خلال فترة البحث
@@ -596,15 +603,15 @@
                 totalProfit += profit;
 
                 tbody.innerHTML += `
-                      <tr>
-                          <td>${i + 1}</td>
-                          <td>${inv.date}</td>
-                          <td>${inv.customer}</td>
-                          <td>${total.toFixed(2)}</td>
-                          <td>${cost.toFixed(2)}</td>
-                          <td>${profit.toFixed(2)}</td>
-                      </tr>
-                  `;
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${inv.date}</td>
+                        <td>${inv.customer}</td>
+                        <td>${total.toFixed(2)}</td>
+                        <td>${cost.toFixed(2)}</td>
+                        <td>${profit.toFixed(2)}</td>
+                    </tr>
+                `;
             });
 
             document.getElementById("sumProfit").textContent =
@@ -655,14 +662,14 @@
                 netProfitSum += net;
 
                 tbody.innerHTML += `
-                      <tr>
-                          <td>${idx++}</td>
-                          <td>${date}</td>
-                          <td>${profit.toFixed(2)}</td>
-                          <td>${exp.toFixed(2)}</td>
-                          <td>${net.toFixed(2)}</td>
-                      </tr>
-                  `;
+                    <tr>
+                        <td>${idx++}</td>
+                        <td>${date}</td>
+                        <td>${profit.toFixed(2)}</td>
+                        <td>${exp.toFixed(2)}</td>
+                        <td>${net.toFixed(2)}</td>
+                    </tr>
+                `;
             });
 
             document.getElementById("totalProfitSum").textContent =
