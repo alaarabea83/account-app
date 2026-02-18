@@ -128,7 +128,6 @@
             /* ⭐ مهم */
         }
 
-
         /* ===== Overlay ===== */
         #overlay {
             position: fixed;
@@ -168,7 +167,6 @@
             color: white;
         }
 
-
         /* ===== MAIN ===== */
         .main-content {
             margin-top: 70px;
@@ -189,8 +187,6 @@
             flex-wrap: wrap;
             align-items: flex-end;
             justify-content: space-around;
-
-            border: 1px solid #334155;
         }
 
         /* كل عنصر فلترة */
@@ -243,7 +239,6 @@
             box-shadow: 0 6px 15px #00000055;
         }
 
-
         /* ===== Buttons ===== */
         button {
             padding: 10px 18px;
@@ -286,7 +281,7 @@
 
         th,
         td {
-            border: 1px solid #21618c;
+            border: 1px solid #334155;
             padding: 10px;
             text-align: center;
         }
@@ -399,7 +394,6 @@
             <h1>تقارير الأرباح</h1>
         </div>
     </div>
-
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -527,9 +521,15 @@
             </table>
         </div>
 
-        <button style="background: #21618c; color: white; width: 100%; margin-top: 10px" id="showExpensesBtn">
-            عرض المصروفات المسجلة
-        </button>
+        <div style="
+        color: blue;
+        width: fit-content;
+        margin-top: 10px;
+        text-decoration: underline;
+        cursor: pointer;
+        " id="showExpensesBtn">
+            المصروفات المسجلة خلال فترة البحث
+        </div>
     </main>
 
     <!-- مودال المصروفات -->
@@ -542,7 +542,6 @@
     </div>
 
     <script>
-
         const sidebar = document.getElementById("sidebar");
         const overlay = document.getElementById("overlay");
 
@@ -558,26 +557,23 @@
 
     <script>
         // بيانات حقيقية موجودة في localStorage
-        const sales = JSON.parse(localStorage.getItem('sales')) || [];
-        const products = JSON.parse(localStorage.getItem('products')) || [];
-        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        const sales = JSON.parse(localStorage.getItem("sales")) || [];
+        const products = JSON.parse(localStorage.getItem("products")) || [];
+        const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-        const cash = JSON.parse(localStorage.getItem('cash')) || {
+        const cash = JSON.parse(localStorage.getItem("cash")) || {
             opening: 0,
             income: 0,
-            expenses: 0
+            expenses: 0,
         };
 
         function updateCashBalance() {
             const finalCash =
-                (cash.opening || 0) +
-                (cash.income || 0) -
-                (cash.expenses || 0);
+                (cash.opening || 0) + (cash.income || 0) - (cash.expenses || 0);
 
             document.getElementById("cashBalance").textContent =
                 finalCash.toFixed(2) + " جنيه";
         }
-
 
         const fromDateInput = document.getElementById("fromDate");
         const toDateInput = document.getElementById("toDate");
@@ -588,9 +584,10 @@
             let totalProfit = 0;
 
             filteredSales.forEach((inv, i) => {
-                let total = 0, cost = 0;
-                inv.items.forEach(item => {
-                    const product = products.find(p => p.name === item.name);
+                let total = 0,
+                    cost = 0;
+                inv.items.forEach((item) => {
+                    const product = products.find((p) => p.name === item.name);
                     const buyPrice = product ? product.buyPrice : 0;
                     total += item.qty * item.price;
                     cost += item.qty * buyPrice;
@@ -610,7 +607,8 @@
                   `;
             });
 
-            document.getElementById("sumProfit").textContent = totalProfit.toFixed(2);
+            document.getElementById("sumProfit").textContent =
+                totalProfit.toFixed(2);
         }
 
         function renderNetProfitTable(filteredSales, filteredExpenses) {
@@ -619,28 +617,35 @@
 
             // اجمع المصروفات حسب اليوم
             const expensesByDate = {};
-            filteredExpenses.forEach(e => {
+            filteredExpenses.forEach((e) => {
                 if (!expensesByDate[e.date]) expensesByDate[e.date] = 0;
                 expensesByDate[e.date] += e.amount;
             });
 
             // اجمع الأرباح حسب اليوم
             const profitByDate = {};
-            filteredSales.forEach(inv => {
+            filteredSales.forEach((inv) => {
                 if (!profitByDate[inv.date]) profitByDate[inv.date] = 0;
-                inv.items.forEach(item => {
-                    const product = products.find(p => p.name === item.name);
+                inv.items.forEach((item) => {
+                    const product = products.find((p) => p.name === item.name);
                     const buyPrice = product ? product.buyPrice : 0;
                     profitByDate[inv.date] += item.qty * (item.price - buyPrice);
                 });
             });
 
-            let totalProfitSum = 0, totalExpensesSum = 0, netProfitSum = 0;
+            let totalProfitSum = 0,
+                totalExpensesSum = 0,
+                netProfitSum = 0;
             let idx = 1;
 
-            const allDates = Array.from(new Set([...Object.keys(profitByDate), ...Object.keys(expensesByDate)])).sort();
+            const allDates = Array.from(
+                new Set([
+                    ...Object.keys(profitByDate),
+                    ...Object.keys(expensesByDate),
+                ]),
+            ).sort();
 
-            allDates.forEach(date => {
+            allDates.forEach((date) => {
                 const profit = profitByDate[date] || 0;
                 const exp = expensesByDate[date] || 0;
                 const net = profit - exp;
@@ -660,23 +665,32 @@
                   `;
             });
 
-            document.getElementById("totalProfitSum").textContent = totalProfitSum.toFixed(2);
-            document.getElementById("totalExpensesSum").textContent = totalExpensesSum.toFixed(2);
-            document.getElementById("netProfitSum").textContent = netProfitSum.toFixed(2);
+            document.getElementById("totalProfitSum").textContent =
+                totalProfitSum.toFixed(2);
+            document.getElementById("totalExpensesSum").textContent =
+                totalExpensesSum.toFixed(2);
+            document.getElementById("netProfitSum").textContent =
+                netProfitSum.toFixed(2);
         }
 
         function filterAndRender() {
             const from = fromDateInput.value || "1970-01-01";
             const to = toDateInput.value || "9999-12-31";
 
-            const filteredSales = sales.filter(s => s.date.slice(0, 10) >= from && s.date.slice(0, 10) <= to);
-            const filteredExpenses = expenses.filter(e => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to);
+            const filteredSales = sales.filter(
+                (s) => s.date.slice(0, 10) >= from && s.date.slice(0, 10) <= to,
+            );
+            const filteredExpenses = expenses.filter(
+                (e) => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to,
+            );
 
             renderProfitTable(filteredSales);
             renderNetProfitTable(filteredSales, filteredExpenses);
         }
 
-        document.getElementById("filterBtn").addEventListener("click", filterAndRender);
+        document
+            .getElementById("filterBtn")
+            .addEventListener("click", filterAndRender);
 
         // مودال عرض المصروفات
         const expensesModal = document.getElementById("expensesModal");
@@ -685,20 +699,17 @@
         const closeModalBtn = document.getElementById("closeModalBtn");
 
         showExpensesBtn.addEventListener("click", () => {
-
             const from = fromDateInput.value || "1970-01-01";
             const to = toDateInput.value || "9999-12-31";
 
-            const filteredExpenses = expenses.filter(e =>
-                e.date.slice(0, 10) >= from &&
-                e.date.slice(0, 10) <= to
+            const filteredExpenses = expenses.filter(
+                (e) => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to,
             );
 
             if (!filteredExpenses.length) {
                 expensesContent.innerHTML =
                     "<p style='text-align:center'>لا توجد مصروفات مسجلة</p>";
             } else {
-
                 let html = `
         <div class="expenses-table-wrap">
         <table>
@@ -749,8 +760,6 @@
             filterAndRender();
             updateCashBalance();
         };
-
-
     </script>
 </body>
 
