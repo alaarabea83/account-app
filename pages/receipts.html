@@ -162,7 +162,66 @@
       border-collapse: collapse;
     }
 
+    /* ================== تنسيق الفلاتر ================== */
+    .filter-container {
+      max-width: 950px;
+      margin: 20px auto;
+      background: #2E3A59;
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
 
+    /* Inputs و Select */
+    .filter-container input,
+    .filter-container select {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #fff;
+      background: #1E293B;
+      color: #F8F9FA;
+      font-size: 16px;
+      flex: 1;
+      /* تتوسع بشكل متساوي */
+      min-width: 120px;
+      transition: 0.3s;
+    }
+
+    .filter-container input:focus,
+    .filter-container select:focus {
+      outline: none;
+      background: #3B82F6;
+      color: white;
+    }
+
+    /* زر الفلتر */
+    .filter-container button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background: #3B82F6;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .filter-container button:hover {
+      background: #60A5FA;
+    }
+
+    /* موبايل: ترتيب عمودي */
+    @media (max-width: 600px) {
+      .filter-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
 
     .modal {
       display: none;
