@@ -87,13 +87,13 @@
         }
 
         .sidebar::-webkit-scrollbar {
-        width: 8px;
-      }
+            width: 8px;
+        }
 
-      .sidebar::-webkit-scrollbar-thumb {
-        background: #38bdf8;
-        border-radius: 10px;
-      }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 10px;
+        }
 
         /* عناصر القائمة */
         .sidebar a,
@@ -180,68 +180,68 @@
 
         /* ===== Filters ===== */
         /* ===== Filter Card ===== */
-.filter-container {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 14px;
+        .filter-container {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 14px;
 
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-around;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-around;
 
-    border: 1px solid #334155;
-}
+            border: 1px solid #334155;
+        }
 
-/* كل عنصر فلترة */
-.filter-container label {
-    display: flex;
-    flex-direction: column;
-    font-size: 13px;
-    color: #cbd5f5;
-    gap: 6px;
-    min-width: 160px;
-}
+        /* كل عنصر فلترة */
+        .filter-container label {
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+            color: #cbd5f5;
+            gap: 6px;
+            min-width: 160px;
+        }
 
-/* Inputs */
-.filter-container input {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #334155;
+        /* Inputs */
+        .filter-container input {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #334155;
 
-    background: #020617;
-    color: white;
+            background: #020617;
+            color: white;
 
-    transition: 0.2s;
-}
+            transition: 0.2s;
+        }
 
-/* Focus effect */
-.filter-container input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px #2563eb33;
-}
+        /* Focus effect */
+        .filter-container input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px #2563eb33;
+        }
 
-/* زر الفلترة */
-#filterBtn {
-    background: linear-gradient(45deg, #3b82f6, #2563eb);
-    color: white;
+        /* زر الفلترة */
+        #filterBtn {
+            background: #21618c;
+            color: white;
 
-    padding: 12px 22px;
-    border-radius: 10px;
-    margin-right: 0;
+            padding: 12px 22px;
+            border-radius: 10px;
+            margin-right: 0;
 
-    font-weight: bold;
-    cursor: pointer;
+            font-weight: bold;
+            cursor: pointer;
 
-    transition: 0.2s;
-}
+            transition: 0.2s;
+        }
 
-/* Hover */
-#filterBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px #00000055;
-}
+        /* Hover */
+        #filterBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px #00000055;
+        }
 
 
         /* ===== Buttons ===== */
@@ -293,6 +293,10 @@
 
         th {
             background: #1e293b;
+        }
+
+        table tfoot {
+            color: #e0a800;
         }
 
         /* Scrollbar */
@@ -473,7 +477,7 @@
             <button id="filterBtn">فلترة</button>
         </div>
 
-        <h4>تقرير مجمل ربح الفواتير</h4>
+        <h5>تقرير مجمل ربح الفواتير</h5>
 
         <div class="table-container">
             <table id="profitTable">
@@ -497,7 +501,7 @@
             </table>
         </div>
 
-        <h4>تقرير صافي الربح</h4>
+        <h5>تقرير صافي الربح</h5>
 
         <div class="table-container">
             <table id="netProfitTable">
