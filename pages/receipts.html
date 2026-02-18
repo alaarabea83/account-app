@@ -41,22 +41,6 @@
       font-size: 24px;
     }
 
-    .header-right button {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      font-size: 18px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-left: 10px;
-      transition: 0.3s;
-    }
-
-    .header-right button:hover {
-      background: rgba(255, 255, 255, 0.4);
-    }
-
     .form-container {
       max-width: 950px;
       margin: 20px auto;
@@ -88,10 +72,38 @@
       background: #60A5FA;
     }
 
+    .table-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: auto;
+      margin-top: 20px;
+      border-radius: 8px;
+      background: #1E293B;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .table-wrapper::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-track {
+      background: #0F172A;
+      border-radius: 5px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb {
+      background: #3B82F6;
+      border-radius: 5px;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #60A5FA;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
     }
 
     th,
@@ -117,52 +129,6 @@
       background: #21618C;
     }
 
-    /* ================== حاوية الجدول مع سكرول ================== */
-    .table-wrapper {
-      max-height: 400px;
-      /* ارتفاع الجدول قبل ظهور السكرول */
-      overflow-y: auto;
-      /* سكرول عمودي */
-      overflow-x: auto;
-      /* سكرول أفقي */
-      margin-top: 20px;
-      border-radius: 8px;
-      background: #1E293B;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    /* ====== مظهر السكرول لمتصفحات Webkit ====== */
-    .table-wrapper::-webkit-scrollbar {
-      width: 10px;
-      /* عرض السكرول العمودي */
-      height: 10px;
-      /* ارتفاع السكرول الأفقي */
-    }
-
-    .table-wrapper::-webkit-scrollbar-track {
-      background: #0F172A;
-      /* لون المسار */
-      border-radius: 5px;
-    }
-
-    .table-wrapper::-webkit-scrollbar-thumb {
-      background: #3B82F6;
-      /* لون المؤشر */
-      border-radius: 5px;
-    }
-
-    .table-wrapper::-webkit-scrollbar-thumb:hover {
-      background: #60A5FA;
-      /* عند المرور بالماوس */
-    }
-
-    /* الجدول داخل الحاوية */
-    .table-wrapper table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    /* ================== تنسيق الفلاتر ================== */
     .filter-container {
       max-width: 950px;
       margin: 20px auto;
@@ -177,7 +143,6 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Inputs و Select */
     .filter-container input,
     .filter-container select {
       padding: 10px 12px;
@@ -187,7 +152,6 @@
       color: #F8F9FA;
       font-size: 16px;
       flex: 1;
-      /* تتوسع بشكل متساوي */
       min-width: 120px;
       transition: 0.3s;
     }
@@ -199,7 +163,6 @@
       color: white;
     }
 
-    /* زر الفلتر */
     .filter-container button {
       padding: 10px 20px;
       border-radius: 8px;
@@ -213,14 +176,6 @@
 
     .filter-container button:hover {
       background: #60A5FA;
-    }
-
-    /* موبايل: ترتيب عمودي */
-    @media (max-width: 600px) {
-      .filter-container {
-        flex-direction: column;
-        gap: 10px;
-      }
     }
 
     .modal {
@@ -270,36 +225,13 @@
       background: #F87171;
       color: white;
     }
-
-    .filter-container {
-      max-width: 950px;
-      margin: 10px auto;
-      background: #1E293B;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .filter-container select,
-    .filter-container input {
-      width: auto;
-      flex: 1;
-    }
   </style>
 </head>
 
 <body>
 
   <header class="header">
-    <div class="header-left">
-      <h1>المقبوضات</h1>
-    </div>
-    <div class="header-right">
-      <button><i class="fa fa-bell"></i></button>
-      <button><i class="fa fa-user"></i></button>
-    </div>
+    <h1>المقبوضات</h1>
   </header>
 
   <div class="form-container">
@@ -309,7 +241,7 @@
     </select>
 
     <label>الرصيد السابق</label>
-    <input type="text" id="prevBalance" disabled placeholder="الرصيد السابق">
+    <input type="text" id="prevBalance" disabled>
 
     <label>البند / البيان</label>
     <select id="receiptTitle">
@@ -320,17 +252,17 @@
     </select>
 
     <label>المبلغ</label>
-    <input type="number" id="receiptAmount" placeholder="ادخل المبلغ">
+    <input type="number" id="receiptAmount">
 
     <label>المتبقي بعد الدفع</label>
-    <input type="text" id="remainingBalance" disabled placeholder="المتبقي بعد الدفع">
+    <input type="text" id="remainingBalance" disabled>
 
     <button id="addReceiptBtn">إضافة المقبوض</button>
   </div>
 
   <div class="filter-container">
-    <input type="date" id="fromDate" placeholder="من تاريخ">
-    <input type="date" id="toDate" placeholder="إلى تاريخ">
+    <input type="date" id="fromDate">
+    <input type="date" id="toDate">
     <select id="filterCustomer">
       <option value="">الكل</option>
     </select>
@@ -363,7 +295,7 @@
   <div class="modal" id="titleModal">
     <div class="modal-content">
       <h3>أضف بيان جديد</h3>
-      <input type="text" id="otherTitleInput" placeholder="اكتب البيان هنا">
+      <input type="text" id="otherTitleInput">
       <div>
         <button class="save-btn" id="saveTitleBtn">حفظ</button>
         <button class="close-btn" id="closeModalBtn">إلغاء</button>
@@ -372,30 +304,28 @@
   </div>
 
   <script>
-    // ================= البيانات الأساسية =================
+    // ===== البيانات =====
     let customers = [];
-    let incomes = [];
-    let cash = { opening: 0, income: 0, expenses: 0 };
     let receipts = [];
+    let cash = { opening: 0, income: 0, expenses: 0 };
 
-    // تحميل البيانات
+    // ===== تحميل وحفظ البيانات =====
     function loadData() {
       const c = localStorage.getItem("customers");
-      const i = localStorage.getItem("incomes");
+      const r = localStorage.getItem("receipts");
       const ca = localStorage.getItem("cash");
 
       customers = c ? JSON.parse(c) : [];
-      incomes = i ? JSON.parse(i) : [];
+      receipts = r ? JSON.parse(r) : [];
       cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
     }
 
-    // حفظ البيانات
     function saveData() {
-      localStorage.setItem("incomes", JSON.stringify(incomes));
+      localStorage.setItem("receipts", JSON.stringify(receipts));
       localStorage.setItem("cash", JSON.stringify(cash));
     }
 
-    // ================= العملاء =================
+    // ===== اختيار العملاء =====
     function renderCustomerSelect() {
       const sel = document.getElementById("receiptCustomer");
       const filterSel = document.getElementById("filterCustomer");
@@ -408,7 +338,7 @@
         customers.map((c, i) => `<option value="${c.name}">${c.name}</option>`).join("");
     }
 
-    // ================= المقبوضات =================
+    // ===== إضافة المقبوض =====
     function addReceipt() {
       const titleSelect = document.getElementById("receiptTitle");
       let title = titleSelect.value;
@@ -419,7 +349,7 @@
       if (!title || !amount) { alert("من فضلك أكمل جميع البيانات"); return; }
       if (amount <= 0) { alert("المبلغ يجب أن يكون أكبر من صفر"); return; }
 
-      const prev = customer ? customer.balance : 0;
+      const prev = customer ? customer.balance || 0 : 0;
       const remaining = prev - amount;
 
       if (customer) customer.balance = remaining;
@@ -436,7 +366,6 @@
       };
 
       receipts.push(receipt);
-      incomes.push(receipt);
       saveData();
 
       document.getElementById("receiptAmount").value = "";
@@ -446,26 +375,25 @@
       document.getElementById("remainingBalance").value = "";
 
       renderReceipt();
-      updateBottomCashBalance();
+      updateCashBalance();
     }
 
-    // ================= عرض المقبوضات =================
+    // ===== عرض المقبوضات =====
     function renderReceipt(filterFn = null) {
       const tbody = document.querySelector("#receiptTable tbody");
       tbody.innerHTML = "";
       let total = 0;
-      receipts
-        .filter(r => filterFn ? filterFn(r) : true)
+      receipts.filter(r => filterFn ? filterFn(r) : true)
         .forEach(r => {
           const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${r.date}</td><td>${r.customer}</td><td>${r.prevBalance}</td><td>${r.amount}</td><td>${r.remaining}</td><td>${r.title}</td>`;
+          tr.innerHTML = `<td>${r.date}</td><td>${r.customer}</td><td>${r.prevBalance.toFixed(2)}</td><td>${r.amount.toFixed(2)}</td><td>${r.remaining.toFixed(2)}</td><td>${r.title}</td>`;
           tbody.appendChild(tr);
           total += r.amount;
         });
       document.getElementById("receiptTotal").innerText = total.toFixed(2);
     }
 
-    // ================= مودال "أخرى" =================
+    // ===== مودال "أخرى" =====
     const titleSelect = document.getElementById("receiptTitle");
     const modal = document.getElementById("titleModal");
     const saveBtn = document.getElementById("saveTitleBtn");
@@ -495,33 +423,26 @@
       titleSelect.value = "";
     };
 
-    // ================= تحديث الرصيد =================
-    function updateBottomCashBalance() {
-      const final = (cash.opening || 0) + (cash.income || 0) - (cash.expenses || 0);
-      const sidebar = document.getElementById("cashBalance");
-      if (sidebar) sidebar.textContent = final.toFixed(2) + " جنيه";
-    }
-
-    // ================= عند اختيار العميل =================
+    // ===== عند اختيار العميل =====
     document.getElementById("receiptCustomer").addEventListener("change", function () {
       const idx = parseInt(this.value);
       const customer = idx >= 0 ? customers[idx] : null;
-      const prev = customer ? customer.balance : 0;
+      const prev = customer ? customer.balance || 0 : 0;
       document.getElementById("prevBalance").value = prev.toFixed(2);
       const amount = +document.getElementById("receiptAmount").value || 0;
       document.getElementById("remainingBalance").value = (prev - amount).toFixed(2);
     });
 
-    // عند تغيير المبلغ لحساب المتبقي
+    // ===== عند تغيير المبلغ =====
     document.getElementById("receiptAmount").addEventListener("input", function () {
       const customerIndex = parseInt(document.getElementById("receiptCustomer").value);
       const customer = customerIndex >= 0 ? customers[customerIndex] : null;
-      const prev = customer ? customer.balance : 0;
+      const prev = customer ? customer.balance || 0 : 0;
       const remaining = prev - (+this.value || 0);
       document.getElementById("remainingBalance").value = remaining.toFixed(2);
     });
 
-    // ================= فلترة الجدول =================
+    // ===== فلترة الجدول =====
     document.getElementById("filterBtn").addEventListener("click", function () {
       const from = document.getElementById("fromDate").value;
       const to = document.getElementById("toDate").value;
@@ -535,20 +456,24 @@
       });
     });
 
-    // ================= عند تحميل الصفحة =================
+    // ===== عند تحميل الصفحة =====
     window.onload = function () {
       loadData();
       renderCustomerSelect();
       renderReceipt();
       document.getElementById("addReceiptBtn").onclick = addReceipt;
 
-      // ضبط التاريخ الافتراضي للفلاتر
       const today = new Date().toISOString().split("T")[0];
       document.getElementById("fromDate").value = today;
       document.getElementById("toDate").value = today;
     };
+
+    // ===== تحديث الرصيد الكلي =====
+    function updateCashBalance() {
+      const final = (cash.opening || 0) + (cash.income || 0) - (cash.expenses || 0);
+      console.log("رصيد الخزنة النهائي:", final);
+    }
   </script>
 
 </body>
-
 </html>
