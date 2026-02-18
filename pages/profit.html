@@ -86,6 +86,15 @@
             padding-bottom: 40px;
         }
 
+        .sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: #38bdf8;
+        border-radius: 10px;
+      }
+
         /* عناصر القائمة */
         .sidebar a,
         .sidebar button,
@@ -106,6 +115,19 @@
         .sidebar button:hover {
             background: #334155;
         }
+
+        .sidebar a,
+        .sidebar button,
+        .sidebar div {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+
+            box-sizing: border-box;
+            /* ⭐ مهم */
+        }
+
 
         /* ===== Overlay ===== */
         #overlay {
@@ -157,41 +179,70 @@
         }
 
         /* ===== Filters ===== */
-        .filter-container {
-            background: #1e293b;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-        }
+        /* ===== Filter Card ===== */
+.filter-container {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 14px;
 
-        .filter-container label {
-            display: flex;
-            flex-direction: column;
-            font-size: 14px;
-            gap: 5px;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-around;
 
-        .filter-container input {
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            background: #0f172a;
-            color: white;
-        }
+    border: 1px solid #334155;
+}
 
-        /* زر الفلترة */
-        #filterBtn {
-            background: #2563eb;
-            color: white;
-        }
+/* كل عنصر فلترة */
+.filter-container label {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: #cbd5f5;
+    gap: 6px;
+    min-width: 160px;
+}
 
-        #filterBtn:hover {
-            background: #1d4ed8;
-        }
+/* Inputs */
+.filter-container input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+
+    background: #020617;
+    color: white;
+
+    transition: 0.2s;
+}
+
+/* Focus effect */
+.filter-container input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px #2563eb33;
+}
+
+/* زر الفلترة */
+#filterBtn {
+    background: linear-gradient(45deg, #3b82f6, #2563eb);
+    color: white;
+
+    padding: 12px 22px;
+    border-radius: 10px;
+    margin-right: 0;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+/* Hover */
+#filterBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px #00000055;
+}
+
 
         /* ===== Buttons ===== */
         button {
@@ -507,6 +558,23 @@
         const products = JSON.parse(localStorage.getItem('products')) || [];
         const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
+        const cash = JSON.parse(localStorage.getItem('cash')) || {
+            opening: 0,
+            income: 0,
+            expenses: 0
+        };
+
+        function updateCashBalance() {
+            const finalCash =
+                (cash.opening || 0) +
+                (cash.income || 0) -
+                (cash.expenses || 0);
+
+            document.getElementById("cashBalance").textContent =
+                finalCash.toFixed(2) + " جنيه";
+        }
+
+
         const fromDateInput = document.getElementById("fromDate");
         const toDateInput = document.getElementById("toDate");
 
@@ -673,7 +741,11 @@
         toDateInput.value = today;
 
         // تشغيل الفلترة عند فتح الصفحة
-        window.onload = filterAndRender;
+        window.onload = () => {
+            filterAndRender();
+            updateCashBalance();
+        };
+
 
     </script>
 </body>
