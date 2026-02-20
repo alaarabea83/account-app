@@ -57,30 +57,3 @@ body.no-scroll {
   overflow: hidden;
 }
 
-/* Chrome, Safari, Opera for placeholders*/
-input::placeholder {
-  color: #ffffff;   /* لون أبيض */
-  opacity: 1;       /* لازم للتأكد من ظهور اللون */
-}
-
-/* Firefox 19+ */
-input::-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
-/* Firefox 4 - 18 */
-input:-moz-placeholder {
-  color: #ffffff;
-  opacity: 1;
-}
-
-/* Internet Explorer 10+ */
-input:-ms-input-placeholder {
-  color: #ffffff;
-}
-
-/* Edge */
-input::-ms-input-placeholder {
-  color: #ffffff;
-}
