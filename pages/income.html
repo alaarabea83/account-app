@@ -77,50 +77,50 @@
 
     /* ===== Sidebar ===== */
     .sidebar {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        width: 260px;
-        height: calc(100dvh - 60px);
-        background: #0f172a;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        transition: 0.3s;
-        z-index: 1001;
-        overflow-y: auto;
-        scrollbar-width: none;
-        font-family: "Cairo", sans-serif;
-        font-weight: 600;
-        padding: 20px 20px 40px 20px;
-      }
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 260px;
+      height: calc(100dvh - 60px);
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      scrollbar-width: none;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
+      padding: 20px 20px 40px 20px;
+    }
 
-      .sidebar.show {
-        right: 0;
-      }
+    .sidebar.show {
+      right: 0;
+    }
 
-      .sidebar a,
-      .sidebar button,
-      .sidebar div {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background: #1e293b;
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: 0.2s;
-      }
+    .sidebar a,
+    .sidebar button,
+    .sidebar div {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
     .sidebar a:hover,
     .sidebar button:hover {
       background: #334155;
     }
 
-    /* عناوين داخل السايدبار */
+    /* Sidebar Titles */
     .sidebar h2 {
       text-align: center;
       color: #a78bfa;
@@ -140,16 +140,13 @@
       display: block;
     }
 
-    /* روابط السايدبار */
+    /* Sidebar Links */
     .sidebar-link {
       display: flex;
       flex-direction: column;
-      /* عمودياً */
       align-items: center;
-      /* تمركز النص تحت الأيقونة */
       justify-content: center;
       gap: 6px;
-      /* مسافة متساوية بين الأيقونة والنص */
       padding: 12px;
       text-decoration: none;
       color: #cbd5f5;
@@ -170,15 +167,14 @@
     @media (max-width: 768px) {
       .sidebar {
         right: -260px;
-        /* مخفي افتراضيًا */
       }
 
       .sidebar.show {
         right: 0;
-        /* يظهر عند الضغط على التوجل */
       }
     }
 
+    /* Sections */
     section {
       background: #0f172a;
       max-width: 1300px;
@@ -196,12 +192,7 @@
       margin: 5px;
     }
 
-    .incomeReciept {
-      padding: 1rem;
-      border-radius: 12px;
-      background: #1e293b;
-    }
-
+    .incomeReciept,
     .incomeMenu {
       padding: 1rem;
       border-radius: 12px;
@@ -286,7 +277,7 @@
       box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Webkit */
+    /* Webkit Scrollbar */
     .table-scroll::-webkit-scrollbar {
       width: 10px;
       height: 10px;
@@ -301,7 +292,7 @@
       background: #0f172a;
     }
 
-    /* أزرار التعديل والحذف داخل جدول الإيرادات */
+    /* Table Buttons */
     #incomeTable .action-btn {
       padding: 6px 12px;
       border-radius: 8px;
@@ -313,10 +304,8 @@
       color: #fff;
     }
 
-    /* زر التعديل */
     #incomeTable .edit-btn {
       background: #3b82f6;
-      /* أزرق عصري */
     }
 
     #incomeTable .edit-btn:hover {
@@ -325,10 +314,8 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* زر الحذف */
     #incomeTable .delete-btn {
       background: #ef4444;
-      /* أحمر عصري */
     }
 
     #incomeTable .delete-btn:hover {
@@ -337,75 +324,24 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-
-    /*   مودال بند اخري فى بيان المقبوضات */
-    .modal {
+    /* ===== Modals ===== */
+    .modal,
+    #deleteIncomeModal,
+    .success-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
       z-index: 9999;
     }
 
-    .modal-content {
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-      padding: 20px;
+    .modal-content,
+    #deleteIncomeModal .modal-content,
+    .success-box {
       border-radius: 14px;
-      width: 300px;
-      text-align: center;
-      color: #ecf0f1;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .modal-content input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px auto;
-      border-radius: 8px;
-      border: 1px solid #34495e;
-      background: #22313f;
-      color: white;
-    }
-
-    .modal-actions {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .modal-actions button {
-      padding: 8px 14px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #3498db;
-      color: white;
-    }
-
-    #deleteIncomeModal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 10002;
-    }
-
-    #deleteIncomeModal .modal-content {
-      background: linear-gradient(135deg, #2c3e50, #34495e);
       padding: 20px 30px;
-      border-radius: 14px;
-      width: 320px;
       text-align: center;
-      color: #ecf0f1;
       font-weight: bold;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       display: flex;
@@ -413,10 +349,48 @@
       align-items: center;
     }
 
+    /* Delete Modal */
+    #deleteIncomeModal {
+      display: none;
+      /* افتراضيًا مخفي */
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      /* خلفية مظللة */
+      justify-content: center;
+      align-items: center;
+      z-index: 10002;
+    }
+
+    /* الكارت */
+    #deleteIncomeModal .modal-content {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      /* أحمر عصري */
+      color: #fff;
+      padding: 25px 35px;
+      border-radius: 14px;
+      width: 320px;
+      max-width: 90%;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* الرسالة */
+    #deleteIncomeModal p {
+      margin: 15px 0;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    /* أزرار الكارت */
     #deleteIncomeModal .modal-actions {
       display: flex;
-      gap: 10px;
-      margin-top: 15px;
+      gap: 12px;
+      margin-top: 20px;
       width: 100%;
       justify-content: center;
     }
@@ -429,11 +403,11 @@
       cursor: pointer;
       font-weight: bold;
       transition: 0.2s;
+      color: #fff;
     }
 
     #confirmDeleteIncomeBtn {
       background: #ef4444;
-      color: #fff;
     }
 
     #confirmDeleteIncomeBtn:hover {
@@ -442,13 +416,124 @@
 
     #cancelDeleteIncomeBtn {
       background: #64748b;
-      color: #fff;
     }
 
     #cancelDeleteIncomeBtn:hover {
       background: #475569;
     }
 
+    #editIncomeModal {
+      display: none;
+      /* افتراضيًا مخفي */
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      /* خلفية مظللة */
+      justify-content: center;
+      align-items: center;
+      z-index: 10003;
+    }
+
+    /* الكارت */
+    #editIncomeModal .modal-content {
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      /* أزرق عصري */
+      color: #fff;
+      padding: 25px 35px;
+      border-radius: 14px;
+      width: 320px;
+      max-width: 90%;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* العناوين والنص */
+    #editIncomeModal h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    #editIncomeModal input {
+      width: 80%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #2563eb;
+      background: #1e40af;
+      color: white;
+      font-size: 16px;
+    }
+
+    /* أزرار الكارت */
+    #editIncomeModal .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    #editIncomeModal .modal-actions button {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      color: #000;
+    }
+
+    #saveEditIncomeBtn {
+      background: #22c55e;
+      /* أخضر */
+    }
+
+    #saveEditIncomeBtn:hover {
+      background: #16a34a;
+    }
+
+    #cancelEditIncomeBtn {
+      background: #64748b;
+      /* رمادي */
+    }
+
+    #cancelEditIncomeBtn:hover {
+      background: #475569;
+    }
+
+    /* Success Modal */
+    .success-modal {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .success-modal.active {
+      display: flex;
+    }
+
+    .success-box {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 20px 40px;
+      font-size: 18px;
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 
     /* ===== Desktop ===== */
     @media (min-width: 768px) {
@@ -466,7 +551,6 @@
 
       section {
         margin-right: 260px;
-        /* مساحة السايدبار */
         margin-left: auto;
       }
 
@@ -481,38 +565,6 @@
 
       button {
         margin: 0;
-      }
-    }
-
-    .success-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 9999;
-    }
-
-    .success-box {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: white;
-      padding: 20px 40px;
-      border-radius: 14px;
-      font-size: 18px;
-      font-weight: bold;
-      animation: pop 0.3s ease;
-    }
-
-    @keyframes pop {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-
-      to {
-        transform: scale(1);
-        opacity: 1;
       }
     }
   </style>
@@ -670,14 +722,6 @@
     </div>
   </section>
 
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage"></p>
-      <button onclick="closeModal()">حسناً</button>
-    </div>
-  </div>
-
   <div id="editIncomeModal" class="modal">
     <div class="modal-content">
       <h3>تعديل سند الإيراد</h3>
@@ -705,6 +749,15 @@
         <button id="confirmDeleteIncomeBtn">نعم، احذف</button>
         <button id="cancelDeleteIncomeBtn">إلغاء</button>
       </div>
+    </div>
+  </div>
+
+  <div id="appModal" class="success-modal">
+    <div class="success-box">
+      <h3 id="modalTitle">تنبيه</h3>
+      <p id="modalMessage"></p>
+      <button onclick="closeModal()"
+        style="margin-top:15px; padding:8px 20px; border-radius:8px; background:#fff; color:#16a34a; font-weight:bold; cursor:pointer;">حسناً</button>
     </div>
   </div>
 

@@ -46,6 +46,35 @@ function renderFilterCustomerSelect() {
       .join("");
 }
 
+// ==================== App Modal ====================
+function showModal(message, type = "warning") {
+  const modal = document.getElementById("appModal");
+  const title = document.getElementById("modalTitle");
+  const text = document.getElementById("modalMessage");
+
+  if (!modal) return; // أمان لو المودال مش موجود
+
+  text.innerText = message;
+
+  if (type === "success") {
+    title.innerText = "نجاح";
+    title.style.color = "#28a745";
+  } else if (type === "error") {
+    title.innerText = "خطأ";
+    title.style.color = "#dc3545";
+  } else {
+    title.innerText = "تنبيه";
+    title.style.color = "#ffc107";
+  }
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  const modal = document.getElementById("appModal");
+  if (modal) modal.style.display = "none";
+}
+
 // ==================== إضافة الإيراد ====================
 function addIncome() {
   const title = document.getElementById("incomeTitle").value.trim();
@@ -56,7 +85,7 @@ function addIncome() {
   const customer = customerIndex >= 0 ? incomeCustomers[customerIndex] : null;
 
   if (!title || !amount) {
-    showModal("من فضلك أكمل جميع البيانات");
+    showModal("من فضلك أكمل جميع البيانات", "warning");
     return;
   }
 
@@ -78,7 +107,7 @@ function addIncome() {
   saveData();
   updateBottomCashBalance();
   renderIncome();
-  showSuccess();
+  showModal("تمت إضافة الإيراد بنجاح ✔", "success");
 }
 
 // ==================== عرض الإيرادات مع الفلترة ====================
