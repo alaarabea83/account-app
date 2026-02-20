@@ -84,58 +84,40 @@
         position: fixed;
         top: 60px;
         right: 0;
-        /* دائم الظهور على الكمبيوتر */
         width: 260px;
         height: calc(100dvh - 60px);
-        /* بدل 100vh */
         background: #0f172a;
-        padding: 20px 20px 40px 20px;
-        /* زيادة padding-bottom لتظهر آخر عنصر */
         display: flex;
         flex-direction: column;
         gap: 10px;
         transition: 0.3s;
         z-index: 1001;
         overflow-y: auto;
+        scrollbar-width: none;
         font-family: "Cairo", sans-serif;
         font-weight: 600;
-        border-left: 1px solid #334155;
-        box-sizing: border-box;
-        /* مهم جداً */
-        padding-bottom: 40px;
+        padding: 20px 20px 40px 20px;
       }
 
-    /* Scrollbar */
-    .sidebar::-webkit-scrollbar {
-      width: 8px;
-    }
+      .sidebar.show {
+        right: 0;
+      }
 
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #38bdf8;
-      border-radius: 10px;
-    }
-
-    /* تظهر عند toggle على الموبايل */
-    .sidebar.show {
-      right: 0;
-    }
-
-    /* روابط وأزرار داخل السايدبار */
-    .sidebar a,
-    .sidebar button,
-    .sidebar div {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #1e293b;
-      border-radius: 8px;
-      text-align: center;
-      color: white;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+      .sidebar a,
+      .sidebar button,
+      .sidebar div {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: #1e293b;
+        border-radius: 8px;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+      }
 
     .sidebar a:hover,
     .sidebar button:hover {

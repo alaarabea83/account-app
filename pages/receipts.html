@@ -243,6 +243,52 @@
         background: #F87171;
         color: white;
       }
+
+      .success-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+  z-index: 9999;
+}
+
+.success-modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.success-box {
+  background: #28a745;
+  padding: 30px 50px;
+  border-radius: 16px;
+  text-align: center;
+  animation: pop .3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.check-icon {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  background: #28a745;
+  color: #fff;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+@keyframes pop {
+  from { transform: scale(.7); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
     </style>
   </head>
 
@@ -302,11 +348,6 @@
         </thead>
         <tbody></tbody>
         <tfoot>
-          <tr>
-            <td colspan="4">الإجمالي</td>
-            <td id="receiptTotal">0</td>
-            <td></td>
-          </tr>
         </tfoot>
       </table>
     </div>
@@ -321,6 +362,13 @@
         </div>
       </div>
     </div>
+
+    <div id="successModal" class="success-modal">
+  <div class="success-box">
+    <div class="check-icon">✔</div>
+    <h3 id="successText">تمت العملية بنجاح</h3>
+  </div>
+</div>
 
     <script src="../js/data.js"></script>
       <script src="../js/common.js"></script>

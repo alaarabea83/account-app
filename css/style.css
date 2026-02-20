@@ -12,44 +12,6 @@
   z-index: 9999;
 }
 
-/* صندوق المودال */
-.modal-box {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 350px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  animation: scaleIn 0.25s ease;
-  font-family: "Tajawal", sans-serif;
-}
-
-/* العنوان */
-.modal-box h3 {
-  margin-top: 0;
-  color: #dc3545;
-  font-family: "Cairo", sans-serif;
-}
-
-/* الرسالة */
-.modal-box p {
-  color: #555;
-  margin: 1rem 0;
-  line-height: 1.6;
-}
-
-/* زر */
-.modal-box button {
-  background: #0d6efd;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 /* أنيميشن */
 @keyframes scaleIn {
   from {

@@ -95,23 +95,13 @@
         transition: 0.3s;
         z-index: 1001;
         overflow-y: auto;
+        scrollbar-width: none;
         font-family: "Cairo", sans-serif;
         font-weight: 600;
-        border-left: 1px solid #334155;
         box-sizing: border-box;
         /* مهم جداً */
         padding-bottom: 40px;
       }
-
-    /* Scrollbar */
-    .sidebar::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #38bdf8;
-      border-radius: 10px;
-    }
 
     /* تظهر عند toggle على الموبايل */
     .sidebar.show {
