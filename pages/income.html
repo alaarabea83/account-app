@@ -46,7 +46,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       height: 60px;
-      background: #1e293b;
+      background: #1E3A8A;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -77,29 +77,29 @@
 
     /* ===== Sidebar ===== */
     .sidebar {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        /* دائم الظهور على الكمبيوتر */
-        width: 260px;
-        height: calc(100dvh - 60px);
-        /* بدل 100vh */
-        background: #0f172a;
-        padding: 20px 20px 40px 20px;
-        /* زيادة padding-bottom لتظهر آخر عنصر */
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        transition: 0.3s;
-        z-index: 1001;
-        overflow-y: auto;
-        font-family: "Cairo", sans-serif;
-        font-weight: 600;
-        border-left: 1px solid #334155;
-        box-sizing: border-box;
-        /* مهم جداً */
-        padding-bottom: 40px;
-      }
+      position: fixed;
+      top: 60px;
+      right: 0;
+      /* دائم الظهور على الكمبيوتر */
+      width: 260px;
+      height: calc(100dvh - 60px);
+      /* بدل 100vh */
+      background: #0f172a;
+      padding: 20px 20px 40px 20px;
+      /* زيادة padding-bottom لتظهر آخر عنصر */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
+      border-left: 1px solid #334155;
+      box-sizing: border-box;
+      /* مهم جداً */
+      padding-bottom: 40px;
+    }
 
     /* Scrollbar */
     .sidebar::-webkit-scrollbar {
@@ -184,9 +184,8 @@
       color: white;
     }
 
-
     /* ===== Mobile ===== */
-    @media(max-width:768px) {
+    @media (max-width: 768px) {
       .sidebar {
         right: -260px;
         /* مخفي افتراضيًا */
@@ -197,7 +196,6 @@
         /* يظهر عند الضغط على التوجل */
       }
     }
-
 
     section {
       background: #0f172a;
@@ -296,6 +294,10 @@
       background: #1e293b;
     }
 
+    table tfoot {
+      color: #fbbf24;
+    }
+
     .table-scroll {
       overflow: auto;
       max-height: 400px;
@@ -316,6 +318,43 @@
     .table-scroll::-webkit-scrollbar-track {
       background: #0f172a;
     }
+
+    /* أزرار التعديل والحذف داخل جدول الإيرادات */
+    #incomeTable .action-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.2s ease;
+      color: #fff;
+    }
+
+    /* زر التعديل */
+    #incomeTable .edit-btn {
+      background: #3b82f6;
+      /* أزرق عصري */
+    }
+
+    #incomeTable .edit-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* زر الحذف */
+    #incomeTable .delete-btn {
+      background: #ef4444;
+      /* أحمر عصري */
+    }
+
+    #incomeTable .delete-btn:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
 
     /*   مودال بند اخري فى بيان المقبوضات */
     .modal {
@@ -368,6 +407,67 @@
       color: white;
     }
 
+    #deleteIncomeModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 10002;
+    }
+
+    #deleteIncomeModal .modal-content {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      padding: 20px 30px;
+      border-radius: 14px;
+      width: 320px;
+      text-align: center;
+      color: #ecf0f1;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #deleteIncomeModal .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    #deleteIncomeModal .modal-actions button {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    #confirmDeleteIncomeBtn {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    #confirmDeleteIncomeBtn:hover {
+      background: #dc2626;
+    }
+
+    #cancelDeleteIncomeBtn {
+      background: #64748b;
+      color: #fff;
+    }
+
+    #cancelDeleteIncomeBtn:hover {
+      background: #475569;
+    }
+
+
     /* ===== Desktop ===== */
     @media (min-width: 768px) {
       .menu-toggle {
@@ -401,6 +501,38 @@
         margin: 0;
       }
     }
+
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+    }
+
+    .success-box {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
@@ -411,135 +543,75 @@
   </div>
 
   <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <!-- رصيد الخزينة -->
-      <div class="menu-item cash-item">
-        💰 رصيد الخزينة:
-        <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
-      </div>
-
-      <a href="../index.html" class="sidebar-link">
-        <img
-          src="../icons/home.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>الصفحة الرئيسية</span>
-      </a>
-
-      <a href="customers.html" class="sidebar-link">
-        <img
-          src="../icons/customer-512.png"
-          width="32"
-          height="32"
-          alt="Customers Icon"
-        />
-        <span>الحسابات</span>
-      </a>
-
-      <a href="products.html" class="sidebar-link">
-        <img
-          src="../icons/products.png"
-          width="32"
-          height="32"
-          alt="Products Icon"
-        />
-        <span>المخزون</span>
-      </a>
-
-      <a href="sales.html" class="sidebar-link">
-        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-        <span>المبيعات</span>
-      </a>
-
-      <a href="purchases.html" class="sidebar-link">
-        <img
-          src="../icons/purchases.png"
-          width="32"
-          height="32"
-          alt="Purchases Icon"
-        />
-        <span>المشتريات</span>
-      </a>
-
-      <a href="receipts.html" class="sidebar-link">
-        <img
-          src="../icons/income-512.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>المقبوضات</span>
-      </a>
-
-      <a href="#" class="sidebar-link">
-        <img
-          src="../icons/accounting-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>المدفوعات</span>
-      </a>
-      <a href="income.html" class="sidebar-link">
-        <img
-          src="../icons/income.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>تسجيل الإيرادات</span>
-      </a>
-
-      <a href="expenses.html" class="sidebar-link">
-        <img
-          src="../icons/expenses.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>تسجيل المصروفات</span>
-      </a>
-      <a href="cash.html" class="sidebar-link">
-        <img
-          src="../icons/icon-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>الصندوق الرئيسي</span>
-      </a>
-
-      <a href="profit.html" class="sidebar-link">
-        <img
-          src="../icons/profit.png"
-          width="32"
-          height="32"
-          alt="Profit Icon"
-        />
-        <span>تقارير الأرباح</span>
-      </a>
-
-      <a href="../pages/dashboard.html" class="sidebar-link">
-        <img
-          src="../icons/dashboard.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>لوحة التحكم</span>
-      </a>
-      <a href="../pages/tayar.html" class="sidebar-link">
-        <img
-          src="../icons/delivery.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تطبيق الطيار</span>
-      </a>
+  <div class="sidebar" id="sidebar">
+    <!-- رصيد الخزينة -->
+    <div class="menu-item cash-item">
+      💰 رصيد الخزينة:
+      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
     </div>
+
+    <a href="../index.html" class="sidebar-link">
+      <img src="../icons/home.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>الصفحة الرئيسية</span>
+    </a>
+
+    <a href="customers.html" class="sidebar-link">
+      <img src="../icons/customer-512.png" width="32" height="32" alt="Customers Icon" />
+      <span>الحسابات</span>
+    </a>
+
+    <a href="products.html" class="sidebar-link">
+      <img src="../icons/products.png" width="32" height="32" alt="Products Icon" />
+      <span>المخزون</span>
+    </a>
+
+    <a href="sales.html" class="sidebar-link">
+      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
+      <span>المبيعات</span>
+    </a>
+
+    <a href="purchases.html" class="sidebar-link">
+      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon" />
+      <span>المشتريات</span>
+    </a>
+
+    <a href="receipts.html" class="sidebar-link">
+      <img src="../icons/income-512.png" width="32" height="32" alt="Income Icon" />
+      <span>المقبوضات</span>
+    </a>
+
+    <a href="#" class="sidebar-link">
+      <img src="../icons/accounting-512.png" width="32" height="32" alt="Expenses Icon" />
+      <span>المدفوعات</span>
+    </a>
+    <a href="income.html" class="sidebar-link">
+      <img src="../icons/income.png" width="32" height="32" alt="Income Icon" />
+      <span>تسجيل الإيرادات</span>
+    </a>
+
+    <a href="expenses.html" class="sidebar-link">
+      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon" />
+      <span>تسجيل المصروفات</span>
+    </a>
+    <a href="cash.html" class="sidebar-link">
+      <img src="../icons/icon-512.png" width="32" height="32" alt="Expenses Icon" />
+      <span>الصندوق الرئيسي</span>
+    </a>
+
+    <a href="profit.html" class="sidebar-link">
+      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon" />
+      <span>تقارير الأرباح</span>
+    </a>
+
+    <a href="../pages/dashboard.html" class="sidebar-link">
+      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>لوحة التحكم</span>
+    </a>
+    <a href="../pages/tayar.html" class="sidebar-link">
+      <img src="../icons/delivery.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>تطبيق الطيار</span>
+    </a>
+  </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 
@@ -552,7 +624,7 @@
             <option value="">إختر الحساب</option>
           </select>
           <input type="number" id="incomeAmount" placeholder="المبلغ" min="0" />
-          <!-- بيان المقبوضات -->
+          <!-- بيان الإيرادات -->
           <select id="incomeTitle">
             <option value="" disabled selected>البند / البيان</option>
             <option>تسجيل إيراد خارجي</option>
@@ -581,6 +653,16 @@
     <div class="t-container">
       <div class="incomeMenu">
         <h5>📋 سجل الإيرادات الخارجية</h5>
+
+        <!-- ===== فلتر الإيرادات ===== -->
+        <div class="form-row">
+          <input type="date" id="fromDate" placeholder="من تاريخ" />
+          <input type="date" id="toDate" placeholder="إلى تاريخ" />
+          <select id="filterCustomer">
+            <option value="">اختر الحساب للفلترة</option>
+          </select>
+        </div>
+
         <div class="table-scroll">
           <table id="incomeTable">
             <thead>
@@ -589,9 +671,17 @@
                 <th>الحساب</th>
                 <th>المبلغ</th>
                 <th>البيان</th>
+                <th>إجراءات</th>
               </tr>
             </thead>
             <tbody></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2">الإجمالي</td>
+                <td id="incomeTotal">0</td>
+                <td></td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -605,6 +695,37 @@
       <button onclick="closeModal()">حسناً</button>
     </div>
   </div>
+
+  <div id="editIncomeModal" class="modal">
+    <div class="modal-content">
+      <h3>تعديل سند الإيراد</h3>
+
+      <input type="number" id="editAmount" placeholder="المبلغ" />
+      <input type="text" id="editTitle" placeholder="البيان" />
+
+      <div class="modal-actions">
+        <button onclick="saveIncomeEdit()">حفظ</button>
+        <button onclick="closeEditModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="successModal" class="success-modal">
+    <div class="success-box">✅ تم حفظ الإيراد بنجاح</div>
+  </div>
+
+  <!-- مودال تأكيد الحذف -->
+  <div id="deleteIncomeModal" class="modal">
+    <div class="modal-content">
+      <h3>تأكيد الحذف</h3>
+      <p>هل أنت متأكد من حذف السند؟</p>
+      <div class="modal-actions">
+        <button id="confirmDeleteIncomeBtn">نعم، احذف</button>
+        <button id="cancelDeleteIncomeBtn">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
 
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>

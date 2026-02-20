@@ -1,330 +1,331 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+  <!DOCTYPE html>
+  <html lang="ar" dir="rtl">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/style.css" />
-  <title>المقبوضات</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Cairo", sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>المقبوضات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      background: #1E293B;
-      color: #F8F9FA;
-      padding-bottom: 100px;
-    }
+      body {
+        background: #1E293B;
+        color: #F8F9FA;
+        padding-bottom: 100px;
+      }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      background: linear-gradient(90deg, #2980B9, #6DD5FA);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-radius: 0 0 15px 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 25px;
+        background: #1E3A8A;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
 
-    .header h1 {
-      font-family: "Tajawal", sans-serif;
-      font-size: 24px;
-    }
+      .header h1 {
+        font-family: "Tajawal", sans-serif;
+        font-size: 24px;
+      }
 
-    .header-right button {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      font-size: 18px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-left: 10px;
-      transition: 0.3s;
-    }
+      .header-right button {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        font-size: 18px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
 
-    .header-right button:hover {
-      background: rgba(255, 255, 255, 0.4);
-    }
+      .header-right button:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
 
-    .form-container {
-      max-width: 950px;
-      margin: 20px auto;
-      background: #2E3A59;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
+      .form-container {
+        max-width: 950px;
+        margin: 20px auto;
+        background: #2E3A59;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
 
-    .form-container input,
-    .form-container select,
-    .form-container button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-      font-size: 16px;
-    }
+      .form-container input,
+      .form-container select,
+      .form-container button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+      }
 
-    .form-container button {
-      background: #3B82F6;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+      .form-container input,
+      .form-container select {
+        background-color: #0f172a;
+        color: #fff;
+      }
 
-    .form-container button:hover {
-      background: #60A5FA;
-    }
+      .form-container button {
+        background: #1E3A8A;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-    .table-wrapper {
-      max-height: 400px;
-      overflow-y: auto;
-      overflow-x: auto;
-      margin-top: 20px;
-      border-radius: 8px;
-      background: #1E293B;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
+      .form-container button:hover {
+        background: #1E3A8A;
+      }
 
-    .table-wrapper table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+      .table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: auto;
+        margin-top: 20px;
+        border-radius: 8px;
+        background: #1E293B;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
 
-    th,
-    td {
-      padding: 12px;
-      text-align: center;
-    }
+      .table-wrapper table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-    th {
-      background: #21618C;
-    }
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+      }
 
-    tr:nth-child(even) {
-      background: #2E3A59;
-    }
+      th {
+        background: #21618C;
+      }
 
-    tr:nth-child(odd) {
-      background: #1E2A45;
-    }
+      tr:nth-child(even) {
+        background: #2E3A59;
+      }
 
-    tfoot td {
-      font-weight: bold;
-      background: #21618C;
-    }
+      tr:nth-child(odd) {
+        background: #1E2A45;
+      }
 
-    .table-wrapper::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
+      tfoot td {
+        font-weight: bold;
+        background: #21618C;
+      }
 
-    .table-wrapper::-webkit-scrollbar-track {
-      background: #0F172A;
-      border-radius: 5px;
-    }
+      .table-wrapper::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
 
-    .table-wrapper::-webkit-scrollbar-thumb {
-      background: #3B82F6;
-      border-radius: 5px;
-    }
+      .table-wrapper::-webkit-scrollbar-track {
+        background: #0F172A;
+        border-radius: 5px;
+      }
 
-    .table-wrapper::-webkit-scrollbar-thumb:hover {
-      background: #60A5FA;
-    }
+      .table-wrapper::-webkit-scrollbar-thumb {
+        background: #3B82F6;
+        border-radius: 5px;
+      }
 
-    .filter-container {
-      max-width: 950px;
-      margin: 10px auto;
-      background: #1E293B;
-      padding: 10px;
-      border-radius: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+      .table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #60A5FA;
+      }
 
-    .filter-container select,
-    .filter-container input {
-      width: auto;
-      flex: 1;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #fff;
-      background: #1E293B;
-      color: #F8F9FA;
-      font-size: 16px;
-    }
+      .filter-container {
+        max-width: 950px;
+        margin: 10px auto;
+        background: #1E293B;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
 
-    .filter-container input:focus,
-    .filter-container select:focus {
-      outline: none;
-      background: #3B82F6;
-      color: white;
-    }
+      .filter-container select,
+      .filter-container input {
+        width: auto;
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #fff;
+        background: #1E293B;
+        color: #F8F9FA;
+        font-size: 16px;
+      }
 
-    .filter-container button {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      background: #3B82F6;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
+      .filter-container input:focus,
+      .filter-container select:focus {
+        outline: none;
+        background: #3B82F6;
+        color: white;
+      }
 
-    .filter-container button:hover {
-      background: #60A5FA;
-    }
+      .filter-container button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        background: #1E3A8A;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-    }
+      .filter-container button:hover {
+        background: #1E3A8A;
+      }
 
-    .modal-content {
-      background: #1E3A8A;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      text-align: center;
-      color: white;
-    }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+      }
 
-    .modal-content input {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-    }
+      .modal-content {
+        background: #1E3A8A;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        color: white;
+      }
 
-    .modal-content button {
-      padding: 8px 12px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+      .modal-content input {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: none;
+      }
 
-    .save-btn {
-      background: #3B82F6;
-      color: white;
-    }
+      .modal-content button {
+        padding: 8px 12px;
+        margin: 5px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
 
-    .close-btn {
-      background: #F87171;
-      color: white;
-    }
-  </style>
-</head>
+      .save-btn {
+        background: #3B82F6;
+        color: white;
+      }
 
-<body>
+      .close-btn {
+        background: #F87171;
+        color: white;
+      }
+    </style>
+  </head>
 
-  <header class="header">
-    <div class="header-left">
-      <h1>المقبوضات</h1>
+  <body>
+
+    <header class="header">
+      <div class="header-left">
+        <h1>المقبوضات</h1>
+      </div>
+      <div class="header-right">
+        <button><i class="fa fa-bell"></i></button>
+        <button><i class="fa fa-user"></i></button>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <select id="receiptCustomer">
+        <option value="" disabled selected>اختر الحساب</option>
+      </select>
+
+      <input type="text" id="prevBalance" disabled placeholder="الرصيد السابق">
+
+      <select id="receiptTitle">
+        <option value="" disabled selected>البند / البيان</option>
+        <option value="سند قبض">سند قبض</option>
+        <option value="تحصيل ديون">تحصيل ديون</option>
+        <option value="أخرى">أخرى</option>
+      </select>
+
+      <input type="number" id="receiptAmount" placeholder="ادخل المبلغ">
+
+      <input type="text" id="remainingBalance" disabled placeholder="المتبقي بعد الدفع">
+
+      <button id="addReceiptBtn">إضافة المقبوض</button>
     </div>
-    <div class="header-right">
-      <button><i class="fa fa-bell"></i></button>
-      <button><i class="fa fa-user"></i></button>
+
+    <div class="filter-container">
+      <input type="date" id="fromDate" placeholder="من تاريخ">
+      <input type="date" id="toDate" placeholder="إلى تاريخ">
+      <select id="filterCustomer">
+        <option value="">الكل</option>
+      </select>
+      <button id="filterBtn">تطبيق الفلتر</button>
     </div>
-  </header>
 
-  <div class="form-container">
-    <label>اختر الحساب</label>
-    <select id="receiptCustomer">
-      <option value="" disabled selected>اختر الحساب</option>
-    </select>
+    <div class="table-wrapper">
+      <table id="receiptTable">
+        <thead>
+          <tr>
+            <th>التاريخ</th>
+            <th>الحساب</th>
+            <th>الرصيد السابق</th>
+            <th>المبلغ</th>
+            <th>المتبقي</th>
+            <th>البيان</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">الإجمالي</td>
+            <td id="receiptTotal">0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
 
-    <label>الرصيد السابق</label>
-    <input type="text" id="prevBalance" disabled placeholder="الرصيد السابق">
-
-    <label>البند / البيان</label>
-    <select id="receiptTitle">
-      <option value="" disabled selected>اختر البيان</option>
-      <option value="سند قبض">سند قبض</option>
-      <option value="تحصيل ديون">تحصيل ديون</option>
-      <option value="أخرى">أخرى</option>
-    </select>
-
-    <label>المبلغ</label>
-    <input type="number" id="receiptAmount" placeholder="ادخل المبلغ">
-
-    <label>المتبقي بعد الدفع</label>
-    <input type="text" id="remainingBalance" disabled placeholder="المتبقي بعد الدفع">
-
-    <button id="addReceiptBtn">إضافة المقبوض</button>
-  </div>
-
-  <div class="filter-container">
-    <input type="date" id="fromDate" placeholder="من تاريخ">
-    <input type="date" id="toDate" placeholder="إلى تاريخ">
-    <select id="filterCustomer">
-      <option value="">الكل</option>
-    </select>
-    <button id="filterBtn">تطبيق الفلتر</button>
-  </div>
-
-  <div class="table-wrapper">
-    <table id="receiptTable">
-      <thead>
-        <tr>
-          <th>التاريخ</th>
-          <th>الحساب</th>
-          <th>الرصيد السابق</th>
-          <th>المبلغ</th>
-          <th>المتبقي</th>
-          <th>البيان</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4">الإجمالي</td>
-          <td id="receiptTotal">0</td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-
-  <div class="modal" id="titleModal">
-    <div class="modal-content">
-      <h3>أضف بيان جديد</h3>
-      <input type="text" id="otherTitleInput" placeholder="اكتب البيان هنا">
-      <div>
-        <button class="save-btn" id="saveTitleBtn">حفظ</button>
-        <button class="close-btn" id="closeModalBtn">إلغاء</button>
+    <div class="modal" id="titleModal">
+      <div class="modal-content">
+        <h3>أضف بيان جديد</h3>
+        <input type="text" id="otherTitleInput" placeholder="اكتب البيان هنا">
+        <div>
+          <button class="save-btn" id="saveTitleBtn">حفظ</button>
+          <button class="close-btn" id="closeModalBtn">إلغاء</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="../js/data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/receipts.js"></script>
+    <script src="../js/data.js"></script>
+      <script src="../js/common.js"></script>
+      <script src="../js/receipts.js"></script>
 
-</body>
+  </body>
 
-</html>
+  </html>

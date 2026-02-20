@@ -1,25 +1,59 @@
+let editingIndex = null;
+
 window.onload = function () {
   loadData();
-  renderCustomerSelect();
-  renderIncome();
+  renderIncomeCustomerSelect();
+  renderFilterCustomerSelect();
+  renderIncome(); // الافتراضي: عرض عمليات اليوم
 
   document.getElementById("addIncomeBtn").onclick = addIncome;
+
+  // تعيين التاريخ الافتراضي للفلاتر
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("fromDate").value = today;
+  document.getElementById("toDate").value = today;
+
+  // عرض العمليات حسب التاريخ الافتراضي
+  renderIncome();
 };
 
-function renderCustomerSelect() {
+// ==================== قائمة حسابات الإيراد ====================
+function renderIncomeCustomerSelect() {
   const sel = document.getElementById("incomeCustomer");
   if (!sel) return;
+
+  // حسابات الإيراد فقط
+  const incomeCustomers = customers.filter((c) => c.type === "income");
+
   sel.innerHTML =
-    `<option value="" disabled selected>اختر الحساب</option>` +
-    `<option value="">نقدي بدون عميل</option>` +
-    customers.map((c, i) => `<option value="${i}">${c.name}</option>`).join("");
+    `<option value="" selected disabled>اختر حساب الإيراد</option>` +
+    incomeCustomers
+      .map((c, i) => `<option value="${i}">${c.name}</option>`)
+      .join("");
 }
 
+// ==================== قائمة فلتر الحسابات ====================
+function renderFilterCustomerSelect() {
+  const sel = document.getElementById("filterCustomer");
+  if (!sel) return;
+
+  const incomeCustomers = customers.filter((c) => c.type === "income");
+
+  sel.innerHTML =
+    `<option value="">اختر الحساب للفلترة</option>` +
+    incomeCustomers
+      .map((c) => `<option value="${c.name}">${c.name}</option>`)
+      .join("");
+}
+
+// ==================== إضافة الإيراد ====================
 function addIncome() {
   const title = document.getElementById("incomeTitle").value.trim();
   const amount = +document.getElementById("incomeAmount").value;
   const customerIndex = document.getElementById("incomeCustomer").value;
-  const customer = customerIndex !== "" ? customers[customerIndex] : null;
+
+  const incomeCustomers = customers.filter((c) => c.type === "income");
+  const customer = customerIndex >= 0 ? incomeCustomers[customerIndex] : null;
 
   if (!title || !amount) {
     showModal("من فضلك أكمل جميع البيانات");
@@ -44,33 +78,144 @@ function addIncome() {
   saveData();
   updateBottomCashBalance();
   renderIncome();
+  showSuccess();
 }
 
+// ==================== عرض الإيرادات مع الفلترة ====================
 function renderIncome() {
   const tbody = document.querySelector("#incomeTable tbody");
   if (!tbody) return;
   tbody.innerHTML = "";
 
-  incomes.sort((a, b) => (a.order || 0) - (b.order || 0));
+  const from = document.getElementById("fromDate").value;
+  const to = document.getElementById("toDate").value;
+  const filterCustomer = document.getElementById("filterCustomer")?.value || "";
 
-  incomes.forEach((i) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${i.date}</td><td>${i.customer}</td><td>${i.amount}</td><td>${i.title}</td>`;
-    tbody.appendChild(tr);
+  const filtered = incomes.filter((i) => {
+    if (from && i.date < from) return false;
+    if (to && i.date > to) return false;
+    if (filterCustomer && i.customer !== filterCustomer) return false;
+    return true;
   });
+
+  filtered.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  let total = 0;
+
+  filtered.forEach((i) => {
+    const index = incomes.indexOf(i);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+    <td>${i.date}</td>
+    <td>${i.customer}</td>
+    <td>${i.amount}</td>
+    <td>${i.title}</td>
+    <td>
+  <button class="action-btn edit-btn" onclick="editIncome(${index})">✏️ تعديل</button>
+  <button class="action-btn delete-btn" onclick="deleteIncome(${index})">🗑️ حذف</button>
+</td>
+  `;
+    tbody.appendChild(tr);
+    total += i.amount;
+  });
+
+  const totalCell = document.getElementById("incomeTotal");
+  if (totalCell) totalCell.textContent = total.toFixed(2);
 }
 
-function showModal(message, title = "تنبيه") {
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalMessage").innerText = message;
-  document.getElementById("appModal").style.display = "flex";
+function editIncome(index) {
+  const item = incomes[index];
+
+  editingIndex = index;
+
+  document.getElementById("editAmount").value = item.amount;
+  document.getElementById("editTitle").value = item.title;
+
+  document.getElementById("editIncomeModal").style.display = "flex";
 }
 
-function closeModal() {
-  document.getElementById("appModal").style.display = "none";
+function closeEditModal() {
+  document.getElementById("editIncomeModal").style.display = "none";
 }
 
-//عند اختيار بند اخري فى بيان المقبوضات
+function saveIncomeEdit() {
+  const newAmount = +document.getElementById("editAmount").value;
+  const newTitle = document.getElementById("editTitle").value.trim();
+
+  if (!newAmount || !newTitle) return;
+
+  const oldItem = incomes[editingIndex];
+
+  // تعديل الرصيد
+  const customer = customers.find((c) => c.name === oldItem.customer);
+  if (customer) {
+    customer.balance += oldItem.amount; // رجع القديم
+    customer.balance -= newAmount; // اخصم الجديد
+  }
+
+  cash.income -= oldItem.amount;
+  cash.income += newAmount;
+
+  incomes[editingIndex].amount = newAmount;
+  incomes[editingIndex].title = newTitle;
+
+  saveData();
+  updateBottomCashBalance();
+  closeEditModal();
+  renderIncome();
+}
+
+// ====================   دالة الحذف ====================
+let deleteIncomeIndex = null;
+
+function deleteIncome(index) {
+  deleteIncomeIndex = index;
+  const modal = document.getElementById("deleteIncomeModal");
+  modal.style.display = "flex";
+}
+
+// زر تأكيد الحذف
+document
+  .getElementById("confirmDeleteIncomeBtn")
+  .addEventListener("click", () => {
+    if (deleteIncomeIndex === null) return;
+
+    const item = incomes[deleteIncomeIndex];
+
+    // تعديل الرصيد
+    const customer = customers.find((c) => c.name === item.customer);
+    if (customer) customer.balance += item.amount;
+
+    cash.income -= item.amount;
+
+    // حذف الإيراد
+    incomes.splice(deleteIncomeIndex, 1);
+
+    saveData();
+    updateBottomCashBalance();
+    renderIncome();
+
+    document.getElementById("deleteIncomeModal").style.display = "none";
+    deleteIncomeIndex = null;
+  });
+
+// زر الإلغاء
+document
+  .getElementById("cancelDeleteIncomeBtn")
+  .addEventListener("click", () => {
+    document.getElementById("deleteIncomeModal").style.display = "none";
+    deleteIncomeIndex = null;
+  });
+
+// ==================== فلترة عند تغيير التاريخ تلقائيًا ====================
+document.getElementById("fromDate")?.addEventListener("change", renderIncome);
+document.getElementById("toDate")?.addEventListener("change", renderIncome);
+document
+  .getElementById("filterCustomer")
+  ?.addEventListener("change", renderIncome);
+
+// ==================== مودال بند أخرى ====================
 document.addEventListener("DOMContentLoaded", function () {
   const titleSelect = document.getElementById("incomeTitle");
   const modal = document.getElementById("titleModal");
@@ -80,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!titleSelect) return;
 
-  // فتح المودال عند اختيار "أخرى"
   titleSelect.addEventListener("change", function () {
     if (this.value === "other") {
       modal.style.display = "flex";
@@ -89,25 +233,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // حفظ البيان الجديد
   saveBtn.onclick = function () {
     let val = otherInput.value.trim();
     if (!val) return;
-
-    // إضافة البيان للقائمة
     let opt = document.createElement("option");
     opt.text = val;
     opt.value = val;
     titleSelect.add(opt);
-
-    // تحديده
     titleSelect.value = val;
-
-    // إغلاق المودال
     modal.style.display = "none";
   };
 
-  // إغلاق المودال بدون حفظ
   closeBtn.onclick = function () {
     modal.style.display = "none";
     titleSelect.value = "";
