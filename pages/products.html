@@ -70,43 +70,43 @@
 
     /* ===== Sidebar ===== */
     .sidebar {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      width: 260px;
-      height: calc(100dvh - 60px);
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: 0.3s;
-      z-index: 1001;
-      overflow-y: auto;
-      scrollbar-width: none;
-      font-family: "Cairo", sans-serif;
-      font-weight: 600;
-      padding: 20px 20px 40px 20px;
-    }
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 260px;
+        height: calc(100dvh - 60px);
+        background: #0f172a;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s;
+        z-index: 1001;
+        overflow-y: auto;
+        scrollbar-width: none;
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        padding: 20px 20px 40px 20px;
+      }
 
-    .sidebar.show {
-      right: 0;
-    }
+      .sidebar.show {
+        right: 0;
+      }
 
-    .sidebar a,
-    .sidebar button,
-    .sidebar div {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #1e293b;
-      border-radius: 8px;
-      text-align: center;
-      color: white;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+      .sidebar a,
+      .sidebar button,
+      .sidebar div {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: #1e293b;
+        border-radius: 8px;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+      }
 
     .sidebar a:hover,
     .sidebar button:hover {
@@ -173,10 +173,13 @@
       }
     }
 
+
+    /* ===== Main ===== */
     .main {
       padding: 80px 15px 20px;
     }
 
+    /* ===== Cards ===== */
     .card {
       background: var(--card);
       padding: 20px;
@@ -244,11 +247,13 @@
       border-color: var(--primary);
     }
 
+    /* ===== Search ===== */
     #searchProduct {
       margin-bottom: 5px;
     }
 
     /* ===== Table ===== */
+    /* Wrapper للجداول مع overflow */
     .table-scroll {
       overflow: auto;
       max-height: 400px;
@@ -290,43 +295,6 @@
       padding: 12px;
       text-align: center;
       border: 1px solid #21618c;
-    }
-
-    .actions {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-
-    .actions button {
-      width: 100%;
-      max-width: 70px;
-      height: 32px;
-      padding: 0 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    /* تعديل */
-    .btn-edit {
-      background: #3b82f6;
-      color: #fff;
-    }
-
-    /* حذف */
-    .btn-delete {
-      background: #ef4444;
-      color: #fff;
-    }
-
-    /* حركة صنف */
-    .btn-info {
-      background: #16a34a;
-      color: #fff;
     }
 
     /* ===== Modals ===== */
@@ -420,6 +388,48 @@
       max-width: 150px;
     }
 
+    td.actions {
+      white-space: nowrap;
+    }
+
+    /* صندوق الأزرار */
+    .actions {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .actions button {
+      width: 100%;
+      max-width: 70px;
+      height: 32px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    /* تعديل */
+    .btn-edit {
+      background: #3b82f6;
+      color: #fff;
+    }
+
+    /* حذف */
+    .btn-delete {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* حركة صنف */
+    .btn-info {
+      background: #16a34a;
+      color: #fff;
+    }
+
     /* الزر الرئيسي داخل المودال */
     .modal-card button {
       padding: 10px 16px;
@@ -497,75 +507,135 @@
   </div>
 
   <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <!-- رصيد الخزينة -->
-    <div class="menu-item cash-item">
-      💰 رصيد الخزينة:
-      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+    <div class="sidebar" id="sidebar">
+      <!-- رصيد الخزينة -->
+      <div class="menu-item cash-item">
+        💰 رصيد الخزينة:
+        <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+      </div>
+
+      <a href="../index.html" class="sidebar-link">
+        <img
+          src="../icons/home.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>الصفحة الرئيسية</span>
+      </a>
+
+      <a href="customers.html" class="sidebar-link">
+        <img
+          src="../icons/customer-512.png"
+          width="32"
+          height="32"
+          alt="Customers Icon"
+        />
+        <span>الحسابات</span>
+      </a>
+
+      <a href="products.html" class="sidebar-link">
+        <img
+          src="../icons/products.png"
+          width="32"
+          height="32"
+          alt="Products Icon"
+        />
+        <span>المخزون</span>
+      </a>
+
+      <a href="sales.html" class="sidebar-link">
+        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
+        <span>المبيعات</span>
+      </a>
+
+      <a href="purchases.html" class="sidebar-link">
+        <img
+          src="../icons/purchases.png"
+          width="32"
+          height="32"
+          alt="Purchases Icon"
+        />
+        <span>المشتريات</span>
+      </a>
+
+      <a href="receipts.html" class="sidebar-link">
+        <img
+          src="../icons/income-512.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>المقبوضات</span>
+      </a>
+
+      <a href="#" class="sidebar-link">
+        <img
+          src="../icons/accounting-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>المدفوعات</span>
+      </a>
+      <a href="income.html" class="sidebar-link">
+        <img
+          src="../icons/income.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>تسجيل الإيرادات</span>
+      </a>
+
+      <a href="expenses.html" class="sidebar-link">
+        <img
+          src="../icons/expenses.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>تسجيل المصروفات</span>
+      </a>
+      <a href="cash.html" class="sidebar-link">
+        <img
+          src="../icons/icon-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>الصندوق الرئيسي</span>
+      </a>
+
+      <a href="profit.html" class="sidebar-link">
+        <img
+          src="../icons/profit.png"
+          width="32"
+          height="32"
+          alt="Profit Icon"
+        />
+        <span>تقارير الأرباح</span>
+      </a>
+
+      <a href="../pages/dashboard.html" class="sidebar-link">
+        <img
+          src="../icons/dashboard.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>لوحة التحكم</span>
+      </a>
+      <a href="../pages/tayar.html" class="sidebar-link">
+        <img
+          src="../icons/delivery.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>تطبيق الطيار</span>
+      </a>
     </div>
-
-    <a href="../index.html" class="sidebar-link">
-      <img src="../icons/home.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>الصفحة الرئيسية</span>
-    </a>
-
-    <a href="customers.html" class="sidebar-link">
-      <img src="../icons/customer-512.png" width="32" height="32" alt="Customers Icon" />
-      <span>الحسابات</span>
-    </a>
-
-    <a href="products.html" class="sidebar-link">
-      <img src="../icons/products.png" width="32" height="32" alt="Products Icon" />
-      <span>المخزون</span>
-    </a>
-
-    <a href="sales.html" class="sidebar-link">
-      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-      <span>المبيعات</span>
-    </a>
-
-    <a href="purchases.html" class="sidebar-link">
-      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon" />
-      <span>المشتريات</span>
-    </a>
-
-    <a href="receipts.html" class="sidebar-link">
-      <img src="../icons/income-512.png" width="32" height="32" alt="Income Icon" />
-      <span>المقبوضات</span>
-    </a>
-
-    <a href="#" class="sidebar-link">
-      <img src="../icons/accounting-512.png" width="32" height="32" alt="Expenses Icon" />
-      <span>المدفوعات</span>
-    </a>
-    <a href="income.html" class="sidebar-link">
-      <img src="../icons/income.png" width="32" height="32" alt="Income Icon" />
-      <span>تسجيل الإيرادات</span>
-    </a>
-
-    <a href="expenses.html" class="sidebar-link">
-      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon" />
-      <span>تسجيل المصروفات</span>
-    </a>
-    <a href="cash.html" class="sidebar-link">
-      <img src="../icons/icon-512.png" width="32" height="32" alt="Expenses Icon" />
-      <span>الصندوق الرئيسي</span>
-    </a>
-
-    <a href="profit.html" class="sidebar-link">
-      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon" />
-      <span>تقارير الأرباح</span>
-    </a>
-
-    <a href="../pages/dashboard.html" class="sidebar-link">
-      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>لوحة التحكم</span>
-    </a>
-    <a href="../pages/tayar.html" class="sidebar-link">
-      <img src="../icons/delivery.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>تطبيق الطيار</span>
-    </a>
-  </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 
