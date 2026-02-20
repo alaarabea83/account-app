@@ -13,8 +13,7 @@ function renderExpenseCustomerSelect() {
   const expenseCustomers = customers.filter((c) => c.type === "expense");
 
   const opts =
-    `<option value="" disabled selected>اختر الحساب</option>` +
-    `<option value="-1">نقدي بدون عميل</option>` +
+    `<option value="" disabled selected>اختر حساب المصروف</option>` +
     expenseCustomers
       .map((c, i) => `<option value="${i}">${c.name}</option>`)
       .join("");
@@ -38,8 +37,13 @@ function addExpense() {
   if (customer) customer.balance += amount;
   cash.expenses += amount;
 
+  if (!customer) {
+    showModal("من فضلك اختر الحساب أولاً"); // مودال تنبيه
+    return;
+  }
+
   expenses.push({
-    customer: customer ? customer.name : "نقدي",
+    customer: customer.name,
     amount,
     title,
     date: new Date().toISOString().slice(0, 10),
@@ -70,6 +74,21 @@ function showSuccessModal(message = "تمت العملية بنجاح") {
     modal.style.display = "none";
   }, 2000);
 }
+
+// دوال المودال
+function showModal(message) {
+  const modal = document.getElementById("appModal");
+  document.getElementById("modalMessage").textContent = message;
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  const modal = document.getElementById("appModal");
+  modal.style.display = "none";
+}
+
+// زر "حسناً" يغلق المودال
+document.getElementById("closeModalBtn")?.addEventListener("click", closeModal);
 
 // ==================== عرض سجل المصروفات ====================
 function renderExpenses() {
