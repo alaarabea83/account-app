@@ -13,13 +13,17 @@
 
   <title>سهل لإدارة الحسابات</title>
   <style>
+    /* =====================================
+   🔷 SAHL SYSTEM UI - CLEAN VERSION
+====================================== */
+
     /* ===== Variables ===== */
     :root {
       --primary: #6366f1;
       --bg: #0f172a;
       --card: #1e293b;
       --text: #f1f5f9;
-      --border: #fff;
+      --border: #334155;
     }
 
     /* Light Mode */
@@ -42,7 +46,10 @@
       overflow-x: hidden;
     }
 
-    /* ===== Header ===== */
+    /* =====================================
+   🔷 HEADER
+====================================== */
+
     .header {
       position: fixed;
       inset: 0 0 auto 0;
@@ -61,8 +68,11 @@
       margin: 40px;
     }
 
-    /* ===== Menu Toggle ===== */
-    .menu-toggle {
+    /* =====================================
+   🔷 SIDEBAR
+====================================== */
+
+     .menu-toggle {
       position: fixed;
       right: 12px;
       background: white;
@@ -121,7 +131,7 @@
       background: #334155;
     }
 
-    /* عناوين داخل السايدبار */
+    /* Sidebar Titles */
     .sidebar h2 {
       text-align: center;
       color: #a78bfa;
@@ -141,16 +151,13 @@
       display: block;
     }
 
-    /* روابط السايدبار */
+    /* Sidebar Links */
     .sidebar-link {
       display: flex;
       flex-direction: column;
-      /* عمودياً */
       align-items: center;
-      /* تمركز النص تحت الأيقونة */
       justify-content: center;
       gap: 6px;
-      /* مسافة متساوية بين الأيقونة والنص */
       padding: 12px;
       text-decoration: none;
       color: #cbd5f5;
@@ -167,171 +174,140 @@
       color: white;
     }
 
-
     /* ===== Mobile ===== */
-    @media(max-width:768px) {
+    @media (max-width: 768px) {
       .sidebar {
         right: -260px;
-        /* مخفي افتراضيًا */
       }
 
       .sidebar.show {
         right: 0;
-        /* يظهر عند الضغط على التوجل */
       }
     }
 
+    /* =====================================
+   🔷 LAYOUT
+====================================== */
 
-    /* ===== Layout ===== */
     section {
-      background: #0f172a;
       max-width: 1300px;
-      margin: 60px auto 20px;
+      margin: 80px auto 20px;
       padding: 15px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
     }
+
+    /* Desktop layout */
+    @media (min-width:768px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      section {
+        margin-right: 260px;
+      }
+    }
+
+    /* =====================================
+   🔷 CARD
+====================================== */
 
     .card {
-      background: #1e293b;
+      background: var(--card);
       padding: 20px;
       border-radius: 16px;
-      margin: 5px;
     }
 
-    /* ===== Forms ===== */
+    /* =====================================
+   🔷 FORM ROW
+====================================== */
+
     .form-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       align-items: center;
-      background: #1e293b;
+      background: var(--card);
       border-radius: 12px;
-      margin: 10px;
-      padding: 20px;
+      padding: 15px;
     }
 
     .form-row input,
     .form-row select {
       flex: 1;
       min-width: 140px;
-      background: #0f172a;
+      background: #111827;
       color: white;
-      border: 1px solid #21618c;
+      border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 14px;
-      font-size: 16px;
-    }
-
-    .form-row button {
-      background: #21618c;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+      padding: 10px;
+      font-size: 14px;
     }
 
     .form-row input:focus,
     .form-row select:focus {
       outline: none;
-      border-color: #e74c3c;
+      border-color: var(--primary);
     }
 
-    button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: #0e7490;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto;
-      max-width: 120px;
-      margin: 5px auto;
-    }
-
-    #customerBalance {
-      background: #0f172a;
-      border: 1px solid #21618c;
-      font-weight: bold;
-      max-width: 300px;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-
+    /* Mobile */
+    @media (max-width:768px) {
       .form-row {
         flex-direction: column;
         align-items: stretch;
       }
-
-      .form-row input,
-      .form-row select {
-        width: 100%;
-      }
-
-      #customerBalance {
-        max-width: 100%;
-        text-align: center;
-      }
-
     }
 
-    /* ===== Table ===== */
-
-    table {
-      width: 100%;
-      min-width: 600px;
-      border-collapse: collapse;
-    }
-
-    thead th {
-      position: sticky;
-      top: 0;
-      background: #0f172a;
-      border: 1px solid #21618c;
-      z-index: 10;
-      padding: 12px;
-      color: #e5e7eb;
-    }
-
-    td {
-      text-align: center;
-      border: 1px solid #21618c;
-    }
-
-    tr {
-      background: #1e293b;
-    }
-
-    tfoot tr {
-      background: linear-gradient(135deg, #1f2937, #111827);
-      color: #fbbf24;
-      font-size: 16px;
-      height: 40px;
-    }
+    /* =====================================
+   🔷 TABLE
+====================================== */
 
     .table-container {
-      overflow: auto;
-      border-radius: 10px;
+      margin-top: 15px;
+      border-radius: 12px;
       padding: 10px;
-      background-color: #0f172a;
+      background: var(--card);
     }
 
     .table-scroll {
       overflow: auto;
       max-height: 400px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Webkit */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      background: #1f2937;
+      font-weight: 600;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    tfoot tr {
+      background: #111827;
+      color: #fbbf24;
+      font-weight: bold;
+    }
+
+    /* Scrollbar */
     .table-scroll::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
@@ -339,36 +315,113 @@
       border-radius: 10px;
     }
 
-    .table-scroll::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
+    /* =====================================
+   🔷 ACTION BUTTONS
+====================================== */
 
-    /* ===== Buttons ===== */
     .action-buttons {
       display: flex;
-      gap: 6px;
+      gap: 4px;
       justify-content: center;
     }
 
     .btn-edit {
       background: #3b82f6;
-      color: #fff;
     }
 
     .btn-delete {
       background: #ef4444;
-      color: #fff;
     }
 
     .btn-edit,
     .btn-delete {
       border: none;
-      padding: 5px 10px;
+      padding: 6px 10px;
       border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    /* =====================================
+   🔷 INVOICE INPUTS
+====================================== */
+
+    .itemQty,
+    .itemPrice,
+    .itemTotal {
+      width: 75px;
+      padding: 6px;
+      text-align: center;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #111827;
+      color: white;
+    }
+
+    .itemTotal {
+      color: #f1c40f;
+      font-weight: bold;
+    }
+
+    /* =====================================
+   🔷 SAVE BUTTON
+====================================== */
+
+    #saveInvoiceBtn {
+      width: 100%;
+      max-width: 200px;
+      margin: 15px auto 0;
+      display: block;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      background: #21618c;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* =====================================
+   🔷 CUSTOM SELECT
+====================================== */
+
+    .custom-select {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dropdown-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #1f2937;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      z-index: 1000;
+    }
+
+    .dropdown-item {
+      padding: 10px;
       cursor: pointer;
     }
 
-    /* ===== Modal ===== */
+    .dropdown-item:hover {
+      background: var(--primary);
+    }
+
+    /* =====================================
+   🔷 MODAL
+====================================== */
+
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -388,96 +441,6 @@
       max-width: 400px;
       text-align: center;
     }
-
-    /* ===== Invoice Inputs ===== */
-    .itemQty,
-    .itemPrice,
-    .itemTotal {
-      width: 75px;
-      padding: 6px;
-      text-align: center;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #111827;
-      color: white;
-    }
-
-    .itemTotal {
-      color: #f1c40f;
-      font-weight: bold;
-    }
-
-    /* ===== Desktop ===== */
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
-      }
-
-      .sidebar {
-        right: 0;
-      }
-
-      section {
-        margin-right: 260px;
-      }
-      }
-
-      /* ===== Desktop ===== */
-
-      /* زر الحفظ */
-      #saveInvoiceBtn {
-        width: 100%;
-        max-width: 200px;
-        margin: 15px auto 0;
-        display: block;
-        padding: 12px;
-        font-size: 16px;
-        border-radius: 8px;
-        background: #21618c;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      /* ===== Mobile ===== */
-      @media (max-width: 600px) {
-        #saveInvoiceBtn {
-          width: 70%;
-          max-width: 100%;
-        }
-      }
-
-      .custom-select {
-        position: relative;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        min-width: 140px;
-      }
-
-      .dropdown-list {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        max-height: 200px;
-        overflow-y: auto;
-        scrollbar-width: none;
-        background: #0a570a;
-        border: 1px solid #4b5563;
-        border-radius: 10px;
-        z-index: 1000;
-      }
-
-      .dropdown-item {
-        padding: 10px;
-        cursor: pointer;
-      }
-
-      .dropdown-item:hover {
-        background: blue;
-      }
   </style>
 </head>
 
@@ -627,7 +590,6 @@
         </div>
 
         <input type="text" id="searchSale" placeholder="بحث بإسم العميل" />
-        <button onclick="filterSalesByDate()">🔍 بحث</button>
       </div>
 
       <div class="table-scroll">
