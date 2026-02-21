@@ -448,94 +448,96 @@
    🔷 INVOICE TABLE STYLE
 ========================= */
 
-.table-container {
-  margin-top: 20px;
-  background: #1E3A8A;
-  padding: 15px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  margin-bottom: 10px;
-}
+    .table-container {
+      margin-top: 20px;
+      background: #1E3A8A;
+      padding: 15px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      margin-bottom: 10px;
+    }
 
-.table-scroll {
-  overflow: auto;
-  max-height: 450px;
-  border-radius: 12px;
-}
+    .table-scroll {
+      overflow: auto;
+      max-height: 450px;
+      border-radius: 12px;
+    }
 
-/* Scrollbar */
-.table-scroll::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.table-scroll::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 10px;
-}
-.table-scroll::-webkit-scrollbar-track {
-  background: #334155;
-}
+    /* Scrollbar */
+    .table-scroll::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
 
-#invoiceTable {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 750px;
-  font-size: 14px;
-}
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
 
-/* Header */
-#invoiceTable thead th {
-  position: sticky;
-  top: 0;
-  background: linear-gradient(90deg, #1E3A8A, #2563eb);
-  color: white;
-  padding: 14px;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 2px solid var(--primary);
-  letter-spacing: 0.5px;
-}
+    .table-scroll::-webkit-scrollbar-track {
+      background: #334155;
+    }
 
-/* Body Cells */
-#invoiceTable td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  transition: 0.2s;
-}
+    #invoiceTable {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+      font-size: 14px;
+    }
 
-/* Row Hover */
-#invoiceTable tbody tr:hover {
-  background: rgba(99,102,241,0.08);
-}
+    /* Header */
+    #invoiceTable thead th {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(0, #1E3A8A, #2563eb);
+      color: white;
+      padding: 14px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 2px solid var(--primary);
+      letter-spacing: 0.5px;
+    }
 
-/* Alternating Rows */
-#invoiceTable tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.02);
-}
+    /* Body Cells */
+    #invoiceTable td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      transition: 0.2s;
+    }
 
-/* Total Column Highlight */
-#invoiceTable td:nth-child(5) {
-  font-weight: bold;
-  color: #22c55e;
-}
+    /* Row Hover */
+    #invoiceTable tbody tr:hover {
+      background: rgba(99, 102, 241, 0.08);
+    }
 
-/* Action Buttons Cell */
-#invoiceTable td:last-child {
-  white-space: nowrap;
-}
+    /* Alternating Rows */
+    #invoiceTable tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
 
-/* Responsive */
-@media (max-width:768px){
-  #invoiceTable {
-    font-size: 13px;
-  }
+    /* Total Column Highlight */
+    #invoiceTable td:nth-child(5) {
+      font-weight: bold;
+      color: #22c55e;
+    }
 
-  #invoiceTable th,
-  #invoiceTable td {
-    padding: 8px;
-  }
-}
+    /* Action Buttons Cell */
+    #invoiceTable td:last-child {
+      white-space: nowrap;
+    }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      #invoiceTable {
+        font-size: 13px;
+      }
+
+      #invoiceTable th,
+      #invoiceTable td {
+        padding: 8px;
+      }
+    }
   </style>
 </head>
 
