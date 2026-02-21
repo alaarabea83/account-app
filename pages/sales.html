@@ -72,7 +72,7 @@
    🔷 SIDEBAR
 ====================================== */
 
-     .menu-toggle {
+    .menu-toggle {
       position: fixed;
       right: 12px;
       background: white;
@@ -227,17 +227,17 @@
       gap: 12px;
       flex-wrap: wrap;
       align-items: center;
-      background: var(--card);
+      background: #1E3A8A;
       border-radius: 12px;
-      padding: 15px;
+      padding: 35px;
+      margin-bottom: 10px;
     }
 
     .form-row input,
     .form-row select {
       flex: 1;
       min-width: 140px;
-      background: #111827;
-      color: white;
+      background: #F8FAFC;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 10px;
@@ -390,7 +390,7 @@
       padding: 12px;
       font-size: 15px;
       border-radius: 8px;
-      background: #21618c;
+      background: #EF4444;
       border: none;
       color: white;
       cursor: pointer;
@@ -541,18 +541,23 @@
     <!-- اختيار العميل + رصيد -->
     <div class="card">
       <h5>🧾 فاتورة بيع جديده</h5>
+
+      <!-- العميل + المنتج -->
       <div class="form-row">
-        <div style="flex: 1;" class="custom-select">
+
+        <!-- العميل -->
+        <div class="custom-select">
           <input type="text" id="customerInput" placeholder="ابحث عن عميل..." />
           <div id="customerDropdown" class="dropdown-list"></div>
           <input type="number" id="customerBalance" placeholder="الرصيد السابق" readonly />
         </div>
-      </div>
-      <div class="form-row">
-        <div style="flex: 1" class="custom-select">
+
+        <!-- المنتج -->
+        <div class="custom-select">
           <input type="text" id="productInput" placeholder="أضف منتج..." />
           <div id="productDropdown" class="dropdown-list"></div>
         </div>
+
       </div>
 
       <!-- جدول الفاتورة -->
@@ -574,20 +579,34 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <label>إجمالي الفاتورة:</label>
-        <input type="number" id="invoiceTotal" placeholder="0" readonly />
-        <label>الإجمالي الكلي:</label>
-        <input type="number" id="grandTotal" placeholder="0" readonly />
-        <label>المبلغ المدفوع:</label>
-        <input type="number" id="paidAmount" placeholder="0" />
-        <label>الرصيد الجديد:</label>
-        <input type="number" id="remainingAmount" placeholder="0" readonly />
+      <!-- الإجماليات -->
+      <div class="form-row totals-row">
+        <div>
+          <label>إجمالي الفاتورة</label>
+          <input type="number" id="invoiceTotal" placeholder="0" readonly />
+        </div>
+
+        <div>
+          <label>الإجمالي الكلي</label>
+          <input type="number" id="grandTotal" placeholder="0" readonly />
+        </div>
+
+        <div>
+          <label>المبلغ المدفوع</label>
+          <input type="number" id="paidAmount" placeholder="0" />
+        </div>
+
+        <div>
+          <label>الرصيد الجديد</label>
+          <input type="number" id="remainingAmount" placeholder="0" readonly />
+        </div>
       </div>
 
+      <!-- زر الحفظ -->
       <div class="form-row">
         <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
       </div>
+
     </div>
 
     <div class="card">
