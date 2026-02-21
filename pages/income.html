@@ -208,37 +208,64 @@
       margin-bottom: 10px;
     }
 
-    .form-row input,
-    .form-row select {
-      flex: 1;
-      min-width: 140px;
-      background: #0f172a;
-      color: white;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 16px;
-    }
+    /* ===== Income Form Toolbar ===== */
+.income-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: #1E3A8A;
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
 
-    input::placeholder {
-      color: #fff;
-    }
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
 
-    .form-row button {
-      background: #21618c;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.field-group label {
+  font-size: 13px;
+  color: #E2E8F0;
+}
 
-    .form-row input:focus,
-    .form-row select:focus {
-      outline: none;
-      border-color: #e74c3c;
-    }
+.field-group input,
+.field-group select {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #CBD5E1;
+  background: #F8FAFC;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* زر الإضافة */
+.btn-primary {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #3B82F6;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  height: 38px;
+}
+
+.btn-primary:hover {
+  background: #2563EB;
+  transform: translateY(-2px);
+}
 
     /* ===== Filter Toolbar ===== */
     .filter-row {
@@ -755,20 +782,34 @@
     <div class="t-container">
       <div class="incomeReciept">
         <h5>💰 تسجيل الإيرادات الخارجية</h5>
-        <div class="form-row">
-          <select id="incomeCustomer">
-            <option value="">إختر الحساب</option>
-          </select>
-          <input type="number" id="incomeAmount" placeholder="المبلغ" min="0" />
-          <!-- بيان الإيرادات -->
-          <select id="incomeTitle">
-            <option value="" disabled selected>البند / البيان</option>
-            <option>تسجيل إيراد خارجي</option>
-            <option value="other">إدخال بند آخر</option>
-          </select>
+        <div class="form-row income-row">
 
-          <button id="addIncomeBtn">✚ إضافة</button>
-        </div>
+  <div class="field-group">
+    <label>الحساب</label>
+    <select id="incomeCustomer">
+      <option value="">إختر الحساب</option>
+    </select>
+  </div>
+
+  <div class="field-group">
+    <label>المبلغ</label>
+    <input type="number" id="incomeAmount" placeholder="0.00" min="0" />
+  </div>
+
+  <div class="field-group">
+    <label>البيان</label>
+    <select id="incomeTitle">
+      <option value="" disabled selected>البند / البيان</option>
+      <option>تسجيل إيراد خارجي</option>
+      <option value="other">إدخال بند آخر</option>
+    </select>
+  </div>
+
+  <button id="addIncomeBtn" class="btn-primary">
+    ✚ إضافة
+  </button>
+
+</div>
       </div>
     </div>
 

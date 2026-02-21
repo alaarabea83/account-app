@@ -217,37 +217,71 @@
       margin-bottom: 10px;
     }
 
-    .form-row input,
-    .form-row select {
-      flex: 1;
-      min-width: 140px;
-      background: #0f172a;
-      color: white;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 16px;
-    }
+    /* صف المصروفات */
+.expense-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: #1E3A8A;
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
 
-    input::placeholder {
-      color: #fff;
-    }
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
 
-    .form-row button {
-      background: #21618c;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.field-group label {
+  font-size: 13px;
+  color: #E2E8F0;
+}
 
-    .form-row input:focus,
-    .form-row select:focus {
-      outline: none;
-      border-color: #e74c3c;
-    }
+.field-group input,
+.field-group select {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #CBD5E1;
+  background: #F8FAFC;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* زر الإضافة للمصروفات */
+.btn-danger {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #EF4444;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  height: 38px;
+}
+
+.btn-danger:hover {
+  background: #DC2626;
+  transform: translateY(-2px);
+}
+
+/* صف واحد على الكمبيوتر */
+@media (min-width: 992px) {
+  .expense-row {
+    flex-wrap: nowrap;
+  }
+}
 
     .filter-row {
       display: flex;
@@ -736,26 +770,42 @@
     <div class="t-container">
       <div class="expenseReciept">
         <h5>💸 تسجيل المصروفات</h5>
-        <div class="form-row">
-          <select id="expenseCustomer"></select>
-          <input type="number" id="expenseAmount" placeholder="المبلغ" min="0" />
-          <select id="expenseTitle">
-            <option value="" disabled selected>البند / البيان</option>
-            <option>مصروفات نثرية</option>
-            <option>مصروفات إدارية</option>
-            <option>مصروفات تسويقية</option>
-            <option>مصروفات دعاية وإعلان</option>
-            <option>سلف العاملين</option>
-            <option>أجور ومرتبات</option>
-            <option>وقود ومحروقات</option>
-            <option>إيجارات</option>
-            <option>نقل ومواصلات</option>
-            <option>إكراميات</option>
-            <option>رسوم أخري</option>
-            <option value="other">إدخال بند آخر</option>
-          </select>
-          <button id="addExpenseBtn">✚ إضافة</button>
-        </div>
+        <div class="form-row expense-row">
+
+  <div class="field-group">
+    <label>الحساب</label>
+    <select id="expenseCustomer"></select>
+  </div>
+
+  <div class="field-group">
+    <label>المبلغ</label>
+    <input type="number" id="expenseAmount" placeholder="0.00" min="0" />
+  </div>
+
+  <div class="field-group">
+    <label>البيان</label>
+    <select id="expenseTitle">
+      <option value="" disabled selected>البند / البيان</option>
+      <option>مصروفات نثرية</option>
+      <option>مصروفات إدارية</option>
+      <option>مصروفات تسويقية</option>
+      <option>مصروفات دعاية وإعلان</option>
+      <option>سلف العاملين</option>
+      <option>أجور ومرتبات</option>
+      <option>وقود ومحروقات</option>
+      <option>إيجارات</option>
+      <option>نقل ومواصلات</option>
+      <option>إكراميات</option>
+      <option>رسوم أخرى</option>
+      <option value="other">إدخال بند آخر</option>
+    </select>
+  </div>
+
+  <button id="addExpenseBtn" class="btn-danger">
+    ✚ إضافة
+  </button>
+
+</div>
       </div>
     </div>
 
