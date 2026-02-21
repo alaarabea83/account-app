@@ -78,43 +78,43 @@
 
     /* ===== Sidebar ===== */
     .sidebar {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        width: 260px;
-        height: calc(100dvh - 60px);
-        background: #0f172a;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        transition: 0.3s;
-        z-index: 1001;
-        overflow-y: auto;
-        scrollbar-width: none;
-        font-family: "Cairo", sans-serif;
-        font-weight: 600;
-        padding: 20px 20px 40px 20px;
-      }
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 260px;
+      height: calc(100dvh - 60px);
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      scrollbar-width: none;
+      font-family: "Cairo", sans-serif;
+      font-weight: 600;
+      padding: 20px 20px 40px 20px;
+    }
 
-      .sidebar.show {
-        right: 0;
-      }
+    .sidebar.show {
+      right: 0;
+    }
 
-      .sidebar a,
-      .sidebar button,
-      .sidebar div {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background: #1e293b;
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: 0.2s;
-      }
+    .sidebar a,
+    .sidebar button,
+    .sidebar div {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
     .sidebar a:hover,
     .sidebar button:hover {
@@ -256,7 +256,7 @@
 
     #customerBalance {
       background: #0f172a;
-      border: none;
+      border: 1px solid #21618c;
       font-weight: bold;
       max-width: 300px;
       text-align: center;
@@ -420,64 +420,64 @@
       section {
         margin-right: 260px;
       }
-    }
-
-    /* ===== Desktop ===== */
-
-    /* زر الحفظ */
-    #saveInvoiceBtn {
-      width: 100%;
-      max-width: 200px;
-      margin: 15px auto 0;
-      display: block;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      background: #21618c;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* ===== Mobile ===== */
-    @media (max-width: 600px) {
-      #saveInvoiceBtn {
-        width: 70%;
-        max-width: 100%;
       }
-    }
 
-    .custom-select {
-      position: relative;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      min-width: 140px;
-    }
+      /* ===== Desktop ===== */
 
-    .dropdown-list {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      width: 100%;
-      max-height: 200px;
-      overflow-y: auto;
-      scrollbar-width: none;
-      background: #0a570a;
-      border: 1px solid #4b5563;
-      border-radius: 10px;
-      z-index: 1000;
-    }
+      /* زر الحفظ */
+      #saveInvoiceBtn {
+        width: 100%;
+        max-width: 200px;
+        margin: 15px auto 0;
+        display: block;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        background: #21618c;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
 
-    .dropdown-item {
-      padding: 10px;
-      cursor: pointer;
-    }
+      /* ===== Mobile ===== */
+      @media (max-width: 600px) {
+        #saveInvoiceBtn {
+          width: 70%;
+          max-width: 100%;
+        }
+      }
 
-    .dropdown-item:hover {
-      background: blue;
-    }
+      .custom-select {
+        position: relative;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-width: 140px;
+      }
+
+      .dropdown-list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        background: #0a570a;
+        border: 1px solid #4b5563;
+        border-radius: 10px;
+        z-index: 1000;
+      }
+
+      .dropdown-item {
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .dropdown-item:hover {
+        background: blue;
+      }
   </style>
 </head>
 
@@ -488,135 +488,75 @@
   </div>
 
   <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <!-- رصيد الخزينة -->
-      <div class="menu-item cash-item">
-        💰 رصيد الخزينة:
-        <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
-      </div>
-
-      <a href="../index.html" class="sidebar-link">
-        <img
-          src="../icons/home.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>الصفحة الرئيسية</span>
-      </a>
-
-      <a href="customers.html" class="sidebar-link">
-        <img
-          src="../icons/customer-512.png"
-          width="32"
-          height="32"
-          alt="Customers Icon"
-        />
-        <span>الحسابات</span>
-      </a>
-
-      <a href="products.html" class="sidebar-link">
-        <img
-          src="../icons/products.png"
-          width="32"
-          height="32"
-          alt="Products Icon"
-        />
-        <span>المخزون</span>
-      </a>
-
-      <a href="sales.html" class="sidebar-link">
-        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-        <span>المبيعات</span>
-      </a>
-
-      <a href="purchases.html" class="sidebar-link">
-        <img
-          src="../icons/purchases.png"
-          width="32"
-          height="32"
-          alt="Purchases Icon"
-        />
-        <span>المشتريات</span>
-      </a>
-
-      <a href="receipts.html" class="sidebar-link">
-        <img
-          src="../icons/income-512.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>المقبوضات</span>
-      </a>
-
-      <a href="#" class="sidebar-link">
-        <img
-          src="../icons/accounting-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>المدفوعات</span>
-      </a>
-      <a href="income.html" class="sidebar-link">
-        <img
-          src="../icons/income.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>تسجيل الإيرادات</span>
-      </a>
-
-      <a href="expenses.html" class="sidebar-link">
-        <img
-          src="../icons/expenses.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>تسجيل المصروفات</span>
-      </a>
-      <a href="cash.html" class="sidebar-link">
-        <img
-          src="../icons/icon-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>الصندوق الرئيسي</span>
-      </a>
-
-      <a href="profit.html" class="sidebar-link">
-        <img
-          src="../icons/profit.png"
-          width="32"
-          height="32"
-          alt="Profit Icon"
-        />
-        <span>تقارير الأرباح</span>
-      </a>
-
-      <a href="../pages/dashboard.html" class="sidebar-link">
-        <img
-          src="../icons/dashboard.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تقرير حركه</span>
-      </a>
-      <a href="../pages/tayar.html" class="sidebar-link">
-        <img
-          src="../icons/delivery.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تطبيق الطيار</span>
-      </a>
+  <div class="sidebar" id="sidebar">
+    <!-- رصيد الخزينة -->
+    <div class="menu-item cash-item">
+      💰 رصيد الخزينة:
+      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
     </div>
+
+    <a href="../index.html" class="sidebar-link">
+      <img src="../icons/home.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>الصفحة الرئيسية</span>
+    </a>
+
+    <a href="customers.html" class="sidebar-link">
+      <img src="../icons/customer-512.png" width="32" height="32" alt="Customers Icon" />
+      <span>الحسابات</span>
+    </a>
+
+    <a href="products.html" class="sidebar-link">
+      <img src="../icons/products.png" width="32" height="32" alt="Products Icon" />
+      <span>المخزون</span>
+    </a>
+
+    <a href="sales.html" class="sidebar-link">
+      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
+      <span>المبيعات</span>
+    </a>
+
+    <a href="purchases.html" class="sidebar-link">
+      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon" />
+      <span>المشتريات</span>
+    </a>
+
+    <a href="receipts.html" class="sidebar-link">
+      <img src="../icons/income-512.png" width="32" height="32" alt="Income Icon" />
+      <span>المقبوضات</span>
+    </a>
+
+    <a href="#" class="sidebar-link">
+      <img src="../icons/accounting-512.png" width="32" height="32" alt="Expenses Icon" />
+      <span>المدفوعات</span>
+    </a>
+    <a href="income.html" class="sidebar-link">
+      <img src="../icons/income.png" width="32" height="32" alt="Income Icon" />
+      <span>تسجيل الإيرادات</span>
+    </a>
+
+    <a href="expenses.html" class="sidebar-link">
+      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon" />
+      <span>تسجيل المصروفات</span>
+    </a>
+    <a href="cash.html" class="sidebar-link">
+      <img src="../icons/icon-512.png" width="32" height="32" alt="Expenses Icon" />
+      <span>الصندوق الرئيسي</span>
+    </a>
+
+    <a href="profit.html" class="sidebar-link">
+      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon" />
+      <span>تقارير الأرباح</span>
+    </a>
+
+    <a href="../pages/dashboard.html" class="sidebar-link">
+      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>تقرير حركه</span>
+    </a>
+    <a href="../pages/tayar.html" class="sidebar-link">
+      <img src="../icons/delivery.png" width="32" height="32" alt="Dashboard Icon" />
+      <span>تطبيق الطيار</span>
+    </a>
+  </div>
 
   <div id="overlay" onclick="toggleSidebar()"></div>
 
@@ -638,7 +578,7 @@
         </div>
       </div>
 
-      <!-- جدول المنتجات -->
+      <!-- جدول الفاتورة -->
       <div class="table-container">
         <div class="table-scroll">
           <table id="invoiceTable">
