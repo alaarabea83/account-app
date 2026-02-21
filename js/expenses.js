@@ -124,8 +124,8 @@ function renderExpenses() {
       <td>${e.amount.toFixed(2)}</td>
       <td>${e.title}</td>
       <td>
-        <button class="action-btn edit-btn" onclick="editExpense(${index})">✏ تعديل</button>
-        <button class="action-btn delete-btn" onclick="deleteExpense(${index})">🗑 حذف</button>
+        <button class="action-btn edit-btn" onclick="editExpense(${index})">تعديل</button>
+        <button class="action-btn delete-btn" onclick="deleteExpense(${index})">حذف</button>
       </td>
     `;
     expenseTableBody.appendChild(tr);

@@ -141,8 +141,8 @@ function renderIncome() {
     <td>${i.amount}</td>
     <td>${i.title}</td>
     <td>
-  <button class="action-btn edit-btn" onclick="editIncome(${index})">✏️ تعديل</button>
-  <button class="action-btn delete-btn" onclick="deleteIncome(${index})">🗑️ حذف</button>
+  <button class="action-btn edit-btn" onclick="editIncome(${index})">تعديل</button>
+  <button class="action-btn delete-btn" onclick="deleteIncome(${index})">حذف</button>
 </td>
   `;
     tbody.appendChild(tr);
