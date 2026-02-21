@@ -189,6 +189,8 @@
       background: #1E3A8A;
       border-radius: 12px;
       padding: 25px;
+      margin-bottom: 10px;
+      color: #000;
     }
 
     .form-row input,
@@ -196,11 +198,16 @@
       flex: 1;
       min-width: 140px;
       background: #F8FAFC;
-      color: white;
+      color: #000;
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 10px;
       font-size: 14px;
+    }
+
+    .form-row label{
+      font-size: 13px;
+      color: white;
     }
 
     input,
@@ -473,7 +480,7 @@
 
         <div class="form-row">
           <label>الحساب</label>
-          <input type="text" id="customerName" placeholder="اسم العميل / المورد / الحساب" />
+          <input type="text" id="customerName" placeholder="إسم العميل / المورد / الحساب" />
           <label>الرصيد الإفتتاحي</label>
           <input type="number" id="openingBalance" placeholder="الرصيد السابق ( ان وجد )" />
           <label>نوع االحساب</label>
@@ -493,7 +500,9 @@
       <div class="card">
         <h5>📋 قائمة الحسابات</h5>
 
-        <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث..." />
+        <div class="form-row">
+
+        <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث في الحسابات..." />
 
         <select class="searchAccounts" id="filterType">
           <option value="" disabled selected>اختر نوع الحساب</option>
@@ -503,6 +512,7 @@
           <option value="income">الإيرادات</option>
           <option value="expense">المصروفات</option>
         </select>
+        </div>
 
         <div class="table-scroll">
           <table id="customersTable">
