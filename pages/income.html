@@ -240,6 +240,25 @@
       border-color: #e74c3c;
     }
 
+    .date-group label {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .date-group input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      background: #F8FAFC;
+      color: #000;
+    }
+
+    #filterCustomer {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+    }
+
     /* ===== Table ===== */
     table {
       width: 100%;
@@ -743,11 +762,21 @@
 
         <!-- ===== فلتر الإيرادات ===== -->
         <div class="form-row">
-          <input type="date" id="fromDate" placeholder="من تاريخ" />
-          <input type="date" id="toDate" placeholder="إلى تاريخ" />
+
+          <div class="date-group">
+            <label>من تاريخ</label>
+            <input type="date" id="fromDate" />
+          </div>
+
+          <div class="date-group">
+            <label>إلى تاريخ</label>
+            <input type="date" id="toDate" />
+          </div>
+
           <select id="filterCustomer">
-            <option value="">اختر الحساب للفلترة</option>
+            <option value="">كل الحسابات</option>
           </select>
+
         </div>
 
         <div class="table-scroll">

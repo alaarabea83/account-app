@@ -40,7 +40,7 @@ function renderFilterCustomerSelect() {
   const incomeCustomers = customers.filter((c) => c.type === "income");
 
   sel.innerHTML =
-    `<option value="">اختر الحساب للفلترة</option>` +
+    `<option value="">كل الحسابات</option>` +
     incomeCustomers
       .map((c) => `<option value="${c.name}">${c.name}</option>`)
       .join("");
