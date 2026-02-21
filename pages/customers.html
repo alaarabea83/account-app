@@ -170,7 +170,7 @@
 
     .card {
       background: var(--card);
-      padding: 20px;
+      padding: 25px;
       border-radius: 16px;
       margin-bottom: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -183,31 +183,35 @@
 
     .form-row {
       display: flex;
-      gap: 12px;
-      width: 100%;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #1E3A8A;
+      border-radius: 12px;
+      padding: 25px;
     }
 
     .form-row input,
     select {
       flex: 1;
-      padding: 14px;
-      border-radius: 12px;
-      background: #0f172a;
-      color: var(--text);
-      font-size: 16px;
-      box-sizing: border-box;
+      min-width: 140px;
+      background: #F8FAFC;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 14px;
     }
 
     input,
     select {
       width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: #0f172a;
+      padding: 10px;
+      border-radius: 6px;
+      background: #F8FAFC;
       border: 1px solid #334155;
-      color: white;
-      font-size: 16px;
+      color: #000;
+      font-size: 14px;
     }
 
     .searchAccounts {
@@ -230,7 +234,7 @@
       border: none;
       padding: 10px 12px;
       border-radius: 12px;
-      background: #21618c;
+      background: #EF4444;
       color: var(--text);
       font-weight: bold;
       font-size: 16px;
@@ -468,8 +472,11 @@
         <h5>📝 إضافة حساب جديد</h5>
 
         <div class="form-row">
+          <label>الحساب</label>
           <input type="text" id="customerName" placeholder="اسم العميل / المورد / الحساب" />
-          <input type="number" id="openingBalance" placeholder="الرصيد الافتتاحي ( ان وجد )" />
+          <label>الرصيد الإفتتاحي</label>
+          <input type="number" id="openingBalance" placeholder="الرصيد السابق ( ان وجد )" />
+          <label>نوع االحساب</label>
           <select id="accountType" required>
             <option value="" disabled selected>اختر نوع الحساب</option>
             <option value="customer">عميل</option>
