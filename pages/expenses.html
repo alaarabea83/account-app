@@ -249,6 +249,46 @@
       border-color: #e74c3c;
     }
 
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      background: #1E3A8A;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+
+    .date-group,
+    .select-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-row label {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .filter-row input,
+    .filter-row select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #CBD5E1;
+      background: #F8FAFC;
+      color: #000;
+      transition: 0.2s;
+    }
+
+    .filter-row input:focus,
+    .filter-row select:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
     /* ===== Table ===== */
     table {
       width: 100%;
@@ -724,18 +764,25 @@
       <div class="expenseMenu">
         <h5>📋 سجل المصروفات</h5>
 
-        <div class="form-row" style="margin-bottom: 10px; gap: 10px">
-          <!-- فلتر من وإلى -->
-          <input type="date" id="filterDateFrom" />
-          <input type="date" id="filterDateTo" />
+        <div class="form-row filter-row">
 
-          <!-- فلتر الحساب -->
-          <select id="filterCustomer">
-            <option value="">كل الحسابات</option>
-          </select>
+          <div class="date-group">
+            <label>من</label>
+            <input type="date" id="filterDateFrom" />
+          </div>
 
-          <!-- زر مسح الفلاتر -->
-          <button id="clearFilters">مسح الفلاتر</button>
+          <div class="date-group">
+            <label>إلى</label>
+            <input type="date" id="filterDateTo" />
+          </div>
+
+          <div class="select-group">
+            <label>الحساب</label>
+            <select id="filterCustomer">
+              <option value="">كل الحسابات</option>
+            </select>
+          </div>
+
         </div>
 
         <div class="table-scroll">

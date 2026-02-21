@@ -240,23 +240,53 @@
       border-color: #e74c3c;
     }
 
-    .date-group label {
-      font-size: 14px;
-      white-space: nowrap;
+    /* ===== Filter Toolbar ===== */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      background: #1E3A8A;
+      padding: 10px 15px;
+      border-radius: 10px;
     }
 
-    .date-group input {
+    .date-group,
+    .select-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-row label {
+      font-size: 14px;
+      white-space: nowrap;
+      color: #F8F9FA;
+    }
+
+    .filter-row input,
+    .filter-row select {
       padding: 6px 10px;
       border-radius: 6px;
       border: 1px solid #CBD5E1;
       background: #F8FAFC;
       color: #000;
+      transition: 0.2s;
     }
 
-    #filterCustomer {
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 1px solid #CBD5E1;
+    .filter-row input:focus,
+    .filter-row select:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    /* الكمبيوتر صف واحد */
+    @media (min-width: 992px) {
+      .filter-row {
+        flex-wrap: nowrap;
+      }
     }
 
     /* ===== Table ===== */
@@ -761,21 +791,24 @@
         <h5>📋 سجل الإيرادات الخارجية</h5>
 
         <!-- ===== فلتر الإيرادات ===== -->
-        <div class="form-row">
+        <div class="form-row filter-row">
 
           <div class="date-group">
-            <label>من تاريخ</label>
+            <label>من</label>
             <input type="date" id="fromDate" />
           </div>
 
           <div class="date-group">
-            <label>إلى تاريخ</label>
+            <label>إلى</label>
             <input type="date" id="toDate" />
           </div>
 
-          <select id="filterCustomer">
-            <option value="">كل الحسابات</option>
-          </select>
+          <div class="select-group">
+            <label>الحساب</label>
+            <select id="filterCustomer">
+              <option value="">كل الحسابات</option>
+            </select>
+          </div>
 
         </div>
 
