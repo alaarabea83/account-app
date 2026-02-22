@@ -199,19 +199,25 @@
     .form-row {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #1E3A8A;
+      border-radius: 12px;
+      padding: 35px;
+      margin-bottom: 10px;
+      color: #000;
     }
+
 
     input {
       width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: #0f172a;
+      padding: 10px;
+      border-radius: 6px;
+      background: #F8FAFC;
       border: 1px solid #334155;
-      color: white;
-      font-size: 16px;
+      color: #000;
+      font-size: 14px;
     }
 
     input:focus {
@@ -223,7 +229,7 @@
       border: none;
       padding: 10px 12px;
       border-radius: 12px;
-      background: #21618c;
+      background: #EF4444;
       color: var(--text);
       font-weight: bold;
       font-size: 16px;
@@ -234,19 +240,22 @@
     }
 
     .form-row select {
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: var(--text);
-      font-size: 14px;
       width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      background: #F8FAFC;
+      border: 1px solid #334155;
+      color: #000;
+      font-size: 14px;
     }
 
     .form-row select:focus {
       outline: none;
       border-color: var(--primary);
+    }
+
+    .form-row label {
+      color: white;
     }
 
     /* ===== Search ===== */
@@ -644,17 +653,22 @@
     <div class="card">
       <h5>📝 إضافة منتج جديد</h5>
       <div class="form-row">
+        <label>إسم المنتج</label>
         <input id="productName" placeholder="إسم المنتج" />
+        <label>رصيد أول المدة</label>
         <input id="productQty" type="number" placeholder="الكمية الإفتتاحية ( ان وجدت )" />
+        <label>الوحدة</label>
         <select id="productUnit">
-          <option disabled selected>الوحده</option>
+          <option disabled selected>الوحدة</option>
           <option>قطعة</option>
           <option>علبة</option>
           <option>كرتونة</option>
           <option>كجم</option>
           <option>لتر</option>
         </select>
+        <label>سعر البيع</label>
         <input id="productPrice" type="number" placeholder="سعر البيع" />
+        <label>سعر الشراء</label>
         <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
         <button id="addProductBtn">💾 حفظ</button>
       </div>
@@ -662,7 +676,9 @@
 
     <div class="card">
       <h5>📋 قائمة المنتجات</h5>
-      <input id="searchProduct" placeholder="🔍 بحث..." />
+      <div class="form-row">
+      <input id="searchProduct" placeholder="🔍 بحث في المنتجات..." />
+      </div>
       <div class="table-scroll">
         <table id="productsTable">
           <thead>
