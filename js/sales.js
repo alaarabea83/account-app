@@ -418,9 +418,9 @@ function renderSales(data = sales) {
 
   // ===== صف الإجمالي =====
   const totalRow = document.createElement("tr");
-  totalRow.style.background = "#F3F4F6";
+  totalRow.style.background = "#0f172a";
   totalRow.style.fontWeight = "bold";
-  totalRow.style.color = "#000";
+  totalRow.style.color = "#fff";
 
   totalRow.innerHTML = `
     <td colspan="3">الإجمالي</td>

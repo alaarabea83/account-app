@@ -114,6 +114,7 @@ function addIncome() {
 function renderIncome() {
   const tbody = document.querySelector("#incomeTable tbody");
   if (!tbody) return;
+
   tbody.innerHTML = "";
 
   const from = document.getElementById("fromDate").value;
@@ -130,27 +131,52 @@ function renderIncome() {
   filtered.sort((a, b) => (a.order || 0) - (b.order || 0));
 
   let total = 0;
+  let visibleCount = 0; // 👈 عداد البيانات الظاهرة
 
   filtered.forEach((i) => {
+    visibleCount++;
+
     const index = incomes.indexOf(i);
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-    <td>${i.date}</td>
-    <td>${i.customer}</td>
-    <td>${i.amount}</td>
-    <td>${i.title}</td>
-    <td>
-  <button class="action-btn edit-btn" onclick="editIncome(${index})">تعديل</button>
-  <button class="action-btn delete-btn" onclick="deleteIncome(${index})">حذف</button>
-</td>
-  `;
+      <td>${i.date}</td>
+      <td>${i.customer}</td>
+      <td>${(+i.amount).toFixed(2)}</td>
+      <td>${i.title}</td>
+      <td>
+        <button class="action-btn edit-btn" onclick="editIncome(${index})">تعديل</button>
+        <button class="action-btn delete-btn" onclick="deleteIncome(${index})">حذف</button>
+      </td>
+    `;
     tbody.appendChild(tr);
-    total += i.amount;
+
+    total += +i.amount;
   });
 
-  const totalCell = document.getElementById("incomeTotal");
-  if (totalCell) totalCell.textContent = total.toFixed(2);
+  // ===== لو مفيش بيانات =====
+  if (visibleCount === 0) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="5" style="text-align:center; padding:20px; color:#fff;">
+        لا توجد بيانات
+      </td>
+    `;
+    tbody.appendChild(emptyRow);
+    return;
+  }
+
+  // ===== صف الإجمالي =====
+  const totalRow = document.createElement("tr");
+  totalRow.classList.add("table-total-row");
+
+  totalRow.innerHTML = `
+    <td colspan="2">الإجمالي</td>
+    <td>${total.toFixed(2)}</td>
+    <td colspan="2"></td>
+  `;
+
+  tbody.appendChild(totalRow);
 }
 
 function editIncome(index) {

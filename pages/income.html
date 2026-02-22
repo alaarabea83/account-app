@@ -16,7 +16,7 @@
     /* ===== Variables ===== */
     :root {
       --primary: #6366f1;
-      --bg: #0f172a;
+      --bg: #1E3A8A;
       --card: #1e293b;
       --text: #f1f5f9;
     }
@@ -176,7 +176,7 @@
 
     /* Sections */
     section {
-      background: #0f172a;
+      background: #1E3A8A;
       max-width: 1300px;
       margin: 60px auto 20px;
       padding: 15px;
@@ -186,7 +186,8 @@
     }
 
     .t-container {
-      background: #1e293b;
+      background: #1E3A8A;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 16px;
       margin: 5px;
@@ -200,6 +201,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     /* ===== Income Form Toolbar ===== */
@@ -240,7 +242,7 @@
     .field-group select:focus {
       outline: none;
       border-color: #3B82F6;
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
     }
 
     /* زر الإضافة */
@@ -261,7 +263,7 @@
       transform: translateY(-2px);
     }
 
-     /* صف واحد على الكمبيوتر */
+    /* صف واحد على الكمبيوتر */
     @media (min-width: 992px) {
       .expense-row {
         flex-wrap: nowrap;
@@ -271,7 +273,8 @@
     .incomeMenu {
       padding: 1rem;
       border-radius: 12px;
-      background: #1e293b;
+      background: #1E3A8A;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
     }
 
     /* ===== Filter Toolbar ===== */
@@ -327,7 +330,6 @@
       position: sticky;
       top: 0;
       background: #0f172a;
-      border: 1px solid #334155;
       z-index: 10;
       padding: 12px;
       color: #e5e7eb;
@@ -336,17 +338,26 @@
     td {
       padding: 12px;
       text-align: center;
-      border: 1px solid #334155;
+      border: 1px solid #fff;
     }
 
     tr {
-      background: #1e293b;
+      background: #1E3A8A;
     }
 
-    table tfoot {
+    .table-total-row {
       background: #0f172a;
-      font-weight: bold;
-      color: #22c55e;
+      font-weight: 600;
+    }
+
+    .table-total-row td {
+      border-top: 2px solid #E5E7EB;
+      padding: 14px;
+    }
+
+    .table-total-row td:nth-child(3) {
+      color: #16A34A;
+      /* أخضر مناسب للإيرادات */
     }
 
     .table-scroll {
@@ -362,12 +373,8 @@
     }
 
     .table-scroll::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: blue;
       border-radius: 10px;
-    }
-
-    .table-scroll::-webkit-scrollbar-track {
-      background: #0f172a;
     }
 
     /* Table Buttons */
@@ -865,13 +872,6 @@
               </tr>
             </thead>
             <tbody></tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">الإجمالي</td>
-                <td id="incomeTotal">0</td>
-                <td colspan="2"></td>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div>
