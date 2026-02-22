@@ -82,42 +82,30 @@ function renderCustomers(searchQuery = "", filterType = null) {
 
   let totalDebit = 0;
   let totalCredit = 0;
+  let visibleCount = 0; // 👈 هنعدّ العملاء اللي اتعرضوا
 
   customers.forEach((c, index) => {
-    if (searchQuery && !c.name.toLowerCase().includes(searchQuery)) return;
+    if (searchQuery && !c.name.toLowerCase().includes(searchQuery.toLowerCase())) return;
     if (filterType && c.type !== filterType) return;
+
+    visibleCount++; // 👈 زوّدنا العداد
 
     let currentBalance = c.openingBalance;
 
-    sales
-      .filter((s) => s.customer === c.name)
-      .forEach((s) => {
-        currentBalance += s.total - s.paid;
-      });
+    sales.filter((s) => s.customer === c.name)
+      .forEach((s) => currentBalance += s.total - s.paid);
 
-    purchases
-      .filter((p) => p.customer === c.name)
-      .forEach((p) => {
-        currentBalance += p.paid - p.total;
-      });
+    purchases.filter((p) => p.customer === c.name)
+      .forEach((p) => currentBalance += p.paid - p.total);
 
-    incomes
-      .filter((i) => i.customer === c.name)
-      .forEach((i) => {
-        currentBalance -= i.amount;
-      });
+    incomes.filter((i) => i.customer === c.name)
+      .forEach((i) => currentBalance -= i.amount);
 
-    expenses
-      .filter((e) => e.customer === c.name)
-      .forEach((e) => {
-        currentBalance += e.amount;
-      });
+    expenses.filter((e) => e.customer === c.name)
+      .forEach((e) => currentBalance += e.amount);
 
-    receipts
-      .filter((r) => r.customer === c.name)
-      .forEach((r) => {
-        currentBalance -= r.amount;
-      });
+    receipts.filter((r) => r.customer === c.name)
+      .forEach((r) => currentBalance -= r.amount);
 
     if (currentBalance > 0) {
       totalDebit += currentBalance;
@@ -125,39 +113,47 @@ function renderCustomers(searchQuery = "", filterType = null) {
       totalCredit += Math.abs(currentBalance);
     }
 
-    // ✅ هنا التقسيم الصحيح
     const debit = currentBalance > 0 ? currentBalance.toFixed(2) : "0.00";
-    const credit =
-      currentBalance < 0 ? Math.abs(currentBalance).toFixed(2) : "0.00";
+    const credit = currentBalance < 0 ? Math.abs(currentBalance).toFixed(2) : "0.00";
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-    <td>${c.name}</td>
-    <td>${getTypeName(c.type)}</td>
-    <td class="debit">${debit}</td>
-    <td class="credit">${credit}</td>
-    <td class="actions">
-      <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
-      <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
-      <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
-    </td>
-  `;
+      <td>${c.name}</td>
+      <td>${getTypeName(c.type)}</td>
+      <td class="debit">${debit}</td>
+      <td class="credit">${credit}</td>
+      <td class="actions">
+        <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
+        <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
+        <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
+      </td>
+    `;
 
     tbody.appendChild(tr);
   });
 
-  // ===== صف الإجمالي =====
+  // ===== لو مفيش بيانات =====
+  if (visibleCount === 0) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="5" style="text-align:center; padding:20px; color:#6B7280;">
+        لا توجد بيانات
+      </td>
+    `;
+    tbody.appendChild(emptyRow);
+    return; // 👈 نوقف هنا ومينزلش صف الإجمالي
+  }
+
+  // ===== صف الإجمالي (يظهر فقط لو فيه بيانات) =====
   const totalRow = document.createElement("tr");
-  totalRow.style.background = "#111827";
-  totalRow.style.fontWeight = "bold";
-  totalRow.style.color = "#fbbf24";
+  totalRow.classList.add("table-total-row");
 
   totalRow.innerHTML = `
-  <td colspan="2">إجمالي الأرصدة</td>
-  <td>${totalDebit.toFixed(2)}</td>
-  <td>${totalCredit.toFixed(2)}</td>
-  <td></td>
-`;
+    <td colspan="2">إجمالي الأرصدة</td>
+    <td>${totalDebit.toFixed(2)}</td>
+    <td>${totalCredit.toFixed(2)}</td>
+    <td></td>
+  `;
 
   tbody.appendChild(totalRow);
 }
