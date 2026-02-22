@@ -14,11 +14,21 @@
   <style>
     /* ===== Colors ===== */
     :root {
-      --primary: #6366f1;
-      --bg: #1E3A8A;
-      --card: #1e293b;
-      --text: #f1f5f9;
-    }
+  --primary: #1E293B;       /* كحلي احترافي */
+  --primary-light: #2563EB; 
+  --success: #16A34A;
+  --danger: #DC2626;
+  --warning: #F59E0B;
+
+  --bg: #0F172A;            /* خلفية غامقة مريحة */
+  --card: #FFFFFF;          /* الكروت أبيض */
+  --card-light: #F8FAFC;
+
+  --text: #FFFFFF;
+  --text-muted: #6B7280;
+
+  --border: #E5E7EB;
+}
 
     * {
       box-sizing: border-box;
@@ -200,7 +210,6 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      flex-wrap: wrap;
       align-items: center;
       background: #1E3A8A;
       border-radius: 12px;
@@ -505,13 +514,6 @@
       .form-row input,
       .form-row select {
         flex: 1;
-        min-width: 150px;
-      }
-
-      .form-row button {
-        width: auto;
-        min-width: 120px;
-        margin: 0;
       }
 
       .actions button {
