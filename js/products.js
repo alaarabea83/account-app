@@ -82,13 +82,16 @@ function renderProducts(searchQuery = "") {
   tbody.innerHTML = "";
 
   let grandTotal = 0;
+  let visibleCount = 0; // 👈 عداد المنتجات الظاهرة
 
   products.forEach((p, index) => {
-    if (searchQuery && !p.name.toLowerCase().includes(searchQuery)) return;
+    if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return;
+
+    visibleCount++; // 👈 زود العداد
 
     const currentQty = getCurrentQty(p.name);
-    const sellPrice = p.price || 0; // سعر البيع
-    const buyPrice = p.buyPrice || 0; // سعر الشراء
+    const sellPrice = p.price || 0;
+    const buyPrice = p.buyPrice || 0;
     const unit = p.unit || "-";
 
     const total = currentQty * buyPrice;
@@ -96,7 +99,7 @@ function renderProducts(searchQuery = "") {
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${index + 1}</td>
+      <td>${visibleCount}</td>
       <td>${p.name}</td>
       <td>${currentQty}</td>
       <td>${unit}</td>
@@ -113,21 +116,29 @@ function renderProducts(searchQuery = "") {
     tbody.appendChild(tr);
   });
 
-  /* صف الإجمالي العام */
-  if (products.length) {
-    const trTotal = document.createElement("tr");
-    trTotal.style.background = "#111827";
-    trTotal.style.fontWeight = "bold";
-    trTotal.style.color = "#fbbf24";
-
-    trTotal.innerHTML = `
-      <td colspan="6">إجمالي قيمة المخزون (بسعر الشراء)</td>
-      <td>${grandTotal.toFixed(2)}</td>
-      <td></td>
+  // ===== لو مفيش بيانات =====
+  if (visibleCount === 0) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="8" style="text-align:center; padding:20px; color:#6B7280;">
+        لا توجد بيانات
+      </td>
     `;
-
-    tbody.appendChild(trTotal);
+    tbody.appendChild(emptyRow);
+    return; // 👈 نوقف هنا ومينزلش صف الإجمالي
   }
+
+  // ===== صف الإجمالي يظهر فقط لو فيه منتجات =====
+  const trTotal = document.createElement("tr");
+  trTotal.classList.add("table-total-row");
+
+  trTotal.innerHTML = `
+    <td colspan="6">إجمالي قيمة المخزون (بسعر الشراء)</td>
+    <td>${grandTotal.toFixed(2)}</td>
+    <td></td>
+  `;
+
+  tbody.appendChild(trTotal);
 }
 
 // البحث في المنتجات
