@@ -375,40 +375,61 @@ function renderSales(data = sales) {
   let sumTotal = 0;
   let sumPaid = 0;
   let sumRemain = 0;
+  let visibleCount = 0; // 👈 عداد المبيعات الظاهرة
 
   data.forEach((inv, i) => {
+    visibleCount++;
+
     sumTotal += +inv.total || 0;
     sumPaid += +inv.paid || 0;
     sumRemain += +inv.remaining || 0;
 
-    tbody.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
-        <td>${inv.date}</td>
-        <td>${inv.customer}</td>
-        <td>${inv.total}</td>
-        <td>${inv.paid}</td>
-        <td>${inv.remaining}</td>
-        <td>${inv.previousBalance}</td>
-        <td>${inv.newBalance}</td>
-        <td>
-          <div class="action-buttons">
-            <button class="btn-edit" onclick="editInvoice(${inv.order})">تعديل</button>
-            <button class="btn-delete" onclick="confirmDeleteInvoice(${inv.order})">حذف</button>
-          </div>
-        </td>
-      </tr>`;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${visibleCount}</td>
+      <td>${inv.date}</td>
+      <td>${inv.customer}</td>
+      <td>${inv.total}</td>
+      <td>${inv.paid}</td>
+      <td>${inv.remaining}</td>
+      <td>${inv.previousBalance}</td>
+      <td>${inv.newBalance}</td>
+      <td>
+        <div class="action-buttons">
+          <button class="btn-edit" onclick="editInvoice(${inv.order})">تعديل</button>
+          <button class="btn-delete" onclick="confirmDeleteInvoice(${inv.order})">حذف</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 
-  // صف الإجمالي  //
-  tbody.innerHTML += `
-    <tr style="background:#111827;color:#fbbf24;font-weight:bold;height:40px">
-      <td colspan="3">الإجمالي</td>
-      <td>${sumTotal}</td>
-      <td>${sumPaid}</td>
-      <td>${sumRemain}</td>
-      <td colspan="3"></td>
-    </tr>`;
+  // ===== لو مفيش مبيعات =====
+  if (visibleCount === 0) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="9" style="text-align:center; padding:20px; color:#6B7280;">
+        لا توجد بيانات
+      </td>
+    `;
+    tbody.appendChild(emptyRow);
+    return; // 👈 مفيش إجمالي
+  }
+
+  // ===== صف الإجمالي =====
+  const totalRow = document.createElement("tr");
+  totalRow.style.background = "#F3F4F6";
+  totalRow.style.fontWeight = "bold";
+  totalRow.style.color = "#2563EB";
+
+  totalRow.innerHTML = `
+    <td colspan="3">الإجمالي</td>
+    <td>${sumTotal.toFixed(2)}</td>
+    <td>${sumPaid.toFixed(2)}</td>
+    <td>${sumRemain.toFixed(2)}</td>
+    <td colspan="3"></td>
+  `;
+  tbody.appendChild(totalRow);
 }
 
 // تعديل فاتورة //
