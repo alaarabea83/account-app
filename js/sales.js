@@ -408,7 +408,7 @@ function renderSales(data = sales) {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="9" style="text-align:center; padding:20px; color:#6B7280;">
+      <td colspan="9" style="text-align:center; padding:20px; color:#fff;">
         لا توجد بيانات
       </td>
     `;
@@ -420,7 +420,7 @@ function renderSales(data = sales) {
   const totalRow = document.createElement("tr");
   totalRow.style.background = "#F3F4F6";
   totalRow.style.fontWeight = "bold";
-  totalRow.style.color = "#2563EB";
+  totalRow.style.color = "#000";
 
   totalRow.innerHTML = `
     <td colspan="3">الإجمالي</td>

@@ -206,7 +206,7 @@
       font-size: 14px;
     }
 
-    .form-row label{
+    .form-row label {
       font-size: 13px;
       color: white;
     }
@@ -282,6 +282,7 @@
       position: sticky;
       top: 0;
       background: #0f172a;
+      border-bottom: 1px solid #fff;
       color: #e5e7eb;
       padding: 12px;
       text-align: center;
@@ -293,24 +294,15 @@
       border-bottom: 1px solid #fff;
     }
 
-    .table-total-row{
-  background:#F3F4F6;
-  color: #000;
-  font-weight:600;
-}
+    .table-total-row {
+      background: #F3F4F6;
+      color: #000;
+      font-weight: 600;
+    }
 
-.table-total-row td{
-  border-top:2px solid #E5E7EB;
-  padding:14px;
-}
-
-.table-total-row td:nth-child(3){
-  color:#2563EB;
-}
-
-.table-total-row td:nth-child(4){
-  color:#DC2626;
-}
+    .table-total-row td {
+      padding: 14px;
+    }
 
     td.actions {
       white-space: nowrap;
@@ -521,16 +513,16 @@
 
         <div class="form-row">
 
-        <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث في الحسابات..." />
+          <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث في الحسابات..." />
 
-        <select class="searchAccounts" id="filterType">
-          <option value="" disabled selected>اختر نوع الحساب</option>
-          <option value="">كل الحسابات</option>
-          <option value="customer">العملاء</option>
-          <option value="supplier">الموردين</option>
-          <option value="income">الإيرادات</option>
-          <option value="expense">المصروفات</option>
-        </select>
+          <select class="searchAccounts" id="filterType">
+            <option value="" disabled selected>اختر نوع الحساب</option>
+            <option value="">كل الحسابات</option>
+            <option value="customer">العملاء</option>
+            <option value="supplier">الموردين</option>
+            <option value="income">الإيرادات</option>
+            <option value="expense">المصروفات</option>
+          </select>
         </div>
 
         <div class="table-scroll">
