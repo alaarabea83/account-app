@@ -14,21 +14,24 @@
   <style>
     /* ===== Colors ===== */
     :root {
-  --primary: #1E293B;       /* كحلي احترافي */
-  --primary-light: #2563EB; 
-  --success: #16A34A;
-  --danger: #DC2626;
-  --warning: #F59E0B;
+      --primary: #1E293B;
+      /* كحلي احترافي */
+      --primary-light: #2563EB;
+      --success: #16A34A;
+      --danger: #DC2626;
+      --warning: #F59E0B;
 
-  --bg: #0F172A;            /* خلفية غامقة مريحة */
-  --card: #FFFFFF;          /* الكروت أبيض */
-  --card-light: #F8FAFC;
+      --bg: #0F172A;
+      /* خلفية غامقة مريحة */
+      --card: #1E293B;
+      /* الكروت أبيض */
+      --card-light: #F8FAFC;
 
-  --text: #FFFFFF;
-  --text-muted: #6B7280;
+      --text: #FFFFFF;
+      --text-muted: #6B7280;
 
-  --border: #E5E7EB;
-}
+      --border: #E5E7EB;
+    }
 
     * {
       box-sizing: border-box;
@@ -50,7 +53,7 @@
       left: 0;
       right: 0;
       height: 60px;
-      background: #1E3A8A;
+      background: var(--primary);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -191,7 +194,7 @@
 
     /* ===== Cards ===== */
     .card {
-      background: #1E3A8A;
+      background: var(--primary);
       padding: 20px;
       border-radius: 16px;
       margin-bottom: 20px;
@@ -211,7 +214,7 @@
       flex-direction: column;
       gap: 10px;
       align-items: center;
-      background: #1E3A8A;
+      background: var(--primary);
       border-radius: 12px;
       padding: 35px;
       margin-bottom: 10px;
@@ -293,7 +296,7 @@
     }
 
     .table-scroll::-webkit-scrollbar-track {
-      background: #1E3A8A;
+      background: var(--primary);
     }
 
     table {
