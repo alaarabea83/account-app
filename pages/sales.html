@@ -19,18 +19,34 @@
 
     /* ===== Variables ===== */
     :root {
-      --primary: #6366f1;
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f1f5f9;
-      --border: #334155;
+
+      /* Identity */
+      --primary: #1E3A8A;
+      --primary-light: #3B82F6;
+      --success: #16A34A;
+      --danger: #DC2626;
+      --warning: #F59E0B;
+
+      /* Backgrounds */
+      --bg: #0B1120;
+      --card: #111827;
+      --card-light: #1F2937;
+
+      /* Text */
+      --text: #F9FAFB;
+      --text-muted: #9CA3AF;
+
+      /* Borders */
+      --border: #374151;
     }
 
     /* Light Mode */
     .light {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #0f172a;
+      --bg: #F3F4F6;
+      --card: #FFFFFF;
+      --card-light: #F9FAFB;
+      --text: #111827;
+      --border: #E5E7EB;
     }
 
     /* Reset */
@@ -54,7 +70,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       height: 60px;
-      background: #1E3A8A;
+      background: var(--primary);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -213,9 +229,11 @@
 ====================================== */
 
     .card {
-      background: #971a1a41;
+      background: var(--card);
       padding: 20px;
       border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
     /* =====================================
@@ -227,7 +245,7 @@
       gap: 12px;
       flex-wrap: wrap;
       align-items: center;
-      background: #971a1a41;
+      background: var(--card-light);
       border-radius: 12px;
       padding: 35px;
       margin-bottom: 10px;
@@ -303,7 +321,7 @@
     }
 
     thead th {
-      background: #0f172a;
+      background: var(--primary);
       font-weight: 600;
     }
 
@@ -372,17 +390,14 @@
 
     #saveInvoiceBtn {
       width: 100%;
-      max-width: 80px;
-      margin: 15px auto 0;
-      display: block;
+      max-width: 120px;
       padding: 12px;
-      font-size: 15px;
       border-radius: 8px;
-      background: #ef4444;
+      background: var(--success);
       border: none;
       color: white;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
     }
 
     /* =====================================
@@ -486,7 +501,7 @@
     #invoiceTable thead th {
       position: sticky;
       top: 0;
-      background: #0f172a;
+      background: var(--primary);
       color: white;
       padding: 10px;
       text-align: center;
