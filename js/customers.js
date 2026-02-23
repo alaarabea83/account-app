@@ -118,6 +118,7 @@ function renderCustomers(searchQuery = "", filterType = null) {
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
+      <td>${index + 1}</td>
       <td>${c.name}</td>
       <td>${getTypeName(c.type)}</td>
       <td class="debit">${debit}</td>
@@ -149,6 +150,7 @@ function renderCustomers(searchQuery = "", filterType = null) {
   totalRow.classList.add("table-total-row");
 
   totalRow.innerHTML = `
+    <td></td>
     <td colspan="2">إجمالي الأرصدة</td>
     <td>${totalDebit.toFixed(2)}</td>
     <td>${totalCredit.toFixed(2)}</td>
