@@ -137,10 +137,10 @@ function renderCustomers(searchQuery = "", filterType = null) {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="5" style="text-align:center; padding:20px; color:#fff;">
-        لا توجد بيانات
-      </td>
-    `;
+  <td colspan="6" style="text-align:center; padding:20px; color:#fff;">
+    لا توجد بيانات
+  </td>
+`;
     tbody.appendChild(emptyRow);
     return; // 👈 نوقف هنا ومينزلش صف الإجمالي
   }
@@ -150,12 +150,12 @@ function renderCustomers(searchQuery = "", filterType = null) {
   totalRow.classList.add("table-total-row");
 
   totalRow.innerHTML = `
-    <td></td>
-    <td colspan="2">إجمالي الأرصدة</td>
-    <td>${totalDebit.toFixed(2)}</td>
-    <td>${totalCredit.toFixed(2)}</td>
-    <td></td>
-  `;
+  <td></td>
+  <td colspan="2">إجمالي الأرصدة</td>
+  <td>${totalDebit.toFixed(2)}</td>
+  <td>${totalCredit.toFixed(2)}</td>
+  <td></td>
+`;
 
   tbody.appendChild(totalRow);
 }
