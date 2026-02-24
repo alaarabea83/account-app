@@ -1,29 +1,54 @@
+// ===================== دوال مساعدة =====================
+
+// ترجمة نوع الحساب
 function getTypeName(type) {
   switch (type) {
-    case "customer":
-      return "عميل";
-    case "supplier":
-      return "مورد";
-    case "income":
-      return "إيراد";
-    case "expense":
-      return "مصروف";
-    default:
-      return "-";
+    case "customer": return "عميل";
+    case "supplier": return "مورد";
+    case "income": return "إيراد";
+    case "expense": return "مصروف";
+    default: return "-";
   }
 }
 
+// ===== دالة لحساب الرصيد الفعلي للعميل =====
+function calculateCustomerBalance(customerName) {
+  const customer = customers.find(c => c.name === customerName);
+  if (!customer) return 0;
+
+  let balance = customer.openingBalance || 0;
+
+  // المبيعات
+  sales.filter(s => s.customer === customerName)
+       .forEach(s => balance += (s.total || 0) - (s.paid || 0));
+
+  // المشتريات
+  purchases.filter(p => p.customer === customerName)
+           .forEach(p => balance += (p.paid || 0) - (p.total || 0));
+
+  // المصروفات
+  expenses.filter(e => e.customer === customerName)
+          .forEach(e => balance += (e.amount || 0));
+
+  // المقبوضات
+  receipts.filter(r => r.customer === customerName)
+          .forEach(r => balance -= (r.amount || 0));
+
+  return balance;
+}
+
+// ===================== متغيرات =====================
 let editIndex = null;
 let deleteIndex = null;
 
-// عند تحميل الصفحة
+// ===================== عند تحميل الصفحة =====================
 window.onload = function () {
   loadData();
   renderCustomers();
   document.getElementById("addCustomerBtn").onclick = addCustomerHandler;
 };
 
-// ====== MODAL ======
+// ===================== مودال تنبيه =====================
 function showModal(message, title = "تنبيه") {
   document.getElementById("modalTitle").innerText = title;
   document.getElementById("modalMessage").innerText = message;
@@ -34,81 +59,53 @@ function closeModal() {
   document.getElementById("appModal").style.display = "none";
 }
 
-// ====== ADD CUSTOMER ======
+// ===================== إضافة حساب جديد =====================
 function addCustomerHandler() {
   const name = document.getElementById("customerName").value.trim();
-  const balance = +document.getElementById("openingBalance").value || 0;
-  const type = document.getElementById("accountType").value; // النوع
+  const openingBalance = +document.getElementById("openingBalance").value || 0;
+  const type = document.getElementById("accountType").value;
 
-  // ✅ التحقق من الاسم ونوع الحساب مع بعض
   if (!name && !type) {
     showModal("من فضلك أدخل اسم الحساب واختر نوع الحساب");
     return;
   }
+  if (!name) { showModal("من فضلك أدخل اسم الحساب"); return; }
+  if (!type) { showModal("من فضلك اختر نوع الحساب"); return; }
 
-  if (!name) {
-    showModal("من فضلك أدخل اسم الحساب");
-    return;
-  }
-
-  if (!type) {
-    showModal("من فضلك اختر نوع الحساب");
-    return;
-  }
-
-  // 👇 إضافة الحساب
   customers.push({
     name,
-    openingBalance: balance,
-    balance: balance,
-    type,
+    openingBalance,
+    type
   });
 
-  // تنظيف الحقول بعد الإضافة
   document.getElementById("customerName").value = "";
   document.getElementById("openingBalance").value = "";
   document.getElementById("accountType").value = "";
 
   saveData();
-  updateBottomCashBalance();
   renderCustomers();
   showModal("تم إضافة الحساب بنجاح ✅", "نجاح");
 }
 
-// ====== RENDER CUSTOMERS ======
+// ===================== عرض الحسابات =====================
 function renderCustomers(searchQuery = "", filterType = null) {
   const tbody = document.querySelector("#customersTable tbody");
   tbody.innerHTML = "";
 
   let totalDebit = 0;
   let totalCredit = 0;
-  let visibleCount = 0; // 👈 هنعدّ العملاء اللي اتعرضوا
+  let visibleCount = 0;
 
   customers.forEach((c, index) => {
     if (searchQuery && !c.name.toLowerCase().includes(searchQuery.toLowerCase())) return;
     if (filterType && c.type !== filterType) return;
 
-    visibleCount++; // 👈 زوّدنا العداد
+    visibleCount++;
 
-    let currentBalance = c.openingBalance;
+    let currentBalance = calculateCustomerBalance(c.name);
 
-    sales.filter((s) => s.customer === c.name)
-      .forEach((s) => currentBalance += s.total - s.paid);
-
-    purchases.filter((p) => p.customer === c.name)
-      .forEach((p) => currentBalance += p.paid - p.total);
-
-    expenses.filter((e) => e.customer === c.name)
-      .forEach((e) => currentBalance += e.amount);
-
-    receipts.filter((r) => r.customer === c.name)
-      .forEach((r) => currentBalance -= r.amount);
-
-    if (currentBalance > 0) {
-      totalDebit += currentBalance;
-    } else {
-      totalCredit += Math.abs(currentBalance);
-    }
+    if (currentBalance > 0) totalDebit += currentBalance;
+    else totalCredit += Math.abs(currentBalance);
 
     const debit = currentBalance > 0 ? currentBalance.toFixed(2) : "0.00";
     const credit = currentBalance < 0 ? Math.abs(currentBalance).toFixed(2) : "0.00";
@@ -130,59 +127,47 @@ function renderCustomers(searchQuery = "", filterType = null) {
     tbody.appendChild(tr);
   });
 
-  // ===== لو مفيش بيانات =====
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
-    emptyRow.innerHTML = `
-  <td colspan="6" style="text-align:center; padding:20px; color:#fff;">
-    لا توجد بيانات
-  </td>
-`;
+    emptyRow.innerHTML = `<td colspan="6" style="text-align:center; padding:20px; color:#fff;">لا توجد بيانات</td>`;
     tbody.appendChild(emptyRow);
-    return; // 👈 نوقف هنا ومينزلش صف الإجمالي
+    return;
   }
 
-  // ===== صف الإجمالي (يظهر فقط لو فيه بيانات) =====
+  // صف الإجمالي
   const totalRow = document.createElement("tr");
   totalRow.classList.add("table-total-row");
-
   totalRow.innerHTML = `
-  <td></td>
-  <td colspan="2">إجمالي الأرصدة</td>
-  <td>${totalDebit.toFixed(2)}</td>
-  <td>${totalCredit.toFixed(2)}</td>
-  <td></td>
-`;
-
+    <td></td>
+    <td colspan="2">إجمالي الأرصدة</td>
+    <td>${totalDebit.toFixed(2)}</td>
+    <td>${totalCredit.toFixed(2)}</td>
+    <td></td>
+  `;
   tbody.appendChild(totalRow);
 }
 
-// البحث في الحسابات
-document
-  .getElementById("searchCustomer")
-  .addEventListener("input", function () {
-    const query = this.value.trim().toLowerCase();
-    const type = document.getElementById("filterType").value;
-    renderCustomers(query, type);
-  });
+// ===================== البحث والتصفية =====================
+document.getElementById("searchCustomer").addEventListener("input", function () {
+  const query = this.value.trim().toLowerCase();
+  const type = document.getElementById("filterType").value;
+  renderCustomers(query, type);
+});
 
 document.getElementById("filterType").addEventListener("change", function () {
-  const query = document
-    .getElementById("searchCustomer")
-    .value.trim()
-    .toLowerCase();
+  const query = document.getElementById("searchCustomer").value.trim().toLowerCase();
   const type = this.value;
   renderCustomers(query, type);
 });
 
-// ====== OPEN EDIT MODAL ======
+// ===================== تعديل الحساب =====================
 function openEditModal(index) {
   editIndex = index;
   const customer = customers[index];
 
   document.getElementById("editCustomerName").value = customer.name;
   document.getElementById("editOpeningBalance").value = customer.openingBalance;
-  document.getElementById("editAccountType").value = customer.type; // ✅ النوع
+  document.getElementById("editAccountType").value = customer.type;
 
   document.getElementById("editModal").style.display = "flex";
 }
@@ -192,7 +177,6 @@ function closeEditModal() {
   editIndex = null;
 }
 
-// ====== SAVE EDIT ======
 function saveCustomerEdit() {
   if (editIndex === null) return;
 
@@ -200,28 +184,24 @@ function saveCustomerEdit() {
 
   const newName = document.getElementById("editCustomerName").value.trim();
   const newOpening = +document.getElementById("editOpeningBalance").value;
-  const newType = document.getElementById("editAccountType").value; // ✅ النوع
+  const newType = document.getElementById("editAccountType").value;
 
   if (!newName || isNaN(newOpening)) {
     showModal("من فضلك أدخل بيانات صحيحة");
     return;
   }
 
-  const diff = newOpening - customer.openingBalance;
-
   customer.name = newName;
   customer.openingBalance = newOpening;
-  customer.balance += diff;
-  customer.type = newType; // ✅ تحديث النوع
+  customer.type = newType;
 
   saveData();
-  updateBottomCashBalance();
   renderCustomers();
   closeEditModal();
   showModal("تم تعديل بيانات الحساب ✨", "نجاح");
 }
 
-// ====== DELETE ======
+// ===================== حذف الحساب =====================
 function deleteCustomer(index) {
   deleteIndex = index;
   document.getElementById("deleteModal").style.display = "flex";
@@ -237,18 +217,17 @@ function confirmDelete() {
 
   customers.splice(deleteIndex, 1);
   saveData();
-  updateBottomCashBalance();
   renderCustomers();
 
   closeDeleteModal();
   showModal("تم حذف الحساب 🗑️", "نجاح");
 }
 
-// ====== OPEN STATEMENT MODAL ======
+// ===================== كشف حساب =====================
 function openStatementModal(index) {
   const customer = customers[index];
   document.getElementById("statementCustomerName").innerText =
-    "الحساب: " + customer.name + " (" + customer.type + ")";
+    "الحساب: " + customer.name + " (" + getTypeName(customer.type) + ")";
 
   const tbody = document.getElementById("statementBody");
   tbody.innerHTML = "";
@@ -266,63 +245,53 @@ function openStatementModal(index) {
   `;
 
   const allEntries = [
-    ...sales
-      .filter((s) => s.customer === customer.name)
-      .map((s) => ({
-        date: s.date,
-        desc: "فاتورة مبيعات",
-        debit: s.total,
-        credit: s.paid,
-        order: s.order,
-      })),
-    ...purchases
-      .filter((p) => p.customer === customer.name)
-      .map((p) => ({
-        date: p.date,
-        desc: "فاتورة مشتريات",
-        debit: p.paid,
-        credit: p.total,
-        order: p.order,
-      })),
-    ...incomes
-      .filter((i) => i.customer === customer.name)
-      .map((i) => ({
-        date: i.date,
-        desc: i.title,
-        debit: 0,
-        credit: i.amount,
-        order: i.order,
-      })),
-    ...expenses
-      .filter((e) => e.customer === customer.name)
-      .map((e) => ({
-        date: e.date,
-        desc: e.title,
-        debit: e.amount,
-        credit: 0,
-        order: e.order,
-      })),
-    ...receipts
-      .filter((r) => r.customer === customer.name)
-      .map((r) => ({
-        date: r.date,
-        desc: r.title || "سند قبض",
-        debit: 0,
-        credit: r.amount,
-        order: r.order,
-      })),
+    ...sales.filter(s => s.customer === customer.name).map(s => ({
+      date: s.date,
+      desc: "فاتورة مبيعات",
+      debit: s.total,
+      credit: s.paid,
+      order: s.order
+    })),
+    ...purchases.filter(p => p.customer === customer.name).map(p => ({
+      date: p.date,
+      desc: "فاتورة مشتريات",
+      debit: p.paid,
+      credit: p.total,
+      order: p.order
+    })),
+    ...incomes.filter(i => i.customer === customer.name).map(i => ({
+      date: i.date,
+      desc: i.title,
+      debit: 0,
+      credit: i.amount,
+      order: i.order
+    })),
+    ...expenses.filter(e => e.customer === customer.name).map(e => ({
+      date: e.date,
+      desc: e.title,
+      debit: e.amount,
+      credit: 0,
+      order: e.order
+    })),
+    ...receipts.filter(r => r.customer === customer.name).map(r => ({
+      date: r.date,
+      desc: r.title || "سند قبض",
+      debit: 0,
+      credit: r.amount,
+      order: r.order
+    }))
   ];
 
-  allEntries.sort((a, b) => (a.order || 0) - (b.order || 0));
+  allEntries.sort((a,b) => (a.order||0) - (b.order||0));
 
-  allEntries.forEach((e) => {
-    balance += (e.debit || 0) - (e.credit || 0);
+  allEntries.forEach(e => {
+    balance += (e.debit||0) - (e.credit||0);
     tbody.innerHTML += `
       <tr>
         <td>${e.date}</td>
         <td>${e.desc}</td>
-        <td>${(e.debit || 0).toFixed(2)}</td>
-        <td>${(e.credit || 0).toFixed(2)}</td>
+        <td>${(e.debit||0).toFixed(2)}</td>
+        <td>${(e.credit||0).toFixed(2)}</td>
         <td>${balance.toFixed(2)}</td>
       </tr>
     `;
