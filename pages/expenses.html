@@ -15,17 +15,23 @@
   <style>
     /* ===== Variables ===== */
     :root {
-      --primary: #6366f1;
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f1f5f9;
-    }
+      --primary: #1E293B;
+      /* كحلي احترافي */
+      --primary-light: #2563EB;
+      --success: #16A34A;
+      --danger: #DC2626;
+      --warning: #F59E0B;
 
-    /* Light Mode */
-    .light {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #0f172a;
+      --bg: #0F172A;
+      /* خلفية غامقة مريحة */
+      --card: #1E293B;
+      /* الكروت أبيض */
+      --card-light: #F8FAFC;
+
+      --text: #FFFFFF;
+      --text-muted: #6B7280;
+
+      --border: #E5E7EB;
     }
 
     /* Reset */
@@ -46,7 +52,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       height: 60px;
-      background: #1E3A8A;
+      background: var(--primary);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -180,7 +186,6 @@
     }
 
     section {
-      background: #0f172a;
       max-width: 1300px;
       margin: 60px auto 20px;
       padding: 15px;
@@ -190,7 +195,7 @@
     }
 
     .t-container {
-      background: #1e293b;
+      background: var(--primary);
       padding: 20px;
       border-radius: 16px;
       margin: 5px;
@@ -209,6 +214,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     /* صف المصروفات */
@@ -217,7 +223,7 @@
       align-items: flex-end;
       gap: 14px;
       flex-wrap: wrap;
-      background: #1E3A8A;
+      background: var(--primary);
       padding: 25px;
       border-radius: 12px;
       margin-bottom: 18px;
@@ -283,7 +289,7 @@
       gap: 10px;
       flex-wrap: wrap;
       margin-bottom: 10px;
-      background: #1E3A8A;
+      background: var(--primary);
       padding: 25px;
       border-radius: 12px;
     }
@@ -328,7 +334,6 @@
       position: sticky;
       top: 0;
       background: #0f172a;
-      border: 1px solid #334155;
       z-index: 10;
       padding: 12px;
       color: #e5e7eb;
@@ -346,9 +351,23 @@
 
     .table-scroll {
       overflow: auto;
+      scrollbar-width: none;
       max-height: 400px;
       box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     }
+
+    .table-total-row{
+  background: #0f172a;
+  font-weight:600;
+}
+
+.table-total-row td{
+  padding:14px;
+}
+
+.table-total-row td:nth-child(3){
+  color:#DC2626; /* لون مناسب للمصروفات */
+}
 
     /* Webkit */
     .table-scroll::-webkit-scrollbar {
@@ -578,11 +597,6 @@
       button {
         margin: 0;
       }
-    }
-
-    .total-row {
-      font-weight: bold;
-      color: #22c55e;
     }
 
     #successModal {
@@ -835,6 +849,7 @@
           <table id="expenseTable">
             <thead>
               <tr>
+                <th>م</th>
                 <th>التاريخ</th>
                 <th>الحساب</th>
                 <th>المبلغ</th>

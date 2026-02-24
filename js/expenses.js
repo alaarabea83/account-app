@@ -93,6 +93,7 @@ document.getElementById("closeModalBtn")?.addEventListener("click", closeModal);
 // ==================== عرض سجل المصروفات ====================
 function renderExpenses() {
   if (!expenseTableBody) return;
+
   expenseTableBody.innerHTML = "";
 
   const filterFrom = document.getElementById("filterDateFrom")?.value;
@@ -103,44 +104,65 @@ function renderExpenses() {
 
   if (filterFrom)
     filteredExpenses = filteredExpenses.filter((e) => e.date >= filterFrom);
+
   if (filterTo)
     filteredExpenses = filteredExpenses.filter((e) => e.date <= filterTo);
+
   if (filterCustomer)
     filteredExpenses = filteredExpenses.filter(
       (e) => e.customer === filterCustomer,
     );
 
+  // ترتيب حسب الإدخال
   filteredExpenses.sort((a, b) => (a.order || 0) - (b.order || 0));
 
   let total = 0;
+  let visibleCount = 0;
 
   filteredExpenses.forEach((e, index) => {
-    total += e.amount;
+    visibleCount++;
+    total += +e.amount;
 
     const tr = document.createElement("tr");
+
     tr.innerHTML = `
+      <td>${index + 1}</td>  <!-- عمود المسلسل -->
       <td>${e.date}</td>
       <td>${e.customer}</td>
-      <td>${e.amount.toFixed(2)}</td>
+      <td>${(+e.amount).toFixed(2)}</td>
       <td>${e.title}</td>
       <td>
         <button class="action-btn edit-btn" onclick="editExpense(${index})">تعديل</button>
         <button class="action-btn delete-btn" onclick="deleteExpense(${index})">حذف</button>
       </td>
     `;
+
     expenseTableBody.appendChild(tr);
   });
 
-  if (filteredExpenses.length > 0) {
-    const totalRow = document.createElement("tr");
-    totalRow.classList.add("total-row");
-    totalRow.innerHTML = `
-      <td colspan="2"><strong>الإجمالي</strong></td>
-      <td><strong>${total.toFixed(2)}</strong></td>
-      <td colspan="2"></td>
+  // ===== لو مفيش بيانات =====
+  if (visibleCount === 0) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="6" style="text-align:center; padding:20px; color:#6B7280;">
+        لا توجد بيانات
+      </td>
     `;
-    expenseTableBody.appendChild(totalRow);
+    expenseTableBody.appendChild(emptyRow);
+    return;
   }
+
+  // ===== صف الإجمالي =====
+  const totalRow = document.createElement("tr");
+  totalRow.classList.add("table-total-row");
+
+  totalRow.innerHTML = `
+    <td colspan="3"><strong>الإجمالي</strong></td>
+    <td><strong>${total.toFixed(2)}</strong></td>
+    <td colspan="2"></td>
+  `;
+
+  expenseTableBody.appendChild(totalRow);
 }
 
 function renderExpenseFilterCustomers() {

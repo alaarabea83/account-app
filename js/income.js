@@ -131,24 +131,26 @@ function renderIncome() {
   filtered.sort((a, b) => (a.order || 0) - (b.order || 0));
 
   let total = 0;
-  let visibleCount = 0; // 👈 عداد البيانات الظاهرة
+  let visibleCount = 0;
 
-  filtered.forEach((i) => {
+  filtered.forEach((i, displayIndex) => {
     visibleCount++;
 
-    const index = incomes.indexOf(i);
+    const originalIndex = incomes.indexOf(i);
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
+      <td>${displayIndex + 1}</td> <!-- عمود المسلسل -->
       <td>${i.date}</td>
       <td>${i.customer}</td>
       <td>${(+i.amount).toFixed(2)}</td>
       <td>${i.title}</td>
       <td>
-        <button class="action-btn edit-btn" onclick="editIncome(${index})">تعديل</button>
-        <button class="action-btn delete-btn" onclick="deleteIncome(${index})">حذف</button>
+        <button class="action-btn edit-btn" onclick="editIncome(${originalIndex})">تعديل</button>
+        <button class="action-btn delete-btn" onclick="deleteIncome(${originalIndex})">حذف</button>
       </td>
     `;
+
     tbody.appendChild(tr);
 
     total += +i.amount;
@@ -158,7 +160,7 @@ function renderIncome() {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="5" style="text-align:center; padding:20px; color:#fff;">
+      <td colspan="6" style="text-align:center; padding:20px; color:#fff;">
         لا توجد بيانات
       </td>
     `;
@@ -171,8 +173,8 @@ function renderIncome() {
   totalRow.classList.add("table-total-row");
 
   totalRow.innerHTML = `
-    <td colspan="2">الإجمالي</td>
-    <td>${total.toFixed(2)}</td>
+    <td colspan="3"><strong>الإجمالي</strong></td>
+    <td><strong>${total.toFixed(2)}</strong></td>
     <td colspan="2"></td>
   `;
 
