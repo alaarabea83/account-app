@@ -61,7 +61,6 @@ window.onload = function () {
 };
 
 // ===================== العملاء =====================
-// ===================== العملاء =====================
 function renderCustomerSelect() {
   const list = document.getElementById("customerDropdown");
   const input = document.getElementById("customerInput");
@@ -77,36 +76,65 @@ function renderCustomerSelect() {
         const div = document.createElement("div");
         div.className = "dropdown-item";
         div.innerText = c.name;
+
         div.onclick = () => {
           input.value = c.name;
           input.dataset.index = i;
-          // ✅ هنا نحسب الرصيد الصحيح بدل أي قيمة صفر
-          const openingBalance = c.openingBalance || 0;
-          const previousSales = sales
+
+          // ===== حساب الرصيد الحالي للعميل =====
+          let balance = c.openingBalance || 0;
+
+          // مبيعات العميل
+          balance += sales
             .filter((s) => s.customer === c.name)
             .reduce((acc, s) => acc + (s.total - s.paid), 0);
-          customerBalance.value = (openingBalance + previousSales).toFixed(2);
+
+          // مشتريات العميل
+          balance += purchases
+            .filter((p) => p.customer === c.name)
+            .reduce((acc, p) => acc + (p.paid - p.total), 0);
+
+          // مصروفات العميل
+          balance += expenses
+            .filter((e) => e.customer === c.name)
+            .reduce((acc, e) => acc + e.amount, 0);
+
+          // إيرادات / سند قبض
+          balance -= receipts
+            .filter((r) => r.customer === c.name)
+            .reduce((acc, r) => acc + r.amount, 0);
+
+          customerBalance.value = balance.toFixed(2);
+
+          // إخفاء القائمة بعد الاختيار
           list.style.display = "none";
           updateGrandTotal();
         };
+
         list.appendChild(div);
       });
   }
 
+  // أول مرة عرض
   renderList();
 
+  // فتح القائمة عند التركيز
   input.addEventListener("focus", () => {
     list.style.display = "block";
     renderList(input.value);
   });
+
+  // البحث أثناء الكتابة
   input.addEventListener("input", () => {
     list.style.display = "block";
     renderList(input.value);
   });
 
+  // إغلاق القائمة لو ضغط المستخدم خارجها
   document.addEventListener("click", (e) => {
-    if (!input.contains(e.target) && !list.contains(e.target))
+    if (!input.contains(e.target) && !list.contains(e.target)) {
       list.style.display = "none";
+    }
   });
 }
 
@@ -317,16 +345,55 @@ function renderSales(data = sales) {
   const tbody = document.querySelector("#salesTable tbody");
   tbody.innerHTML = "";
 
-  let sumTotal = 0,
-    sumPaid = 0,
-    sumRemain = 0,
-    visibleCount = 0;
+  let sumTotal = 0;
+  let sumPaid = 0;
+  let sumRemain = 0;
+  let visibleCount = 0; // عداد الفواتير الظاهرة
 
   data.forEach((inv) => {
     visibleCount++;
+
     sumTotal += +inv.total || 0;
     sumPaid += +inv.paid || 0;
     sumRemain += +inv.remaining || 0;
+
+    // ===== حساب الرصيد السابق الصحيح =====
+    let previousBalance = 0;
+    if (inv.customer && inv.customer !== "نقدي") {
+      const customer = customers.find((c) => c.name === inv.customer);
+      if (customer) {
+        // اجمع كل العمليات السابقة قبل هذه الفاتورة
+        previousBalance = customer.openingBalance || 0;
+
+        // مبيعات قبل هذه الفاتورة
+        sales
+          .filter((s) => s.customer === inv.customer && s.order < inv.order)
+          .forEach((s) => {
+            previousBalance += s.total - s.paid;
+          });
+
+        // مشتريات قبل هذه الفاتورة
+        purchases
+          .filter((p) => p.customer === inv.customer && p.order < inv.order)
+          .forEach((p) => {
+            previousBalance += p.paid - p.total;
+          });
+
+        // مصروفات قبل هذه الفاتورة
+        expenses
+          .filter((e) => e.customer === inv.customer && e.order < inv.order)
+          .forEach((e) => {
+            previousBalance += e.amount;
+          });
+
+        // إيرادات قبل هذه الفاتورة
+        receipts
+          .filter((r) => r.customer === inv.customer && r.order < inv.order)
+          .forEach((r) => {
+            previousBalance -= r.amount;
+          });
+      }
+    }
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -336,8 +403,8 @@ function renderSales(data = sales) {
       <td>${inv.total}</td>
       <td>${inv.paid}</td>
       <td>${inv.remaining}</td>
-      <td>${inv.previousBalance}</td>
-      <td>${inv.newBalance}</td>
+      <td>${previousBalance.toFixed(2)}</td>
+      <td>${(previousBalance + (inv.total - inv.paid)).toFixed(2)}</td>
       <td>
         <div class="action-buttons">
           <button class="btn-edit" onclick="editInvoice(${inv.order})">تعديل</button>
@@ -348,13 +415,19 @@ function renderSales(data = sales) {
     tbody.appendChild(tr);
   });
 
+  // ===== لو مفيش فواتير =====
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
-    emptyRow.innerHTML = `<td colspan="9" style="text-align:center;padding:20px;color:#fff;">لا توجد بيانات</td>`;
+    emptyRow.innerHTML = `
+      <td colspan="9" style="text-align:center; padding:20px; color:#fff;">
+        لا توجد بيانات
+      </td>
+    `;
     tbody.appendChild(emptyRow);
     return;
   }
 
+  // ===== صف الإجمالي =====
   const totalRow = document.createElement("tr");
   totalRow.style.background = "#0f172a";
   totalRow.style.fontWeight = "bold";
