@@ -259,12 +259,12 @@ function openStatementModal(index) {
       credit: p.total,
       order: p.order
     })),
-    ...receipts.filter(i => i.customer === customer.name).map(i => ({
-      date: i.date,
-      desc: i.title,
+    ...receipts.filter(r => r.customer === customer.name).map(r => ({
+      date: r.date,
+      desc: r.title || "سند قبض",
       debit: 0,
-      credit: i.amount,
-      order: i.order
+      credit: r.amount,
+      order: r.order
     })),
     ...expenses.filter(e => e.customer === customer.name).map(e => ({
       date: e.date,
@@ -272,13 +272,6 @@ function openStatementModal(index) {
       debit: e.amount,
       credit: 0,
       order: e.order
-    })),
-    ...receipts.filter(r => r.customer === customer.name).map(r => ({
-      date: r.date,
-      desc: r.title || "سند قبض",
-      debit: 0,
-      credit: r.amount,
-      order: r.order
     }))
   ];
 
