@@ -98,9 +98,6 @@ function renderCustomers(searchQuery = "", filterType = null) {
     purchases.filter((p) => p.customer === c.name)
       .forEach((p) => currentBalance += p.paid - p.total);
 
-    incomes.filter((i) => i.customer === c.name)
-      .forEach((i) => currentBalance -= i.amount);
-
     expenses.filter((e) => e.customer === c.name)
       .forEach((e) => currentBalance += e.amount);
 

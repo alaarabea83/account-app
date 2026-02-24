@@ -1,5 +1,18 @@
 let editInvoiceIndex = null;
 
+// ✅ دالة حساب الرصيد الديناميكي
+function getCustomerBalance(customerName) {
+  let balance = 0;
+
+  sales.forEach((s) => {
+    if (s.customer === customerName) {
+      balance += s.total - s.paid;
+    }
+  });
+
+  return balance;
+}
+
 function setTodayDate(id) {
   const today = new Date().toISOString().split("T")[0];
   document.getElementById(id).value = today;
@@ -51,13 +64,14 @@ document.getElementById("invoiceItems").addEventListener("click", (e) => {
 function renderCustomerSelect() {
   const list = document.getElementById("customerDropdown");
   const input = document.getElementById("customerInput");
+  const customerBalance = document.getElementById("customerBalance");
 
   if (!list || !input) return;
 
   function renderList(filter = "") {
     list.innerHTML = "";
 
-    // بيع نقدي
+    // ===== بيع نقدي =====
     if ("بيع نقدي".includes(filter)) {
       const cashDiv = document.createElement("div");
       cashDiv.className = "dropdown-item";
@@ -66,7 +80,8 @@ function renderCustomerSelect() {
       cashDiv.onclick = () => {
         input.value = "بيع نقدي";
         input.dataset.index = "";
-        customerBalance.value = 0;
+        customerBalance.value = "0.00";
+
         list.style.display = "none";
         updateGrandTotal();
       };
@@ -74,7 +89,7 @@ function renderCustomerSelect() {
       list.appendChild(cashDiv);
     }
 
-    // العملاء
+    // ===== العملاء =====
     customers
       .filter((c) => c.name.toLowerCase().includes(filter.toLowerCase()))
       .forEach((c, i) => {
@@ -85,7 +100,10 @@ function renderCustomerSelect() {
         div.onclick = () => {
           input.value = c.name;
           input.dataset.index = i;
-          customerBalance.value = c.balance || 0;
+
+          const realBalance = getCustomerBalance(c.name);
+          customerBalance.value = realBalance.toFixed(2);
+
           list.style.display = "none";
           updateGrandTotal();
         };
@@ -94,22 +112,18 @@ function renderCustomerSelect() {
       });
   }
 
-  // أول تحميل
   renderList();
 
-  // فتح القائمة عند التركيز
   input.addEventListener("focus", () => {
     list.style.display = "block";
     renderList(input.value);
   });
 
-  // البحث أثناء الكتابة
   input.addEventListener("input", () => {
     list.style.display = "block";
     renderList(input.value);
   });
 
-  // غلق عند الضغط خارجها
   document.addEventListener("click", (e) => {
     if (!input.contains(e.target) && !list.contains(e.target)) {
       list.style.display = "none";
@@ -316,9 +330,9 @@ function saveSale() {
   if (cIndex !== "") {
     const c = customers[cIndex];
     customerName = c.name;
-    previousBalance = c.balance;
-    newBalance = c.balance + (total - paid);
-    customers[cIndex].balance = newBalance;
+
+    previousBalance = getCustomerBalance(customerName);
+    newBalance = previousBalance + (total - paid);
   }
 
   // ===== خصم الكميات الجديدة من المخزون ===== //
@@ -539,14 +553,6 @@ function confirmDeleteInvoice(order) {
       const product = products.find((p) => p.name === item.name);
       if (product) product.qty += item.qty;
     });
-
-    // رصيد العميل
-    if (invoice.customer !== "نقدي") {
-      const customer = customers.find((c) => c.name === invoice.customer);
-      if (customer) {
-        customer.balance -= invoice.total - invoice.paid;
-      }
-    }
 
     // الخزنة
     cash.income -= invoice.paid;
