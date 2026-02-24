@@ -5,8 +5,8 @@ function getCustomerBalance(customerName) {
   let balance = 0;
 
   sales.forEach((s) => {
-    if (s.customer === customerName) {
-      balance += s.total - s.paid;
+    if (s.customer?.trim() === customerName?.trim()) {
+      balance += (s.total || 0) - (s.paid || 0);
     }
   });
 
