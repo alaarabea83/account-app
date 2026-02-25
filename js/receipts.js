@@ -18,28 +18,31 @@ function saveData() {
 }
 
 // ======================= حساب الرصيد الحالي للعميل =====================
-function getCustomerCurrentBalance(customerName, excludeOrder = null) {
-    let balance = customers.find(c => c.name === customerName)?.openingBalance || 0;
+function getCustomerCurrentBalance(customerName) {
+    const c = customers.find((c) => c.name === customerName);
+    if (!c) return 0;
 
-    // مبيعات
+    let balance = c.openingBalance || 0;
+
+    // مبيعات العميل
     sales
-      .filter(s => s.customer === customerName)
-      .forEach(s => balance += (s.total || 0) - (s.paid || 0));
+        .filter((s) => s.customer === customerName)
+        .forEach((s) => balance += (s.total || 0) - (s.paid || 0));
 
-    // مشتريات
+    // مشتريات العميل
     purchases
-      .filter(p => p.customer === customerName)
-      .forEach(p => balance += (p.paid || 0) - (p.total || 0));
+        .filter((p) => p.customer === customerName)
+        .forEach((p) => balance += (p.paid || 0) - (p.total || 0));
 
-    // مصروفات
+    // مصروفات العميل
     expenses
-      .filter(e => e.customer === customerName)
-      .forEach(e => balance += e.amount);
+        .filter((e) => e.customer === customerName)
+        .forEach((e) => balance += e.amount);
 
     // إيرادات / سندات قبض
     receipts
-      .filter(r => r.customer === customerName && r.order !== excludeOrder)
-      .forEach(r => balance -= r.amount);
+        .filter((r) => r.customer === customerName)
+        .forEach((r) => balance -= r.amount);
 
     return balance;
 }
@@ -59,7 +62,7 @@ function renderCustomerSelect() {
 }
 
 // ======================= تحديث الرصيد السابق والمتبقي =====================
-function updateRemainingField(excludeOrder = null) {
+function updateRemainingField() {
     const customerName = document.getElementById("receiptCustomer").value;
     const amount = +document.getElementById("receiptAmount").value || 0;
 
@@ -69,10 +72,34 @@ function updateRemainingField(excludeOrder = null) {
         return;
     }
 
-    const prevBalance = getCustomerCurrentBalance(customerName, excludeOrder);
+    // 🔹 إعادة تحميل البيانات من localStorage للتأكد من الحصول على أحدث العمليات
+    loadData();
 
-    document.getElementById("prevBalance").value = prevBalance.toFixed(2);
-    document.getElementById("remainingBalance").value = (prevBalance - amount).toFixed(2);
+    // 🔹 حساب الرصيد الحالي للعميل بناءً على كل العمليات الفعلية
+    let balance = 0;
+
+    const c = customers.find(c => c.name === customerName);
+    if (c) balance = c.openingBalance || 0;
+
+    // المبيعات
+    sales.filter(s => s.customer === customerName)
+         .forEach(s => balance += (s.total || 0) - (s.paid || 0));
+
+    // المشتريات
+    purchases.filter(p => p.customer === customerName)
+             .forEach(p => balance += (p.paid || 0) - (p.total || 0));
+
+    // المصروفات
+    expenses.filter(e => e.customer === customerName)
+            .forEach(e => balance += e.amount || 0);
+
+    // المقبوضات / الإيرادات
+    receipts.filter(r => r.customer === customerName)
+            .forEach(r => balance -= r.amount || 0);
+
+    // 🔹 تحديث الحقول
+    document.getElementById("prevBalance").value = balance.toFixed(2);
+    document.getElementById("remainingBalance").value = (balance - amount).toFixed(2);
 }
 
 // ======================= إضافة أو تعديل قبض =====================
