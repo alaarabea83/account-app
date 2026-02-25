@@ -501,7 +501,7 @@ function editInvoice(order) {
       <td><input type="number" class="itemQty" value="${item.qty}"></td>
       <td><input type="number" class="itemPrice" value="${item.price}" readonly></td>
       <td><input type="number" class="itemTotal" value="${item.qty * item.price}" readonly></td>
-      <td><button type="button" class="btn-delete-item">❌</button></td>
+      <td><button type="button" class="btn-delete-item">حذف</button></td>
     `;
     container.appendChild(row);
 

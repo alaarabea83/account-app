@@ -1,4 +1,4 @@
-// ======================= تحميل وحفظ =====================
+// ======================= تحميل وحفظ البيانات =====================
 function loadData() {
     const c = localStorage.getItem("customers");
     const r = localStorage.getItem("receipts");
@@ -10,40 +10,41 @@ function loadData() {
     cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
 }
 
-// ======================= رصيد العميل الحالي =====================
+function saveData() {
+    localStorage.setItem("customers", JSON.stringify(customers));
+    localStorage.setItem("receipts", JSON.stringify(receipts));
+    localStorage.setItem("cashEntries", JSON.stringify(cashEntries));
+    localStorage.setItem("cash", JSON.stringify(cash));
+}
+
+// ======================= حساب الرصيد الحالي للعميل =====================
 function getCustomerCurrentBalance(customerName) {
-    let c = customers.find((c) => c.name === customerName);
+    const c = customers.find((c) => c.name === customerName);
     if (!c) return 0;
 
     let balance = c.openingBalance || 0;
 
     sales
         .filter((s) => s.customer === customerName)
-        .forEach((s) => (balance += s.total - s.paid));
+        .forEach((s) => balance += s.total - s.paid);
 
     purchases
         .filter((p) => p.customer === customerName)
-        .forEach((p) => (balance += p.paid - p.total));
+        .forEach((p) => balance += p.paid - p.total);
 
     incomes
         .filter((i) => i.customer === customerName)
-        .forEach((i) => (balance -= i.amount));
+        .forEach((i) => balance -= i.amount);
 
     expenses
         .filter((e) => e.customer === customerName)
-        .forEach((e) => (balance += e.amount));
+        .forEach((e) => balance += e.amount);
 
     receipts
         .filter((r) => r.customer === customerName)
-        .forEach((r) => (balance -= r.amount));
+        .forEach((r) => balance -= r.amount);
 
     return balance;
-}
-
-function saveData() {
-    localStorage.setItem("receipts", JSON.stringify(receipts));
-    localStorage.setItem("cashEntries", JSON.stringify(cashEntries));
-    localStorage.setItem("cash", JSON.stringify(cash));
 }
 
 // ======================= العملاء =====================
@@ -51,26 +52,35 @@ function renderCustomerSelect() {
     const sel = document.getElementById("receiptCustomer");
     const filterSel = document.getElementById("filterCustomer");
 
-    const validCustomers = customers.filter(
-        (c) => c.type !== "income" && c.type !== "expense"
-    );
+    const validCustomers = customers.filter(c => c.type !== "income" && c.type !== "expense");
 
-    sel.innerHTML =
-        `<option value="" disabled selected>اختر الحساب</option>` +
-        validCustomers
-            .map((c) => `<option value="${c.name}">${c.name}</option>`)
-            .join("");
+    sel.innerHTML = `<option value="" disabled selected>اختر الحساب</option>` +
+        validCustomers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
 
-    filterSel.innerHTML =
-        `<option value="">الكل</option>` +
-        validCustomers
-            .map((c) => `<option value="${c.name}">${c.name}</option>`)
-            .join("");
+    filterSel.innerHTML = `<option value="">الكل</option>` +
+        validCustomers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
 }
 
-// ======================= إضافة المقبوض =====================
+// ======================= تحديث الرصيد السابق والمتبقي =====================
+function updateRemainingField() {
+    const customerName = document.getElementById("receiptCustomer").value;
+    const amount = +document.getElementById("receiptAmount").value || 0;
+
+    if (!customerName) {
+        document.getElementById("prevBalance").value = "";
+        document.getElementById("remainingBalance").value = "";
+        return;
+    }
+
+    const prevBalance = getCustomerCurrentBalance(customerName);
+
+    document.getElementById("prevBalance").value = prevBalance.toFixed(2);
+    document.getElementById("remainingBalance").value = (prevBalance - amount).toFixed(2);
+}
+
+// ======================= إضافة قبض =====================
 function addReceipt() {
-    const title = document.getElementById("receiptTitle").value;
+    const title = document.getElementById("receiptTitle").value.trim();
     const amount = +document.getElementById("receiptAmount").value;
     const customerName = document.getElementById("receiptCustomer").value;
 
@@ -111,9 +121,11 @@ function addReceipt() {
     saveData();
     renderReceipt();
     renderCashStatement();
-
-    resetReceiptForm();   // 🔥 مهم جداً
+    resetReceiptForm();   
     showSuccessModal("تم تسجيل القبض بنجاح ✔");
+
+    // 🔹 تحديث الرصيد بعد إضافة القبض مباشرة
+    updateRemainingField();
 }
 
 // ======================= عرض المقبوضات =====================
@@ -123,8 +135,8 @@ function renderReceipt(filterFn = null) {
     let totalAmount = 0;
 
     receipts
-        .filter((r) => (filterFn ? filterFn(r) : true))
-        .forEach((r) => {
+        .filter(r => filterFn ? filterFn(r) : true)
+        .forEach(r => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
         <td>${r.date}</td>
@@ -135,25 +147,58 @@ function renderReceipt(filterFn = null) {
         <td>${r.title}</td>
       `;
             tbody.appendChild(tr);
-
             totalAmount += r.amount;
         });
 
-    // 🔥 صف الإجمالي
     const totalRow = document.createElement("tr");
     totalRow.classList.add("total-row");
-
     totalRow.innerHTML = `
     <td colspan="3" style="text-align:center;font-weight:bold;">الإجمالي</td>
     <td style="font-weight:bold;color:#28a745;">${totalAmount.toFixed(2)}</td>
     <td></td>
     <td></td>
   `;
-
     tbody.appendChild(totalRow);
 }
 
-// ======================= مودال أخرى =====================
+// ======================= كشف الخزنة =====================
+function renderCashStatement() {
+    const tbody = document.querySelector("#cashStatementTable tbody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    let cumulative = cash.opening || 0;
+    cashEntries.sort((a, b) => new Date(a.date) - new Date(b.date) || (a.order || 0) - (b.order || 0));
+    cashEntries.forEach(e => {
+        cumulative += (e.debit || 0) - (e.credit || 0);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${e.date}</td><td>${e.customer}</td><td>${e.desc}</td><td>${(e.debit || 0).toFixed(2)}</td><td>${(e.credit || 0).toFixed(2)}</td><td>${cumulative.toFixed(2)}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+
+// ======================= إعادة ضبط النموذج =====================
+function resetReceiptForm() {
+    document.getElementById("receiptTitle").value = "";
+    document.getElementById("receiptAmount").value = "";
+    document.getElementById("receiptCustomer").selectedIndex = 0;
+    document.getElementById("prevBalance").value = "";
+    document.getElementById("remainingBalance").value = "";
+}
+
+// ======================= فلترة الجدول =====================
+document.getElementById("filterBtn").addEventListener("click", function () {
+    const from = document.getElementById("fromDate").value;
+    const to = document.getElementById("toDate").value;
+    const cust = document.getElementById("filterCustomer").value;
+    renderReceipt(r => {
+        if (from && r.date < from) return false;
+        if (to && r.date > to) return false;
+        if (cust && r.customer !== cust) return false;
+        return true;
+    });
+});
+
+// ======================= مودال العنوان الأخرى =====================
 const titleSelect = document.getElementById("receiptTitle");
 const modal = document.getElementById("titleModal");
 const saveBtn = document.getElementById("saveTitleBtn");
@@ -182,69 +227,7 @@ closeBtn.onclick = function () {
     titleSelect.value = "";
 };
 
-// ======================= الرصيد السابق والمتبقي =====================
-// عند اختيار العميل
-function updateRemainingField() {
-    const customerName = document.getElementById("receiptCustomer").value;
-    const amount = +document.getElementById("receiptAmount").value || 0;
-
-    if (!customerName) return;
-
-    const prev = getCustomerCurrentBalance(customerName);
-
-    document.getElementById("prevBalance").value = prev.toFixed(2);
-    document.getElementById("remainingBalance").value =
-        (prev - amount).toFixed(2);
-}
-
-document
-    .getElementById("receiptCustomer")
-    .addEventListener("change", updateRemainingField);
-
-document
-    .getElementById("receiptAmount")
-    .addEventListener("input", updateRemainingField);
-
-function resetReceiptForm() {
-    document.getElementById("receiptTitle").value = "";
-    document.getElementById("receiptAmount").value = "";
-    document.getElementById("receiptCustomer").selectedIndex = 0;
-    document.getElementById("prevBalance").value = "";
-    document.getElementById("remainingBalance").value = "";
-}
-
-// ======================= فلترة الجدول =====================
-document.getElementById("filterBtn").addEventListener("click", function () {
-    const from = document.getElementById("fromDate").value;
-    const to = document.getElementById("toDate").value;
-    const cust = document.getElementById("filterCustomer").value;
-    renderReceipt((r) => {
-        if (from && r.date < from) return false;
-        if (to && r.date > to) return false;
-        if (cust && r.customer !== cust) return false;
-        return true;
-    });
-});
-
-// ======================= كشف الخزنة =====================
-function renderCashStatement() {
-    const tbody = document.querySelector("#cashStatementTable tbody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    let cumulative = cash.opening || 0;
-    cashEntries.sort(
-        (a, b) =>
-            new Date(a.date) - new Date(b.date) || (a.order || 0) - (b.order || 0),
-    );
-    cashEntries.forEach((e) => {
-        cumulative += (e.debit || 0) - (e.credit || 0);
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${e.date}</td><td>${e.customer}</td><td>${e.desc}</td><td>${(e.debit || 0).toFixed(2)}</td><td>${(e.credit || 0).toFixed(2)}</td><td>${cumulative.toFixed(2)}</td>`;
-        tbody.appendChild(tr);
-    });
-}
-
-// ======================= تحميل الصفحة =====================
+// ======================= حدث تحميل الصفحة =====================
 window.onload = function () {
     loadData();
     renderCustomerSelect();
@@ -255,8 +238,13 @@ window.onload = function () {
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("fromDate").value = today;
     document.getElementById("toDate").value = today;
+
+    // 🔹 حدث اختيار العميل أو كتابة المبلغ
+    document.getElementById("receiptCustomer").addEventListener("change", updateRemainingField);
+    document.getElementById("receiptAmount").addEventListener("input", updateRemainingField);
 };
 
+// ======================= مودال نجاح أو خطأ =====================
 function showSuccessModal(message, success = true) {
     const modal = document.getElementById("successModal");
     const text = document.getElementById("successText");
