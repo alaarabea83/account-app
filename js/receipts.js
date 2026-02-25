@@ -72,10 +72,11 @@ function updateRemainingField() {
         return;
     }
 
-    const prevBalance = getCustomerCurrentBalance(customerName);
+    // 🔹 احسب الرصيد الحالي الحقيقي
+    const currentBalance = getCustomerCurrentBalance(customerName);
 
-    document.getElementById("prevBalance").value = prevBalance.toFixed(2);
-    document.getElementById("remainingBalance").value = (prevBalance - amount).toFixed(2);
+    document.getElementById("prevBalance").value = currentBalance.toFixed(2);
+    document.getElementById("remainingBalance").value = (currentBalance - amount).toFixed(2);
 }
 
 // ======================= إضافة قبض =====================
@@ -135,20 +136,24 @@ function renderReceipt(filterFn = null) {
     let totalAmount = 0;
 
     receipts
-        .filter(r => filterFn ? filterFn(r) : true)
-        .forEach(r => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-        <td>${r.date}</td>
-        <td>${r.customer}</td>
-        <td>${r.prevBalance.toFixed(2)}</td>
-        <td>${r.amount.toFixed(2)}</td>
-        <td>${r.remaining.toFixed(2)}</td>
-        <td>${r.title}</td>
-      `;
-            tbody.appendChild(tr);
-            totalAmount += r.amount;
-        });
+    .filter(r => filterFn ? filterFn(r) : true)
+    .forEach(r => {
+        const tr = document.createElement("tr");
+
+        // احسب الرصيد الحالي للعميل حتى تاريخ القبض
+        const currentBalance = getCustomerCurrentBalance(r.customer);
+
+        tr.innerHTML = `
+            <td>${r.date}</td>
+            <td>${r.customer}</td>
+            <td>${currentBalance.toFixed(2)}</td>
+            <td>${r.amount.toFixed(2)}</td>
+            <td>${(currentBalance - r.amount).toFixed(2)}</td>
+            <td>${r.title}</td>
+        `;
+        tbody.appendChild(tr);
+        totalAmount += r.amount;
+    });
 
     const totalRow = document.createElement("tr");
     totalRow.classList.add("total-row");
