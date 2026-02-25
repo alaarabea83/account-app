@@ -324,14 +324,6 @@ function saveSale() {
     editInvoiceIndex = null;
   } else sales.push(invoiceData);
 
-  if (customerName !== "نقدي") {
-  const customer = customers.find(c => c.name === customerName);
-  if (customer) {
-    customer.openingBalance = getCustomerBalance(customerName); // تحديث الرصيد الحالي
-  }
-}
-saveData(); // تأكد من حفظ العملاء أيضاً
-
   // إعادة تعيين النموذج
   container.innerHTML = "";
   input.value = "";
