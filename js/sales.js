@@ -461,12 +461,38 @@ function editInvoice(order) {
 
   if (cIndex !== -1) {
     customerInput.dataset.index = cIndex;
-    customerBalance.value = invoice.previousBalance || 0;
+
+    // حساب الرصيد الحقيقي للعميل باستثناء هذه الفاتورة نفسها
+    const customer = customers[cIndex];
+    let balance = customer.openingBalance || 0;
+
+    // مبيعات العميل ما عدا هذه الفاتورة
+    balance += sales
+      .filter((s) => s.customer === customer.name && s.order !== invoice.order)
+      .reduce((acc, s) => acc + (s.total - s.paid), 0);
+
+    // مشتريات العميل
+    balance += purchases
+      .filter((p) => p.customer === customer.name)
+      .reduce((acc, p) => acc + (p.paid - p.total), 0);
+
+    // مصروفات العميل
+    balance += expenses
+      .filter((e) => e.customer === customer.name)
+      .reduce((acc, e) => acc + e.amount, 0);
+
+    // إيرادات / سندات قبض
+    balance -= receipts
+      .filter((r) => r.customer === customer.name)
+      .reduce((acc, r) => acc + r.amount, 0);
+
+    customerBalance.value = balance.toFixed(2);
   } else {
     customerInput.dataset.index = "";
     customerBalance.value = 0;
   }
 
+  // عرض المنتجات في الفاتورة
   invoice.items.forEach((item) => {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -488,8 +514,11 @@ function editInvoice(order) {
   });
 
   updateRowNumbers();
+
+  // المدفوع والمتبقي
   document.getElementById("paidAmount").value = invoice.paid;
   document.getElementById("remainingAmount").value = invoice.remaining;
+
   updateInvoiceTotal();
   updateGrandTotal();
   updateRemaining();
