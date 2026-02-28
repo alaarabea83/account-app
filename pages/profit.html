@@ -16,7 +16,7 @@
     <style>
         body {
             font-family: "Cairo", sans-serif;
-            background: #0f172a;
+            background: #111827;
             color: white;
             margin: 0;
         }
@@ -26,15 +26,14 @@
             position: fixed;
             inset: 0 0 auto 0;
             height: 60px;
-            background: #1E3A8A;
-
+            background: #111827;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            /* بدل space-between */
-
             padding: 0 15px;
             z-index: 1002;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* جروب العنوان + التوجّل */
@@ -42,7 +41,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /* مسافة بينهم */
         }
 
         .header h1 {
@@ -68,10 +66,8 @@
             /* دائم الظهور على الكمبيوتر */
             width: 260px;
             height: calc(100dvh - 60px);
-            /* بدل 100vh */
             background: #0f172a;
             padding: 20px 20px 40px 20px;
-            /* زيادة padding-bottom لتظهر آخر عنصر */
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -82,7 +78,6 @@
             font-family: "Cairo", sans-serif;
             font-weight: 600;
             box-sizing: border-box;
-            /* مهم جداً */
             padding-bottom: 40px;
         }
 
@@ -114,9 +109,7 @@
             width: 100%;
             padding: 12px;
             border-radius: 10px;
-
             box-sizing: border-box;
-            /* ⭐ مهم */
         }
 
         /* ===== Overlay ===== */
@@ -162,31 +155,21 @@
         .main-content {
             margin-top: 70px;
             margin-right: 300px;
-            /* مساحة للسايدبار */
             padding: 20px;
             transition: 0.3s;
         }
 
-        h5 {
-            border-bottom: 1px solid #2563eb;
-            border-width: thick;
-            text-align: center;
-            width: fit-content;
-        }
-
         /* ===== Filters ===== */
         .filter-container {
-            background: #1e293b;
+            background: #1F2937;
             padding: 20px;
             border-radius: 14px;
-
             display: flex;
             flex-wrap: wrap;
             align-items: flex-end;
             justify-content: space-around;
         }
 
-        /* كل عنصر فلترة */
         .filter-container label {
             display: flex;
             flex-direction: column;
@@ -201,10 +184,8 @@
             padding: 12px;
             border-radius: 10px;
             border: 1px solid #334155;
-
             background: #020617;
             color: white;
-
             transition: 0.2s;
         }
 
@@ -219,18 +200,14 @@
         #filterBtn {
             background: #21618c;
             color: white;
-
             padding: 12px 22px;
             border-radius: 10px;
             margin-right: 0;
-
             font-weight: bold;
             cursor: pointer;
-
             transition: 0.2s;
         }
 
-        /* Hover */
         #filterBtn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 15px #00000055;
@@ -266,14 +243,14 @@
             width: 100%;
             max-height: 400px;
             overflow: auto;
-            background: #020617;
+            scrollbar-width: none;
+            background: #1F2937;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             min-width: 700px;
-            /* يجبر الاسكرول */
         }
 
         th,
@@ -526,11 +503,10 @@
         color: #fff;
         width: fit-content;
         margin-top: 29px;
-        border-bottom: 1px solid #2563eb;
         border-width: thick;
         cursor: pointer;
         " id="showExpensesBtn">
-            المصروفات المسجلة خلال الفترة
+            إضغط لعرض المصروفات المسجلة خلال الفترة
         </div>
     </main>
 
