@@ -16,7 +16,44 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    .breadcrumb {
+
+    :root {
+      --bg: #111827;
+      --card: #1F2937;
+      --text: white;
+      --accent: #38bdf8;
+    }
+
+    .light {
+      --bg: #f1f5f9;
+      --card: white;
+      --text: #0f172a;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tajawal;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      background: var(--bg);
+      font-weight: bold;
+      z-index: 1002;
+      padding: 0 15px;
+      height: 60px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+        margin: 20px;
+      }
+
+      .breadcrumb {
       background: #0f172a;
       padding: 12px 20px;
       max-width: 100%;
@@ -34,39 +71,8 @@
 
     @media (max-width: 768px) {
       .breadcrumb {
-        /* مسافة من كل الجهات */
         padding: 14px 16px;
-        /* راحة للمس */
       }
-    }
-
-    :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: white;
-      --accent: #38bdf8;
-    }
-
-    .light {
-      --bg: #f1f5f9;
-      --card: white;
-      --text: #0f172a;
-    }
-
-    body {
-      margin: 0;
-      font-family: Cairo;
-      background: var(--bg);
-      color: var(--text);
-      transition: .3s;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px;
-      background: #1E3A8A;
-      font-weight: bold;
     }
 
     .btn {
@@ -103,7 +109,6 @@
       border-radius: 14px;
     }
 
-    /* مودال الخسارة العصري */
     .loss-modal {
       position: fixed;
       top: 0;
@@ -183,7 +188,7 @@
 <body>
 
   <div class="header">
-    سهل لإدارة الحسابات
+    <h1>سهل لإدارة الحسابات</h1>
   </div>
 
   <nav class="breadcrumb">
