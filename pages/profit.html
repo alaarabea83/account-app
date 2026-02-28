@@ -14,6 +14,10 @@
     <title>سهل لإدارة الحسابات</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: "Cairo", sans-serif;
             background: #111827;
@@ -181,7 +185,6 @@
 
         /* Inputs */
         .filter-container input {
-            flex: 1;
             padding: 12px;
             border-radius: 10px;
             background: #F5F5F5;
@@ -359,6 +362,17 @@
             .main-content {
                 margin-right: 0;
             }
+        }
+
+        /* الموبايل */
+        @media (max-width: 480px) {
+            .filter-container input {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+                /* مهم عشان يمنع zoom التلقائي في iPhone */
+            }
+        }
         }
     </style>
 </head>
