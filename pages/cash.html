@@ -17,16 +17,9 @@
     /* ===== Variables ===== */
     :root {
       --primary: #6366f1;
-      --bg: #111827;
+      --bg: #162A20;
       --card: #1e293b;
       --text: #f1f5f9;
-    }
-
-    /* Light Mode */
-    .light {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #0f172a;
     }
 
     /* Reset */
@@ -47,7 +40,7 @@
       position: fixed;
       inset: 0 0 auto 0;
       height: 60px;
-      background: #111827;
+      background: #1f3729;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -77,18 +70,14 @@
     }
 
     /* ===== Sidebar ===== */
-    /* ===== Sidebar ===== */
     .sidebar {
         position: fixed;
         top: 60px;
         right: 0;
-        /* دائم الظهور على الكمبيوتر */
         width: 260px;
         height: calc(100dvh - 60px);
-        /* بدل 100vh */
         background: #0f172a;
         padding: 20px 20px 40px 20px;
-        /* زيادة padding-bottom لتظهر آخر عنصر */
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -192,7 +181,7 @@
 
 
     section {
-      background: #111827;
+      background: #162A20;
       max-width: 1300px;
       margin: 60px auto 20px;
       padding: 15px;
@@ -202,9 +191,9 @@
     }
 
     .t-container {
-      background: #1F2937;
+      background: #1f3729;
       padding: 20px;
-      border-radius: 16px;
+      border-radius: 6px;
       margin: 5px;
     }
 
@@ -215,32 +204,31 @@
 
     .summary-table {
       width: 100%;
-      background: #1F2937;
+      background: #1f3729;
       border-radius: 6px;
       overflow: hidden;
     }
 
     .summary-table td {
       padding: 10px;
-      border: 1px solid #334155;
+      border: 1px solid #2E5240;
       text-align: right;
     }
 
     .summary-table td:first-child {
       font-weight: bold;
-      background: #1F2937;
+      background: #1f3729;
       width: 50%;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #1F2937;
     }
 
     thead th {
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #162A20;
+      border: 1px solid #2E5240;
       color: #ecf0f1;
       padding: 12px;
       font-size: 14px;
@@ -248,15 +236,15 @@
 
     tbody td {
       padding: 10px;
-      background: #1F2937;
-      border: 1px solid #334155;
+      background: #1f3729;
+      border: 1px solid #2E5240;
       color: #fff;
       font-size: 14px;
       text-align: center;
     }
 
     #cashStatementTable tfoot:last-child {
-      border-bottom: 1px solid #334155;
+      border-bottom: 1px solid #2E5240;
       color: #fbbf24;
       height: 40px;
     }
@@ -285,13 +273,13 @@
       padding: 1rem;
       border-radius: 12px;
       color: #fff;
-      background: #1F2937;
+      background: #1f3729;
     }
 
     .cashMovement {
       padding: 1rem;
       border-radius: 12px;
-      background: #1F2937;
+      background: #1f3729;
     }
 
     .filters {
@@ -302,15 +290,16 @@
       flex-wrap: wrap;
       margin: 20px auto;
       padding: 14px 18px;
-      background: #1F2937;
+      background: #1f3729;
       border-radius: 14px;
       max-width: 900px;
       color: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
     }
 
     .filters input {
-      background: #22313f !important;
-      color: #ecf0f1 !important;
+      background: #ffffff !important;
+      color: #000 !important;
       border: 1px solid #34495e;
       border-radius: 10px;
       padding: 10px 12px;
@@ -323,12 +312,11 @@
     }
 
     .filters select {
-      background-color: #22313f !important;
-      color: #ecf0f1 !important;
+      background-color: #ffffff !important;
+      color: #000 !important;
       border: 1px solid #34495e;
       border-radius: 8px;
     }
-
 
     .filters button {
       background: #21618c;
@@ -342,12 +330,6 @@
       letter-spacing: .3px;
       transition: .2s;
     }
-
-    .filters button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(52, 152, 219, .4);
-    }
-
 
     @media (max-width: 768px) {
       .filters {

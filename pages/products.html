@@ -15,14 +15,17 @@
     <style>
       /* ===== Colors ===== */
       :root {
-        --primary: #1F2937;
+        --primary: #1f3729;
+        /* كحلي احترافي */
         --primary-light: #2563eb;
         --success: #16a34a;
         --danger: #dc2626;
         --warning: #f59e0b;
 
-        --bg: #111827;
-        --card: #1e293b;
+        --bg: #1f3729;
+        /* خلفية غامقة مريحة */
+        --card: #162A20;
+        /* الكروت أبيض */
         --card-light: #f8fafc;
 
         --text: #ffffff;
@@ -39,7 +42,7 @@
       body {
         margin: 0;
         font-family: Tajawal;
-        background: var(--bg);
+        background: var(--card);
         color: var(--text);
         overflow-x: hidden;
       }
@@ -192,9 +195,9 @@
       .card {
         background: var(--primary);
         padding: 20px;
-        border-radius: 16px;
+        border-radius: 6px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
       }
 
       h3 {
@@ -211,11 +214,11 @@
         gap: 10px;
         align-items: center;
         background: var(--primary);
-        border-radius: 12px;
+        border-radius: 6px;
         padding: 35px;
         margin-bottom: 10px;
         color: #000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
       }
 
       input {
@@ -237,7 +240,7 @@
         border: none;
         padding: 10px 12px;
         border-radius: 12px;
-        background: #ef4444;
+        background: #21618c;
         color: var(--text);
         font-weight: bold;
         font-size: 16px;
@@ -272,7 +275,6 @@
       }
 
       /* ===== Table ===== */
-      /* Wrapper للجداول مع overflow */
       .table-scroll {
         overflow: auto;
         scrollbar-width: none;
@@ -304,7 +306,7 @@
       th {
         position: sticky;
         top: 0;
-        background: #0f172a;
+        background: #162A20;
         color: #e5e7eb;
         padding: 12px;
         text-align: center;
@@ -313,11 +315,11 @@
       td {
         padding: 12px;
         text-align: center;
-        border: 1px solid #334155;
+        border: 1px solid #2E5240;
       }
 
       .table-total-row {
-        background: #0f172a;
+        background: #243F31;
         color: #fff;
         font-weight: 600;
       }

@@ -121,7 +121,7 @@ function renderProducts(searchQuery = "") {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
       <td colspan="8" style="text-align:center; padding:20px; color:#fff;">
-        لا توجد بيانات
+        لا توجد بيانات للعرض
       </td>
     `;
     tbody.appendChild(emptyRow);
