@@ -129,7 +129,7 @@ function renderCustomers(searchQuery = "", filterType = null) {
 
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
-    emptyRow.innerHTML = `<td colspan="6" style="text-align:center; padding:20px; color:#fff;">لا توجد بيانات</td>`;
+    emptyRow.innerHTML = `<td colspan="6" style="text-align:center; padding:20px; color:#fff;">لا توجد بيانات للعرض</td>`;
     tbody.appendChild(emptyRow);
     return;
   }
