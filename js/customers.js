@@ -120,7 +120,7 @@ function renderCustomers(searchQuery = "", filterType = null) {
       <td class="actions">
         <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
         <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
-        <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
+        <button class="action-btn view" onclick="openStatementModal(${index})">حركة حساب</button>
       </td>
     `;
 
@@ -227,7 +227,7 @@ function confirmDelete() {
 function openStatementModal(index) {
   const customer = customers[index];
   document.getElementById("statementCustomerName").innerText =
-    "الحساب: " + customer.name + " (" + getTypeName(customer.type) + ")";
+    "إسم الحساب: " + customer.name + " (" + getTypeName(customer.type) + ")";
 
   const tbody = document.getElementById("statementBody");
   tbody.innerHTML = "";
