@@ -204,7 +204,7 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items: center;
-      background: #F6F1E3;
+      background: #f1e6c7;
       border-radius: 8px;
       padding: 25px;
       margin-bottom: 10px;
@@ -298,27 +298,35 @@
       background: #1e293b;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
+    .table-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-width: 100%;
+        }
 
-    th {
-      position: sticky;
-      top: 0;
-      background: #CBB884;
-      color: #000;
-      padding: 10px;
-      text-align: center;
-      border-left: 1px solid #DEE2E6;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    td {
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #DEE2E6;
-    }
+        th,
+        td {
+            border: 1px solid #DEE2E6;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #CBB884;
+            color: #1F2A44;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #F5F5F5;
+            color: #1F2A44;
+        }
 
     tbody tr:nth-child(even) {
             background: #F5F5F5;
@@ -332,12 +340,6 @@
 
     .table-total-row td {
       padding: 14px;
-    }
-
-    @media (max-width: 768) {
-      td {
-      padding: 5px;
-    }
     }
 
     td.actions {
