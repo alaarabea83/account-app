@@ -4,14 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="stylesheet" href="../css/style.css" />
   <title>سهل لإدارة الحسابات</title>
-
   <link rel="icon" type="image/png" href="../icons/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
     rel="stylesheet" />
-
   <style>
     :root {
       --primary: #1f3729;
@@ -33,8 +30,8 @@
 
     body {
       margin: 0;
-      font-family: Tajawal, sans-serif;
-      background: #F6F1E3;
+      font-family: Tajawal;
+      background: #0f1f18;
       color: var(--text);
       overflow-x: hidden;
     }
@@ -45,7 +42,7 @@
       right: 0;
       left: 0;
       height: 60px;
-      background: #1F2A44;
+      background: var(--primary-light);
       color: white;
       display: flex;
       align-items: center;
@@ -57,20 +54,19 @@
 
     .header h1 {
       font-size: 18px;
-      margin: 45px;
+      margin: 40px;
     }
 
     .menu-toggle {
       position: fixed;
       right: 12px;
       z-index: 1001;
-      background: #CBB884;
+      background: white;
       color: #000;
       border: none;
-      padding: 0 12px 0;
+      padding: 4px 8px;
       border-radius: 8px;
       font-size: 20px;
-      margin-bottom: 20px;
     }
 
     .sidebar {
@@ -177,12 +173,11 @@
     }
 
     .card {
-      background: #F6F1E3;
+      background: var(--bg);
+      padding: 10px;
+      border-radius: 10px;
       margin-bottom: 20px;
-      color: #000;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: inset 0 0 10px #97753596;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     h5 {
@@ -204,7 +199,7 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items: center;
-      background: #f1e6c7;
+      background: var(--bg);
       border-radius: 8px;
       padding: 25px;
       margin-bottom: 10px;
@@ -217,7 +212,7 @@
       min-width: 140px;
       background: #f8fafc;
       color: #000;
-      border: 1px solid #a5c8eb;
+      border: 1px solid var(--border);
       border-radius: 6px;
       padding: 10px;
       font-size: 14px;
@@ -225,7 +220,7 @@
 
     .form-row label {
       font-size: 13px;
-      color: #000;
+      color: white;
     }
 
     input,
@@ -234,7 +229,7 @@
       padding: 10px;
       border-radius: 6px;
       background: #f8fafc;
-      border: 1px solid #a5c8eb;
+      border: 1px solid #334155;
       color: #000;
       font-size: 14px;
     }
@@ -256,32 +251,39 @@
     }
 
     button {
-      font-family: cairo;
       border: none;
-      border-radius: 8px;
-      padding: 8px 18px;
-      font-weight: 500;
-      transition: 0.2s;
-      background: #CBB884;
-      color: #000;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #21618c;
+      color: var(--text);
       font-weight: bold;
       font-size: 16px;
       cursor: pointer;
       width: auto;
       max-width: 120px;
       margin: 5px auto;
-      margin-top: 20px;
-    }
-
-    button:hover {
-      transform: scale(1.05);
     }
 
     .table-scroll {
       overflow: auto;
       scrollbar-width: none;
       max-height: 400px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Webkit Scrollbar */
+    .table-scroll::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: yellow;
       border-radius: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-track {
+      background: #1e293b;
     }
 
     table {
@@ -293,30 +295,22 @@
     th {
       position: sticky;
       top: 0;
-      background: #0f172a;
-      color: #fff;
-      padding: 10px;
+      background: #0f1f18;
+      color: #e5e7eb;
+      padding: 12px;
       text-align: center;
-      white-space: nowrap;
     }
 
     td {
-      padding: 5px;
+      padding: 12px;
       text-align: center;
-      border: 1px solid #334155;
-      white-space: nowrap;
-      background-color: #1F2937;
-      color:#fff;
+      border: 1px solid #2e5240;
     }
 
-    tbody tr:nth-child(even) {
-            background: #F5F5F5;
-        }
-
     .table-total-row {
-      background: #CBB884 !important;
-      color: #000;
-      font-weight: 800;
+      background: #243f31;
+      color: #fff;
+      font-weight: 600;
     }
 
     .table-total-row td {
@@ -335,10 +329,10 @@
     }
 
     .action-btn {
-      width: fit-content;
-      max-width: 75%;
+      width: 100%;
+      max-width: 70px;
       height: 32px;
-      padding: 10px;
+      padding: 0 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -461,89 +455,55 @@
 
 <body>
   <div class="header">
-    <h1>إدارة الحسابات</h1>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  </div>
-
-  <!-- Sidebar -->
+    <h1>إدارة الحسابات</h1> <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  </div> <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <div class="menu-item cash-item">
-      💰 رصيد الخزينة:
-      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
-    </div>
-
+    <div class="menu-item cash-item"> 💰 رصيد الخزينة: <span class="cash-badge" id="cashBalance">0.00 جنيه</span> </div>
     <a href="../index.html" class="sidebar-link"><img src="../icons/home.png" width="32" height="32" /><span>الصفحة
-        الرئيسية</span></a>
-    <a href="customers.html" class="sidebar-link"><img src="../icons/customer-512.png" width="32"
-        height="32" /><span>الحسابات</span></a>
-    <a href="products.html" class="sidebar-link"><img src="../icons/products.png" width="32"
-        height="32" /><span>المخزون</span></a>
-    <a href="sales.html" class="sidebar-link"><img src="../icons/sales.png" width="32"
-        height="32" /><span>المبيعات</span></a>
-    <a href="purchases.html" class="sidebar-link"><img src="../icons/purchases.png" width="32"
-        height="32" /><span>المشتريات</span></a>
-    <a href="receipts.html" class="sidebar-link"><img src="../icons/income-512.png" width="32"
-        height="32" /><span>المقبوضات</span></a>
-    <a href="#" class="sidebar-link"><img src="../icons/accounting-512.png" width="32"
-        height="32" /><span>المدفوعات</span></a>
-    <a href="income.html" class="sidebar-link"><img src="../icons/income.png" width="32" height="32" /><span>تسجيل
-        الإيرادات</span></a>
-    <a href="expenses.html" class="sidebar-link"><img src="../icons/expenses.png" width="32" height="32" /><span>تسجيل
-        المصروفات</span></a>
-    <a href="cash.html" class="sidebar-link"><img src="../icons/icon-512.png" width="32" height="32" /><span>الصندوق
-        الرئيسي</span></a>
-    <a href="profit.html" class="sidebar-link"><img src="../icons/profit.png" width="32" height="32" /><span>تقارير
-        الأرباح</span></a>
-    <a href="../pages/dashboard.html" class="sidebar-link"><img src="../icons/dashboard.png" width="32"
-        height="32" /><span>تقرير حركه</span></a>
-    <a href="../pages/tayar.html" class="sidebar-link"><img src="../icons/delivery.png" width="32"
-        height="32" /><span>تطبيق الطيار</span></a>
+        الرئيسية</span></a> <a href="customers.html" class="sidebar-link"><img src="../icons/customer-512.png"
+        width="32" height="32" /><span>الحسابات</span></a> <a href="products.html" class="sidebar-link"><img
+        src="../icons/products.png" width="32" height="32" /><span>المخزون</span></a> <a href="sales.html"
+      class="sidebar-link"><img src="../icons/sales.png" width="32" height="32" /><span>المبيعات</span></a> <a
+      href="purchases.html" class="sidebar-link"><img src="../icons/purchases.png" width="32"
+        height="32" /><span>المشتريات</span></a> <a href="receipts.html" class="sidebar-link"><img
+        src="../icons/income-512.png" width="32" height="32" /><span>المقبوضات</span></a> <a href="#"
+      class="sidebar-link"><img src="../icons/accounting-512.png" width="32" height="32" /><span>المدفوعات</span></a> <a
+      href="income.html" class="sidebar-link"><img src="../icons/income.png" width="32" height="32" /><span>تسجيل
+        الإيرادات</span></a> <a href="expenses.html" class="sidebar-link"><img src="../icons/expenses.png" width="32"
+        height="32" /><span>تسجيل المصروفات</span></a> <a href="cash.html" class="sidebar-link"><img
+        src="../icons/icon-512.png" width="32" height="32" /><span>الصندوق الرئيسي</span></a> <a href="profit.html"
+      class="sidebar-link"><img src="../icons/profit.png" width="32" height="32" /><span>تقارير الأرباح</span></a> <a
+      href="../pages/dashboard.html" class="sidebar-link"><img src="../icons/dashboard.png" width="32"
+        height="32" /><span>تقرير حركه</span></a> <a href="../pages/tayar.html" class="sidebar-link"><img
+        src="../icons/delivery.png" width="32" height="32" /><span>تطبيق الطيار</span></a>
   </div>
-
-  <div id="overlay" onclick="toggleSidebar()"></div>
-
-  <!-- Main -->
+  <div id="overlay" onclick="toggleSidebar()"></div> <!-- Main -->
   <div class="main">
-    <section>
-      <!-- Add Customer -->
+    <section> <!-- Add Customer -->
       <div class="card">
         <h5>📝 إضافة حساب جديد</h5>
-
-        <div class="form-row">
-          <label>الحساب</label>
-          <input type="text" id="customerName" placeholder="إسم العميل / المورد / الحساب" />
-          <label>الرصيد الإفتتاحي</label>
-          <input type="number" id="openingBalance" placeholder="الرصيد السابق ( ان وجد )" />
-          <label>نوع االحساب</label>
-          <select id="accountType" required>
+        <div class="form-row"> <label>الحساب</label> <input type="text" id="customerName"
+            placeholder="إسم العميل / المورد / الحساب" /> <label>الرصيد الإفتتاحي</label> <input type="number"
+            id="openingBalance" placeholder="الرصيد السابق ( ان وجد )" /> <label>نوع االحساب</label> <select
+            id="accountType" required>
             <option value="" disabled selected>اختر نوع الحساب</option>
             <option value="customer">عميل</option>
             <option value="supplier">مورد</option>
             <option value="income">إيراد</option>
             <option value="expense">مصروف</option>
-          </select>
-
-          <button id="addCustomerBtn">💾 حفظ</button>
-        </div>
-      </div>
-
-      <!-- Table -->
+          </select> <button id="addCustomerBtn">💾 حفظ</button> </div>
+      </div> <!-- Table -->
       <div class="card">
         <h5>📋 قائمة الحسابات</h5>
-
-        <div class="form-row">
-          <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث في الحسابات..." />
-
-          <select class="searchAccounts" id="filterType">
+        <div class="form-row"> <input class="searchAccounts" type="text" id="searchCustomer"
+            placeholder="🔍 بحث في الحسابات..." /> <select class="searchAccounts" id="filterType">
             <option value="" disabled selected>اختر نوع الحساب</option>
             <option value="">كل الحسابات</option>
             <option value="customer">العملاء</option>
             <option value="supplier">الموردين</option>
             <option value="income">الإيرادات</option>
             <option value="expense">المصروفات</option>
-          </select>
-        </div>
-
+          </select> </div>
         <div class="table-scroll">
           <table id="customersTable">
             <thead>
@@ -561,75 +521,43 @@
         </div>
       </div>
     </section>
-  </div>
-
-  <!-- Alert Modal -->
+  </div> <!-- Alert Modal -->
   <div id="appModal" class="modal-overlay">
     <div class="modal-card">
       <h3 id="modalTitle">تنبيه</h3>
       <p id="modalMessage"></p>
-      <div class="modal-actions">
-        <button class="btn btn-info" onclick="closeModal()">حسناً</button>
-      </div>
+      <div class="modal-actions"> <button class="btn btn-info" onclick="closeModal()">حسناً</button> </div>
     </div>
-  </div>
-
-  <!-- Edit Modal -->
+  </div> <!-- Edit Modal -->
   <div id="editModal" class="modal-overlay">
     <div class="modal-card">
       <h3>تعديل الحساب</h3>
-
-      <div class="form-group">
-        <label for="editAccountType">نوع الحساب</label>
-        <select id="editAccountType">
+      <div class="form-group"> <label for="editAccountType">نوع الحساب</label> <select id="editAccountType">
           <option value="customer">عميل</option>
           <option value="supplier">مورد</option>
           <option value="income">إيراد</option>
           <option value="expense">مصروف</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="editCustomerName">اسم العميل</label>
-        <input type="text" id="editCustomerName" />
-      </div>
-
-      <div class="form-group">
-        <label for="editOpeningBalance">الرصيد الافتتاحي</label>
-        <input type="number" id="editOpeningBalance" />
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-save" onclick="saveCustomerEdit()">حفظ</button>
-        <button class="btn btn-cancel" onclick="closeEditModal()">
-          إلغاء
-        </button>
-      </div>
+        </select> </div>
+      <div class="form-group"> <label for="editCustomerName">اسم العميل</label> <input type="text"
+          id="editCustomerName" /> </div>
+      <div class="form-group"> <label for="editOpeningBalance">الرصيد الافتتاحي</label> <input type="number"
+          id="editOpeningBalance" /> </div>
+      <div class="modal-actions"> <button class="btn btn-save" onclick="saveCustomerEdit()">حفظ</button> <button
+          class="btn btn-cancel" onclick="closeEditModal()"> إلغاء </button> </div>
     </div>
-  </div>
-
-  <!-- Delete Modal -->
+  </div> <!-- Delete Modal -->
   <div id="deleteModal" class="modal-overlay">
     <div class="modal-card">
       <h3>تأكيد الحذف</h3>
       <p>هل أنت متأكد؟</p>
-
-      <div class="modal-actions">
-        <button class="btn btn-delete" onclick="confirmDelete()">حذف</button>
-        <button class="btn btn-cancel" onclick="closeDeleteModal()">
-          إلغاء
-        </button>
-      </div>
+      <div class="modal-actions"> <button class="btn btn-delete" onclick="confirmDelete()">حذف</button> <button
+          class="btn btn-cancel" onclick="closeDeleteModal()"> إلغاء </button> </div>
     </div>
-  </div>
-
-  <!-- Statement Modal -->
+  </div> <!-- Statement Modal -->
   <div id="statementModal" class="modal-overlay">
     <div class="modal-card">
       <h3>حركة الحساب</h3>
-
       <p id="statementCustomerName"></p>
-
       <div class="table-scroll">
         <table>
           <thead>
@@ -644,30 +572,13 @@
           <tbody id="statementBody"></tbody>
         </table>
       </div>
-
-      <div class="modal-actions">
-        <button class="btn btn-cancel" onclick="closeStatementModal()">
-          إغلاق
-        </button>
-      </div>
+      <div class="modal-actions"> <button class="btn btn-cancel" onclick="closeStatementModal()"> إغلاق </button> </div>
     </div>
-  </div>
-
-  <!-- Scripts -->
+  </div> <!-- Scripts -->
   <script src="../js/data.js"></script>
   <script src="../js/common.js"></script>
   <script src="../js/customers.js"></script>
-
-  <script>
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-      document.getElementById("overlay").classList.toggle("show");
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle("light");
-    }
-  </script>
+  <script> function toggleSidebar() { document.getElementById("sidebar").classList.toggle("show"); document.getElementById("overlay").classList.toggle("show"); } function toggleMode() { document.body.classList.toggle("light"); } </script>
 </body>
 
 </html>
