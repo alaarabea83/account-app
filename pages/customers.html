@@ -206,7 +206,7 @@
       align-items: center;
       background: #F6F1E3;
       border-radius: 8px;
-      padding: px;
+      padding: 25px;
       margin-bottom: 10px;
       color: #000;
     }
@@ -309,12 +309,13 @@
       top: 0;
       background: #CBB884;
       color: #000;
-      padding: 12px;
+      padding: 10px;
       text-align: center;
+      border-left: 1px solid #DEE2E6;
     }
 
     td {
-      padding: 12px;
+      padding: 5px;
       text-align: center;
       border: 1px solid #DEE2E6;
     }
@@ -331,6 +332,12 @@
 
     .table-total-row td {
       padding: 14px;
+    }
+
+    @media (max-width: 768) {
+      td {
+      padding: 5px;
+    }
     }
 
     td.actions {
