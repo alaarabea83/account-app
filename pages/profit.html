@@ -15,7 +15,7 @@
             margin: 0;
             padding: 0;
             font-family: "Cairo", sans-serif;
-            overflow-x:hidden;
+            overflow-x: hidden;
         }
 
         /* ===== BODY ===== */
@@ -73,7 +73,6 @@
             padding: 25px;
             margin-right: 240px;
             margin-top: 70px;
-            /* مسافة بين الهيدر وبداية الصفحة */
             transition: .3s;
         }
 
@@ -103,11 +102,20 @@
             border-radius: 8px;
             cursor: pointer;
             transition: .3s;
+            display: none;
+            /* مخفي افتراضياً */
         }
 
         .icon-btn:hover {
             background: #1F2A44;
             color: white;
+        }
+
+        /* يظهر فقط على الموبايل */
+        @media (max-width: 768px) {
+            .icon-btn {
+                display: inline-block;
+            }
         }
 
         /* ===== CARDS ===== */
