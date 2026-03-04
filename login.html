@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            margin: 0;
+        }
+
+        .box {
+            background: #2c3e50;
+            padding: 35px;
+            border-radius: 20px;
+            width: 340px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, .4);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #CBB884;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tabs button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .tabs button.active {
+            background: #CBB884;
+            color: black;
+        }
+
+        form {
+            display: none;
+            animation: fade .3s ease-in-out;
+        }
+
+        form.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .remember-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .remember-box input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .remember-box i {
+            color: #CBB884;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 70%;
+            margin: 18px auto;
+            padding: 12px;
+            background: #CBB884;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .submit-btn:hover {
+            background: #1F2A44;
+            color: white;
+            box-shadow: 0 0 10px #CBB884;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <div class="logo">
+            <i class="fa-solid fa-chart-line"></i> نظام الحسابات
+        </div>
+
+        <div class="tabs">
+            <button id="loginTab" class="active">تسجيل الدخول</button>
+            <button id="registerTab">إنشاء حساب</button>
+        </div>
+
+        <!-- Login -->
+        <form id="loginForm" class="active">
+            <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+            <input type="password" id="loginPassword" placeholder="كلمة المرور">
+
+            <div class="remember-box">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">
+                    <i class="fa-solid fa-user-check"></i> تذكرني
+                </label>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="loginUser()">دخول</button>
+        </form>
+
+        <!-- Register -->
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="اسم المستخدم">
+            <input type="email" id="registerEmail" placeholder="البريد الإلكتروني">
+            <input type="password" id="registerPassword" placeholder="كلمة المرور">
+            <button type="button" class="submit-btn" onclick="registerUser()">إنشاء حساب</button>
+        </form>
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+            authDomain: "accounts-system-47961.firebaseapp.com",
+            projectId: "accounts-system-47961",
+            storageBucket: "accounts-system-47961.firebasestorage.app",
+            messagingSenderId: "164539147206",
+            appId: "1:164539147206:web:8b8267577e1af4622948c7",
+            measurementId: "G-7YT025BJT9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Auto login if remembered
+        onAuthStateChanged(auth, (user) => {
+            if (user && localStorage.getItem("rememberUser")) {
+                window.location.href = "index.html";
+            }
+        });
+
+        // Tabs switching
+        const loginTab = document.getElementById("loginTab");
+        const registerTab = document.getElementById("registerTab");
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+
+        loginTab.onclick = () => {
+            loginTab.classList.add("active");
+            registerTab.classList.remove("active");
+            loginForm.classList.add("active");
+            registerForm.classList.remove("active");
+        };
+
+        registerTab.onclick = () => {
+            registerTab.classList.add("active");
+            loginTab.classList.remove("active");
+            registerForm.classList.add("active");
+            loginForm.classList.remove("active");
+        };
+
+        // Login
+        window.loginUser = function () {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            const remember = document.getElementById("rememberMe").checked;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    if (remember) {
+                        localStorage.setItem("rememberUser", "true");
+                    } else {
+                        localStorage.removeItem("rememberUser");
+                    }
+                    window.location.href = "index.html";
+                })
+                .catch(error => alert(error.message));
+        };
+
+        // Register
+        window.registerUser = async function () {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("registerEmail").value;
+            const password = document.getElementById("registerPassword").value;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    username,
+                    email,
+                    createdAt: new Date()
+                });
+
+                localStorage.setItem("rememberUser", "true");
+                window.location.href = "index.html";
+
+            } catch (error) {
+                alert(error.message);
+            }
+        };
+    </script>
+
+</body>
+
+</html>
