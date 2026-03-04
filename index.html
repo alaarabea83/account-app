@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="../icons/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <title>سهل لإدارة الحسابات</title>
 
@@ -19,8 +19,8 @@
     }
 
     body {
-      background: #F6F1E3;
-      color: #1F2A44;
+      background: #f6f1e3;
+      color: #1f2a44;
     }
 
     /* ===== Header ===== */
@@ -31,7 +31,7 @@
       padding: 15px 25px;
       position: sticky;
       top: 0;
-      background: #CBB884;
+      background: #cbb884;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       z-index: 100;
     }
@@ -39,7 +39,7 @@
     .header h1 {
       font-family: "Tajawal", sans-serif;
       font-size: 22px;
-      color: #1F2A44;
+      color: #1f2a44;
     }
 
     .header-right {
@@ -50,7 +50,7 @@
     .btn-icon {
       background: rgba(255, 255, 255, 0.4);
       border: none;
-      color: #1F2A44;
+      color: #1f2a44;
       font-size: 17px;
       padding: 8px 12px;
       border-radius: 8px;
@@ -59,7 +59,7 @@
     }
 
     .btn-icon:hover {
-      background: #1F2A44;
+      background: #1f2a44;
       color: #fff;
     }
 
@@ -75,12 +75,12 @@
 
     /* ===== Card ===== */
     .card {
-      background: #DCCB9A;
+      background: #dccb9a;
       border-radius: 16px;
       padding: 28px 18px;
       text-align: center;
       text-decoration: none;
-      color: #1F2A44;
+      color: #1f2a44;
       transition: 0.35s ease;
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
     }
@@ -88,13 +88,13 @@
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-      background: #E5D6A8;
+      background: #e5d6a8;
     }
 
     .card i {
       font-size: 26px;
       margin-bottom: 12px;
-      color: #1F2A44;
+      color: #1f2a44;
       transition: 0.3s;
     }
 
@@ -115,7 +115,7 @@
 
     /* ===== Footer ===== */
     .footer {
-      background: #1F2A44;
+      background: #1f2a44;
       color: #ffffff;
       padding: 35px 20px 20px;
       margin-top: 60px;
@@ -137,7 +137,7 @@
     }
 
     .footer a {
-      color: #E5E7EB;
+      color: #e5e7eb;
       text-decoration: none;
       display: block;
       margin-bottom: 6px;
@@ -146,7 +146,7 @@
     }
 
     .footer a:hover {
-      color: #DCCB9A;
+      color: #dccb9a;
     }
 
     .footer-bottom {
@@ -178,12 +178,14 @@
 </head>
 
 <body>
-
   <header class="header">
     <h1>سهل لإدارة الحسابات</h1>
     <div class="header-right">
       <button class="btn-icon"><i class="fa fa-bell"></i></button>
-      <button class="btn-icon"><i class="fa fa-user"></i></button>
+      <button class="btn-icon" id="userBtn">
+        <i class="fa fa-user"></i>
+      </button>
+      <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
     </div>
   </header>
 
@@ -191,73 +193,81 @@
     <a class="card" href="pages/customers.html">
       <i class="fa fa-users"></i>
       <h3>الحسابات</h3>
-      <p>إضافة حساب<br>إدارة العملاء<br>كشف حساب<br>أرصدة إفتتاحية</p>
+      <p>إضافة حساب<br />إدارة العملاء<br />كشف حساب<br />أرصدة إفتتاحية</p>
     </a>
 
     <a class="card" href="pages/products.html">
       <i class="fa fa-box"></i>
       <h3>المنتجات</h3>
-      <p>إضافة منتج<br>إدارة المخزون<br>حركة صنف<br>أرصدة إفتتاحية</p>
+      <p>إضافة منتج<br />إدارة المخزون<br />حركة صنف<br />أرصدة إفتتاحية</p>
     </a>
 
     <a class="card" href="pages/sales.html">
       <i class="fa fa-cart-shopping"></i>
       <h3>المبيعات</h3>
-      <p>فاتورة بيع<br>بيع نقدي<br>بيع بالأجل<br>إدارة الفواتير</p>
+      <p>فاتورة بيع<br />بيع نقدي<br />بيع بالأجل<br />إدارة الفواتير</p>
     </a>
 
     <a class="card" href="pages/purchases.html">
       <i class="fa fa-truck"></i>
       <h3>المشتريات</h3>
-      <p>فاتورة شراء<br>تحديث المخزون<br>تحديث الموردين<br>إدارة الفواتير</p>
+      <p>
+        فاتورة شراء<br />تحديث المخزون<br />تحديث الموردين<br />إدارة الفواتير
+      </p>
     </a>
 
     <a class="card" href="pages/receipts.html">
       <i class="fa fa-hand-holding-dollar"></i>
       <h3>القبض</h3>
-      <p>سند قبض<br>تحصيل ديون<br>تدفقات نقدية<br>إضافة رأس مال</p>
+      <p>سند قبض<br />تحصيل ديون<br />تدفقات نقدية<br />إضافة رأس مال</p>
     </a>
 
     <a class="card" href="#">
       <i class="fa fa-money-bill-wave"></i>
       <h3>الدفع</h3>
-      <p>سند دفع<br>دفع مستحقات<br>تصفية شريك<br>تخفيض رأس مال</p>
+      <p>سند دفع<br />دفع مستحقات<br />تصفية شريك<br />تخفيض رأس مال</p>
     </a>
 
     <a class="card" href="pages/income.html">
       <i class="fa fa-chart-line"></i>
       <h3>الإيرادات</h3>
-      <p>تسجيل إيراد<br>إيرادات خارجية<br>سجل إيرادات<br>تحديث الأرباح</p>
+      <p>
+        تسجيل إيراد<br />إيرادات خارجية<br />سجل إيرادات<br />تحديث الأرباح
+      </p>
     </a>
 
     <a class="card" href="pages/expenses.html">
       <i class="fa fa-receipt"></i>
       <h3>المصروفات</h3>
-      <p>تسجيل مصروف<br>أجور ومرتبات<br>رسوم وإيجارات<br>سلف العاملين</p>
+      <p>
+        تسجيل مصروف<br />أجور ومرتبات<br />رسوم وإيجارات<br />سلف العاملين
+      </p>
     </a>
 
     <a class="card" href="pages/cash.html">
       <i class="fa fa-vault"></i>
       <h3>الخزينة</h3>
-      <p>رصيد الخزينة<br>حركة النقدية<br>تقارير يومية<br>تقارير شهرية</p>
+      <p>
+        رصيد الخزينة<br />حركة النقدية<br />تقارير يومية<br />تقارير شهرية
+      </p>
     </a>
 
     <a class="card" href="pages/profit.html">
       <i class="fa fa-coins"></i>
       <h3>الأرباح</h3>
-      <p>مجمل الربح<br>صافي الربح<br>تقرير يومي<br>تقرير شهري</p>
+      <p>مجمل الربح<br />صافي الربح<br />تقرير يومي<br />تقرير شهري</p>
     </a>
 
     <a class="card" href="pages/dashboard.html">
       <i class="fa fa-chart-pie"></i>
       <h3>تقرير الحركة</h3>
-      <p>حركة يومية<br>الربح اليومي<br>الربح الشهري<br>مبيعات اليوم</p>
+      <p>حركة يومية<br />الربح اليومي<br />الربح الشهري<br />مبيعات اليوم</p>
     </a>
 
     <a class="card" href="pages/about.html">
       <i class="fa fa-headset"></i>
       <h3>التواصل</h3>
-      <p>عن البرنامج<br>التحديثات<br>الدعم الفني<br>تواصل معنا</p>
+      <p>عن البرنامج<br />التحديثات<br />الدعم الفني<br />تواصل معنا</p>
     </a>
   </section>
 
@@ -282,17 +292,53 @@
   </footer>
 
   <script type="module">
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-const auth = getAuth();
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+      authDomain: "accounts-system-47961.firebaseapp.com",
+      projectId: "accounts-system-47961",
+      storageBucket: "accounts-system-47961.firebasestorage.app",
+      messagingSenderId: "164539147206",
+      appId: "1:164539147206:web:8b8267577e1af4622948c7",
+    };
 
-onAuthStateChanged(auth, (user) => {
-    if (!user) {
-        window.location.href = "login.html";
-    }
-});
-</script>
+    // تهيئة Firebase مرة واحدة
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
+    // نخفي الصفحة لحد ما يتم التحقق
+    document.body.style.display = "none";
+
+    // تحقق من تسجيل الدخول مرة واحدة فقط عند التحميل
+    let checked = false;
+
+    onAuthStateChanged(auth, (user) => {
+      if (checked) return; // يمنع التنفيذ أكثر من مرة
+      checked = true;
+
+      if (!user) {
+        window.location.replace("login.html"); // replace بدل href لتجنب التاريخ المستمر
+      } else {
+        document.body.style.display = "block";
+      }
+    });
+
+    // زر تسجيل خروج
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+      if (confirm("هل تريد تسجيل الخروج؟")) {
+        signOut(auth).then(() => {
+          window.location.replace("login.html");
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
