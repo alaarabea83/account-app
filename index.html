@@ -442,23 +442,13 @@
     document.body.style.display = "none";
 
     // ======================= النسخ الاحتياطي على Firebase =======================
-    async function saveBackup() {
+    async function saveBackup(data) {
       const user = auth.currentUser;
       if (!user) return alert("المستخدم غير مسجل الدخول");
-
       try {
         await setDoc(doc(db, "backups", user.uid), {
           timestamp: new Date(),
-          data: {
-            customers,
-            products,
-            sales,
-            purchases,
-            incomes,
-            expenses,
-            receipts,
-            cash,
-          },
+          data: data || {}, // ترسل أي بيانات تريد رفعها
         });
         alert("تم رفع النسخة الاحتياطية بنجاح ✅");
       } catch (e) {
@@ -486,10 +476,7 @@
           incomes.splice(0, incomes.length, ...(data.incomes || []));
           expenses.splice(0, expenses.length, ...(data.expenses || []));
           receipts.splice(0, receipts.length, ...(data.receipts || []));
-          Object.assign(
-            cash,
-            data.cash || { opening: 0, income: 0, expenses: 0 },
-          );
+          Object.assign(cash, data.cash || { opening: 0, income: 0, expenses: 0 });
 
           // لو عايز تحدث LocalStorage
           saveData();
@@ -498,6 +485,7 @@
         } else {
           alert("لا توجد نسخة احتياطية على Firebase ⚠️");
         }
+
       } catch (e) {
         console.error(e);
         alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
