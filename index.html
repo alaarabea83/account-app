@@ -459,16 +459,7 @@
         const restoreBtn = document.getElementById("restoreBtn");
         const logoutBtn = document.getElementById("logoutBtn");
 
-        if (backupBtn) backupBtn.onclick = () => saveBackup({
-  customers,
-  products,
-  sales,
-  purchases,
-  incomes,
-  expenses,
-  receipts,
-  cash
-});
+        if (backupBtn) backupBtn.onclick = () => saveBackup({ exampleData: "بيانات تجريبيه" });
         if (restoreBtn) restoreBtn.onclick = restoreBackup;
 
         if (logoutBtn) {
