@@ -169,7 +169,12 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -186,10 +191,10 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Auto login if remembered
+        // 🔹 حماية login.html: منع الرجوع للمستخدمين المسجلين
         onAuthStateChanged(auth, (user) => {
-            if (user && localStorage.getItem("rememberUser")) {
-                window.location.href = "index.html";
+            if (user) {
+                window.location.replace("index.html"); // أي مستخدم مسجل سيتم تحويله مباشرة
             }
         });
 
@@ -226,7 +231,7 @@
                     } else {
                         localStorage.removeItem("rememberUser");
                     }
-                    window.location.href = "index.html";
+                    window.location.replace("index.html");
                 })
                 .catch(error => alert(error.message));
         };
@@ -247,7 +252,7 @@
                 });
 
                 localStorage.setItem("rememberUser", "true");
-                window.location.href = "index.html";
+                window.location.replace("index.html");
 
             } catch (error) {
                 alert(error.message);
