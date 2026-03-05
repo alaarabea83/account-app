@@ -29,6 +29,10 @@ function saveData() {
   localStorage.setItem("expenses", JSON.stringify(expenses));
   localStorage.setItem("cash", JSON.stringify(cash));
   localStorage.setItem("receipts", JSON.stringify(receipts));
+
+  // Optional: تجميع كل البيانات في appData
+  const appData = { customers, products, sales, purchases, incomes, expenses, receipts, cash };
+  localStorage.setItem("appData", JSON.stringify(appData));
 }
 
 function loadData() {
@@ -48,7 +52,6 @@ function loadData() {
   incomes = i ? JSON.parse(i) : [];
   expenses = e ? JSON.parse(e) : [];
   receipts = r ? JSON.parse(r) : [];
-
   cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
 }
 
