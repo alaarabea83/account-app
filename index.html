@@ -1,29 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>سهل لإدارة الحسابات</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الرئيسية - سهل لإدارة الحسابات</title>
+  <link rel="icon" href="../icons/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Cairo", sans-serif;
-    }
-
     body {
+      font-family: 'Cairo', sans-serif;
       background: #f6f1e3;
       color: #1f2a44;
+      margin: 0;
     }
 
-    /* ===== Header ===== */
     .header {
       display: flex;
       justify-content: space-between;
@@ -37,43 +30,29 @@
     }
 
     .header h1 {
-      font-family: "Tajawal", sans-serif;
+      font-family: 'Tajawal', sans-serif;
       font-size: 22px;
       color: #1f2a44;
     }
 
-    .header-right {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-icon {
-      background: rgba(255, 255, 255, 0.4);
-      border: none;
-      color: #1f2a44;
-      font-size: 17px;
+    .header-right button {
+      margin-left: 10px;
       padding: 8px 12px;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      font-size: 14px;
     }
 
-    .btn-icon:hover {
-      background: #1f2a44;
-      color: #fff;
-    }
-
-    /* ===== Section ===== */
-    section {
-      max-width: 1200px;
-      margin: 35px auto;
+    .section-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 22px;
-      padding: 0 20px;
+      padding: 35px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    /* ===== Card ===== */
     .card {
       background: #dccb9a;
       border-radius: 16px;
@@ -94,85 +73,21 @@
     .card i {
       font-size: 26px;
       margin-bottom: 12px;
-      color: #1f2a44;
-      transition: 0.3s;
     }
 
-    .card:hover i {
-      transform: scale(1.15);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .card p {
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.9;
-    }
-
-    /* ===== Footer ===== */
-    .footer {
+    button.backup-btn {
       background: #1f2a44;
-      color: #ffffff;
-      padding: 35px 20px 20px;
-      margin-top: 60px;
-      font-family: "Tajawal", sans-serif;
+      color: #fff;
+      margin: 5px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
     }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .footer h4 {
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-
-    .footer a {
-      color: #e5e7eb;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 6px;
-      transition: 0.3s;
-      font-size: 14px;
-    }
-
-    .footer a:hover {
-      color: #dccb9a;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 20px;
-      padding-top: 15px;
-      text-align: center;
-      font-size: 13px;
-      opacity: 0.8;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 600px) {
-      .header h1 {
-        font-size: 18px;
-      }
-
-      section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
+    button.backup-btn:hover {
+      background: #cbb884;
+      color: #1f2a44;
     }
   </style>
 </head>
@@ -181,299 +96,148 @@
   <header class="header">
     <h1>سهل لإدارة الحسابات</h1>
     <div class="header-right">
-      <button class="btn-icon"><i class="fa fa-bell"></i></button>
-      <button class="btn-icon" id="userBtn">
-        <i class="fa fa-user"></i>
-      </button>
-      <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+      <button id="uploadBackupBtn" class="backup-btn">رفع النسخة الاحتياطية</button>
+      <button id="restoreBackupBtn" class="backup-btn">استرجاع النسخة الاحتياطية</button>
+      <button id="logoutBtn" class="backup-btn">تسجيل خروج</button>
     </div>
   </header>
 
-  <section>
+  <section class="section-cards">
     <a class="card" href="pages/customers.html">
       <i class="fa fa-users"></i>
       <h3>الحسابات</h3>
-      <p>إضافة حساب<br />إدارة العملاء<br />كشف حساب<br />أرصدة إفتتاحية</p>
+      <p>إضافة حساب<br>إدارة العملاء<br>كشف حساب</p>
     </a>
-
     <a class="card" href="pages/products.html">
       <i class="fa fa-box"></i>
       <h3>المنتجات</h3>
-      <p>إضافة منتج<br />إدارة المخزون<br />حركة صنف<br />أرصدة إفتتاحية</p>
+      <p>إضافة منتج<br>إدارة المخزون</p>
     </a>
-
     <a class="card" href="pages/sales.html">
       <i class="fa fa-cart-shopping"></i>
       <h3>المبيعات</h3>
-      <p>فاتورة بيع<br />بيع نقدي<br />بيع بالأجل<br />إدارة الفواتير</p>
+      <p>فاتورة بيع<br>بيع نقدي</p>
     </a>
-
     <a class="card" href="pages/purchases.html">
       <i class="fa fa-truck"></i>
       <h3>المشتريات</h3>
-      <p>
-        فاتورة شراء<br />تحديث المخزون<br />تحديث الموردين<br />إدارة الفواتير
-      </p>
+      <p>فاتورة شراء<br>تحديث المخزون</p>
     </a>
-
     <a class="card" href="pages/receipts.html">
       <i class="fa fa-hand-holding-dollar"></i>
       <h3>القبض</h3>
-      <p>سند قبض<br />تحصيل ديون<br />تدفقات نقدية<br />إضافة رأس مال</p>
+      <p>سند قبض<br>تحصيل ديون</p>
     </a>
-
-    <a class="card" href="#">
-      <i class="fa fa-money-bill-wave"></i>
-      <h3>الدفع</h3>
-      <p>سند دفع<br />دفع مستحقات<br />تصفية شريك<br />تخفيض رأس مال</p>
-    </a>
-
-    <a class="card" href="pages/income.html">
-      <i class="fa fa-chart-line"></i>
-      <h3>الإيرادات</h3>
-      <p>
-        تسجيل إيراد<br />إيرادات خارجية<br />سجل إيرادات<br />تحديث الأرباح
-      </p>
-    </a>
-
     <a class="card" href="pages/expenses.html">
       <i class="fa fa-receipt"></i>
       <h3>المصروفات</h3>
-      <p>
-        تسجيل مصروف<br />أجور ومرتبات<br />رسوم وإيجارات<br />سلف العاملين
-      </p>
+      <p>تسجيل مصروف<br>أجور ومرتبات</p>
     </a>
-
     <a class="card" href="pages/cash.html">
       <i class="fa fa-vault"></i>
       <h3>الخزينة</h3>
-      <p>
-        رصيد الخزينة<br />حركة النقدية<br />تقارير يومية<br />تقارير شهرية
-      </p>
-    </a>
-
-    <a class="card" href="pages/profit.html">
-      <i class="fa fa-coins"></i>
-      <h3>الأرباح</h3>
-      <p>مجمل الربح<br />صافي الربح<br />تقرير يومي<br />تقرير شهري</p>
-    </a>
-
-    <a class="card" href="pages/dashboard.html">
-      <i class="fa fa-chart-pie"></i>
-      <h3>تقرير الحركة</h3>
-      <p>حركة يومية<br />الربح اليومي<br />الربح الشهري<br />مبيعات اليوم</p>
-    </a>
-
-    <a class="card" href="pages/about.html">
-      <i class="fa fa-headset"></i>
-      <h3>التواصل</h3>
-      <p>عن البرنامج<br />التحديثات<br />الدعم الفني<br />تواصل معنا</p>
+      <p>رصيد الخزينة<br>حركة النقدية</p>
     </a>
   </section>
 
-  <!-- Backup & Restore Buttons -->
-<div id="backupControls" style="display:flex; gap:12px; justify-content:center; margin:30px 0;">
-  <button id="backupBtn" class="btn-action">
-    <i class="fa fa-cloud-arrow-up"></i> رفع النسخة الاحتياطية
-  </button>
-  <button id="restoreBtn" class="btn-action">
-    <i class="fa fa-cloud-arrow-down"></i> استرجاع النسخة الاحتياطية
-  </button>
-</div>
-
-<style>
-  .btn-action {
-    background: #CBB884;
-    color: #1f2a44;
-    border: none;
-    padding: 12px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-
-  .btn-action:hover {
-    background: #1F2A44;
-    color: #CBB884;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  }
-</style>
-
-<script type="module">
-  import { auth, db } from "./firebaseConfig.js"; // لو حطيته في ملف منفصل
-  import { customers, products, sales, purchases, incomes, expenses, receipts, cash, saveData, loadData } from "./data.js";
-  import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-  async function saveBackup() {
-    const user = auth.currentUser;
-    if(!user) return alert("المستخدم غير مسجل الدخول");
-
-    try {
-      await setDoc(doc(db, "backups", user.uid), {
-        timestamp: new Date(),
-        customers,
-        products,
-        sales,
-        purchases,
-        incomes,
-        expenses,
-        receipts,
-        cash
-      });
-      alert("تم رفع النسخة الاحتياطية بنجاح ✅");
-    } catch(e) {
-      console.error(e);
-      alert("حدث خطأ أثناء رفع النسخة الاحتياطية ❌");
-    }
-  }
-
-  async function restoreBackup() {
-    const user = auth.currentUser;
-    if(!user) return alert("المستخدم غير مسجل الدخول");
-
-    try {
-      const docRef = doc(db, "backups", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if(docSnap.exists()){
-        const data = docSnap.data();
-        customers.splice(0, customers.length, ...(data.customers || []));
-        products.splice(0, products.length, ...(data.products || []));
-        sales.splice(0, sales.length, ...(data.sales || []));
-        purchases.splice(0, purchases.length, ...(data.purchases || []));
-        incomes.splice(0, incomes.length, ...(data.incomes || []));
-        expenses.splice(0, expenses.length, ...(data.expenses || []));
-        receipts.splice(0, receipts.length, ...(data.receipts || []));
-        Object.assign(cash, data.cash || { opening:0, income:0, expenses:0 });
-
-        saveData(); // تحديث LocalStorage
-        alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
-      } else {
-        alert("لا توجد نسخة احتياطية على Firebase ⚠️");
-      }
-
-    } catch(e) {
-      console.error(e);
-      alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
-    }
-  }
-
-  document.getElementById("backupBtn").addEventListener("click", saveBackup);
-  document.getElementById("restoreBtn").addEventListener("click", restoreBackup);
-</script>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <div>
-        <h4>سهل لإدارة الحسابات</h4>
-        <a href="#">عن البرنامج</a>
-        <a href="#">التحديثات</a>
-        <a href="#">الدعم الفني</a>
-      </div>
-      <div>
-        <h4>روابط سريعة</h4>
-        <a href="#">المبيعات</a>
-        <a href="#">المشتريات</a>
-        <a href="#">التقارير</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 جميع الحقوق محفوظة | تطوير / علاء ربيع
-    </div>
-  </footer>
-
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  // ======================= Firebase Config =======================
-  const firebaseConfig = {
-    apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
-    authDomain: "accounts-system-47961.firebaseapp.com",
-    projectId: "accounts-system-47961",
-    storageBucket: "accounts-system-47961.firebasestorage.app",
-    messagingSenderId: "164539147206",
-    appId: "1:164539147206:web:8b8267577e1af4622948c7",
-  };
+    /* ===============================
+       Firebase Initialization
+    ================================= */
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+      authDomain: "accounts-system-47961.firebaseapp.com",
+      projectId: "accounts-system-47961",
+      storageBucket: "accounts-system-47961.firebasestorage.app",
+      messagingSenderId: "164539147206",
+      appId: "1:164539147206:web:8b8267577e1af4622948c7",
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-  // نخفي الصفحة لحد ما يتم التحقق
-  document.body.style.display = "none";
+    // اخفاء الصفحة حتى يتم التحقق
+    document.body.style.display = "none";
 
-  // ======================= النسخ الاحتياطي على Firebase =======================
-  async function saveBackup(data) {
-    const user = auth.currentUser;
-    if (!user) return alert("المستخدم غير مسجل الدخول");
-    try {
+    // تحقق من تسجيل الدخول
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.replace("login.html");
+      } else {
+        document.body.style.display = "block";
+      }
+    });
+
+    // تسجيل خروج
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      if (confirm("هل تريد تسجيل الخروج؟")) {
+        signOut(auth).then(() => {
+          window.location.replace("login.html");
+        });
+      }
+    });
+
+    /* ===============================
+       بيانات التطبيق
+    ================================= */
+    let customers = [];
+    let products = [];
+    let sales = [];
+    let purchases = [];
+    let incomes = [];
+    let expenses = [];
+    let receipts = [];
+    let cash = { opening: 0, income: 0, expenses: 0 };
+
+    function getAllAppData() {
+      return { customers, products, sales, purchases, incomes, expenses, receipts, cash };
+    }
+
+    // رفع النسخة الاحتياطية
+    async function uploadBackup() {
+      const user = auth.currentUser;
+      if (!user) return alert("يجب تسجيل الدخول أولاً");
+
+      const data = getAllAppData();
       await setDoc(doc(db, "backups", user.uid), {
         timestamp: new Date(),
-        data: data || {} // ترسل أي بيانات تريد رفعها
+        data
       });
       alert("تم رفع النسخة الاحتياطية بنجاح ✅");
-    } catch (e) {
-      console.error(e);
-      alert("حدث خطأ أثناء رفع النسخة الاحتياطية ❌");
     }
-  }
 
-  async function restoreBackup() {
-    const user = auth.currentUser;
-    if (!user) return alert("المستخدم غير مسجل الدخول");
-    try {
+    // استرجاع النسخة الاحتياطية
+    async function restoreBackup() {
+      const user = auth.currentUser;
+      if (!user) return alert("يجب تسجيل الدخول أولاً");
+
       const docRef = doc(db, "backups", user.uid);
       const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data().data;
-        console.log("تم استرجاع البيانات:", data);
-        alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
-        // هنا ممكن تستخدم البيانات مباشرة في التطبيق
-      } else {
-        alert("لا توجد نسخة احتياطية على Firebase ⚠️");
-      }
-    } catch (e) {
-      console.error(e);
-      alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
+
+      if (!docSnap.exists()) return alert("لا توجد نسخة احتياطية");
+
+      const restored = docSnap.data().data;
+      customers = restored.customers || [];
+      products = restored.products || [];
+      sales = restored.sales || [];
+      purchases = restored.purchases || [];
+      incomes = restored.incomes || [];
+      expenses = restored.expenses || [];
+      receipts = restored.receipts || [];
+      cash = restored.cash || { opening: 0, income: 0, expenses: 0 };
+
+      alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
     }
-  }
 
-  // ======================= التحقق من تسجيل الدخول =======================
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.replace("login.html");
-    } else {
-      document.body.style.display = "block";
+    document.getElementById("uploadBackupBtn").addEventListener("click", uploadBackup);
+    document.getElementById("restoreBackupBtn").addEventListener("click", restoreBackup);
 
-      // ربط الأزرار
-      const backupBtn = document.getElementById("backupBtn");
-      const restoreBtn = document.getElementById("restoreBtn");
-      const logoutBtn = document.getElementById("logoutBtn");
-
-      if (backupBtn) backupBtn.onclick = () => saveBackup({ exampleData: "هنا بياناتك" });
-      if (restoreBtn) restoreBtn.onclick = restoreBackup;
-
-      if (logoutBtn) {
-        logoutBtn.onclick = () => {
-          if (confirm("هل تريد تسجيل الخروج؟")) {
-            signOut(auth).then(() => {
-              window.location.replace("login.html");
-            });
-          }
-        };
-      }
-    }
-  });
-</script>
+  </script>
 </body>
 
 </html>
