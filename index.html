@@ -272,7 +272,7 @@
   </section>
 
   <!-- Backup & Restore Buttons -->
-  <div id="backupControls" style="display: flex; gap: 12px; justify-content: center; margin: 30px 0">
+  <div id="backupControls" style="display:flex; gap:12px; justify-content:center; margin:30px 0;">
     <button id="backupBtn" class="btn-action">
       <i class="fa fa-cloud-arrow-up"></i> رفع النسخة الاحتياطية
     </button>
@@ -283,7 +283,7 @@
 
   <style>
     .btn-action {
-      background: #cbb884;
+      background: #CBB884;
       color: #1f2a44;
       border: none;
       padding: 12px 20px;
@@ -299,8 +299,8 @@
     }
 
     .btn-action:hover {
-      background: #1f2a44;
-      color: #cbb884;
+      background: #1F2A44;
+      color: #CBB884;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
@@ -308,23 +308,8 @@
 
   <script type="module">
     import { auth, db } from "./firebaseConfig.js"; // لو حطيته في ملف منفصل
-    import {
-      customers,
-      products,
-      sales,
-      purchases,
-      incomes,
-      expenses,
-      receipts,
-      cash,
-      saveData,
-      loadData,
-    } from "./data.js";
-    import {
-      doc,
-      setDoc,
-      getDoc,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { customers, products, sales, purchases, incomes, expenses, receipts, cash, saveData, loadData } from "./data.js";
+    import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
     async function saveBackup() {
       const user = auth.currentUser;
@@ -340,7 +325,7 @@
           incomes,
           expenses,
           receipts,
-          cash,
+          cash
         });
         alert("تم رفع النسخة الاحتياطية بنجاح ✅");
       } catch (e) {
@@ -366,28 +351,22 @@
           incomes.splice(0, incomes.length, ...(data.incomes || []));
           expenses.splice(0, expenses.length, ...(data.expenses || []));
           receipts.splice(0, receipts.length, ...(data.receipts || []));
-          Object.assign(
-            cash,
-            data.cash || { opening: 0, income: 0, expenses: 0 },
-          );
+          Object.assign(cash, data.cash || { opening: 0, income: 0, expenses: 0 });
 
           saveData(); // تحديث LocalStorage
           alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
         } else {
           alert("لا توجد نسخة احتياطية على Firebase ⚠️");
         }
+
       } catch (e) {
         console.error(e);
         alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
       }
     }
 
-    document
-      .getElementById("backupBtn")
-      .addEventListener("click", saveBackup);
-    document
-      .getElementById("restoreBtn")
-      .addEventListener("click", restoreBackup);
+    document.getElementById("backupBtn").addEventListener("click", saveBackup);
+    document.getElementById("restoreBtn").addEventListener("click", restoreBackup);
   </script>
 
   <footer class="footer">
@@ -412,17 +391,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import {
-      getFirestore,
-      doc,
-      setDoc,
-      getDoc,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
     // ======================= Firebase Config =======================
     const firebaseConfig = {
@@ -448,7 +418,7 @@
       try {
         await setDoc(doc(db, "backups", user.uid), {
           timestamp: new Date(),
-          data: data || {}, // ترسل أي بيانات تريد رفعها
+          data: data || {} // ترسل أي بيانات تريد رفعها
         });
         alert("تم رفع النسخة الاحتياطية بنجاح ✅");
       } catch (e) {
@@ -460,32 +430,17 @@
     async function restoreBackup() {
       const user = auth.currentUser;
       if (!user) return alert("المستخدم غير مسجل الدخول");
-
       try {
         const docRef = doc(db, "backups", user.uid);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           const data = docSnap.data().data;
-
-          // نسخ البيانات في متغيرات التطبيق
-          customers.splice(0, customers.length, ...(data.customers || []));
-          products.splice(0, products.length, ...(data.products || []));
-          sales.splice(0, sales.length, ...(data.sales || []));
-          purchases.splice(0, purchases.length, ...(data.purchases || []));
-          incomes.splice(0, incomes.length, ...(data.incomes || []));
-          expenses.splice(0, expenses.length, ...(data.expenses || []));
-          receipts.splice(0, receipts.length, ...(data.receipts || []));
-          Object.assign(cash, data.cash || { opening: 0, income: 0, expenses: 0 });
-
-          // لو عايز تحدث LocalStorage
-          saveData();
-
+          console.log("تم استرجاع البيانات:", data);
           alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
+          // هنا ممكن تستخدم البيانات مباشرة في التطبيق
         } else {
           alert("لا توجد نسخة احتياطية على Firebase ⚠️");
         }
-
       } catch (e) {
         console.error(e);
         alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
@@ -504,18 +459,7 @@
         const restoreBtn = document.getElementById("restoreBtn");
         const logoutBtn = document.getElementById("logoutBtn");
 
-        if (backupBtn)
-          backupBtn.onclick = () =>
-            saveBackup({
-              customers,
-              products,
-              sales,
-              purchases,
-              incomes,
-              expenses,
-              receipts,
-              cash,
-            });
+        if (backupBtn) backupBtn.onclick = () => saveBackup({ exampleData: "بلح الشام" });
         if (restoreBtn) restoreBtn.onclick = restoreBackup;
 
         if (logoutBtn) {
