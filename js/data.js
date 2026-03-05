@@ -30,9 +30,6 @@ function saveData() {
   localStorage.setItem("cash", JSON.stringify(cash));
   localStorage.setItem("receipts", JSON.stringify(receipts));
 
-  // Optional: تجميع كل البيانات في appData
-  const appData = { customers, products, sales, purchases, incomes, expenses, receipts, cash };
-  localStorage.setItem("appData", JSON.stringify(appData));
 }
 
 function loadData() {
