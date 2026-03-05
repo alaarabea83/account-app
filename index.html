@@ -174,6 +174,137 @@
         text-align: center;
       }
     }
+
+    /* الخلفية */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 9999;
+    }
+
+    /* اظهار المودال */
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* الصندوق */
+    .modal-box {
+      background: #1e293b;
+      padding: 25px 35px;
+      border-radius: 18px;
+      text-align: center;
+      color: #fff;
+      min-width: 260px;
+      transform: scale(0.8);
+      transition: 0.3s ease;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    /* الأيقونة */
+    .modal-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    /* النص */
+    .modal-text {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .confirm-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 9999;
+    }
+
+    .confirm-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .confirm-box {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 20px;
+      width: 300px;
+      text-align: center;
+      color: #fff;
+      transform: scale(0.8);
+      transition: 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .confirm-overlay.active .confirm-box {
+      transform: scale(1);
+    }
+
+    .confirm-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .confirm-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .confirm-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-cancel,
+    .btn-confirm {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-cancel {
+      background: #334155;
+      color: #fff;
+    }
+
+    .btn-cancel:hover {
+      background: #475569;
+    }
+
+    .btn-confirm {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .btn-confirm:hover {
+      background: #b02a37;
+    }
   </style>
 </head>
 
@@ -185,7 +316,9 @@
       <button class="btn-icon" id="userBtn">
         <i class="fa fa-user"></i>
       </button>
-      <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+      <button id="logoutBtn" class="btn-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
     </div>
   </header>
 
@@ -326,143 +459,200 @@
     </div>
   </footer>
 
+  <!-- Modern Modal -->
+  <div id="statusModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon" id="modalIcon">✔</div>
+      <div class="modal-text" id="modalText">تمت العملية بنجاح</div>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="confirmModal" class="confirm-overlay">
+    <div class="confirm-box">
+      <div class="confirm-icon">🔐</div>
+      <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
+
+      <div class="confirm-actions">
+        <button id="cancelLogout" class="btn-cancel">إلغاء</button>
+        <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  // بياناتك الأساسية
-  let customers = [];
-  let products = [];
-  let sales = [];
-  let purchases = [];
-  let incomes = [];
-  let expenses = [];
-  let receipts = [];
-  let cash = { opening:0, income:0, expenses:0 };
+    // بياناتك الأساسية
+    let customers = [];
+    let products = [];
+    let sales = [];
+    let purchases = [];
+    let incomes = [];
+    let expenses = [];
+    let receipts = [];
+    let cash = { opening: 0, income: 0, expenses: 0 };
 
-  function saveData() {
-    localStorage.setItem("customers", JSON.stringify(customers));
-    localStorage.setItem("products", JSON.stringify(products));
-    localStorage.setItem("sales", JSON.stringify(sales));
-    localStorage.setItem("purchases", JSON.stringify(purchases));
-    localStorage.setItem("incomes", JSON.stringify(incomes));
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-    localStorage.setItem("cash", JSON.stringify(cash));
-    localStorage.setItem("receipts", JSON.stringify(receipts));
-  }
-
-  function loadData() {
-    const c = localStorage.getItem("customers");
-    const p = localStorage.getItem("products");
-    const s = localStorage.getItem("sales");
-    const pu = localStorage.getItem("purchases");
-    const i = localStorage.getItem("incomes");
-    const e = localStorage.getItem("expenses");
-    const ca = localStorage.getItem("cash");
-    const r = localStorage.getItem("receipts");
-
-    customers = c ? JSON.parse(c) : [];
-    products = p ? JSON.parse(p) : [];
-    sales = s ? JSON.parse(s) : [];
-    purchases = pu ? JSON.parse(pu) : [];
-    incomes = i ? JSON.parse(i) : [];
-    expenses = e ? JSON.parse(e) : [];
-    receipts = r ? JSON.parse(r) : [];
-    cash = ca ? JSON.parse(ca) : { opening:0, income:0, expenses:0 };
-  }
-
-  // ======================= Firebase =======================
-  const firebaseConfig = {
-    apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
-    authDomain: "accounts-system-47961.firebaseapp.com",
-    projectId: "accounts-system-47961",
-    storageBucket: "accounts-system-47961.firebasestorage.app",
-    messagingSenderId: "164539147206",
-    appId: "1:164539147206:web:8b8267577e1af4622948c7",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // نخفي الصفحة لحد ما يتم التحقق
-  document.body.style.display = "none";
-
-  // ======================= النسخ الاحتياطي =======================
-  async function saveBackup() {
-    const user = auth.currentUser;
-    if (!user) return alert("المستخدم غير مسجل الدخول");
-    try {
-      await setDoc(doc(db, "backups", user.uid), {
-        timestamp: new Date(),
-        customers, products, sales, purchases, incomes, expenses, receipts, cash
-      });
-      alert("تم رفع النسخة الاحتياطية بنجاح ✅");
-    } catch (e) {
-      console.error(e);
-      alert("حدث خطأ أثناء رفع النسخة الاحتياطية ❌");
+    function saveData() {
+      localStorage.setItem("customers", JSON.stringify(customers));
+      localStorage.setItem("products", JSON.stringify(products));
+      localStorage.setItem("sales", JSON.stringify(sales));
+      localStorage.setItem("purchases", JSON.stringify(purchases));
+      localStorage.setItem("incomes", JSON.stringify(incomes));
+      localStorage.setItem("expenses", JSON.stringify(expenses));
+      localStorage.setItem("cash", JSON.stringify(cash));
+      localStorage.setItem("receipts", JSON.stringify(receipts));
     }
-  }
 
-  async function restoreBackup() {
-    const user = auth.currentUser;
-    if (!user) return alert("المستخدم غير مسجل الدخول");
-    try {
-      const docRef = doc(db, "backups", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        customers = data.customers || [];
-        products = data.products || [];
-        sales = data.sales || [];
-        purchases = data.purchases || [];
-        incomes = data.incomes || [];
-        expenses = data.expenses || [];
-        receipts = data.receipts || [];
-        cash = data.cash || { opening:0, income:0, expenses:0 };
-        saveData();
-        alert("تم استرجاع النسخة الاحتياطية بنجاح ✅");
-      } else {
-        alert("لا توجد نسخة احتياطية على Firebase ⚠️");
+    function loadData() {
+      const c = localStorage.getItem("customers");
+      const p = localStorage.getItem("products");
+      const s = localStorage.getItem("sales");
+      const pu = localStorage.getItem("purchases");
+      const i = localStorage.getItem("incomes");
+      const e = localStorage.getItem("expenses");
+      const ca = localStorage.getItem("cash");
+      const r = localStorage.getItem("receipts");
+
+      customers = c ? JSON.parse(c) : [];
+      products = p ? JSON.parse(p) : [];
+      sales = s ? JSON.parse(s) : [];
+      purchases = pu ? JSON.parse(pu) : [];
+      incomes = i ? JSON.parse(i) : [];
+      expenses = e ? JSON.parse(e) : [];
+      receipts = r ? JSON.parse(r) : [];
+      cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
+    }
+
+    // ======================= Firebase =======================
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+      authDomain: "accounts-system-47961.firebaseapp.com",
+      projectId: "accounts-system-47961",
+      storageBucket: "accounts-system-47961.firebasestorage.app",
+      messagingSenderId: "164539147206",
+      appId: "1:164539147206:web:8b8267577e1af4622948c7",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // نخفي الصفحة لحد ما يتم التحقق
+    document.body.style.display = "none";
+
+    // ======================= النسخ الاحتياطي =======================
+    async function saveBackup() {
+      const user = auth.currentUser;
+      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+      try {
+        await setDoc(doc(db, "backups", user.uid), {
+          timestamp: new Date(),
+          customers, products, sales, purchases, incomes, expenses, receipts, cash
+        });
+        showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
+      } catch (e) {
+        console.error(e);
+        showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
       }
-    } catch (e) {
-      console.error(e);
-      alert("حدث خطأ أثناء استرجاع النسخة الاحتياطية ❌");
     }
-  }
 
-  // ======================= التحقق من تسجيل الدخول =======================
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      window.location.replace("login.html");
-    } else {
-      // المستخدم موجود، نحمّل البيانات المحلية
-      loadData();
-      document.body.style.display = "block";
+    async function restoreBackup() {
+      const user = auth.currentUser;
+      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+      try {
+        const docRef = doc(db, "backups", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          customers = data.customers || [];
+          products = data.products || [];
+          sales = data.sales || [];
+          purchases = data.purchases || [];
+          incomes = data.incomes || [];
+          expenses = data.expenses || [];
+          receipts = data.receipts || [];
+          cash = data.cash || { opening: 0, income: 0, expenses: 0 };
+          saveData();
+          showModal("تم استرجاع النسخة الاحتياطية بنجاح", "success");
+        } else {
+          showModal("لا توجد نسخة احتياطية على Firebase", "warning");
+        }
+      } catch (e) {
+        console.error(e);
+        showModal("حدث خطأ أثناء استرجاع النسخة الاحتياطية", "error");
+      }
+    }
 
-      // نربط الأزرار
-      document.getElementById("backupBtn").onclick = saveBackup;
-      document.getElementById("restoreBtn").onclick = restoreBackup;
+    // ======================= التحقق من تسجيل الدخول =======================
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.replace("login.html");
+      } else {
+        // المستخدم موجود، نحمّل البيانات المحلية
+        loadData();
+        document.body.style.display = "block";
 
-      // حفظ النسخة تلقائي كل 15 دقيقة
-      setInterval(saveBackup, 15 * 60 * 1000);
+        // نربط الأزرار
+        document.getElementById("backupBtn").onclick = saveBackup;
+        document.getElementById("restoreBtn").onclick = restoreBackup;
 
-      // تسجيل الخروج
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (logoutBtn) {
+        // حفظ النسخة تلقائي كل 15 دقيقة
+        setInterval(saveBackup, 15 * 60 * 1000);
+
+        // تسجيل الخروج
+        const confirmModal = document.getElementById("confirmModal");
+        const confirmBtn = document.getElementById("confirmLogout");
+        const cancelBtn = document.getElementById("cancelLogout");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        // فتح المودال
         logoutBtn.onclick = () => {
-          if (confirm("هل تريد تسجيل الخروج؟")) {
-            signOut(auth).then(() => {
-              window.location.replace("login.html");
-            });
-          }
+          confirmModal.classList.add("active");
+        };
+
+        // إغلاق عند إلغاء
+        cancelBtn.onclick = () => {
+          confirmModal.classList.remove("active");
+        };
+
+        // تنفيذ تسجيل الخروج
+        confirmBtn.onclick = () => {
+          signOut(auth).then(() => {
+            window.location.replace("login.html");
+          });
         };
       }
-    }
-  });
+    });
 
-</script>
+    function showModal(message, type = "success") {
+      const modal = document.getElementById("statusModal");
+      const text = document.getElementById("modalText");
+      const icon = document.getElementById("modalIcon");
+
+      text.textContent = message;
+
+      if (type === "success") {
+        icon.textContent = "✔";
+        icon.style.color = "#22c55e";
+      } else if (type === "error") {
+        icon.textContent = "✖";
+        icon.style.color = "#ef4444";
+      } else {
+        icon.textContent = "⚠";
+        icon.style.color = "#f59e0b";
+      }
+
+      modal.classList.add("active");
+
+      setTimeout(() => {
+        modal.classList.remove("active");
+      }, 2000); // يختفي بعد ثانيتين
+    }
+
+  </script>
 </body>
 
 </html>
