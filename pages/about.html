@@ -1,130 +1,211 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتصل بنا</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>سهل لإدارة الحسابات</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "cairo", sans-serif;
-    }
+    <style>
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: white;
+      }
 
-    body {
-      margin: 0;
-      background: #111827;
-      color: #ecf0f1;
-    }
+      /* header */
 
-    .header {
-      background: #111827;
-      /* أزرق عصري */
-      color: white;
-      backdrop-filter: blur(12px);
-      padding: 10px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: 700;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+      header {
+        background: #cbb884;
+        color: #1e293b;
+        text-align: center;
+        padding: 18px;
+        font-size: 20px;
+        font-weight: bold;
+      }
 
-    .breadcrumb {
-      background: #111827;
-      padding: 12px 20px;
-      max-width: 100%;
-      text-align: center;
-    }
+      /* container */
 
-    .breadcrumb a {
-      color: yellow;
-      text-decoration: none;
-    }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+      }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      margin-top: 25px;
-      margin-bottom: 25px;
-      padding: 20px;
-      border-radius: 12px;
-      background: #111827;
-    }
+      /* card */
 
-    section {
-      display: block;
-      text-align: center;
-      color: #fff;
-      font-size: small;
-      max-width: 1000px;
-      background: #1F2937;
-      padding: 20px;
-      border-radius: 12px;
-    }
+      .contact-card {
+        background: #2c3e50;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
 
-    .whatsapp-footer {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-      width: 200px;
-      height: 42px;
-      background: #21618c;
-      color: #fff;
-      font-size: 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+      /* title */
 
-    .whatsapp-footer:hover {
-      background: #158f46;
-    }
-  </style>
-</head>
+      .contact-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: #cbb884;
+      }
 
-<body>
-  <header class="header">
-    سهل لإدارة الحسابات
-  </header>
+      /* inputs */
 
-  <nav class="breadcrumb">
-    <a href="../index.html">الرئيسية</a> /
-    <span class="active">التواصل</span>
-  </nav>
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        box-sizing: border-box;
+      }
 
-  <div class="container">
-    <section>
-      <p>
-        تطبيق "سهل لإدارة الحسابات" يساعدك على إدارة العملاء، المنتجات،
-        المبيعات، المشتريات، المقبوضات، المصروفات، والخزنة بكل سهولة.
-      </p>
-      <p>
-        هدفنا تقديم حلول بسيطة وفعّالة لإدارة الحسابات والمبيعات، لمساعدة
-        أصحاب الأعمال على تنظيم بياناتهم واتخاذ قرارات أفضل بسهولة ودقة. نسعى
-        دائمًا إلى تطوير أدواتنا لتواكب احتياجات المستخدمين وتسهّل عليهم إدارة
-        أعمالهم اليومية.
-      </p>
-      <h6>الإصدار: 1.0.0</h6>
-      <h5>تطوير: علاء </h5>
-      <h4>لتفعيل الإشتراك يمكنك مراسلتنا عن طريق واتس آب</h4>
-      <a href="https://wa.me/201019065615" class="whatsapp-footer" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"> إضغط للتواصل </i>
-      </a>
-    </section>
-  </div>
-</body>
+      /* textarea */
 
+      textarea {
+        resize: none;
+        height: 120px;
+      }
+
+      /* button */
+
+      .send-btn {
+        width: 100%;
+        padding: 12px;
+        background: #cbb884;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .send-btn:hover {
+        background: #1f2a44;
+        color: white;
+      }
+
+      /* contact info */
+
+      .contact-info {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .contact-info p {
+        margin: 8px 0;
+        color: #ccc;
+      }
+
+      /* whatsapp button */
+
+      .whatsapp-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #25d366;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .whatsapp-btn:hover {
+        background: #1da851;
+      }
+
+      .whatsapp-btn i {
+        margin-left: 8px;
+      }
+
+      /* footer */
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        padding: 15px;
+        background: #0f172a;
+        color: #aaa;
+        border-top: 1px solid #cbb884;
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        z-index: 1000;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      input:focus,
+      textarea:focus {
+        border: 2px solid #cbb884;
+        box-shadow: 0 0 10px #cbb884;
+        background: #1e293b;
+        transition: 0.3s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <i class="fa-solid fa-headset"></i>
+      اتصل بنا
+    </header>
+
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-title">نحن هنا لمساعدتك</div>
+
+        <form>
+          <input type="text" placeholder="الاسم" />
+
+          <input type="email" placeholder="البريد الإلكتروني" />
+
+          <textarea placeholder="اكتب رسالتك هنا"></textarea>
+
+          <button class="send-btn">إرسال الرسالة</button>
+        </form>
+
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> alaarabea83@gmail.com</p>
+
+          <p><i class="fa-solid fa-phone"></i> 01019065615</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2026 جميع الحقوق محفوظة</footer>
+
+    <a href="https://wa.me/201019065615" target="_blank" class="whatsapp-float">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </body>
 </html>
