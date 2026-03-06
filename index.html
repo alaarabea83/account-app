@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #f6f1e3;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
       color: #1f2a44;
     }
 
@@ -28,11 +28,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 25px;
+      padding: 15px 5px;
       position: sticky;
       top: 0;
-      background: #cbb884;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: #CBB884;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
       z-index: 100;
     }
 
@@ -75,12 +75,12 @@
 
     /* ===== Card ===== */
     .card {
-      background: #dccb9a;
+      background: #2c3e50;
       border-radius: 16px;
       padding: 28px 18px;
       text-align: center;
       text-decoration: none;
-      color: #1f2a44;
+      color: #fff;
       transition: 0.35s ease;
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
     }
@@ -88,13 +88,13 @@
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-      background: #e5d6a8;
+      background: #2c3e50;
     }
 
     .card i {
       font-size: 26px;
       margin-bottom: 12px;
-      color: #1f2a44;
+      color: #CBB884;
       transition: 0.3s;
     }
 
@@ -305,12 +305,66 @@
     .btn-confirm:hover {
       background: #b02a37;
     }
+
+    /* زرار النسخ الاحتياطي */
+    #backupControls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 30px 0;
+      /* هامش فوق وتحت */
+      padding: 0 15px;
+      /* هامش 15px من الشمال واليمين */
+      box-sizing: border-box;
+      /* عشان الـ padding يتحسب مع العرض */
+    }
+
+    .btn-action {
+      background: #CBB884;
+      color: #1f2a44;
+      border: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      flex: 1 1 auto;
+      /* يخلي الزرار يتمدد بشكل متساوي داخل الحاوية */
+      max-width: 300px;
+      /* يمنع الزرار يبقى كبير جدًا على الشاشات الكبيرة */
+    }
+
+    .btn-action:hover {
+      background: #1F2A44;
+      color: #CBB884;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Responsive للموبايل */
+    @media (max-width: 600px) {
+      #backupControls {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn-action {
+        width: 100%;
+        /* ياخد كامل عرض الحاوية بعد البادينج */
+      }
+    }
   </style>
 </head>
 
 <body>
   <header class="header">
-    <h1>نظام الإدارة المالية</h1>
+    <h1>نظام الحسابات والفواتير</h1>
     <div class="header-right">
       <button class="btn-icon"><i class="fa fa-bell"></i></button>
       <button id="logoutBtn" class="btn-icon">
@@ -397,7 +451,7 @@
     <a class="card" href="pages/about.html">
       <i class="fa fa-headset"></i>
       <h3>التواصل</h3>
-      <p>عن البرنامج<br />التحديثات<br />الدعم الفني<br />تواصل معنا</p>
+      <p>عن النظام<br />التحديثات<br />الدعم الفني<br />تواصل معنا</p>
     </a>
   </section>
 
@@ -411,67 +465,11 @@
     </button>
   </div>
 
-  <style>
-    /* زرار النسخ الاحتياطي */
-    #backupControls {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin: 30px 0;
-      /* هامش فوق وتحت */
-      padding: 0 15px;
-      /* هامش 15px من الشمال واليمين */
-      box-sizing: border-box;
-      /* عشان الـ padding يتحسب مع العرض */
-    }
-
-    .btn-action {
-      background: #CBB884;
-      color: #1f2a44;
-      border: none;
-      padding: 12px 20px;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      flex: 1 1 auto;
-      /* يخلي الزرار يتمدد بشكل متساوي داخل الحاوية */
-      max-width: 300px;
-      /* يمنع الزرار يبقى كبير جدًا على الشاشات الكبيرة */
-    }
-
-    .btn-action:hover {
-      background: #1F2A44;
-      color: #CBB884;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Responsive للموبايل */
-    @media (max-width: 600px) {
-      #backupControls {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .btn-action {
-        width: 100%;
-        /* ياخد كامل عرض الحاوية بعد البادينج */
-      }
-    }
-  </style>
-
   <footer class="footer">
     <div class="footer-content">
       <div>
-        <h4>نظام الإدارة المالية</h4>
-        <a href="#">عن البرنامج</a>
+        <h4>نظام الحسابات والفواتير</h4>
+        <a href="#">عن النظام</a>
         <a href="#">التحديثات</a>
         <a href="#">الدعم الفني</a>
       </div>
