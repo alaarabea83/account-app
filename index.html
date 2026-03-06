@@ -28,7 +28,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 25px;
+      padding: 20px;
       position: sticky;
       top: 0;
       background: #1e293b;
@@ -47,6 +47,12 @@
       font-size: 18px;
       color: #cbb884;
     }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #cbb884;
+      }
 
     /* ===== Section ===== */
     section {
@@ -360,7 +366,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f3e9c8;
+      background: #cbb884;
       border-radius: 10px;
       color: #333;
       font-size: 17px;
@@ -373,27 +379,13 @@
       transform: translateY(-2px);
     }
 
-    /* عداد الاشعارات */
-
-    .badge {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      background: #e74c3c;
-      color: #fff;
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
     /* زر الخروج */
 
     .logout-btn {
       width: 38px;
       height: 38px;
       border: none;
-      background: #f3e9c8;
+      background: #cbb884;
       border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
@@ -411,14 +403,14 @@
 
 <body>
   <header class="header">
-    <h1>نظام الحسابات والفواتير</h1>
+    <div class="logo">
+        <i class="fa-solid fa-calculator"></i>
+        سهل للحسابات
+      </div>
 
     <div class="header-right">
-      <!-- Notifications -->
       <a href="./pages/notification.html" class="notification-btn">
         <i class="fa-solid fa-bell"></i>
-
-        <span class="badge" id="notificationCount">0</span>
       </a>
 
       <!-- Logout -->
@@ -745,9 +737,6 @@
         modal.classList.remove("active");
       }, 2000); // يختفي بعد ثانيتين
     }
-
-    let count = localStorage.getItem("notificationCount") || 0;
-    document.getElementById("notificationCount").textContent = count;
   </script>
 </body>
 

@@ -1,338 +1,489 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>سهل لإدارة الحسابات</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <title>سهل لإدارة الحسابات</title>
 
-    <style>
-      body {
-        margin: 0;
-        font-family: "Cairo", sans-serif;
-        background: #0f172a;
-        color: white;
-      }
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-      /* header */
+  <style>
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: #0f172a;
+      color: white;
+    }
 
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        background: #1e293b;
-        border-bottom: 1px solid #cbb884;
-      }
+    /* header */
 
-      .logo {
-        font-size: 22px;
-        font-weight: bold;
-        color: #cbb884;
-      }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #1e293b;
+      border-bottom: 1px solid #cbb884;
+    }
 
-      .nav a {
-        margin-left: 20px;
-        text-decoration: none;
-        color: #ddd;
-        font-size: 14px;
-      }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #cbb884;
+    }
 
-      .nav a:hover {
-        color: #cbb884;
-      }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-      /* hero */
+    /* زر الاشعارات */
 
-      .hero {
-        text-align: center;
-        padding: 80px 20px;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-      }
+    .notification-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #cbb884;
+      border-radius: 10px;
+      color: #333;
+      font-size: 17px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
+    .notification-btn:hover {
+      background: #e6d8b5;
+      transform: translateY(-2px);
+    }
+
+    /* زر الخروج */
+
+    .logout-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: #cbb884;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #333;
+    }
+
+    .logout-btn:hover {
+      background: #e74c3c;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* hero */
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #bbb;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .hero-btn {
+      background: #cbb884;
+      color: #1f2a44;
+      padding: 14px 25px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 8px;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .hero-btn:hover {
+      background: white;
+    }
+
+    /* section */
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 40px;
+      color: #cbb884;
+    }
+
+    /* features */
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .feature {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature i {
+      font-size: 28px;
+      color: #cbb884;
+      margin-bottom: 10px;
+    }
+
+    /* sections */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background: #253447;
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 22px;
+      color: #cbb884;
+      margin-bottom: 10px;
+    }
+
+    /* footer */
+
+    footer {
+      background: #020617;
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      border-top: 1px solid #cbb884;
+    }
+
+    /* mobile */
+
+    @media (max-width: 700px) {
       .hero h1 {
-        font-size: 36px;
-        margin-bottom: 10px;
+        font-size: 26px;
       }
+    }
 
-      .hero p {
-        color: #bbb;
-        font-size: 16px;
-        margin-bottom: 30px;
-      }
+    .confirm-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 9999;
+    }
 
-      .hero-btn {
-        background: #cbb884;
-        color: #1f2a44;
-        padding: 14px 25px;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: bold;
-        margin: 8px;
-        display: inline-block;
-        transition: 0.3s;
-      }
+    .confirm-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
-      .hero-btn:hover {
-        background: white;
-      }
+    .confirm-box {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 20px;
+      width: 300px;
+      text-align: center;
+      color: #fff;
+      transform: scale(0.8);
+      transition: 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
 
-      /* section */
+    .confirm-overlay.active .confirm-box {
+      transform: scale(1);
+    }
 
-      .section {
-        max-width: 1100px;
-        margin: auto;
-        padding: 60px 20px;
-      }
+    .confirm-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
 
-      .title {
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 40px;
-        color: #cbb884;
-      }
+    .confirm-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
 
-      /* features */
+    .confirm-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
 
-      .features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-      }
+    .btn-cancel,
+    .btn-confirm {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
 
-      .feature {
-        background: #1e293b;
-        padding: 25px;
-        border-radius: 14px;
-        text-align: center;
-        transition: 0.3s;
-      }
+    .btn-cancel {
+      background: #334155;
+      color: #fff;
+    }
 
-      .feature:hover {
-        transform: translateY(-5px);
-      }
+    .btn-cancel:hover {
+      background: #475569;
+    }
 
-      .feature i {
-        font-size: 28px;
-        color: #cbb884;
-        margin-bottom: 10px;
-      }
+    .btn-confirm {
+      background: #dc3545;
+      color: #fff;
+    }
 
-      /* sections */
+    .btn-confirm:hover {
+      background: #b02a37;
+    }
+  </style>
+</head>
 
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 18px;
-      }
-
-      .card {
-        background: #1e293b;
-        padding: 20px;
-        border-radius: 12px;
-        text-align: center;
-        transition: 0.3s;
-      }
-
-      .card:hover {
-        background: #253447;
-        transform: translateY(-5px);
-      }
-
-      .card i {
-        font-size: 22px;
-        color: #cbb884;
-        margin-bottom: 10px;
-      }
-
-      /* whatsapp */
-
-      .support {
-        text-align: center;
-        padding: 60px 20px;
-      }
-
-      .whatsapp {
-        background: #1da851;
-        color: white;
-        padding: 14px 25px;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      .whatsapp:hover {
-        background: #25d366;
-      }
-
-      /* footer */
-
-      footer {
-        background: #020617;
-        text-align: center;
-        padding: 20px;
-        color: #888;
-        border-top: 1px solid #cbb884;
-      }
-
-      /* mobile */
-
-      @media (max-width: 700px) {
-        .hero h1 {
-          font-size: 26px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <div class="logo">
-        <i class="fa-solid fa-calculator"></i>
-        سهل للحسابات
-      </div>
-
-      <div class="nav">
-        <a href="#">المميزات</a>
-        <a href="#">الأقسام</a>
-        <a href="#">الدعم</a>
-      </div>
-    </header>
-
-    <section class="hero">
-      <h1>نظام إدارة الحسابات والفواتير</h1>
-
-      <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع</p>
-
-      <a class="hero-btn" href="index.html">
-        <i class="fa-solid fa-play"></i>
-        دخول النظام
+<body>
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-calculator"></i>
+      سهل للحسابات
+    </div>
+    <div class="header-right">
+      <!-- Notifications -->
+      <a href="./pages/notification.html" class="notification-btn">
+        <i class="fa-solid fa-bell"></i>
       </a>
 
-      <a class="hero-btn" href="https://wa.me/201019065615" target="_blank">
-        <iz class="fa-brands fa-whatsapp"></iz>
-        الدعم الفني
-      </a>
-    </section>
+      <!-- Logout -->
+      <button id="logoutBtn" class="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  </header>
 
-    <section class="section">
-      <div class="title">مميزات النظام</div>
+  <section class="hero">
+    <h1>نظام إدارة الحسابات والفواتير</h1>
 
-      <div class="features">
-        <div class="feature">
-          <i class="fa-solid fa-users"></i>
-          <h3>إدارة العملاء</h3>
-          <p>تسجيل العملاء وكشف الحساب</p>
-        </div>
+    <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع</p>
 
-        <div class="feature">
-          <i class="fa-solid fa-box"></i>
-          <h3>إدارة المنتجات</h3>
-          <p>متابعة المخزون والأسعار</p>
-        </div>
+    <a class="hero-btn" href="index.html">
+      <i class="fa-solid fa-play"></i>
+      دخول النظام
+    </a>
 
-        <div class="feature">
-          <i class="fa-solid fa-file-invoice"></i>
-          <h3>فواتير البيع</h3>
-          <p>إنشاء وإدارة الفواتير</p>
-        </div>
+    <a class="hero-btn" href="https://wa.me/201019065615" target="_blank">
+      <iz class="fa-brands fa-whatsapp"></iz>
+      الدعم الفني
+    </a>
+  </section>
 
-        <div class="feature">
-          <i class="fa-solid fa-chart-line"></i>
-          <h3>تقارير الأرباح</h3>
-          <p>معرفة الأرباح اليومية والشهرية</p>
-        </div>
+  <section class="section">
+    <div class="title">مميزات النظام</div>
 
-        <div class="feature">
-          <i class="fa-solid fa-vault"></i>
-          <h3>إدارة الخزينة</h3>
-          <p>متابعة حركة النقدية</p>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-vault"></i>
-          <h3>إدارة الخزينة</h3>
-          <p>متابعة حركة النقدية</p>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-vault"></i>
-          <h3>إدارة الخزينة</h3>
-          <p>متابعة حركة النقدية</p>
-        </div>
-
-        <div class="feature">
-          <i class="fa-solid fa-cloud"></i>
-          <h3>نسخ احتياطي</h3>
-          <p>حفظ البيانات على Firebase</p>
-        </div>
+    <div class="features">
+      <div class="feature">
+        <i class="fa-solid fa-users"></i>
+        <h3>إدارة العملاء</h3>
+        <p>تسجيل العملاء وكشف الحساب</p>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="title">أقسام النظام</div>
-
-      <div class="cards">
-        <div class="card">
-          <i class="fa-solid fa-users"></i>
-          <h4>الحسابات</h4>
-        </div>
-
-        <div class="card">
-          <i class="fa-solid fa-box"></i>
-          <h4>المنتجات</h4>
-        </div>
-
-        <div class="card">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <h4>المبيعات</h4>
-        </div>
-
-        <div class="card">
-          <i class="fa-solid fa-truck"></i>
-          <h4>المشتريات</h4>
-        </div>
-
-        <div class="card">
-          <i class="fa-solid fa-receipt"></i>
-          <h4>المصروفات</h4>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-receipt"></i>
-          <h4>المصروفات</h4>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-receipt"></i>
-          <h4>المصروفات</h4>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-receipt"></i>
-          <h4>المصروفات</h4>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-receipt"></i>
-          <h4>المصروفات</h4>
-        </div>
-
-        <div class="card">
-          <i class="fa-solid fa-coins"></i>
-          <h4>الأرباح</h4>
-        </div>
+      <div class="feature">
+        <i class="fa-solid fa-box"></i>
+        <h3>إدارة المنتجات</h3>
+        <p>متابعة المخزون والأسعار</p>
       </div>
-    </section>
 
-    <section class="support">
-      <h2 style="margin-bottom: 20px">تحتاج مساعدة؟</h2>
+      <div class="feature">
+        <i class="fa-solid fa-file-invoice"></i>
+        <h3>فواتير البيع</h3>
+        <p>إنشاء وإدارة الفواتير</p>
+      </div>
 
-      <a class="whatsapp" href="https://wa.me/201019065615" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-        التواصل عبر واتساب
-      </a>
-    </section>
+      <div class="feature">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>تقارير الأرباح</h3>
+        <p>معرفة الأرباح اليومية والشهرية</p>
+      </div>
 
-    <footer>© 2026 جميع الحقوق محفوظة | تطوير علاء ربيع</footer>
-  </body>
+      <div class="feature">
+        <i class="fa-solid fa-vault"></i>
+        <h3>إدارة الخزينة</h3>
+        <p>متابعة حركة النقدية</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-vault"></i>
+        <h3>إدارة الخزينة</h3>
+        <p>متابعة حركة النقدية</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-vault"></i>
+        <h3>إدارة الخزينة</h3>
+        <p>متابعة حركة النقدية</p>
+      </div>
+
+      <div class="feature">
+        <i class="fa-solid fa-cloud"></i>
+        <h3>نسخ احتياطي</h3>
+        <p>حفظ البيانات على Firebase</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="title">أقسام النظام</div>
+
+    <div class="cards">
+      <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h4>الحسابات</h4>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-box"></i>
+        <h4>المنتجات</h4>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h4>المبيعات</h4>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-truck"></i>
+        <h4>المشتريات</h4>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-receipt"></i>
+        <h4>المصروفات</h4>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-receipt"></i>
+        <h4>المصروفات</h4>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-receipt"></i>
+        <h4>المصروفات</h4>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-receipt"></i>
+        <h4>المصروفات</h4>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-receipt"></i>
+        <h4>المصروفات</h4>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-coins"></i>
+        <h4>الأرباح</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="confirmModal" class="confirm-overlay">
+    <div class="confirm-box">
+      <div class="confirm-icon">🔐</div>
+      <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
+
+      <div class="confirm-actions">
+        <button id="cancelLogout" class="btn-cancel">إلغاء</button>
+        <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2026 جميع الحقوق محفوظة | تطوير علاء ربيع</footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+      authDomain: "accounts-system-47961.firebaseapp.com",
+      projectId: "accounts-system-47961",
+      storageBucket: "accounts-system-47961.firebasestorage.app",
+      messagingSenderId: "164539147206",
+      appId: "1:164539147206:web:8b8267577e1af4622948c7",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const confirmModal = document.getElementById("confirmModal");
+    const confirmBtn = document.getElementById("confirmLogout");
+    const cancelBtn = document.getElementById("cancelLogout");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // فتح المودال
+    logoutBtn.onclick = () => {
+      confirmModal.classList.add("active");
+    };
+
+    // إغلاق عند إلغاء
+    cancelBtn.onclick = () => {
+      confirmModal.classList.remove("active");
+    };
+
+    // تنفيذ تسجيل الخروج
+    confirmBtn.onclick = () => {
+      signOut(auth).then(() => {
+        window.location.replace("login.html");
+      }).catch((error) => {
+        alert("حدث خطأ أثناء تسجيل الخروج ❌");
+        console.error(error);
+      });
+    };
+  </script>
+</body>
+
 </html>
