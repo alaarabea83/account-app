@@ -9,18 +9,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #1e293b, #0f172a);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            flex-direction: column;
+            min-height: 100vh;
             color: white;
             margin: 0;
         }
 
+        header {
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            background: #CBB884;
+            color: #1e293b;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            width: 100%;
+            padding: 12px 0;
+            text-align: center;
+            background: #0f172a;
+            font-size: 14px;
+            color: #aaa;
+            border-top: 1px solid #CBB884;
+        }
+
         .box {
+            margin: 15px;
             background: #2c3e50;
             padding: 35px;
             border-radius: 20px;
@@ -131,41 +163,55 @@
 
 <body>
 
-    <div class="box">
+    <header>
+        <i class="fa-solid fa-calculator"></i>
+        نظام الحسابات - MONGEZ
+    </header>
 
-        <div class="logo">
-            <i class="fa-solid fa-chart-line"></i> نظام الحسابات
-        </div>
+    <main>
 
-        <div class="tabs">
-            <button id="loginTab" class="active">تسجيل الدخول</button>
-            <button id="registerTab">إنشاء حساب</button>
-        </div>
+        <div class="box">
 
-        <!-- Login -->
-        <form id="loginForm" class="active">
-            <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
-            <input type="password" id="loginPassword" placeholder="كلمة المرور">
-
-            <div class="remember-box">
-                <input type="checkbox" id="rememberMe">
-                <label for="rememberMe">
-                    <i class="fa-solid fa-user-check"></i> تذكرني
-                </label>
+            <div class="logo">
+                <i class="fa-solid fa-user"></i>
+                الدخول إلى الحساب
             </div>
 
-            <button type="button" class="submit-btn" onclick="loginUser()">دخول</button>
-        </form>
+            <div class="tabs">
+                <button id="loginTab" class="active">تسجيل الدخول</button>
+                <button id="registerTab">إنشاء حساب</button>
+            </div>
 
-        <!-- Register -->
-        <form id="registerForm">
-            <input type="text" id="username" placeholder="اسم المستخدم">
-            <input type="email" id="registerEmail" placeholder="البريد الإلكتروني">
-            <input type="password" id="registerPassword" placeholder="كلمة المرور">
-            <button type="button" class="submit-btn" onclick="registerUser()">إنشاء حساب</button>
-        </form>
+            <!-- Login -->
+            <form id="loginForm" class="active">
+                <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+                <input type="password" id="loginPassword" placeholder="كلمة المرور">
 
-    </div>
+                <div class="remember-box">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">
+                        <i class="fa-solid fa-user-check"></i> تذكرني
+                    </label>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="loginUser()">دخول</button>
+            </form>
+
+            <!-- Register -->
+            <form id="registerForm">
+                <input type="text" id="username" placeholder="اسم المستخدم">
+                <input type="email" id="registerEmail" placeholder="البريد الإلكتروني">
+                <input type="password" id="registerPassword" placeholder="كلمة المرور">
+                <button type="button" class="submit-btn" onclick="registerUser()">إنشاء حساب</button>
+            </form>
+
+        </div>
+
+    </main>
+
+    <footer>
+        © 2026 جميع الحقوق محفوظة | نظام الحسابات - MONGEZ
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
