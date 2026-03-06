@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>اتصل بنا</title>
+    <title>عن التطبيق</title>
 
     <link
       rel="stylesheet"
@@ -21,7 +21,7 @@
       /* header */
 
       header {
-        background: #cbb884;
+        background: #dccb9a;
         color: #1e293b;
         text-align: center;
         padding: 18px;
@@ -51,66 +51,45 @@
       .contact-title {
         text-align: center;
         margin-bottom: 25px;
-        font-size: 24px;
+        font-size: 26px;
         color: #cbb884;
       }
 
-      /* inputs */
+      /* paragraphs */
 
-      input,
-      textarea {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: none;
+      .info-text {
+        line-height: 1.9;
+        color: #ddd;
+        font-size: 15px;
+        margin-bottom: 25px;
+      }
+
+      /* features */
+
+      .features {
+        margin-top: 20px;
+      }
+
+      .feature {
+        background: #1e293b;
+        padding: 12px 15px;
         border-radius: 10px;
-        outline: none;
-        box-sizing: border-box;
-      }
-
-      /* textarea */
-
-      textarea {
-        resize: none;
-        height: 120px;
-      }
-
-      /* button */
-
-      .send-btn {
-        width: 100%;
-        padding: 12px;
-        background: #cbb884;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .send-btn:hover {
-        background: #1f2a44;
-        color: white;
-      }
-
-      /* contact info */
-
-      .contact-info {
-        margin-top: 30px;
-        text-align: center;
-      }
-
-      .contact-info p {
         margin: 8px 0;
-        color: #ccc;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
       }
 
-      /* whatsapp button */
+      .feature i {
+        color: #cbb884;
+      }
+
+      /* whatsapp */
 
       .whatsapp-btn {
         display: inline-block;
-        margin-top: 20px;
+        margin-top: 25px;
         background: #1da851;
         color: white;
         padding: 12px 20px;
@@ -143,36 +122,66 @@
 
   <body>
     <header>
-      <i class="fa-solid fa-headset"></i>
-      اتصل بنا
+      <i class="fa-solid fa-calculator"></i>
+      عن نظام الحسابات والفواتير
     </header>
 
     <div class="container">
       <div class="contact-card">
-        <div class="contact-title">نحن هنا لمساعدتك</div>
+        <div class="contact-title">نظام إدارة الحسابات والفواتير</div>
 
-        <form>
-          <input type="text" placeholder="الاسم" />
+        <p class="info-text">
+          هذا التطبيق هو نظام متكامل لإدارة الحسابات والمبيعات والمشتريات بطريقة
+          سهلة وسريعة. تم تصميمه لمساعدة أصحاب الأنشطة التجارية في تنظيم
+          العمليات المالية اليومية وإدارة العملاء والمنتجات بشكل احترافي.
+        </p>
 
-          <input type="email" placeholder="البريد الإلكتروني" />
+        <p class="info-text">
+          يمكنك من خلال النظام تسجيل الفواتير ومتابعة حركة الخزنة ومعرفة الأرباح
+          والمصروفات بسهولة، بالإضافة إلى إمكانية عمل نسخة احتياطية للبيانات
+          واسترجاعها في أي وقت.
+        </p>
 
-          <textarea placeholder="اكتب رسالتك هنا"></textarea>
+        <div class="features">
+          <div class="feature">
+            <i class="fa-solid fa-users"></i>
+            إدارة العملاء وتسجيل الأرصدة
+          </div>
 
-          <button class="send-btn">إرسال الرسالة</button>
-        </form>
+          <div class="feature">
+            <i class="fa-solid fa-box"></i>
+            إدارة المنتجات والمخزون
+          </div>
 
-        <div class="contact-info">
-          <p><i class="fa-solid fa-envelope"></i> alaarabea83@gmail.com</p>
+          <div class="feature">
+            <i class="fa-solid fa-file-invoice"></i>
+            إنشاء فواتير المبيعات والمشتريات
+          </div>
 
-          <p><i class="fa-solid fa-phone"></i> 01019065615</p>
+          <div class="feature">
+            <i class="fa-solid fa-cash-register"></i>
+            متابعة حركة الخزنة والمقبوضات
+          </div>
 
+          <div class="feature">
+            <i class="fa-solid fa-money-bill-wave"></i>
+            تسجيل الإيرادات والمصروفات
+          </div>
+
+          <div class="feature">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            نسخ احتياطي للبيانات
+          </div>
+        </div>
+
+        <div style="text-align: center">
           <a
             class="whatsapp-btn"
             href="https://wa.me/201019065615?text=مرحبًا!%20أريد%20التحدث%20معك%20حول%20النظام"
             target="_blank"
           >
             <i class="fa-brands fa-whatsapp"></i>
-            تواصل عبر واتساب
+            التواصل مع الدعم
           </a>
         </div>
       </div>
