@@ -1,175 +1,183 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتصل بنا</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>اتصل بنا</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: white;
+      }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      color: white;
-    }
+      /* header */
 
-    /* header */
+      header {
+        background: #cbb884;
+        color: #1e293b;
+        text-align: center;
+        padding: 18px;
+        font-size: 20px;
+        font-weight: bold;
+      }
 
-    header {
-      background: #cbb884;
-      color: #1e293b;
-      text-align: center;
-      padding: 18px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+      /* container */
 
-    /* container */
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+      }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+      /* card */
 
-    /* card */
+      .contact-card {
+        background: #2c3e50;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
 
-    .contact-card {
-      background: #2c3e50;
-      padding: 35px;
-      border-radius: 18px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    }
+      /* title */
 
-    /* title */
+      .contact-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: #cbb884;
+      }
 
-    .contact-title {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 24px;
-      color: #cbb884;
-    }
+      /* inputs */
 
-    /* inputs */
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        box-sizing: border-box;
+      }
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      outline: none;
-      box-sizing: border-box;
-    }
+      /* textarea */
 
-    /* textarea */
+      textarea {
+        resize: none;
+        height: 120px;
+      }
 
-    textarea {
-      resize: none;
-      height: 120px;
-    }
+      /* button */
 
-    /* button */
+      .send-btn {
+        width: 100%;
+        padding: 12px;
+        background: #cbb884;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-    .send-btn {
-      width: 100%;
-      padding: 12px;
-      background: #cbb884;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+      .send-btn:hover {
+        background: #1f2a44;
+        color: white;
+      }
 
-    .send-btn:hover {
-      background: #1f2a44;
-      color: white;
-    }
+      /* contact info */
 
-    /* contact info */
+      .contact-info {
+        margin-top: 30px;
+        text-align: center;
+      }
 
-    .contact-info {
-      margin-top: 30px;
-      text-align: center;
-    }
+      .contact-info p {
+        margin: 8px 0;
+        color: #ccc;
+      }
 
-    .contact-info p {
-      margin: 8px 0;
-      color: #ccc;
-    }
+      /* whatsapp button */
 
-    /* footer */
+      .whatsapp-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #25d366;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+      }
 
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      padding: 15px;
-      background: #0f172a;
-      color: #aaa;
-      border-top: 1px solid #cbb884;
-    }
+      .whatsapp-btn:hover {
+        background: #1da851;
+      }
 
-    .whatsapp-btn-direct {
-      display: inline-block;
-      background: #25D366;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: .3s;
-    }
+      .whatsapp-btn i {
+        margin-left: 8px;
+      }
 
-    .whatsapp-btn-direct:hover {
-      background: #1da851;
-    }
+      /* footer */
 
-    .whatsapp-btn-direct i {
-      margin-left: 8px;
-    }
-  </style>
-</head>
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        padding: 15px;
+        background: #0f172a;
+        color: #aaa;
+        border-top: 1px solid #cbb884;
+      }
+    </style>
+  </head>
 
-<body>
-  <header>
-    <i class="fa-solid fa-headset"></i>
-    اتصل بنا
-  </header>
+  <body>
+    <header>
+      <i class="fa-solid fa-headset"></i>
+      اتصل بنا
+    </header>
 
-  <div class="container">
-    <div class="contact-card">
-      <div class="contact-title">نحن هنا لمساعدتك</div>
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-title">نحن هنا لمساعدتك</div>
 
-      <form>
-        <input type="text" placeholder="الاسم" />
+        <form>
+          <input type="text" placeholder="الاسم" />
 
-        <input type="email" placeholder="البريد الإلكتروني" />
+          <input type="email" placeholder="البريد الإلكتروني" />
 
-        <textarea placeholder="اكتب رسالتك هنا"></textarea>
+          <textarea placeholder="اكتب رسالتك هنا"></textarea>
 
-        <button class="send-btn">إرسال الرسالة</button>
-      </form>
+          <button class="send-btn">إرسال الرسالة</button>
+        </form>
 
-      <div class="contact-info">
-        <p><i class="fa-solid fa-envelope"></i> alaarabea83@gmail.com</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> alaarabea83@gmail.com</p>
 
-        <p><i class="fa-solid fa-phone"></i> 01019065615</p>
+          <p><i class="fa-solid fa-phone"></i> 01019065615</p>
+
+          <a
+            class="whatsapp-btn"
+            href="https://wa.me/201019065615?text=مرحبًا!%20أريد%20التحدث%20معك%20حول%20النظام"
+            target="_blank"
+          >
+            <i class="fa-brands fa-whatsapp"></i>
+            تواصل عبر واتساب
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <footer>© 2026 جميع الحقوق محفوظة</footer>
-
-  <a href="https://wa.me/201019065615?text=مرحبًا!%20أريد%20التحدث%20معك%20حول%20النظام" target="_blank"
-    class="whatsapp-btn-direct">
-    <i class="fa-brands fa-whatsapp"></i> تواصل الآن
-  </a>
-</body>
-
+    <footer>© 2026 جميع الحقوق محفوظة</footer>
+  </body>
 </html>
