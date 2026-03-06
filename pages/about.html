@@ -347,7 +347,7 @@
 
     <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع</p>
 
-    <a class="hero-btn" href="index.html">
+    <a class="hero-btn" href="../index.html">
       <i class="fa-solid fa-play"></i>
       دخول النظام
     </a>
@@ -528,7 +528,7 @@
     // تنفيذ تسجيل الخروج
     confirmBtn.onclick = () => {
       signOut(auth).then(() => {
-        window.location.replace("login.html");
+        window.location.replace("../login.html");
       }).catch((error) => {
         alert("حدث خطأ أثناء تسجيل الخروج ❌");
         console.error(error);
