@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>سهل لإدارة الحسابات</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: #0f172a;
+        color: white;
+      }
+
+      /* header */
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background: #1e293b;
+        border-bottom: 1px solid #cbb884;
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #cbb884;
+      }
+
+      .nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #ddd;
+        font-size: 14px;
+      }
+
+      .nav a:hover {
+        color: #cbb884;
+      }
+
+      /* hero */
+
+      .hero {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+      }
+
+      .hero h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+
+      .hero p {
+        color: #bbb;
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      .hero-btn {
+        background: #cbb884;
+        color: #1f2a44;
+        padding: 14px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 8px;
+        display: inline-block;
+        transition: 0.3s;
+      }
+
+      .hero-btn:hover {
+        background: white;
+      }
+
+      /* section */
+
+      .section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 60px 20px;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 40px;
+        color: #cbb884;
+      }
+
+      /* features */
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .feature {
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 14px;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .feature:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature i {
+        font-size: 28px;
+        color: #cbb884;
+        margin-bottom: 10px;
+      }
+
+      /* sections */
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        background: #253447;
+        transform: translateY(-5px);
+      }
+
+      .card i {
+        font-size: 22px;
+        color: #cbb884;
+        margin-bottom: 10px;
+      }
+
+      /* whatsapp */
+
+      .support {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .whatsapp {
+        background: #1da851;
+        color: white;
+        padding: 14px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .whatsapp:hover {
+        background: #25d366;
+      }
+
+      /* footer */
+
+      footer {
+        background: #020617;
+        text-align: center;
+        padding: 20px;
+        color: #888;
+        border-top: 1px solid #cbb884;
+      }
+
+      /* mobile */
+
+      @media (max-width: 700px) {
+        .hero h1 {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <i class="fa-solid fa-calculator"></i>
+        سهل للحسابات
+      </div>
+
+      <div class="nav">
+        <a href="#">المميزات</a>
+        <a href="#">الأقسام</a>
+        <a href="#">الدعم</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>نظام إدارة الحسابات والفواتير</h1>
+
+      <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع</p>
+
+      <a class="hero-btn" href="index.html">
+        <i class="fa-solid fa-play"></i>
+        دخول النظام
+      </a>
+
+      <a class="hero-btn" href="https://wa.me/201019065615" target="_blank">
+        <iz class="fa-brands fa-whatsapp"></iz>
+        الدعم الفني
+      </a>
+    </section>
+
+    <section class="section">
+      <div class="title">مميزات النظام</div>
+
+      <div class="features">
+        <div class="feature">
+          <i class="fa-solid fa-users"></i>
+          <h3>إدارة العملاء</h3>
+          <p>تسجيل العملاء وكشف الحساب</p>
+        </div>
+
+        <div class="feature">
+          <i class="fa-solid fa-box"></i>
+          <h3>إدارة المنتجات</h3>
+          <p>متابعة المخزون والأسعار</p>
+        </div>
+
+        <div class="feature">
+          <i class="fa-solid fa-file-invoice"></i>
+          <h3>فواتير البيع</h3>
+          <p>إنشاء وإدارة الفواتير</p>
+        </div>
+
+        <div class="feature">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>تقارير الأرباح</h3>
+          <p>معرفة الأرباح اليومية والشهرية</p>
+        </div>
+
+        <div class="feature">
+          <i class="fa-solid fa-vault"></i>
+          <h3>إدارة الخزينة</h3>
+          <p>متابعة حركة النقدية</p>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-vault"></i>
+          <h3>إدارة الخزينة</h3>
+          <p>متابعة حركة النقدية</p>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-vault"></i>
+          <h3>إدارة الخزينة</h3>
+          <p>متابعة حركة النقدية</p>
+        </div>
+
+        <div class="feature">
+          <i class="fa-solid fa-cloud"></i>
+          <h3>نسخ احتياطي</h3>
+          <p>حفظ البيانات على Firebase</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="title">أقسام النظام</div>
+
+      <div class="cards">
+        <div class="card">
+          <i class="fa-solid fa-users"></i>
+          <h4>الحسابات</h4>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-box"></i>
+          <h4>المنتجات</h4>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h4>المبيعات</h4>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-truck"></i>
+          <h4>المشتريات</h4>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-receipt"></i>
+          <h4>المصروفات</h4>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-receipt"></i>
+          <h4>المصروفات</h4>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-receipt"></i>
+          <h4>المصروفات</h4>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-receipt"></i>
+          <h4>المصروفات</h4>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-receipt"></i>
+          <h4>المصروفات</h4>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-coins"></i>
+          <h4>الأرباح</h4>
+        </div>
+      </div>
+    </section>
+
+    <section class="support">
+      <h2 style="margin-bottom: 20px">تحتاج مساعدة؟</h2>
+
+      <a class="whatsapp" href="https://wa.me/201019065615" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+        التواصل عبر واتساب
+      </a>
+    </section>
+
+    <footer>© 2026 جميع الحقوق محفوظة | تطوير علاء ربيع</footer>
+  </body>
+</html>

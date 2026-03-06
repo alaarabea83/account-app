@@ -277,7 +277,7 @@
                     } else {
                         localStorage.removeItem("rememberUser");
                     }
-                    window.location.replace("index.html");
+                    window.location.replace("home.html");
                 })
                 .catch(error => alert(error.message));
         };
@@ -298,7 +298,7 @@
                 });
 
                 localStorage.setItem("rememberUser", "true");
-                window.location.replace("index.html");
+                window.location.replace("home.html");
 
             } catch (error) {
                 alert(error.message);
