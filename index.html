@@ -31,8 +31,8 @@
       padding: 15px 25px;
       position: sticky;
       top: 0;
-      background: #CBB884;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+      background: #cbb884;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
       z-index: 100;
     }
 
@@ -45,22 +45,6 @@
       font-family: "cairo", sans-serif;
       font-size: 18px;
       color: #1f2a44;
-    }
-
-    .btn-icon {
-      background: rgba(255, 255, 255, 0.4);
-      border: none;
-      color: #1f2a44;
-      font-size: 17px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn-icon:hover {
-      background: #1f2a44;
-      color: #fff;
     }
 
     /* ===== Section ===== */
@@ -94,7 +78,7 @@
     .card i {
       font-size: 26px;
       margin-bottom: 12px;
-      color: #CBB884;
+      color: #cbb884;
       transition: 0.3s;
     }
 
@@ -320,7 +304,7 @@
     }
 
     .btn-action {
-      background: #CBB884;
+      background: #cbb884;
       color: #1f2a44;
       border: none;
       padding: 12px 20px;
@@ -340,8 +324,8 @@
     }
 
     .btn-action:hover {
-      background: #1F2A44;
-      color: #CBB884;
+      background: #1f2a44;
+      color: #cbb884;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
@@ -359,15 +343,85 @@
         /* ياخد كامل عرض الحاوية بعد البادينج */
       }
     }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* زر الاشعارات */
+
+    .notification-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3e9c8;
+      border-radius: 10px;
+      color: #333;
+      font-size: 17px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .notification-btn:hover {
+      background: #e6d8b5;
+      transform: translateY(-2px);
+    }
+
+    /* عداد الاشعارات */
+
+    .badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    /* زر الخروج */
+
+    .logout-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: #f3e9c8;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #333;
+    }
+
+    .logout-btn:hover {
+      background: #e74c3c;
+      color: #fff;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 
 <body>
   <header class="header">
     <h1>نظام الحسابات والفواتير</h1>
+
     <div class="header-right">
-      <button class="btn-icon"><i class="fa fa-bell"></i></button>
-      <button id="logoutBtn" class="btn-icon">
+      <!-- Notifications -->
+      <a href="./pages/notification.html" class="notification-btn">
+        <i class="fa-solid fa-bell"></i>
+
+        <span class="badge" id="notificationCount">0</span>
+      </a>
+
+      <!-- Logout -->
+      <button id="logoutBtn" class="logout-btn">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
     </div>
@@ -456,7 +510,7 @@
   </section>
 
   <!-- Backup & Restore Buttons -->
-  <div id="backupControls" style="display:flex; gap:12px; justify-content:center; margin:30px 0;">
+  <div id="backupControls" style="display: flex; gap: 12px; justify-content: center; margin: 30px 0">
     <button id="backupBtn" class="btn-action">
       <i class="fa fa-cloud-arrow-up"></i> رفع النسخة الاحتياطية
     </button>
@@ -480,9 +534,7 @@
         <a href="#">التقارير</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      تطوير : علاء ربيع
-    </div>
+    <div class="footer-bottom">تطوير : علاء ربيع</div>
   </footer>
 
   <!-- Modern Modal -->
@@ -508,8 +560,17 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
     // بياناتك الأساسية
     let customers = [];
@@ -576,7 +637,14 @@
       try {
         await setDoc(doc(db, "backups", user.uid), {
           timestamp: new Date(),
-          customers, products, sales, purchases, incomes, expenses, receipts, cash
+          customers,
+          products,
+          sales,
+          purchases,
+          incomes,
+          expenses,
+          receipts,
+          cash,
         });
         showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
       } catch (e) {
@@ -678,6 +746,8 @@
       }, 2000); // يختفي بعد ثانيتين
     }
 
+    let count = localStorage.getItem("notificationCount") || 0;
+    document.getElementById("notificationCount").textContent = count;
   </script>
 </body>
 
