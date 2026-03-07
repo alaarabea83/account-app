@@ -204,6 +204,56 @@
             color: #22c55e;
             font-size: 18px;
         }
+
+        /* ===== Error Modal ===== */
+        #errorModal .modal-box {
+            background: #1e293b;
+            border-radius: 18px;
+            padding: 25px 35px;
+            text-align: center;
+            color: #fff;
+            min-width: 260px;
+            transform: scale(0.8);
+            transition: 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #ef4444;
+            /* إطار أحمر */
+        }
+
+        #errorModal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #errorModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            z-index: 9999;
+        }
+
+        #errorModal .modal-icon {
+            font-size: 40px;
+            color: #ef4444;
+            margin-bottom: 12px;
+        }
+
+        #errorModal .modal-text {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Animation */
+        #errorModal.active .modal-box {
+            transform: scale(1);
+        }
     </style>
 </head>
 
@@ -258,6 +308,14 @@
     <div id="toast" class="toast">
         <i class="fa-solid fa-circle-check"></i>
         <span id="toastText"> تم تسجيل الخروج بنجاح</span>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">✖</div>
+            <div class="modal-text" id="errorText">حدث خطأ</div>
+        </div>
     </div>
 
     <footer>جميع الحقوق محفوظة | المحاسب المحترف</footer>
@@ -336,7 +394,7 @@
 
                     window.location.replace("index.html");
                 })
-                .catch((error) => alert(error.message));
+                .catch(error => showError("بيانات الدخول غير صحيحة!"));
         };
 
         // Register
@@ -361,9 +419,24 @@
                 localStorage.setItem("rememberUser", "true");
                 window.location.replace("index.html");
             } catch (error) {
-                alert(error.message);
+                showError(getFriendlyError(error.code));
             }
         };
+
+        function getFriendlyError(code) {
+            switch (code) {
+                case "auth/invalid-email":
+                    return "البريد الإلكتروني غير صالح!";
+                case "auth/email-already-in-use":
+                    return "هذا البريد مسجل بالفعل!";
+                case "auth/weak-password":
+                    return "كلمة المرور ضعيفة جدًا!";
+                case "auth/invalid-login-credentials":
+                    return "بيانات الدخول غير صحيحة!";
+                default:
+                    return "حدث خطأ غير متوقع، حاول مرة أخرى!";
+            }
+        }
 
         function showToast(message) {
             const toast = document.getElementById("toast");
@@ -381,6 +454,17 @@
         if (sessionStorage.getItem("logoutSuccess") === "true") {
             showToast("تم تسجيل الخروج بنجاح");
             sessionStorage.removeItem("logoutSuccess");
+        }
+
+        function showError(message) {
+            const modal = document.getElementById("errorModal");
+            const text = document.getElementById("errorText");
+            text.textContent = message;
+            modal.classList.add("active");
+
+            setTimeout(() => {
+                modal.classList.remove("active");
+            }, 2500); // يختفي بعد ثانيتين ونصف
         }
     </script>
 </body>
