@@ -49,9 +49,7 @@
       left: 0;
       height: 60px;
       background: #1e293b;
-      border-bottom: 1px solid #cbb884;
       backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       color: white;
       display: flex;
       align-items: center;
@@ -59,6 +57,7 @@
       padding: 0 15px;
       z-index: 1002;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid #2c3e50;
     }
 
     .header h1 {
@@ -107,12 +106,13 @@
       display: block;
       width: 100%;
       padding: 12px;
-      background: #243447;
+      background: #1e293b;
+      box-shadow: 0 3px 25px rgba(0, 0, 0, 0.4);
       border-radius: 8px;
       text-align: center;
       color: white;
       text-decoration: none;
-      border: none;
+      border: 1px solid #2c3e50;
       cursor: pointer;
       transition: 0.2s;
     }
@@ -159,11 +159,6 @@
       display: block;
     }
 
-    .sidebar-link:hover {
-      background: var(--primary);
-      border-color: var(--primary-light);
-      color: white;
-    }
 
     @media (max-width: 768px) {
       .sidebar {
@@ -224,7 +219,7 @@
     select {
       flex: 1;
       min-width: 140px;
-      background: #fff;
+      background: #f8fafc;
       color: #000;
       border: 1px solid var(--border);
       border-radius: 10px;
