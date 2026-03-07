@@ -362,27 +362,58 @@
       color: #fff;
       transform: translateY(-2px);
     }
+
+    .header-btn{
+  width:38px;
+  height:38px;
+  border:none;
+  background:#cbb884;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+  color:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.header-btn:hover{
+  background:#1f2a44;
+  color:#cbb884;
+  transform:translateY(-2px);
+}
   </style>
 </head>
 
 <body>
   <header class="header">
-    <div class="logo">
-        <i class="fa-solid fa-calculator"></i>
-        سهل للحسابات
-      </div>
 
-    <div class="header-right">
-      <a href="./pages/notification.html" class="notification-btn">
-        <i class="fa-solid fa-bell"></i>
-      </a>
+  <div class="header-right">
 
-      <!-- Logout -->
-      <button id="logoutBtn" class="logout-btn">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
-    </div>
-  </header>
+    <!-- رفع النسخة -->
+    <button id="backupBtn" class="header-btn">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+    </button>
+
+    <!-- استرجاع النسخة -->
+    <button id="restoreBtn" class="header-btn">
+      <i class="fa-solid fa-cloud-arrow-down"></i>
+    </button>
+
+    <!-- الاشعارات -->
+    <a href="./pages/notification.html" class="notification-btn">
+      <i class="fa-solid fa-bell"></i>
+    </a>
+
+    <!-- تسجيل الخروج -->
+    <button id="logoutBtn" class="logout-btn">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+
+  </div>
+
+</header>
 
   <section>
     <a class="card" href="pages/customers.html">
@@ -465,16 +496,6 @@
       <p>عن النظام<br />التحديثات<br />الدعم الفني<br />تواصل معنا</p>
     </a>
   </section>
-
-  <!-- Backup & Restore Buttons -->
-  <div id="backupControls" style="display: flex; gap: 12px; justify-content: center; margin: 30px 0">
-    <button id="backupBtn" class="btn-action">
-      <i class="fa fa-cloud-arrow-up"></i> رفع النسخة الاحتياطية
-    </button>
-    <button id="restoreBtn" class="btn-action">
-      <i class="fa fa-cloud-arrow-down"></i> استرجاع النسخة الاحتياطية
-    </button>
-  </div>
 
   <!-- Modern Modal -->
   <div id="statusModal" class="modal-overlay">
