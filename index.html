@@ -337,18 +337,18 @@
     }
 
     .backup-dropdown {
-  position: absolute;
-  top: 45px;
-  right: 50%;
-  transform: translateX(50%);
-  background: #1e293b;
-  border: 1px solid #cbb884;
-  border-radius: 12px;
-  display: none;
-  flex-direction: column;
-  min-width: 180px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
+      position: absolute;
+      top: 45px;
+      right: 50%;
+      transform: translateX(50%);
+      background: #1e293b;
+      border: 1px solid #cbb884;
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
 
     .backup-dropdown button {
       background: none;
@@ -641,15 +641,38 @@
       if (!user) {
         window.location.replace("login.html");
       } else {
-        // المستخدم موجود، نحمّل البيانات المحلية
+
+        // المستخدم موجود
         loadData();
         document.body.style.display = "block";
 
-        // نربط الأزرار
+        // 🔹 النسخ الاحتياطي عند إغلاق الصفحة
+        window.addEventListener("beforeunload", async () => {
+          const user = auth.currentUser;
+          if (!user) return;
+
+          try {
+            await setDoc(doc(db, "backups", user.uid), {
+              timestamp: new Date(),
+              customers,
+              products,
+              sales,
+              purchases,
+              incomes,
+              expenses,
+              receipts,
+              cash,
+            });
+          } catch (e) {
+            console.error("Backup error:", e);
+          }
+        });
+
+        // ربط الأزرار
         document.getElementById("backupBtn").onclick = saveBackup;
         document.getElementById("restoreBtn").onclick = restoreBackup;
 
-        // حفظ النسخة تلقائي كل 15 دقيقة
+        // النسخ التلقائي كل 15 دقيقة
         setInterval(saveBackup, 15 * 60 * 1000);
 
         // تسجيل الخروج
@@ -658,17 +681,14 @@
         const cancelBtn = document.getElementById("cancelLogout");
         const logoutBtn = document.getElementById("logoutBtn");
 
-        // فتح المودال
         logoutBtn.onclick = () => {
           confirmModal.classList.add("active");
         };
 
-        // إغلاق عند إلغاء
         cancelBtn.onclick = () => {
           confirmModal.classList.remove("active");
         };
 
-        // تنفيذ تسجيل الخروج
         confirmBtn.onclick = () => {
           signOut(auth).then(() => {
             window.location.replace("login.html");
