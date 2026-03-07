@@ -362,14 +362,43 @@
     .backup-dropdown.show {
       display: flex;
     }
+
+    /* ===== Modern Login Success Toast ===== */
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      transform: translateY(-80px);
+      opacity: 0;
+      transition: 0.35s ease;
+      z-index: 99999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast i {
+      font-size: 18px;
+      color: #22c55e;
+    }
   </style>
 </head>
 
 <body>
   <header class="header">
-
     <div class="header-right">
-
       <!-- Backup Dropdown -->
       <div class="backup-menu">
         <button class="header-btn" id="backupMenuBtn">
@@ -398,9 +427,7 @@
       <button id="logoutBtn" class="logout-btn">
         <i class="fa-solid fa-right-from-bracket"></i>
       </button>
-
     </div>
-
   </header>
 
   <section>
@@ -504,6 +531,12 @@
         <button id="confirmLogout" class="btn-confirm">تأكيد</button>
       </div>
     </div>
+  </div>
+
+  <!-- Login Success Toast -->
+  <div id="loginToast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>تم تسجيل الدخول بنجاح</span>
   </div>
 
   <script type="module">
@@ -627,15 +660,28 @@
       }
     }
 
+    function showLoginToast() {
+      const toast = document.getElementById("loginToast");
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
     // ======================= التحقق من تسجيل الدخول =======================
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         window.location.replace("login.html");
       } else {
-
         // المستخدم موجود
         loadData();
         document.body.style.display = "block";
+        if (sessionStorage.getItem("loginSuccess") === "true") {
+          showLoginToast();
+          sessionStorage.removeItem("loginSuccess");
+        }
 
         // ربط الأزرار
         document.getElementById("backupBtn").onclick = saveBackup;
@@ -678,6 +724,8 @@
             }
           }
 
+          sessionStorage.setItem("logoutSuccess", "true");
+
           signOut(auth).then(() => {
             window.location.replace("login.html");
           });
@@ -709,7 +757,6 @@
         modal.classList.remove("active");
       }, 2000); // يختفي بعد ثانيتين
     }
-
 
     // قائمة النسخ الاحتياطي
     const backupMenuBtn = document.getElementById("backupMenuBtn");
