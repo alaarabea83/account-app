@@ -547,9 +547,6 @@
       localStorage.setItem("expenses", JSON.stringify(expenses));
       localStorage.setItem("cash", JSON.stringify(cash));
       localStorage.setItem("receipts", JSON.stringify(receipts));
-
-      // تشغيل النسخ التلقائي
-      autoSync();
     }
 
     function loadData() {
@@ -588,34 +585,6 @@
 
     // نخفي الصفحة لحد ما يتم التحقق
     document.body.style.display = "none";
-
-    let backupTimer = null;
-
-    function autoSync() {
-      clearTimeout(backupTimer);
-
-      // ينتظر 5 ثواني بعد آخر تعديل
-      backupTimer = setTimeout(async () => {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        try {
-          await setDoc(doc(db, "backups", user.uid), {
-            timestamp: new Date(),
-            customers,
-            products,
-            sales,
-            purchases,
-            incomes,
-            expenses,
-            receipts,
-            cash,
-          });
-        } catch (e) {
-          console.error("Auto backup failed:", e);
-        }
-      }, 5000);
-    }
 
     // ======================= النسخ الاحتياطي =======================
     async function saveBackup() {
