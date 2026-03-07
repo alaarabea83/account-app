@@ -28,7 +28,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
+      padding: 10px;
       position: sticky;
       top: 0;
       background: #1e293b;
@@ -49,10 +49,10 @@
     }
 
     .logo {
-        font-size: 22px;
-        font-weight: bold;
-        color: #cbb884;
-      }
+      font-size: 22px;
+      font-weight: bold;
+      color: #cbb884;
+    }
 
     /* ===== Section ===== */
     section {
@@ -261,63 +261,9 @@
       background: #b02a37;
     }
 
-    /* زرار النسخ الاحتياطي */
-    #backupControls {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin: 30px 0;
-      /* هامش فوق وتحت */
-      padding: 0 15px;
-      /* هامش 15px من الشمال واليمين */
-      box-sizing: border-box;
-      /* عشان الـ padding يتحسب مع العرض */
-    }
-
-    .btn-action {
-      background: #cbb884;
-      color: #1f2a44;
-      border: none;
-      padding: 12px 20px;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      flex: 1 1 auto;
-      /* يخلي الزرار يتمدد بشكل متساوي داخل الحاوية */
-      max-width: 300px;
-      /* يمنع الزرار يبقى كبير جدًا على الشاشات الكبيرة */
-    }
-
-    .btn-action:hover {
-      background: #1f2a44;
-      color: #cbb884;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Responsive للموبايل */
-    @media (max-width: 600px) {
-      #backupControls {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .btn-action {
-        width: 100%;
-        /* ياخد كامل عرض الحاوية بعد البادينج */
-      }
-    }
-
     .header-right {
       display: flex;
-      align-items: center;
+      margin-right: auto;
       gap: 12px;
     }
 
@@ -363,57 +309,108 @@
       transform: translateY(-2px);
     }
 
-    .header-btn{
-  width:38px;
-  height:38px;
-  border:none;
-  background:#cbb884;
-  border-radius:10px;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
-  color:#333;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    .header-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: #cbb884;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-btn:hover {
+      background: #1f2a44;
+      color: #cbb884;
+      transform: translateY(-2px);
+    }
+
+    /* Backup dropdown */
+
+    .backup-menu {
+      position: relative;
+    }
+
+    .backup-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 50%;
+  transform: translateX(50%);
+  background: #1e293b;
+  border: 1px solid #cbb884;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.header-btn:hover{
-  background:#1f2a44;
-  color:#cbb884;
-  transform:translateY(-2px);
-}
+    .backup-dropdown button {
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 12px;
+      text-align: right;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+
+    .backup-dropdown button:hover {
+      background: #2c3e50;
+    }
+
+    .backup-dropdown.show {
+      display: flex;
+    }
   </style>
 </head>
 
 <body>
   <header class="header">
 
-  <div class="header-right">
+    <div class="header-right">
 
-    <!-- رفع النسخة -->
-    <button id="backupBtn" class="header-btn">
-      <i class="fa-solid fa-cloud-arrow-up"></i>
-    </button>
+      <!-- Backup Dropdown -->
+      <div class="backup-menu">
+        <button class="header-btn" id="backupMenuBtn">
+          <i class="fa-solid fa-cloud"></i>
+        </button>
 
-    <!-- استرجاع النسخة -->
-    <button id="restoreBtn" class="header-btn">
-      <i class="fa-solid fa-cloud-arrow-down"></i>
-    </button>
+        <div class="backup-dropdown" id="backupDropdown">
+          <button id="backupBtn">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            رفع نسخة احتياطية
+          </button>
 
-    <!-- الاشعارات -->
-    <a href="./pages/notification.html" class="notification-btn">
-      <i class="fa-solid fa-bell"></i>
-    </a>
+          <button id="restoreBtn">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            استرجاع النسخة
+          </button>
+        </div>
+      </div>
 
-    <!-- تسجيل الخروج -->
-    <button id="logoutBtn" class="logout-btn">
-      <i class="fa-solid fa-right-from-bracket"></i>
-    </button>
+      <!-- الاشعارات -->
+      <a href="./pages/notification.html" class="notification-btn">
+        <i class="fa-solid fa-bell"></i>
+      </a>
 
-  </div>
+      <!-- تسجيل الخروج -->
+      <button id="logoutBtn" class="logout-btn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
 
-</header>
+    </div>
+
+  </header>
 
   <section>
     <a class="card" href="pages/customers.html">
@@ -704,6 +701,28 @@
         modal.classList.remove("active");
       }, 2000); // يختفي بعد ثانيتين
     }
+
+
+    // قائمة النسخ الاحتياطي
+    const backupMenuBtn = document.getElementById("backupMenuBtn");
+    const backupDropdown = document.getElementById("backupDropdown");
+
+    // فتح وغلق القائمة
+    backupMenuBtn.onclick = () => {
+      backupDropdown.classList.toggle("show");
+    };
+
+    // اغلاق القائمة عند الضغط خارجها
+    window.addEventListener("click", function (e) {
+      if (!e.target.closest(".backup-menu")) {
+        backupDropdown.classList.remove("show");
+      }
+    });
+
+    // اغلاق القائمة عند اختيار عنصر منها
+    backupDropdown.addEventListener("click", function () {
+      backupDropdown.classList.remove("show");
+    });
   </script>
 </body>
 
