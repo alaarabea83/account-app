@@ -20,19 +20,23 @@ function calculateCustomerBalance(customerName) {
 
   // المبيعات
   sales.filter(s => s.customer === customerName)
-       .forEach(s => balance += (s.total || 0) - (s.paid || 0));
+    .forEach(s => balance += (s.total || 0) - (s.paid || 0));
 
   // المشتريات
   purchases.filter(p => p.customer === customerName)
-           .forEach(p => balance += (p.paid || 0) - (p.total || 0));
+    .forEach(p => balance += (p.paid || 0) - (p.total || 0));
 
   // المصروفات
   expenses.filter(e => e.customer === customerName)
-          .forEach(e => balance += (e.amount || 0));
+    .forEach(e => balance += (e.amount || 0));
 
   // المقبوضات
   receipts.filter(r => r.customer === customerName)
-          .forEach(r => balance -= (r.amount || 0));
+    .forEach(r => balance -= (r.amount || 0));
+
+  // الإيرادات
+  incomes.filter(i => i.customer === customerName)
+    .forEach(i => balance -= (i.amount || 0));
 
   return balance;
 }
@@ -282,16 +286,16 @@ function openStatementModal(index) {
     }))
   ];
 
-  allEntries.sort((a,b) => (a.order||0) - (b.order||0));
+  allEntries.sort((a, b) => (a.order || 0) - (b.order || 0));
 
   allEntries.forEach(e => {
-    balance += (e.debit||0) - (e.credit||0);
+    balance += (e.debit || 0) - (e.credit || 0);
     tbody.innerHTML += `
       <tr>
         <td>${e.date}</td>
         <td>${e.desc}</td>
-        <td>${(e.debit||0).toFixed(2)}</td>
-        <td>${(e.credit||0).toFixed(2)}</td>
+        <td>${(e.debit || 0).toFixed(2)}</td>
+        <td>${(e.credit || 0).toFixed(2)}</td>
         <td>${balance.toFixed(2)}</td>
       </tr>
     `;
