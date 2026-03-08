@@ -30,13 +30,13 @@ function calculateCustomerBalance(customerName) {
   expenses.filter(e => e.customer === customerName)
     .forEach(e => balance += (e.amount || 0));
 
-  // المقبوضات
-  receipts.filter(r => r.customer === customerName)
-    .forEach(r => balance -= (r.amount || 0));
-
   // الإيرادات
   incomes.filter(i => i.customer === customerName)
     .forEach(i => balance -= (i.amount || 0));
+
+    // المقبوضات
+  receipts.filter(r => r.customer === customerName)
+    .forEach(r => balance -= (r.amount || 0));
 
   return balance;
 }
