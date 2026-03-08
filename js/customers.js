@@ -272,6 +272,13 @@ function openStatementModal(index) {
       debit: e.amount,
       credit: 0,
       order: e.order
+    })),
+    ...incomes.filter(e => e.customer === customer.name).map(e => ({
+      date: e.date,
+      desc: e.title,
+      debit: e.amount,
+      credit: 0,
+      order: e.order
     }))
   ];
 
