@@ -120,7 +120,7 @@ function renderCustomers(searchQuery = "", filterType = null) {
       <td class="actions">
         <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
         <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
-        <button class="action-btn view" onclick="openStatementModal(${index})">حركة حساب</button>
+        <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
       </td>
     `;
 
