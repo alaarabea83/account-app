@@ -13,27 +13,6 @@
 
   <title>سهل لإدارة الحسابات</title>
   <style>
-    /* ===== Variables ===== */
-    :root {
-      --primary: #1F2937;
-      /* كحلي احترافي */
-      --primary-light: #2563eb;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --warning: #f59e0b;
-
-      --bg: #111827;
-      /* خلفية غامقة مريحة */
-      --card: #1e293b;
-      /* الكروت أبيض */
-      --card-light: #f8fafc;
-
-      --text: #ffffff;
-      --text-muted: #6b7280;
-
-      --border: #e5e7eb;
-    }
-
     /* Reset */
     * {
       box-sizing: border-box;
@@ -205,9 +184,9 @@
     /* ===== Income Form Toolbar ===== */
     .income-row {
       display: flex;
-      align-items: flex-end;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 16px;
+      align-items: flex-end;
       background: #115e59;
       padding: 25px;
       border-radius: 12px;
@@ -217,45 +196,45 @@
     .field-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      min-width: 160px;
-      background: #115e59;
+      gap: 6px;
+      min-width: 180px;
+      flex: 1;
     }
 
     .field-group label {
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e2e8f0;
     }
 
     .field-group input,
     .field-group select {
-      padding: 7px 10px;
+      width: 100%;
+      padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       background: #f8fafc;
-      font-family: inherit;
-      transition: 0.2s;
+      font-size: 14px;
+      transition: .2s;
     }
 
     .field-group input:focus,
     .field-group select:focus {
       outline: none;
       border-color: #3b82f6;
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, .25);
     }
 
     /* زر الإضافة */
     .btn-primary {
-      padding: 8px 16px;
+      padding: 9px 18px;
       border: none;
       border-radius: 8px;
       background: #ef4444;
       color: white;
       cursor: pointer;
       font-weight: 600;
-      transition: 0.3s;
+      transition: .25s;
       height: 38px;
     }
 
@@ -280,13 +259,13 @@
     /* ===== Filter Toolbar ===== */
     .filter-row {
       display: flex;
-      align-items: center;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 10px;
+      gap: 10px;
+      align-items: center;
       background: #115e59;
-      padding: 25px;
+      padding: 20px;
       border-radius: 12px;
+      width: 100%;
     }
 
     .date-group,
@@ -294,22 +273,23 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      flex: 1;
+      min-width: 180px;
     }
 
     .filter-row label {
       font-size: 14px;
-      white-space: nowrap;
-      color: #f8f9fa;
     }
 
     .filter-row input,
     .filter-row select {
       background: #ffffff;
       color: #000;
-      border: 1px solid #34495e;
-      border-radius: 10px;
       padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
       transition: .2s;
+      width: 100%;
     }
 
     .filter-row input:focus,
