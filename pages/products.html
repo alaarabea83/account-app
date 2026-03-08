@@ -1,264 +1,247 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>المنتجات</title>
 
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="icon" href="../icons/logo.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المنتجات</title>
 
-    <style>
-      :root {
-        --primary: #1f3729;
-        --primary-light: #2563eb;
-        --success: #16a34a;
-        --danger: #dc2626;
-        --warning: #f59e0b;
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="../icons/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+    rel="stylesheet" />
 
-        --bg: #162a20;
-        --card: #162a20;
-        --card-light: #f8fafc;
+  <style>
 
-        --text: #ffffff;
-        --text-muted: #6b7280;
+    * {
+      box-sizing: border-box;
+    }
 
-        --border: #e5e7eb;
-      }
+    /* ===== Body (Mobile First) ===== */
+    body {
+      margin: 0;
+      font-family: "Cairo", sans-serif;
+      background: #115e59;
+      color: #fff;
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    .header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 60px;
+      background: #0f766e;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      z-index: 1002;
+      border-bottom: 1px solid #e2e8f0;
+    }
 
-      /* ===== Body (Mobile First) ===== */
-      body {
-        margin: 0;
-        font-family: "Cairo", sans-serif;
-        background: #020617;
-        color: #f1f5f9;
-      }
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 40px;
+    }
 
-      .header {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        height: 60px;
-        background: #1e40af;
-        backdrop-filter: blur(8px);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 15px;
-        z-index: 1002;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-      }
+    .header-cash {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-      .header h1 {
-        font-size: 18px;
-        margin: 40px;
-      }
+    .menu-toggle {
+      position: fixed;
+      right: 12px;
+      z-index: 1001;
+      background: #0f766e;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 20px;
+    }
 
-      .menu-toggle {
-        position: fixed;
-        right: 12px;
-        z-index: 1001;
-        background: #15803d;
-        color: #fff;
-        border: none;
-        padding: 4px 8px;
-        border-radius: 8px;
-        font-size: 20px;
-      }
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 260px;
+      height: calc(100dvh - 60px);
+      background: #115e59;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: 0.3s;
+      z-index: 1001;
+      overflow-y: auto;
+      scrollbar-width: none;
+      border-left: 1px solid #e2e8f0;
+      padding: 20px 20px 40px 20px;
+    }
 
+    .sidebar.show {
+      right: 0;
+    }
+
+    .sidebar a,
+    .sidebar button,
+    .sidebar div {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #0f766e;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    .sidebar a:hover,
+    .sidebar button:hover {
+      background: #1466e0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #a78bfa;
+      margin-bottom: 10px;
+    }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1000;
+    }
+
+    #overlay.show {
+      display: block;
+    }
+
+    .sidebar-link {
+      background: transparent;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px;
+      text-decoration: none;
+      color: #cbd5f5;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .sidebar-link img {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
       .sidebar {
-        position: fixed;
-        top: 60px;
-        right: 0;
-        width: 260px;
-        height: calc(100dvh - 60px);
-        background: #1e293b;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        transition: 0.3s;
-        z-index: 1001;
-        overflow-y: auto;
-        scrollbar-width: none;
-        font-family: "Cairo", sans-serif;
-        font-weight: 600;
-        padding: 20px 20px 40px 20px;
+        right: -260px;
       }
 
       .sidebar.show {
         right: 0;
       }
+    }
 
-      .sidebar a,
-      .sidebar button,
-      .sidebar div {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background: #1e293b;
-        box-shadow: 0 3px 25px rgba(0, 0, 0, 0.4);
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        text-decoration: none;
-        border: 1px solid #2c3e50;
-        cursor: pointer;
-        transition: 0.2s;
-      }
+    .main {
+      padding: 80px 15px 20px;
+    }
 
-      .sidebar a:hover,
-      .sidebar button:hover {
-        background: #334155;
-      }
+    /* ===== Cards ===== */
+    .card {
+      background: #115e59;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-      .sidebar h2 {
-        text-align: center;
-        color: #a78bfa;
-        margin-bottom: 10px;
-      }
+    h5 {
+      margin: 0 0 15px;
+      color: #fff;
+      font-size: 20px;
+    }
 
-      #overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        z-index: 1000;
-      }
+    /* ===== Forms ===== */
 
-      #overlay.show {
-        display: block;
-      }
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      background: #0f766e;
+      border-radius: 8px;
+      padding: 35px;
+      margin-bottom: 10px;
+    }
 
-      .sidebar-link {
-        background: transparent;
-        border: 1px solid transparent;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 12px;
-        text-decoration: none;
-        color: #cbd5f5;
-        border-radius: 10px;
-        transition: 0.2s;
-      }
+    .form-row input,
+    .form-row select {
+      flex: 1;
+      min-width: 140px;
+    }
 
-      .sidebar-link img {
-        display: block;
-      }
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: none;
+      font-size: 14px;
+    }
 
-      @media (max-width: 768px) {
-        .sidebar {
-          right: -260px;
-        }
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      outline: none;
+    }
 
-        .sidebar.show {
-          right: 0;
-        }
-      }
+    .form-row label {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
 
-      .main {
-        padding: 80px 15px 20px;
-      }
+    button {
+      border: none;
+      background: #ffffff;
+      color: #0f766e;
+      border-radius: 8px;
+      padding: 14px 25px;
+      font-weight: 600;
+      transition: 0.3s;
+      font-size: 16px;
+      cursor: pointer;
+      width: auto;
+      max-width: 120px;
+      margin: 5px auto;
+    }
 
-      /* ===== Cards ===== */
-      .card {
-        background: #0f172a;
-        border-radius: 18px;
-        padding: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        transition: 0.3s;
-      }
-
-      h5 {
-        margin: 0 0 15px;
-        text-align: center;
-        margin-top: 5px;
-        color: #cbb884;
-      }
-
-      /* ===== Forms ===== */
-
-      .form-row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        background: linear-gradient(135deg, #1e293b, #0f172a);
-        border-radius: 8px;
-        padding: 35px;
-        margin-bottom: 10px;
-        color: #000;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-      }
-
-      input {
-        width: 100%;
-        padding: 10px;
-        background: #f8fafc;
-        color: #1f2a44;
-        border: 1px solid #334155;
-        border-radius: 10px;
-        font-size: 14px;
-      }
-
-      input:focus {
-        border-color: var(--primary);
-      }
-
-      .form-row label {
-        font-size: 16px;
-        color: #cbb884;
-      }
-
-      button {
-        border: none;
-        background: #15803d;
-        color: white;
-        border-radius: 10px;
-        padding: 14px 25px;
-        font-weight: 600;
-        transition: 0.3s;
-        font-size: 16px;
-        cursor: pointer;
-        width: auto;
-        max-width: 120px;
-        margin: 5px auto;
-      }
-
-      .form-row select {
-        width: 100%;
-        padding: 10px;
-        background: #f8fafc;
-        color: #1f2a44;
-        border: 1px solid #334155;
-        border-radius: 10px;
-        font-size: 14px;
-      }
-
-      .form-row select:focus {
-        outline: none;
-        border-color: var(--primary);
-      }
-
-      /* ===== Table ===== */
-      .table-scroll {
+    /* ===== Table ===== */
+    .table-scroll {
         overflow: auto;
         scrollbar-width: none;
         max-height: 400px;
-        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
       }
 
       table {
@@ -270,528 +253,410 @@
       th {
         position: sticky;
         top: 0;
-        background: #1e293b;
-        color: #cbb884;
+        background: #0f766e;
+        color: #fff;
         padding: 12px;
         text-align: center;
+        border-bottom: 1px solid #e2e8f0;
       }
 
       td {
         padding: 12px;
         text-align: center;
-        border: 1px solid #2c3e50;
-      }
-
-      .table-total-row {
-        background: #16202a;
-        color: #fff;
-        font-weight: 600;
+        font-weight: bold;
+        border: 1px solid #e2e8f0;
+        color: white;
       }
 
       .table-total-row td {
         padding: 14px;
-      }
-
-      /* ===== Modals ===== */
-      .modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-        z-index: 2000;
-      }
-
-      .modal-overlay.show {
-        display: flex;
-      }
-
-      .modal-box {
-        background: #0f172a;
-        padding: 20px;
-        border-radius: 12px;
-        width: 95%;
-        max-width: 450px;
-      }
-
-      .modal-box h3 {
-        margin-bottom: 10px;
-        text-align: center;
-        color: var(--secondary);
-      }
-
-      .modal-box input,
-      .modal-box select {
-        width: 100%;
-        margin-top: 8px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #4b5563;
-        background: #f8fafc;
-        color: #000;
-      }
-
-      .modal-box button {
-        margin-top: 12px;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 8px;
-        background: #2e86c1;
-        color: #fff;
         font-weight: bold;
-        cursor: pointer;
       }
 
-      .modal-box button.cancel {
-        background: #e74c3c;
+    /* ===== Modals ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #115e59;
+      padding: 20px;
+      border-radius: 12px;
+      width: 95%;
+      max-width: 450px;
+    }
+
+    .modal-box h3 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .modal-box input,
+    .modal-box select {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background: #f8fafc;
+      color: #000;
+    }
+
+    .modal-box button {
+      margin-top: 12px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2e86c1;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal-box button.cancel {
+      background: #e74c3c;
+    }
+
+    .modal-card {
+      background: #115e59;
+      padding: 20px;
+      border-radius: 16px;
+      width: 95%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-box p,
+    .modal-card p,
+    .modal-box span,
+    .modal-card span,
+    .modal-box div {
+      color: var(--text);
+      font-family: "Cairo", sans-serif;
+      line-height: 1.6;
+    }
+
+    .success-box {
+      text-align: center;
+      border: 2px solid #22c55e;
+    }
+
+    .success-box h3 {
+      color: #22c55e;
+    }
+
+    .success-box button {
+      background: #22c55e;
+      max-width: 150px;
+    }
+
+    td.actions {
+      white-space: nowrap;
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .actions button {
+      width: 100%;
+      max-width: 70px;
+      height: 32px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .btn-edit {
+      background: #3b82f6;
+      color: #fff;
+    }
+
+    .btn-delete {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .btn-info {
+      background: #0f766e;
+      color: #fff;
+    }
+
+    .modal-card button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      background: #2e86c1;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+
+    .modal-card button:hover {
+      background: #117a8b;
+    }
+
+    .modal-card button.cancel {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    .modal-card button.cancel:hover {
+      background: #a71d2a;
+    }
+
+    /* ===== Desktop ===== */
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
       }
 
-      .modal-card {
-        background: #0f172a;
-        padding: 20px;
-        border-radius: 16px;
-        width: 95%;
-        max-width: 600px;
-        max-height: 80vh;
-        overflow-y: auto;
-        scrollbar-width: none;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      .sidebar {
+        right: 0;
       }
 
-      .modal-box p,
-      .modal-card p,
-      .modal-box span,
-      .modal-card span,
-      .modal-box div {
-        color: var(--text);
-        font-family: "Cairo", sans-serif;
-        line-height: 1.6;
+      #overlay {
+        display: none !important;
       }
 
-      .success-box {
-        text-align: center;
-        border: 2px solid #22c55e;
+      .main {
+        margin-right: 260px;
+        padding: 80px 25px;
       }
 
-      .success-box h3 {
-        color: #22c55e;
+      .form-row {
+        flex-direction: row;
+        flex-wrap: wrap;
       }
 
-      .success-box button {
-        background: #22c55e;
-        max-width: 150px;
-      }
-
-      td.actions {
-        white-space: nowrap;
-      }
-
-      .actions {
-        display: flex;
-        gap: 6px;
-        justify-content: center;
-        flex-wrap: nowrap;
+      .form-row input,
+      .form-row select {
+        flex: 1;
       }
 
       .actions button {
-        width: 100%;
-        max-width: 70px;
-        height: 32px;
-        padding: 0 8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        border-radius: 8px;
-        font-size: 14px;
+        margin: 0;
       }
+    }
 
-      .btn-edit {
-        background: #3b82f6;
-        color: #fff;
-      }
+    .header-cash {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(5px);
+      transition: 0.3s;
+    }
 
-      .btn-delete {
-        background: #dc2626;
-        color: #fff;
-      }
+    .header-cash span {
+      font-weight: bold;
+    }
+  </style>
+</head>
 
-      .btn-info {
-        background: #16a34a;
-        color: #fff;
-      }
-
-      .modal-card button {
-        padding: 10px 16px;
-        border-radius: 8px;
-        border: none;
-        background: #2e86c1;
-        color: #fff;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 12px;
-        transition: 0.2s;
-      }
-
-      .modal-card button:hover {
-        background: #117a8b;
-      }
-
-      .modal-card button.cancel {
-        background: #e74c3c;
-        color: #fff;
-      }
-
-      .modal-card button.cancel:hover {
-        background: #a71d2a;
-      }
-
-      /* ===== Desktop ===== */
-      @media (min-width: 768px) {
-        .menu-toggle {
-          display: none;
-        }
-
-        .sidebar {
-          right: 0;
-        }
-
-        #overlay {
-          display: none !important;
-        }
-
-        .main {
-          margin-right: 260px;
-          padding: 80px 25px;
-        }
-
-        .form-row {
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
-
-        .form-row input,
-        .form-row select {
-          flex: 1;
-        }
-
-        .actions button {
-          margin: 0;
-        }
-      }
-
-      .header-cash {
-        background: rgba(255, 255, 255, 0.15);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        backdrop-filter: blur(5px);
-        transition: 0.3s;
-      }
-
-      .header-cash span {
-        font-weight: bold;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="header">
-      <h1>المنتجات</h1>
-      <div class="header-cash">
-        💰
-        <span id="cashBalance">0.00 جنيه</span>
-      </div>
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<body>
+  <div class="header">
+    <h1>المنتجات</h1>
+    <div class="header-cash">
+      💰
+      <span id="cashBalance">0.00 جنيه</span>
     </div>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <a href="../index.html" class="sidebar-link">
-        <img
-          src="../icons/home.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>الصفحة الرئيسية</span>
-      </a>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="../index.html" class="sidebar-link"><span>الصفحة الرئيسية</span></a>
+    <a href="customers.html" class="sidebar-link"><span>الحسابات</span></a>
+    <a href="products.html" class="sidebar-link"><span>المنتجات</span></a>
+    <a href="sales.html" class="sidebar-link"><span>المبيعات</span></a>
+    <a href="purchases.html" class="sidebar-link"><span>المشتريات</span></a>
+    <a href="receipts.html" class="sidebar-link"><span>المقبوضات</span></a>
+    <a href="income.html" class="sidebar-link"><span>تسجيل الإيرادات</span></a>
+    <a href="expenses.html" class="sidebar-link"><span>تسجيل المصروفات</span></a>
+    <a href="cash.html" class="sidebar-link"><span>الصندوق الرئيسي</span></a>
+    <a href="profit.html" class="sidebar-link"><span>تقارير الأرباح</span></a>
+    <a href="../pages/dashboard.html" class="sidebar-link"><span>تقرير حركه</span></a>
+    <a href="../pages/tayar.html" class="sidebar-link"><span>تطبيق الطيار</span></a>
+  </div>
 
-      <a href="customers.html" class="sidebar-link">
-        <img
-          src="../icons/customer-512.png"
-          width="32"
-          height="32"
-          alt="Customers Icon"
-        />
-        <span>الحسابات</span>
-      </a>
+  <div id="overlay" onclick="toggleSidebar()"></div>
 
-      <a href="products.html" class="sidebar-link">
-        <img
-          src="../icons/products.png"
-          width="32"
-          height="32"
-          alt="Products Icon"
-        />
-        <span>المنتجات</span>
-      </a>
-
-      <a href="sales.html" class="sidebar-link">
-        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-        <span>المبيعات</span>
-      </a>
-
-      <a href="purchases.html" class="sidebar-link">
-        <img
-          src="../icons/purchases.png"
-          width="32"
-          height="32"
-          alt="Purchases Icon"
-        />
-        <span>المشتريات</span>
-      </a>
-
-      <a href="receipts.html" class="sidebar-link">
-        <img
-          src="../icons/income-512.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>المقبوضات</span>
-      </a>
-
-      <a href="#" class="sidebar-link">
-        <img
-          src="../icons/accounting-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>المدفوعات</span>
-      </a>
-      <a href="income.html" class="sidebar-link">
-        <img
-          src="../icons/income.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>تسجيل الإيرادات</span>
-      </a>
-
-      <a href="expenses.html" class="sidebar-link">
-        <img
-          src="../icons/expenses.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>تسجيل المصروفات</span>
-      </a>
-      <a href="cash.html" class="sidebar-link">
-        <img
-          src="../icons/icon-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>الصندوق الرئيسي</span>
-      </a>
-
-      <a href="profit.html" class="sidebar-link">
-        <img
-          src="../icons/profit.png"
-          width="32"
-          height="32"
-          alt="Profit Icon"
-        />
-        <span>تقارير الأرباح</span>
-      </a>
-
-      <a href="../pages/dashboard.html" class="sidebar-link">
-        <img
-          src="../icons/dashboard.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تقرير حركه</span>
-      </a>
-      <a href="../pages/tayar.html" class="sidebar-link">
-        <img
-          src="../icons/delivery.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تطبيق الطيار</span>
-      </a>
-    </div>
-
-    <div id="overlay" onclick="toggleSidebar()"></div>
-
-    <div class="main">
-      <div class="card">
-        <h5>📝 إضافة منتج جديد</h5>
-        <div class="form-row">
-          <label>إسم المنتج</label>
-          <input id="productName" placeholder="إسم المنتج" />
-          <label>رصيد أول المدة</label>
-          <input
-            id="productQty"
-            type="number"
-            placeholder="الكمية الإفتتاحية ( ان وجدت )"
-          />
-          <label>الوحدة</label>
-          <select id="productUnit">
-            <option disabled selected>الوحدة</option>
-            <option>قطعة</option>
-            <option>علبة</option>
-            <option>كرتونة</option>
-            <option>كجم</option>
-            <option>لتر</option>
-          </select>
-          <label>سعر البيع</label>
-          <input id="productPrice" type="number" placeholder="سعر البيع" />
-          <label>سعر الشراء</label>
-          <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
-          <button id="addProductBtn">💾 حفظ</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h5>📋 قائمة المنتجات</h5>
-        <div class="form-row">
-          <input id="searchProduct" placeholder="🔍 بحث في المنتجات..." />
-        </div>
-        <div class="table-scroll">
-          <table id="productsTable">
-            <thead>
-              <tr>
-                <th>م</th>
-                <th>المنتج</th>
-                <th>الكمية</th>
-                <th>الوحدة</th>
-                <th>بيع</th>
-                <th>شراء</th>
-                <th>الإجمالي</th>
-                <th>المزيد</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modals -->
-
-    <!-- Success Modal -->
-    <div id="successModal" class="modal-overlay">
-      <div class="modal-box success-box">
-        <h3>✔️ نجاح</h3>
-        <p id="successMessage"></p>
-        <button onclick="closeSuccessModal()">حسناً</button>
-      </div>
-    </div>
-
-    <div id="appModal" class="modal-overlay">
-      <div class="modal-box">
-        <h3 id="modalTitle">تنبيه</h3>
-        <p id="modalMessage"></p>
-        <button onclick="closeModal()">حسناً</button>
-      </div>
-    </div>
-
-    <div id="editModal" class="modal-overlay">
-      <div class="modal-box">
-        <h3>تعديل المنتج</h3>
-
-        <label>اسم المنتج</label>
-        <input id="editProductName" />
-
-        <label>الكمية الافتتاحية</label>
-        <input id="editProductQty" type="number" />
-
+  <div class="main">
+    <div class="card">
+      <h5>إضافة منتج جديد</h5>
+      <div class="form-row">
+        <label>إسم المنتج</label>
+        <input id="productName" placeholder="إسم المنتج" />
+        <label>رصيد أول المدة</label>
+        <input id="productQty" type="number" placeholder="الكمية الإفتتاحية ( ان وجدت )" />
         <label>الوحدة</label>
-        <select id="editProductUnit">
-          <option value="قطعة">قطعة</option>
-          <option value="علبة">علبة</option>
-          <option value="كرتونة">كرتونة</option>
-          <option value="كجم">كجم</option>
-          <option value="لتر">لتر</option>
+        <select id="productUnit">
+          <option disabled selected>الوحدة</option>
+          <option>قطعة</option>
+          <option>علبة</option>
+          <option>كرتونة</option>
+          <option>كجم</option>
+          <option>لتر</option>
         </select>
-
         <label>سعر البيع</label>
-        <input id="editProductPrice" type="number" />
-
+        <input id="productPrice" type="number" placeholder="سعر البيع" />
         <label>سعر الشراء</label>
-        <input id="editProductBuyPrice" type="number" />
-
-        <button onclick="saveProductEdit()">حفظ</button>
-        <button class="cancel" onclick="closeEditModal()">إلغاء</button>
+        <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
+        <button id="addProductBtn">💾 حفظ</button>
       </div>
     </div>
 
-    <div id="deleteModal" class="modal-overlay">
-      <div class="modal-box">
-        <h3>تأكيد الحذف</h3>
-        <p>هل أنت متأكد؟</p>
-        <button onclick="confirmDelete()">حذف</button>
-        <button class="cancel" onclick="closeDeleteModal()">إلغاء</button>
+    <div class="card">
+      <h5>قائمة المنتجات</h5>
+      <div class="form-row">
+        <input id="searchProduct" placeholder="🔍 بحث في المنتجات..." />
+      </div>
+      <div class="table-scroll">
+        <table id="productsTable">
+          <thead>
+            <tr>
+              <th>م</th>
+              <th>المنتج</th>
+              <th>الكمية</th>
+              <th>الوحدة</th>
+              <th>بيع</th>
+              <th>شراء</th>
+              <th>الإجمالي</th>
+              <th>المزيد</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-    <!-- Product Movement Modal -->
-    <div id="productMovementModal" class="modal-overlay">
-      <div class="modal-card">
-        <h3>حركة الصنف</h3>
-        <p
-          id="movementProductName"
-          style="
+  <!-- Modals -->
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-box success-box">
+      <h3>✔️ نجاح</h3>
+      <p id="successMessage"></p>
+      <button onclick="closeSuccessModal()">حسناً</button>
+    </div>
+  </div>
+
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3 id="modalTitle">تنبيه</h3>
+      <p id="modalMessage"></p>
+      <button onclick="closeModal()">حسناً</button>
+    </div>
+  </div>
+
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3>تعديل المنتج</h3>
+
+      <label>اسم المنتج</label>
+      <input id="editProductName" />
+
+      <label>الكمية الافتتاحية</label>
+      <input id="editProductQty" type="number" />
+
+      <label>الوحدة</label>
+      <select id="editProductUnit">
+        <option value="قطعة">قطعة</option>
+        <option value="علبة">علبة</option>
+        <option value="كرتونة">كرتونة</option>
+        <option value="كجم">كجم</option>
+        <option value="لتر">لتر</option>
+      </select>
+
+      <label>سعر البيع</label>
+      <input id="editProductPrice" type="number" />
+
+      <label>سعر الشراء</label>
+      <input id="editProductBuyPrice" type="number" />
+
+      <button onclick="saveProductEdit()">حفظ</button>
+      <button class="cancel" onclick="closeEditModal()">إلغاء</button>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3>تأكيد الحذف</h3>
+      <p>هل أنت متأكد؟</p>
+      <button onclick="confirmDelete()">حذف</button>
+      <button class="cancel" onclick="closeDeleteModal()">إلغاء</button>
+    </div>
+  </div>
+
+  <!-- Product Movement Modal -->
+  <div id="productMovementModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3>حركة الصنف</h3>
+      <p id="movementProductName" style="
             text-align: center;
             font-weight: bold;
             margin-bottom: 15px;
             color: #38bdf8;
-          "
-        ></p>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>التاريخ</th>
-                <th>نوع العملية</th>
-                <th>كمية</th>
-                <th>الرصيد بعد العملية</th>
-              </tr>
-            </thead>
-            <tbody id="movementBody"></tbody>
-          </table>
-        </div>
-        <div style="text-align: center; margin-top: 15px">
-          <button onclick="closeProductMovementModal()">إغلاق</button>
-        </div>
+          "></p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>التاريخ</th>
+              <th>نوع العملية</th>
+              <th>كمية</th>
+              <th>الرصيد بعد العملية</th>
+            </tr>
+          </thead>
+          <tbody id="movementBody"></tbody>
+        </table>
+      </div>
+      <div style="text-align: center; margin-top: 15px">
+        <button onclick="closeProductMovementModal()">إغلاق</button>
       </div>
     </div>
+  </div>
 
-    <script>
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("overlay");
-      function toggleSidebar() {
-        sidebar.classList.toggle("show");
-        overlay.classList.toggle("show");
-      }
-    </script>
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    function toggleSidebar() {
+      sidebar.classList.toggle("show");
+      overlay.classList.toggle("show");
+    }
+  </script>
 
-    <script src="../js/data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/products.js"></script>
-  </body>
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/products.js"></script>
+</body>
+
 </html>
