@@ -10,26 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
     rel="stylesheet" />
   <style>
-    :root {
-      --primary: #0f766e;
-      /* أخضر احترافي */
-      --primary-dark: #115e59;
-      --primary-light: #14b8a6;
-
-      --bg-main: #020617;
-      /* خلفية الصفحة */
-      --bg-card: #12201a;
-      /* خلفية الكارت */
-      --bg-soft: #162a20;
-      /* عناصر داخلية */
-
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-
-      --border: #1f3a2f;
-      --danger: #dc2626;
-      --success: #16a34a;
-    }
 
     * {
       box-sizing: border-box;
@@ -39,7 +19,7 @@
       margin: 0;
       font-family: "Cairo", sans-serif;
       background: #020617;
-      color: var(--text-main);
+      color: #f1f5f9;
     }
 
     .header {
@@ -188,18 +168,10 @@
     }
 
     h5 {
-      font-family: Cairo;
       margin: 0 0 15px;
       text-align: center;
       margin-top: 5px;
       color: #cbb884;
-    }
-
-    @media (min-width: 768px) {
-      h5 {
-        text-align: right;
-        padding: 15px;
-      }
     }
 
     .form-row {
@@ -251,7 +223,7 @@
 
     input:focus,
     select:focus {
-      border-color: var(--primary-light);
+      border-color: #14b8a6;
       box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
     }
 

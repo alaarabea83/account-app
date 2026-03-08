@@ -1,754 +1,803 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المنتجات</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>المنتجات</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" href="../icons/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" href="../icons/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #1f3729;
+        --primary-light: #2563eb;
+        --success: #16a34a;
+        --danger: #dc2626;
+        --warning: #f59e0b;
 
-  <style>
-    :root {
-      --primary: #1f3729;
-      --primary-light: #2563eb;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --warning: #f59e0b;
+        --bg: #162a20;
+        --card: #162a20;
+        --card-light: #f8fafc;
 
-      --bg: #162A20;
-      --card: #162A20;
-      --card-light: #f8fafc;
+        --text: #ffffff;
+        --text-muted: #6b7280;
 
-      --text: #ffffff;
-      --text-muted: #6b7280;
+        --border: #e5e7eb;
+      }
 
-      --border: #e5e7eb;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      /* ===== Body (Mobile First) ===== */
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: #020617;
+        color: #f1f5f9;
+      }
 
-    /* ===== Body (Mobile First) ===== */
-    body {
-      margin: 0;
-      font-family: Tajawal;
-      background: var(--card);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+      /* ===== Header ===== */
+      .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 60px;
+        background: #1e40af;
+        backdrop-filter: blur(8px);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px;
+        z-index: 1002;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      }
 
-    /* ===== Header ===== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-      z-index: 1002;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
+      .header h1 {
+        font-size: 18px;
+        margin: 40px;
+      }
 
-    .header h1 {
-      font-size: 18px;
-      margin: 40px;
-    }
+      .menu-toggle {
+        position: fixed;
+        right: 12px;
+        z-index: 1001;
+        background: #15803d;
+        color: #fff;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 20px;
+      }
 
-    .menu-toggle {
-      position: fixed;
-      right: 12px;
-      z-index: 1001;
-      background: white;
-      color: #000;
-      border: none;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    /* ===== Sidebar ===== */
-    .sidebar {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      width: 260px;
-      height: calc(100dvh - 60px);
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: 0.3s;
-      z-index: 1001;
-      overflow-y: auto;
-      scrollbar-width: none;
-      font-family: "Cairo", sans-serif;
-      font-weight: 600;
-      padding: 20px 20px 40px 20px;
-    }
-
-    .sidebar.show {
-      right: 0;
-    }
-
-    .sidebar a,
-    .sidebar button,
-    .sidebar div {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #1e293b;
-      border-radius: 8px;
-      text-align: center;
-      color: white;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .sidebar a:hover,
-    .sidebar button:hover {
-      background: #334155;
-    }
-
-    /* عناوين داخل السايدبار */
-    .sidebar h2 {
-      text-align: center;
-      color: #a78bfa;
-      margin-bottom: 10px;
-    }
-
-    /* ===== Overlay ===== */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 1000;
-    }
-
-    #overlay.show {
-      display: block;
-    }
-
-    /* روابط السايدبار */
-    .sidebar-link {
-      display: flex;
-      flex-direction: column;
-      /* عمودياً */
-      align-items: center;
-      /* تمركز النص تحت الأيقونة */
-      justify-content: center;
-      gap: 6px;
-      /* مسافة متساوية بين الأيقونة والنص */
-      padding: 12px;
-      text-decoration: none;
-      color: #cbd5f5;
-      border-radius: 10px;
-      transition: 0.2s;
-    }
-
-    .sidebar-link img {
-      display: block;
-    }
-
-    .sidebar-link:hover {
-      background: var(--primary, #2563eb);
-      color: white;
-    }
-
-    /* ===== Mobile ===== */
-    @media (max-width: 768px) {
       .sidebar {
-        right: -260px;
-        /* مخفي افتراضيًا */
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 260px;
+        height: calc(100dvh - 60px);
+        background: #1e293b;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s;
+        z-index: 1001;
+        overflow-y: auto;
+        scrollbar-width: none;
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        padding: 20px 20px 40px 20px;
       }
 
       .sidebar.show {
         right: 0;
-        /* يظهر عند الضغط على التوجل */
-      }
-    }
-
-    /* ===== Main ===== */
-    .main {
-      padding: 80px 15px 20px;
-    }
-
-    /* ===== Cards ===== */
-    .card {
-      background: var(--primary);
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-      border: 1px solid #2E5240;
-    }
-
-    h5 {
-      font-family: Cairo;
-      margin-bottom: 15px;
-      color: var(--secondary);
-    }
-
-    /* ===== Forms ===== */
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      background: var(--primary);
-      border-radius: 8px;
-      padding: 35px;
-      margin-bottom: 10px;
-      color: #000;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-      border: 1px solid #2E5240;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      background: #f8fafc;
-      border: 1px solid #334155;
-      color: #000;
-      font-size: 14px;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    button {
-      border: none;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: #21618c;
-      color: var(--text);
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto;
-      max-width: 120px;
-      margin: 5px auto;
-    }
-
-    .form-row select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      background: #f8fafc;
-      border: 1px solid #334155;
-      color: #000;
-      font-size: 14px;
-    }
-
-    .form-row select:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .form-row label {
-      color: white;
-    }
-
-    /* ===== Search ===== */
-    #searchProduct {
-      margin-bottom: 5px;
-    }
-
-    /* ===== Table ===== */
-    .table-scroll {
-      overflow: auto;
-      scrollbar-width: none;
-      max-height: 400px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Webkit */
-    .table-scroll::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    .table-scroll::-webkit-scrollbar-thumb {
-      background: blue;
-      border-radius: 10px;
-    }
-
-    .table-scroll::-webkit-scrollbar-track {
-      background: var(--primary);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      background: #162A20;
-      color: #e5e7eb;
-      padding: 12px;
-      text-align: center;
-    }
-
-    td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid #2E5240;
-    }
-
-    .table-total-row {
-      background: #243F31;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .table-total-row td {
-      padding: 14px;
-    }
-
-    /* ===== Modals ===== */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-
-    .modal-overlay.show {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 12px;
-      width: 95%;
-      max-width: 450px;
-    }
-
-    .modal-box h3 {
-      margin-bottom: 10px;
-      text-align: center;
-      color: var(--secondary);
-    }
-
-    .modal-box input,
-    .modal-box select {
-      width: 100%;
-      margin-top: 8px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #4b5563;
-      background: var(--card);
-      color: var(--text);
-    }
-
-    .modal-box button {
-      margin-top: 12px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      background: #2e86c1;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .modal-box button.cancel {
-      background: #e74c3c;
-    }
-
-    .modal-card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 16px;
-      width: 95%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
-      scrollbar-width: none;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    .modal-box p,
-    .modal-card p,
-    .modal-box span,
-    .modal-card span,
-    .modal-box div {
-      color: var(--text);
-      font-family: "Cairo", sans-serif;
-      line-height: 1.6;
-    }
-
-    .success-box {
-      text-align: center;
-      border: 2px solid #22c55e;
-    }
-
-    .success-box h3 {
-      color: #22c55e;
-    }
-
-    .success-box button {
-      background: #22c55e;
-      max-width: 150px;
-    }
-
-    td.actions {
-      white-space: nowrap;
-    }
-
-    .actions {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-
-    .actions button {
-      width: 100%;
-      max-width: 70px;
-      height: 32px;
-      padding: 0 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    /* تعديل */
-    .btn-edit {
-      background: #3b82f6;
-      color: #fff;
-    }
-
-    /* حذف */
-    .btn-delete {
-      background: #dc2626;
-      color: #fff;
-    }
-
-    /* حركة صنف */
-    .btn-info {
-      background: #16a34a;
-      color: #fff;
-    }
-
-    /* الزر الرئيسي داخل المودال */
-    .modal-card button {
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: none;
-      background: #2e86c1;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: 0.2s;
-    }
-
-    .modal-card button:hover {
-      background: #117a8b;
-    }
-
-    /* زر الإلغاء داخل المودال */
-    .modal-card button.cancel {
-      background: #e74c3c;
-      color: #fff;
-    }
-
-    .modal-card button.cancel:hover {
-      background: #a71d2a;
-    }
-
-    /* ===== Desktop ===== */
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
       }
 
-      .sidebar {
-        right: 0;
+      .sidebar a,
+      .sidebar button,
+      .sidebar div {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: #1e293b;
+        box-shadow: 0 3px 25px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        border: 1px solid #2c3e50;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .sidebar a:hover,
+      .sidebar button:hover {
+        background: #334155;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        color: #a78bfa;
+        margin-bottom: 10px;
       }
 
       #overlay {
-        display: none !important;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 1000;
+      }
+
+      #overlay.show {
+        display: block;
+      }
+
+      .sidebar-link {
+        background: transparent;
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 12px;
+        text-decoration: none;
+        color: #cbd5f5;
+        border-radius: 10px;
+        transition: 0.2s;
+      }
+
+      .sidebar-link img {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          right: -260px;
+        }
+
+        .sidebar.show {
+          right: 0;
+        }
       }
 
       .main {
-        margin-right: 260px;
-        padding: 80px 25px;
+        padding: 80px 15px 20px;
       }
+
+      /* ===== Cards ===== */
+      .card {
+        background: #0f172a;
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        transition: 0.3s;
+      }
+
+      h5 {
+        margin: 0 0 15px;
+        text-align: center;
+        margin-top: 5px;
+        color: #cbb884;
+      }
+
+      /* ===== Forms ===== */
 
       .form-row {
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        border-radius: 8px;
+        padding: 35px;
+        margin-bottom: 10px;
+        color: #000;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
       }
 
-      .form-row input,
+      input {
+        width: 100%;
+        padding: 10px;
+        background: #f8fafc;
+        color: #1f2a44;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: var(--primary);
+      }
+
+      .form-row label {
+        font-size: 16px;
+        color: #cbb884;
+      }
+
+      button {
+        border: none;
+        background: #15803d;
+        color: white;
+        border-radius: 10px;
+        padding: 14px 25px;
+        font-weight: 600;
+        transition: 0.3s;
+        font-size: 16px;
+        cursor: pointer;
+        width: auto;
+        max-width: 120px;
+        margin: 5px auto;
+      }
+
       .form-row select {
-        flex: 1;
+        width: 100%;
+        padding: 10px;
+        background: #f8fafc;
+        color: #1f2a44;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+
+      .form-row select:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      /* ===== Table ===== */
+      .table-scroll {
+        overflow: auto;
+        scrollbar-width: none;
+        max-height: 400px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+
+      th {
+        position: sticky;
+        top: 0;
+        background: #1e293b;
+        color: #cbb884;
+        padding: 12px;
+        text-align: center;
+      }
+
+      td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #2c3e50;
+      }
+
+      .table-total-row {
+        background: #16202a;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .table-total-row td {
+        padding: 14px;
+      }
+
+      /* ===== Modals ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .modal-overlay.show {
+        display: flex;
+      }
+
+      .modal-box {
+        background: #0f172a;
+        padding: 20px;
+        border-radius: 12px;
+        width: 95%;
+        max-width: 450px;
+      }
+
+      .modal-box h3 {
+        margin-bottom: 10px;
+        text-align: center;
+        color: var(--secondary);
+      }
+
+      .modal-box input,
+      .modal-box select {
+        width: 100%;
+        margin-top: 8px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #4b5563;
+        background: #f8fafc;
+        color: #000;
+      }
+
+      .modal-box button {
+        margin-top: 12px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        background: #2e86c1;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .modal-box button.cancel {
+        background: #e74c3c;
+      }
+
+      .modal-card {
+        background: #0f172a;
+        padding: 20px;
+        border-radius: 16px;
+        width: 95%;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-box p,
+      .modal-card p,
+      .modal-box span,
+      .modal-card span,
+      .modal-box div {
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        line-height: 1.6;
+      }
+
+      .success-box {
+        text-align: center;
+        border: 2px solid #22c55e;
+      }
+
+      .success-box h3 {
+        color: #22c55e;
+      }
+
+      .success-box button {
+        background: #22c55e;
+        max-width: 150px;
+      }
+
+      td.actions {
+        white-space: nowrap;
+      }
+
+      .actions {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: nowrap;
       }
 
       .actions button {
-        margin: 0;
+        width: 100%;
+        max-width: 70px;
+        height: 32px;
+        padding: 0 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div class="header">
-    <h1>إدارة المخزون</h1>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  </div>
+      /* تعديل */
+      .btn-edit {
+        background: #3b82f6;
+        color: #fff;
+      }
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <!-- رصيد الخزينة -->
-    <div class="menu-item cash-item">
-      💰 رصيد الخزينة:
-      <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
+      /* حذف */
+      .btn-delete {
+        background: #dc2626;
+        color: #fff;
+      }
+
+      /* حركة صنف */
+      .btn-info {
+        background: #16a34a;
+        color: #fff;
+      }
+
+      /* الزر الرئيسي داخل المودال */
+      .modal-card button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        background: #2e86c1;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 12px;
+        transition: 0.2s;
+      }
+
+      .modal-card button:hover {
+        background: #117a8b;
+      }
+
+      /* زر الإلغاء داخل المودال */
+      .modal-card button.cancel {
+        background: #e74c3c;
+        color: #fff;
+      }
+
+      .modal-card button.cancel:hover {
+        background: #a71d2a;
+      }
+
+      /* ===== Desktop ===== */
+      @media (min-width: 768px) {
+        .menu-toggle {
+          display: none;
+        }
+
+        .sidebar {
+          right: 0;
+        }
+
+        #overlay {
+          display: none !important;
+        }
+
+        .main {
+          margin-right: 260px;
+          padding: 80px 25px;
+        }
+
+        .form-row {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .form-row input,
+        .form-row select {
+          flex: 1;
+        }
+
+        .actions button {
+          margin: 0;
+        }
+      }
+
+      .header-cash {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        backdrop-filter: blur(5px);
+        transition: 0.3s;
+      }
+
+      .header-cash span {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>المنتجات</h1>
+      <div class="header-cash">
+        💰
+        <span id="cashBalance">0.00 جنيه</span>
+      </div>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     </div>
 
-    <a href="../index.html" class="sidebar-link">
-      <img src="../icons/home.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>الصفحة الرئيسية</span>
-    </a>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-link">
+        <img
+          src="../icons/home.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>الصفحة الرئيسية</span>
+      </a>
 
-    <a href="customers.html" class="sidebar-link">
-      <img src="../icons/customer-512.png" width="32" height="32" alt="Customers Icon" />
-      <span>الحسابات</span>
-    </a>
+      <a href="customers.html" class="sidebar-link">
+        <img
+          src="../icons/customer-512.png"
+          width="32"
+          height="32"
+          alt="Customers Icon"
+        />
+        <span>الحسابات</span>
+      </a>
 
-    <a href="products.html" class="sidebar-link">
-      <img src="../icons/products.png" width="32" height="32" alt="Products Icon" />
-      <span>المخزون</span>
-    </a>
+      <a href="products.html" class="sidebar-link">
+        <img
+          src="../icons/products.png"
+          width="32"
+          height="32"
+          alt="Products Icon"
+        />
+        <span>المنتجات</span>
+      </a>
 
-    <a href="sales.html" class="sidebar-link">
-      <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-      <span>المبيعات</span>
-    </a>
+      <a href="sales.html" class="sidebar-link">
+        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
+        <span>المبيعات</span>
+      </a>
 
-    <a href="purchases.html" class="sidebar-link">
-      <img src="../icons/purchases.png" width="32" height="32" alt="Purchases Icon" />
-      <span>المشتريات</span>
-    </a>
+      <a href="purchases.html" class="sidebar-link">
+        <img
+          src="../icons/purchases.png"
+          width="32"
+          height="32"
+          alt="Purchases Icon"
+        />
+        <span>المشتريات</span>
+      </a>
 
-    <a href="receipts.html" class="sidebar-link">
-      <img src="../icons/income-512.png" width="32" height="32" alt="Income Icon" />
-      <span>المقبوضات</span>
-    </a>
+      <a href="receipts.html" class="sidebar-link">
+        <img
+          src="../icons/income-512.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>المقبوضات</span>
+      </a>
 
-    <a href="#" class="sidebar-link">
-      <img src="../icons/accounting-512.png" width="32" height="32" alt="Expenses Icon" />
-      <span>المدفوعات</span>
-    </a>
-    <a href="income.html" class="sidebar-link">
-      <img src="../icons/income.png" width="32" height="32" alt="Income Icon" />
-      <span>تسجيل الإيرادات</span>
-    </a>
+      <a href="#" class="sidebar-link">
+        <img
+          src="../icons/accounting-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>المدفوعات</span>
+      </a>
+      <a href="income.html" class="sidebar-link">
+        <img
+          src="../icons/income.png"
+          width="32"
+          height="32"
+          alt="Income Icon"
+        />
+        <span>تسجيل الإيرادات</span>
+      </a>
 
-    <a href="expenses.html" class="sidebar-link">
-      <img src="../icons/expenses.png" width="32" height="32" alt="Expenses Icon" />
-      <span>تسجيل المصروفات</span>
-    </a>
-    <a href="cash.html" class="sidebar-link">
-      <img src="../icons/icon-512.png" width="32" height="32" alt="Expenses Icon" />
-      <span>الصندوق الرئيسي</span>
-    </a>
+      <a href="expenses.html" class="sidebar-link">
+        <img
+          src="../icons/expenses.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>تسجيل المصروفات</span>
+      </a>
+      <a href="cash.html" class="sidebar-link">
+        <img
+          src="../icons/icon-512.png"
+          width="32"
+          height="32"
+          alt="Expenses Icon"
+        />
+        <span>الصندوق الرئيسي</span>
+      </a>
 
-    <a href="profit.html" class="sidebar-link">
-      <img src="../icons/profit.png" width="32" height="32" alt="Profit Icon" />
-      <span>تقارير الأرباح</span>
-    </a>
+      <a href="profit.html" class="sidebar-link">
+        <img
+          src="../icons/profit.png"
+          width="32"
+          height="32"
+          alt="Profit Icon"
+        />
+        <span>تقارير الأرباح</span>
+      </a>
 
-    <a href="../pages/dashboard.html" class="sidebar-link">
-      <img src="../icons/dashboard.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>تقرير حركه</span>
-    </a>
-    <a href="../pages/tayar.html" class="sidebar-link">
-      <img src="../icons/delivery.png" width="32" height="32" alt="Dashboard Icon" />
-      <span>تطبيق الطيار</span>
-    </a>
-  </div>
+      <a href="../pages/dashboard.html" class="sidebar-link">
+        <img
+          src="../icons/dashboard.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>تقرير حركه</span>
+      </a>
+      <a href="../pages/tayar.html" class="sidebar-link">
+        <img
+          src="../icons/delivery.png"
+          width="32"
+          height="32"
+          alt="Dashboard Icon"
+        />
+        <span>تطبيق الطيار</span>
+      </a>
+    </div>
 
-  <div id="overlay" onclick="toggleSidebar()"></div>
+    <div id="overlay" onclick="toggleSidebar()"></div>
 
-  <div class="main">
-    <div class="card">
-      <h5>📝 إضافة منتج جديد</h5>
-      <div class="form-row">
-        <label>إسم المنتج</label>
-        <input id="productName" placeholder="إسم المنتج" />
-        <label>رصيد أول المدة</label>
-        <input id="productQty" type="number" placeholder="الكمية الإفتتاحية ( ان وجدت )" />
+    <div class="main">
+      <div class="card">
+        <h5>📝 إضافة منتج جديد</h5>
+        <div class="form-row">
+          <label>إسم المنتج</label>
+          <input id="productName" placeholder="إسم المنتج" />
+          <label>رصيد أول المدة</label>
+          <input
+            id="productQty"
+            type="number"
+            placeholder="الكمية الإفتتاحية ( ان وجدت )"
+          />
+          <label>الوحدة</label>
+          <select id="productUnit">
+            <option disabled selected>الوحدة</option>
+            <option>قطعة</option>
+            <option>علبة</option>
+            <option>كرتونة</option>
+            <option>كجم</option>
+            <option>لتر</option>
+          </select>
+          <label>سعر البيع</label>
+          <input id="productPrice" type="number" placeholder="سعر البيع" />
+          <label>سعر الشراء</label>
+          <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
+          <button id="addProductBtn">💾 حفظ</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h5>📋 قائمة المنتجات</h5>
+        <div class="form-row">
+          <input id="searchProduct" placeholder="🔍 بحث في المنتجات..." />
+        </div>
+        <div class="table-scroll">
+          <table id="productsTable">
+            <thead>
+              <tr>
+                <th>م</th>
+                <th>المنتج</th>
+                <th>الكمية</th>
+                <th>الوحدة</th>
+                <th>بيع</th>
+                <th>شراء</th>
+                <th>الإجمالي</th>
+                <th>المزيد</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
+      <div class="modal-box success-box">
+        <h3>✔️ نجاح</h3>
+        <p id="successMessage"></p>
+        <button onclick="closeSuccessModal()">حسناً</button>
+      </div>
+    </div>
+
+    <div id="appModal" class="modal-overlay">
+      <div class="modal-box">
+        <h3 id="modalTitle">تنبيه</h3>
+        <p id="modalMessage"></p>
+        <button onclick="closeModal()">حسناً</button>
+      </div>
+    </div>
+
+    <div id="editModal" class="modal-overlay">
+      <div class="modal-box">
+        <h3>تعديل المنتج</h3>
+
+        <label>اسم المنتج</label>
+        <input id="editProductName" />
+
+        <label>الكمية الافتتاحية</label>
+        <input id="editProductQty" type="number" />
+
         <label>الوحدة</label>
-        <select id="productUnit">
-          <option disabled selected>الوحدة</option>
-          <option>قطعة</option>
-          <option>علبة</option>
-          <option>كرتونة</option>
-          <option>كجم</option>
-          <option>لتر</option>
+        <select id="editProductUnit">
+          <option value="قطعة">قطعة</option>
+          <option value="علبة">علبة</option>
+          <option value="كرتونة">كرتونة</option>
+          <option value="كجم">كجم</option>
+          <option value="لتر">لتر</option>
         </select>
+
         <label>سعر البيع</label>
-        <input id="productPrice" type="number" placeholder="سعر البيع" />
+        <input id="editProductPrice" type="number" />
+
         <label>سعر الشراء</label>
-        <input id="productBuyPrice" type="number" placeholder="سعر الشراء" />
-        <button id="addProductBtn">💾 حفظ</button>
+        <input id="editProductBuyPrice" type="number" />
+
+        <button onclick="saveProductEdit()">حفظ</button>
+        <button class="cancel" onclick="closeEditModal()">إلغاء</button>
       </div>
     </div>
 
-    <div class="card">
-      <h5>📋 قائمة المنتجات</h5>
-      <div class="form-row">
-        <input id="searchProduct" placeholder="🔍 بحث في المنتجات..." />
-      </div>
-      <div class="table-scroll">
-        <table id="productsTable">
-          <thead>
-            <tr>
-              <th>م</th>
-              <th>المنتج</th>
-              <th>الكمية</th>
-              <th>الوحدة</th>
-              <th>بيع</th>
-              <th>شراء</th>
-              <th>الإجمالي</th>
-              <th>المزيد</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+    <div id="deleteModal" class="modal-overlay">
+      <div class="modal-box">
+        <h3>تأكيد الحذف</h3>
+        <p>هل أنت متأكد؟</p>
+        <button onclick="confirmDelete()">حذف</button>
+        <button class="cancel" onclick="closeDeleteModal()">إلغاء</button>
       </div>
     </div>
-  </div>
 
-  <!-- Modals -->
-
-  <!-- Success Modal -->
-  <div id="successModal" class="modal-overlay">
-    <div class="modal-box success-box">
-      <h3>✔️ نجاح</h3>
-      <p id="successMessage"></p>
-      <button onclick="closeSuccessModal()">حسناً</button>
-    </div>
-  </div>
-
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage"></p>
-      <button onclick="closeModal()">حسناً</button>
-    </div>
-  </div>
-
-  <div id="editModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3>تعديل المنتج</h3>
-
-      <label>اسم المنتج</label>
-      <input id="editProductName" />
-
-      <label>الكمية الافتتاحية</label>
-      <input id="editProductQty" type="number" />
-
-      <label>الوحدة</label>
-      <select id="editProductUnit">
-        <option value="قطعة">قطعة</option>
-        <option value="علبة">علبة</option>
-        <option value="كرتونة">كرتونة</option>
-        <option value="كجم">كجم</option>
-        <option value="لتر">لتر</option>
-      </select>
-
-      <label>سعر البيع</label>
-      <input id="editProductPrice" type="number" />
-
-      <label>سعر الشراء</label>
-      <input id="editProductBuyPrice" type="number" />
-
-      <button onclick="saveProductEdit()">حفظ</button>
-      <button class="cancel" onclick="closeEditModal()">إلغاء</button>
-    </div>
-  </div>
-
-  <div id="deleteModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3>تأكيد الحذف</h3>
-      <p>هل أنت متأكد؟</p>
-      <button onclick="confirmDelete()">حذف</button>
-      <button class="cancel" onclick="closeDeleteModal()">إلغاء</button>
-    </div>
-  </div>
-
-  <!-- Product Movement Modal -->
-  <div id="productMovementModal" class="modal-overlay">
-    <div class="modal-card">
-      <h3>حركة الصنف</h3>
-      <p id="movementProductName" style="
+    <!-- Product Movement Modal -->
+    <div id="productMovementModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3>حركة الصنف</h3>
+        <p
+          id="movementProductName"
+          style="
             text-align: center;
             font-weight: bold;
             margin-bottom: 15px;
             color: #38bdf8;
-          "></p>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>نوع العملية</th>
-              <th>كمية</th>
-              <th>الرصيد بعد العملية</th>
-            </tr>
-          </thead>
-          <tbody id="movementBody"></tbody>
-        </table>
-      </div>
-      <div style="text-align: center; margin-top: 15px">
-        <button onclick="closeProductMovementModal()">إغلاق</button>
+          "
+        ></p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>نوع العملية</th>
+                <th>كمية</th>
+                <th>الرصيد بعد العملية</th>
+              </tr>
+            </thead>
+            <tbody id="movementBody"></tbody>
+          </table>
+        </div>
+        <div style="text-align: center; margin-top: 15px">
+          <button onclick="closeProductMovementModal()">إغلاق</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    function toggleSidebar() {
-      sidebar.classList.toggle("show");
-      overlay.classList.toggle("show");
-    }
-  </script>
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      function toggleSidebar() {
+        sidebar.classList.toggle("show");
+        overlay.classList.toggle("show");
+      }
+    </script>
 
-  <script src="../js/data.js"></script>
-  <script src="../js/common.js"></script>
-  <script src="../js/products.js"></script>
-</body>
-
+    <script src="../js/data.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/products.js"></script>
+  </body>
 </html>
