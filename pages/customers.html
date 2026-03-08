@@ -1,603 +1,658 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>سهل لإدارة الحسابات</title>
+    <link rel="icon" type="image/png" href="../icons/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <title>سهل لإدارة الحسابات</title>
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: #f8fafc;
+        color: #1e293b;
+      }
 
-    body {
-      margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #f8fafc;
-      color: #1e293b;
-    }
+      .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 60px;
+        background: #1466e0;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px;
+        z-index: 1002;
+        border-bottom: 1px solid #e2e8f0;
+      }
 
-    .header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 60px;
-      background: #1466e0;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-      z-index: 1002;
-      border-bottom: 1px solid #e2e8f0;
-    }
+      .header h1 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 40px;
+      }
 
-    .header h1 {
-      font-size: 18px;
-      font-weight: 700;
-      margin: 40px;
-    }
+      .menu-toggle {
+        position: fixed;
+        right: 12px;
+        z-index: 1001;
+        background: #22c55e;
+        color: #fff;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 20px;
+      }
 
-    .menu-toggle {
-      position: fixed;
-      right: 12px;
-      z-index: 1001;
-      background: #22c55e;
-      color: #fff;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 20px;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      width: 260px;
-      height: calc(100vh - 60px);
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: .3s;
-      z-index: 1001;
-      overflow-y: auto;
-      scrollbar-width: none;
-      border-left: 1px solid #e2e8f0;
-      padding: 20px 20px 40px 20px;
-    }
-
-    .sidebar.show {
-      right: 0;
-    }
-
-    .sidebar a,
-    .sidebar button,
-    .sidebar div {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #1466e0;
-      box-shadow: 0 3px 10px rgba(163, 175, 177, 0.4);
-      border-radius: 8px;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .sidebar a:hover,
-    .sidebar button:hover {
-      background: #1466e0;
-    }
-
-    .sidebar h2 {
-      text-align: center;
-      color: #a78bfa;
-      margin-bottom: 10px;
-    }
-
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 1000;
-    }
-
-    #overlay.show {
-      display: block;
-    }
-
-    .sidebar-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 12px;
-      text-decoration: none;
-      color: #475569;
-      border-radius: 10px;
-      transition: .2s;
-    }
-
-    .sidebar-link img {
-      display: block;
-    }
-
-
-    @media (max-width: 768px) {
       .sidebar {
-        right: -260px;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 260px;
+        height: calc(100vh - 60px);
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: 0.3s;
+        z-index: 1001;
+        overflow-y: auto;
+        scrollbar-width: none;
+        border-left: 1px solid #e2e8f0;
+        padding: 20px 20px 40px 20px;
       }
 
       .sidebar.show {
         right: 0;
       }
-    }
 
-    .main {
-      padding: 80px 15px 20px;
-    }
-
-    section {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 22px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
-    }
-
-    h5 {
-      margin: 0 0 15px;
-      text-align: center;
-      color: #2563eb;
-      font-size: 20px;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 10px;
-    }
-
-    .form-row input,
-    select {
-      flex: 1;
-      min-width: 140px;
-      background: #ffffff;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      transition: 0.2s;
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #d1d5db;
-      font-size: 14px;
-    }
-
-    .searchAccounts {
-      margin-bottom: 5px;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
-      outline: none;
-    }
-
-    .form-row label {
-      font-size: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .form-row {
-        flex-direction: column;
-      }
-    }
-
-    button {
-      border: none;
-      background: #22c55e;
-      color: white;
-      border-radius: 8px;
-      padding: 14px 25px;
-      font-weight: 600;
-      transition: 0.3s;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto;
-      max-width: 120px;
-      margin: 5px auto;
-    }
-
-    button:hover {
-      background: #16a34a;
-      transform: translateY(-2px);
-    }
-
-    .table-scroll {
-      overflow: scroll;
-      scrollbar-width: none;
-      max-height: 400px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      background: #1466e0;
-      color: #fff;
-      padding: 12px;
-      text-align: center;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    td {
-      padding: 12px;
-      text-align: center;
-      font-weight: bold;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    tr:hover {
-      background: #f9fafb;
-    }
-
-    .table-total-row td {
-      padding: 14px;
-      background: #0c3f8f;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    td.actions {
-      white-space: nowrap;
-    }
-
-    .actions {
-      display: flex;
-      gap: 3px;
-      justify-content: center;
-    }
-
-    .action-btn {
-      height: 30px;
-      padding: 0 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 13px;
-      color: white;
-    }
-
-    .action-btn.view {
-      background: #22c55e;
-    }
-
-    .action-btn.edit {
-      background: #3b82f6;
-    }
-
-    .action-btn.delete {
-      background: #ef4444;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .35);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-card {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 14px;
-      width: 95%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow: auto;
-      border: 1px solid #e2e8f0;
-    }
-
-    /* modal buttons */
-    .modal-actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      color: white;
-    }
-
-    .btn-save {
-      background: #22c55e;
-    }
-
-    .btn-delete {
-      background: #ef4444;
-    }
-
-    .btn-cancel {
-      background: #64748b;
-    }
-
-    .btn-info {
-      background: #3b82f6;
-    }
-
-    .header-cash {
-      background: rgba(255, 255, 255, .2);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: none;
+      .sidebar a,
+      .sidebar button,
+      .sidebar div {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: #1466e0;
+        box-shadow: 0 3px 10px rgba(163, 175, 177, 0.4);
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.2s;
       }
 
-      .sidebar {
-        right: 0;
+      .sidebar a:hover,
+      .sidebar button:hover {
+        background: #1466e0;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        color: #a78bfa;
+        margin-bottom: 10px;
       }
 
       #overlay {
-        display: none !important;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 1000;
+      }
+
+      #overlay.show {
+        display: block;
+      }
+
+      .sidebar-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 12px;
+        text-decoration: none;
+        color: #475569;
+        border-radius: 10px;
+        transition: 0.2s;
+      }
+
+      .sidebar-link img {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          right: -260px;
+        }
+
+        .sidebar.show {
+          right: 0;
+        }
       }
 
       .main {
-        margin-right: 260px;
-        padding: 80px 25px;
+        padding: 80px 15px 20px;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 22px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      h5 {
+        margin: 0 0 15px;
+        text-align: center;
+        color: #2563eb;
+        font-size: 20px;
       }
 
       .form-row {
-        flex-direction: row;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+      }
+
+      .form-row input,
+      select {
+        flex: 1;
+        min-width: 140px;
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        transition: 0.2s;
+        padding: 10px 12px;
+        font-size: 14px;
       }
 
       input,
-      button,
       select {
-        width: auto;
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+      }
+
+      .searchAccounts {
+        margin-bottom: 5px;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        outline: none;
+      }
+
+      .form-row label {
+        font-size: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          flex-direction: column;
+        }
       }
 
       button {
-        margin: 0;
+        border: none;
+        background: #16a34a;
+        color: white;
+        border-radius: 8px;
+        padding: 14px 25px;
+        font-weight: 600;
+        transition: 0.3s;
+        font-size: 16px;
+        cursor: pointer;
+        width: auto;
+        max-width: 120px;
+        margin: 5px auto;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div class="header">
-    <h1>الحسابات</h1>
-    <div class="header-cash">
-      💰
-      <span id="cashBalance">0.00 جنيه</span>
+      button:hover {
+        background: #22c55e;
+        transform: translateY(-2px);
+      }
+
+      .table-scroll {
+        overflow: scroll;
+        scrollbar-width: none;
+        max-height: 400px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+
+      th {
+        position: sticky;
+        top: 0;
+        background: #1466e0;
+        color: #fff;
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      td {
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      tr:hover {
+        background: #f9fafb;
+      }
+
+      .table-total-row td {
+        padding: 14px;
+        background: #1466e0;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      td.actions {
+        white-space: nowrap;
+      }
+
+      .actions {
+        display: flex;
+        gap: 3px;
+        justify-content: center;
+      }
+
+      .action-btn {
+        width: 100%;
+        max-width: 70px;
+        height: 32px;
+        padding: 0 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .action-btn.view {
+        background: #16a34a;
+      }
+
+      .action-btn.edit {
+        background: #3b82f6;
+      }
+
+      .action-btn.delete {
+        background: #ef4444;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 14px;
+        width: 95%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow: auto;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* modal buttons */
+      .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+      }
+
+      .btn-save {
+        background: #22c55e;
+      }
+
+      .btn-delete {
+        background: #ef4444;
+      }
+
+      .btn-cancel {
+        background: #64748b;
+      }
+
+      .btn-info {
+        background: #3b82f6;
+      }
+
+      .header-cash {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      @media (min-width: 768px) {
+        .menu-toggle {
+          display: none;
+        }
+
+        .sidebar {
+          right: 0;
+        }
+
+        #overlay {
+          display: none !important;
+        }
+
+        .main {
+          margin-right: 260px;
+          padding: 80px 25px;
+        }
+
+        .form-row {
+          flex-direction: row;
+        }
+
+        input,
+        button,
+        select {
+          width: auto;
+        }
+
+        button {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>الحسابات</h1>
+      <div class="header-cash">
+        💰
+        <span id="cashBalance">0.00 جنيه</span>
+      </div>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     </div>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-  </div>
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <a href="../index.html" class="sidebar-link"><img src="../icons/home.png" width="32" height="32" /><span>الصفحة
-        الرئيسية</span></a>
-    <a href="customers.html" class="sidebar-link"><img src="../icons/customer-512.png" width="32"
-        height="32" /><span>الحسابات</span></a>
-    <a href="products.html" class="sidebar-link"><img src="../icons/products.png" width="32"
-        height="32" /><span>المنتجات</span></a>
-    <a href="sales.html" class="sidebar-link"><img src="../icons/sales.png" width="32"
-        height="32" /><span>المبيعات</span></a>
-    <a href="purchases.html" class="sidebar-link"><img src="../icons/purchases.png" width="32"
-        height="32" /><span>المشتريات</span></a>
-    <a href="receipts.html" class="sidebar-link"><img src="../icons/income-512.png" width="32"
-        height="32" /><span>المقبوضات</span></a>
-    <a href="#" class="sidebar-link"><img src="../icons/accounting-512.png" width="32"
-        height="32" /><span>المدفوعات</span></a>
-    <a href="income.html" class="sidebar-link"><img src="../icons/income.png" width="32" height="32" /><span>تسجيل
-        الإيرادات</span></a>
-    <a href="expenses.html" class="sidebar-link"><img src="../icons/expenses.png" width="32" height="32" /><span>تسجيل
-        المصروفات</span></a>
-    <a href="cash.html" class="sidebar-link"><img src="../icons/icon-512.png" width="32" height="32" /><span>الصندوق
-        الرئيسي</span></a>
-    <a href="profit.html" class="sidebar-link"><img src="../icons/profit.png" width="32" height="32" /><span>تقارير
-        الأرباح</span></a>
-    <a href="../pages/dashboard.html" class="sidebar-link"><img src="../icons/dashboard.png" width="32"
-        height="32" /><span>تقرير حركه</span></a>
-    <a href="../pages/tayar.html" class="sidebar-link"><img src="../icons/delivery.png" width="32"
-        height="32" /><span>تطبيق الطيار</span></a>
-  </div>
-  <div id="overlay" onclick="toggleSidebar()"></div>
-  <!-- Main -->
-  <div class="main">
-    <section>
-      <!-- Add Customer -->
-      <div class="card">
-        <h5>📝 إضافة حساب جديد</h5>
-        <div class="form-row">
-          <label>إسم الحساب</label>
-          <input type="text" id="customerName" placeholder="العميل / المورد / الحساب" />
-          <label>الرصيد الإفتتاحي</label>
-          <input type="number" id="openingBalance" placeholder="الرصيد السابق ( ان وجد )" />
-          <label>نوع الحساب</label>
-          <select id="accountType" required>
-            <option value="" disabled selected>إختيار نوع الحساب</option>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <a href="../index.html" class="sidebar-link"
+        ><img src="../icons/home.png" width="32" height="32" /><span
+          >الصفحة الرئيسية</span
+        ></a
+      >
+      <a href="customers.html" class="sidebar-link"
+        ><img src="../icons/customer-512.png" width="32" height="32" /><span
+          >الحسابات</span
+        ></a
+      >
+      <a href="products.html" class="sidebar-link"
+        ><img src="../icons/products.png" width="32" height="32" /><span
+          >المنتجات</span
+        ></a
+      >
+      <a href="sales.html" class="sidebar-link"
+        ><img src="../icons/sales.png" width="32" height="32" /><span
+          >المبيعات</span
+        ></a
+      >
+      <a href="purchases.html" class="sidebar-link"
+        ><img src="../icons/purchases.png" width="32" height="32" /><span
+          >المشتريات</span
+        ></a
+      >
+      <a href="receipts.html" class="sidebar-link"
+        ><img src="../icons/income-512.png" width="32" height="32" /><span
+          >المقبوضات</span
+        ></a
+      >
+      <a href="#" class="sidebar-link"
+        ><img src="../icons/accounting-512.png" width="32" height="32" /><a
+          >المدفوعات</span
+        ></a
+      >
+      <a href="income.html" class="sidebar-link"
+        ><img src="../icons/income.png" width="32" height="32" /><span
+          >تسجيل الإيرادات</span
+        ></a
+      >
+      <a href="expenses.html" class="sidebar-link"
+        ><img src="../icons/expenses.png" width="32" height="32" /><span
+          >تسجيل المصروفات</span
+        ></a
+      >
+      <a href="cash.html" class="sidebar-link"
+        ><img src="../icons/icon-512.png" width="32" height="32" /><span
+          >الصندوق الرئيسي</span
+        ></a
+      >
+      <a href="profit.html" class="sidebar-link"
+        ><img src="../icons/profit.png" width="32" height="32" /><span
+          >تقارير الأرباح</span
+        ></a
+      >
+      <a href="../pages/dashboard.html" class="sidebar-link"
+        ><img src="../icons/dashboard.png" width="32" height="32" /><span
+          >تقرير حركه</span
+        ></a
+      >
+      <a href="../pages/tayar.html" class="sidebar-link"
+        ><img src="../icons/delivery.png" width="32" height="32" /><span
+          >تطبيق الطيار</span
+        ></a
+      >
+    </div>
+    <div id="overlay" onclick="toggleSidebar()"></div>
+    <!-- Main -->
+    <div class="main">
+      <section>
+        <!-- Add Customer -->
+        <div class="card">
+          <h5>📝 إضافة حساب جديد</h5>
+          <div class="form-row">
+            <label>إسم الحساب</label>
+            <input
+              type="text"
+              id="customerName"
+              placeholder="العميل / المورد / الحساب"
+            />
+            <label>الرصيد الإفتتاحي</label>
+            <input
+              type="number"
+              id="openingBalance"
+              placeholder="الرصيد السابق ( ان وجد )"
+            />
+            <label>نوع الحساب</label>
+            <select id="accountType" required>
+              <option value="" disabled selected>إختيار نوع الحساب</option>
+              <option value="customer">عميل</option>
+              <option value="supplier">مورد</option>
+              <option value="income">إيراد</option>
+              <option value="expense">مصروف</option>
+            </select>
+            <button id="addCustomerBtn">💾 حفظ</button>
+          </div>
+        </div>
+        <!-- Table -->
+        <div class="card">
+          <h5>📋 قائمة الحسابات</h5>
+          <div class="form-row">
+            <input
+              class="searchAccounts"
+              type="text"
+              id="searchCustomer"
+              placeholder="🔍 بحث في الحسابات..."
+            />
+            <select class="searchAccounts" id="filterType">
+              <option value="" disabled selected>اختر نوع الحساب</option>
+              <option value="">كل الحسابات</option>
+              <option value="customer">العملاء</option>
+              <option value="supplier">الموردين</option>
+              <option value="income">الإيرادات</option>
+              <option value="expense">المصروفات</option>
+            </select>
+          </div>
+          <div class="table-scroll">
+            <table id="customersTable">
+              <thead>
+                <tr>
+                  <th>م</th>
+                  <th>الاسم</th>
+                  <th>النوع</th>
+                  <th>مدين</th>
+                  <th>دائن</th>
+                  <th>المزيد من الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Alert Modal -->
+    <div id="appModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3 id="modalTitle">تنبيه</h3>
+        <p id="modalMessage"></p>
+        <div class="modal-actions">
+          <button class="btn btn-info" onclick="closeModal()">حسناً</button>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3>تعديل الحساب</h3>
+        <div class="form-group">
+          <label for="editAccountType">نوع الحساب</label>
+          <select id="editAccountType">
             <option value="customer">عميل</option>
             <option value="supplier">مورد</option>
             <option value="income">إيراد</option>
             <option value="expense">مصروف</option>
           </select>
-          <button id="addCustomerBtn">💾 حفظ</button>
+        </div>
+        <div class="form-group">
+          <label for="editCustomerName">اسم العميل</label>
+          <input type="text" id="editCustomerName" />
+        </div>
+        <div class="form-group">
+          <label for="editOpeningBalance">الرصيد الافتتاحي</label>
+          <input type="number" id="editOpeningBalance" />
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-save" onclick="saveCustomerEdit()">حفظ</button>
+          <button class="btn btn-cancel" onclick="closeEditModal()">
+            إلغاء
+          </button>
         </div>
       </div>
-      <!-- Table -->
-      <div class="card">
-        <h5>📋 قائمة الحسابات</h5>
-        <div class="form-row">
-          <input class="searchAccounts" type="text" id="searchCustomer" placeholder="🔍 بحث في الحسابات..." />
-          <select class="searchAccounts" id="filterType">
-            <option value="" disabled selected>اختر نوع الحساب</option>
-            <option value="">كل الحسابات</option>
-            <option value="customer">العملاء</option>
-            <option value="supplier">الموردين</option>
-            <option value="income">الإيرادات</option>
-            <option value="expense">المصروفات</option>
-          </select>
+    </div>
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3>تأكيد الحذف</h3>
+        <p>هل أنت متأكد؟</p>
+        <div class="modal-actions">
+          <button class="btn btn-delete" onclick="confirmDelete()">حذف</button>
+          <button class="btn btn-cancel" onclick="closeDeleteModal()">
+            إلغاء
+          </button>
         </div>
+      </div>
+    </div>
+    <!-- Statement Modal -->
+    <div id="statementModal" class="modal-overlay">
+      <div class="modal-card">
+        <h3>حركة الحساب</h3>
+        <p id="statementCustomerName"></p>
         <div class="table-scroll">
-          <table id="customersTable">
+          <table>
             <thead>
               <tr>
-                <th>م</th>
-                <th>الاسم</th>
-                <th>النوع</th>
+                <th>التاريخ</th>
+                <th>البيان</th>
                 <th>مدين</th>
                 <th>دائن</th>
-                <th>المزيد</th>
+                <th>الرصيد</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="statementBody"></tbody>
           </table>
         </div>
-      </div>
-    </section>
-  </div>
-  <!-- Alert Modal -->
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-card">
-      <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage"></p>
-      <div class="modal-actions">
-        <button class="btn btn-info" onclick="closeModal()">حسناً</button>
+        <div class="modal-actions">
+          <button class="btn btn-cancel" onclick="closeStatementModal()">
+            إغلاق
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Edit Modal -->
-  <div id="editModal" class="modal-overlay">
-    <div class="modal-card">
-      <h3>تعديل الحساب</h3>
-      <div class="form-group">
-        <label for="editAccountType">نوع الحساب</label>
-        <select id="editAccountType">
-          <option value="customer">عميل</option>
-          <option value="supplier">مورد</option>
-          <option value="income">إيراد</option>
-          <option value="expense">مصروف</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="editCustomerName">اسم العميل</label>
-        <input type="text" id="editCustomerName" />
-      </div>
-      <div class="form-group">
-        <label for="editOpeningBalance">الرصيد الافتتاحي</label>
-        <input type="number" id="editOpeningBalance" />
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-save" onclick="saveCustomerEdit()">حفظ</button>
-        <button class="btn btn-cancel" onclick="closeEditModal()">
-          إلغاء
-        </button>
-      </div>
-    </div>
-  </div>
-  <!-- Delete Modal -->
-  <div id="deleteModal" class="modal-overlay">
-    <div class="modal-card">
-      <h3>تأكيد الحذف</h3>
-      <p>هل أنت متأكد؟</p>
-      <div class="modal-actions">
-        <button class="btn btn-delete" onclick="confirmDelete()">حذف</button>
-        <button class="btn btn-cancel" onclick="closeDeleteModal()">
-          إلغاء
-        </button>
-      </div>
-    </div>
-  </div>
-  <!-- Statement Modal -->
-  <div id="statementModal" class="modal-overlay">
-    <div class="modal-card">
-      <h3>حركة الحساب</h3>
-      <p id="statementCustomerName"></p>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>البيان</th>
-              <th>مدين</th>
-              <th>دائن</th>
-              <th>الرصيد</th>
-            </tr>
-          </thead>
-          <tbody id="statementBody"></tbody>
-        </table>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-cancel" onclick="closeStatementModal()">
-          إغلاق
-        </button>
-      </div>
-    </div>
-  </div>
-  <!-- Scripts -->
-  <script src="../js/data.js"></script>
-  <script src="../js/common.js"></script>
-  <script src="../js/customers.js"></script>
-  <script>
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-      document.getElementById("overlay").classList.toggle("show");
-    }
-    function toggleMode() {
-      document.body.classList.toggle("light");
-    }
-  </script>
-</body>
-
+    <!-- Scripts -->
+    <script src="../js/data.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/customers.js"></script>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("show");
+        document.getElementById("overlay").classList.toggle("show");
+      }
+      function toggleMode() {
+        document.body.classList.toggle("light");
+      }
+    </script>
+  </body>
 </html>
