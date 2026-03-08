@@ -28,7 +28,7 @@
         right: 0;
         left: 0;
         height: 60px;
-        background: #1abc9c;
+        background: #0f766e;
         color: #fff;
         display: flex;
         align-items: center;
@@ -48,7 +48,7 @@
         position: fixed;
         right: 12px;
         z-index: 1001;
-        background: #1abc9c;
+        background: #0f766e;
         color: #fff;
         border: none;
         padding: 6px 10px;
@@ -62,7 +62,7 @@
         right: 0;
         width: 260px;
         height: calc(100vh - 60px);
-        background: #e0f7f4;
+        background: #fff;
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -84,7 +84,7 @@
         display: block;
         width: 100%;
         padding: 12px;
-        background: #1abc9c;
+        background: #0f766e;
         box-shadow: 0 3px 10px rgba(163, 175, 177, 0.4);
         border-radius: 8px;
         text-align: center;
@@ -92,6 +92,7 @@
         text-decoration: none;
         cursor: pointer;
         transition: 0.2s;
+        font-weight: bold;
       }
 
       .sidebar a:hover,
@@ -163,8 +164,7 @@
 
       h5 {
         margin: 0 0 15px;
-        text-align: center;
-        color: #2563eb;
+        color: #1466e0;
         font-size: 20px;
       }
 
@@ -173,7 +173,7 @@
         gap: 10px;
         flex-wrap: wrap;
         align-items: center;
-        background: #e0f7f4;
+        background: #0f766e;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 10px;
@@ -184,7 +184,7 @@
         flex: 1;
         min-width: 140px;
         background: #ffffff;
-        border: 1px solid #d1d5db;
+        border: none;
         border-radius: 8px;
         transition: 0.2s;
         padding: 10px 12px;
@@ -197,7 +197,7 @@
         padding: 10px;
         border-radius: 8px;
         background: #ffffff;
-        border: 1px solid #d1d5db;
+        border: none;
         font-size: 14px;
       }
 
@@ -213,7 +213,9 @@
       }
 
       .form-row label {
-        font-size: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
       }
 
       @media (max-width: 600px) {
@@ -224,7 +226,7 @@
 
       button {
         border: none;
-        background: #1466e0;
+        background: #1abc9c;
         color: white;
         border-radius: 8px;
         padding: 14px 25px;
@@ -257,7 +259,7 @@
       th {
         position: sticky;
         top: 0;
-        background: #1abc9c;
+        background: #0f766e;
         color: #fff;
         padding: 12px;
         text-align: center;
@@ -430,62 +432,62 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <a href="../index.html" class="sidebar-link"
-        ><img src="../icons/home.png" width="32" height="32" /><span
+        ><span
           >الصفحة الرئيسية</span
         ></a
       >
       <a href="customers.html" class="sidebar-link"
-        ><img src="../icons/customer-512.png" width="32" height="32" /><span
+        ><span
           >الحسابات</span
         ></a
       >
       <a href="products.html" class="sidebar-link"
-        ><img src="../icons/products.png" width="32" height="32" /><span
+        ><span
           >المنتجات</span
         ></a
       >
       <a href="sales.html" class="sidebar-link"
-        ><img src="../icons/sales.png" width="32" height="32" /><span
+        ><span
           >المبيعات</span
         ></a
       >
       <a href="purchases.html" class="sidebar-link"
-        ><img src="../icons/purchases.png" width="32" height="32" /><span
+        ><span
           >المشتريات</span
         ></a
       >
       <a href="receipts.html" class="sidebar-link"
-        ><img src="../icons/income-512.png" width="32" height="32" /><span
+        ><span
           >المقبوضات</span
         ></a
       >
       <a href="income.html" class="sidebar-link"
-        ><img src="../icons/income.png" width="32" height="32" /><span
+        ><span
           >تسجيل الإيرادات</span
         ></a
       >
       <a href="expenses.html" class="sidebar-link"
-        ><img src="../icons/expenses.png" width="32" height="32" /><span
+        ><span
           >تسجيل المصروفات</span
         ></a
       >
       <a href="cash.html" class="sidebar-link"
-        ><img src="../icons/icon-512.png" width="32" height="32" /><span
+        ><span
           >الصندوق الرئيسي</span
         ></a
       >
       <a href="profit.html" class="sidebar-link"
-        ><img src="../icons/profit.png" width="32" height="32" /><span
+        ><span
           >تقارير الأرباح</span
         ></a
       >
       <a href="../pages/dashboard.html" class="sidebar-link"
-        ><img src="../icons/dashboard.png" width="32" height="32" /><span
+        ><span
           >تقرير حركه</span
         ></a
       >
       <a href="../pages/tayar.html" class="sidebar-link"
-        ><img src="../icons/delivery.png" width="32" height="32" /><span
+        ><span
           >تطبيق الطيار</span
         ></a
       >
@@ -496,7 +498,7 @@
       <section>
         <!-- Add Customer -->
         <div class="card">
-          <h5>📝 إضافة حساب جديد</h5>
+          <h5>إضافة حساب جديد</h5>
           <div class="form-row">
             <label>إسم الحساب</label>
             <input
@@ -523,7 +525,7 @@
         </div>
         <!-- Table -->
         <div class="card">
-          <h5>📋 قائمة الحسابات</h5>
+          <h5>قائمة الحسابات</h5>
           <div class="form-row">
             <input
               class="searchAccounts"
