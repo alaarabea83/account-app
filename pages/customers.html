@@ -18,7 +18,7 @@
       margin: 0;
       font-family: "Cairo", sans-serif;
       background: #115e59;
-      color: #1e293b;
+      color: #fff;
     }
 
     .header {
@@ -318,7 +318,7 @@
     }
 
     .modal-card {
-      background: #ffffff;
+      background: #115e59;
       padding: 20px;
       border-radius: 14px;
       width: 95%;
@@ -336,6 +336,28 @@
       margin-top: 15px;
       flex-wrap: wrap;
     }
+
+    .modal-card input,
+.modal-card select,
+.modal-card textarea{
+  width:100%;
+  padding:10px 12px;
+  margin-top:6px;
+  margin-bottom:12px;
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  font-size:14px;
+  box-sizing:border-box;
+}
+
+    @media (max-width:480px){
+
+  .modal-card{
+    padding:12px;
+    border-radius:10px;
+  }
+
+}
 
     .btn {
       border: none;
@@ -361,6 +383,27 @@
 
     .btn-info {
       background: #3b82f6;
+    }
+
+    @media (max-width:768px) {
+
+      .modal-card {
+        width: 90%;
+        max-width: 90%;
+        padding: 15px;
+        border-radius: 12px;
+        max-height: 85vh;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .modal-actions button {
+        width: 100%;
+      }
+
     }
 
     .header-cash {
