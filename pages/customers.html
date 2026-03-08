@@ -47,7 +47,7 @@
       position: fixed;
       right: 12px;
       z-index: 1001;
-      background: #22c55e;
+      background: #16a34a;
       color: #fff;
       border: none;
       padding: 6px 10px;
@@ -152,7 +152,7 @@
     }
 
     .card {
-      background: #ffffff;
+      background: #f1f5f9;
       border-radius: 14px;
       padding: 20px;
       margin-bottom: 22px;
@@ -172,7 +172,7 @@
       gap: 10px;
       flex-wrap: wrap;
       align-items: center;
-      background: #f1f5f9;
+      background: #1466e0;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 10px;
@@ -213,6 +213,7 @@
 
     .form-row label {
       font-size: 18px;
+      color: #fff;
     }
 
     @media (max-width: 600px) {
@@ -223,7 +224,7 @@
 
     button {
       border: none;
-      background: #22c55e;
+      background: #16a34a;
       color: white;
       border-radius: 8px;
       padding: 14px 25px;
@@ -256,31 +257,30 @@
     th {
       position: sticky;
       top: 0;
-      background: #f1f5f9;
-      color: #475569;
+      background: #0f4fb5;
+      color: #fff;
       padding: 12px;
       text-align: center;
       border-bottom: 1px solid #e2e8f0;
     }
 
     td {
+      background-color: #1466e0;
+      color: #fff;
+      font-weight: bold;
       padding: 12px;
       text-align: center;
-      border-bottom: 1px solid #e2e8f0;
+      border: 1px solid #e2e8f0;
     }
 
     tr:hover {
       background: #f9fafb;
     }
 
-    .table-total-row {
-      background: #f1f5f9;
-      color: #000;
-      font-weight: bold;
-    }
-
     .table-total-row td {
       padding: 14px;
+      background: #0c3f8f;
+      font-weight: bold;
     }
 
     td.actions {
@@ -291,27 +291,31 @@
       display: flex;
       gap: 3px;
       justify-content: center;
+      flex-wrap: nowrap;
     }
 
-    .action-btn {
-      height: 30px;
-      padding: 0 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 13px;
-      color: white;
-    }
+    .actions button {
+      height: 32px;
+        background:#0f4fb5;
+color:#fff;
+border:none;
+border-radius:6px;
+padding:4px 10px;
+font-size:13px;
+cursor:pointer;
+transition:.2s;
+}
 
     .action-btn.view {
-      background: #22c55e;
+      background: #0f4fb5;
     }
 
     .action-btn.edit {
-      background: #3b82f6;
+      background: #0f4fb5;
     }
 
     .action-btn.delete {
-      background: #ef4444;
+      background: #0f4fb5;
     }
 
     .modal-overlay {
