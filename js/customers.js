@@ -115,18 +115,20 @@ function renderCustomers(searchQuery = "", filterType = null) {
     const credit = currentBalance < 0 ? Math.abs(currentBalance).toFixed(2) : "0.00";
 
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${c.name}</td>
-      <td>${getTypeName(c.type)}</td>
-      <td class="debit">${debit}</td>
-      <td class="credit">${credit}</td>
-      <td class="actions">
-        <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
-        <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
-        <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
-      </td>
-    `;
+tr.innerHTML = `
+  <td>${index + 1}</td>
+  <td><span>${c.name}</span></td>
+  <td><span>${getTypeName(c.type)}</span></td>
+  <td class="debit"><span>${debit}</span></td>
+  <td class="credit"><span>${credit}</span></td>
+  <td class="actions-cell">
+    <div class="actions">
+      <button class="action-btn edit" onclick="openEditModal(${index})">تعديل</button>
+      <button class="action-btn delete" onclick="deleteCustomer(${index})">حذف</button>
+      <button class="action-btn view" onclick="openStatementModal(${index})">كشف حساب</button>
+    </div>
+  </td>
+`;
 
     tbody.appendChild(tr);
   });
