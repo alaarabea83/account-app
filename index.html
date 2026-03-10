@@ -1,923 +1,873 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../icons/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>المحاسب المحترف</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>المحاسب المحترف</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+      body {
+        margin: 0;
+        font-family: "Cairo", sans-serif;
+        background: #0f172a;
+        color: #fff;
+      }
 
-    body {
-      margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #0f172a;
-      color: #fff;
-    }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        position: sticky;
+        top: 0;
+        background: #1466e0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+        z-index: 100;
+      }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      position: sticky;
-      top: 0;
-      background: #1466e0;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
-      z-index: 100;
-    }
+      .header-right {
+        display: flex;
+        gap: 10px;
+      }
 
-    .header-right {
-      display: flex;
-      gap: 10px;
-    }
-
-    .header h1 {
-      font-family: "cairo", sans-serif;
-      font-size: 18px;
-      color: #cbb884;
-    }
-
-    .logo {
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    section {
-      max-width: 1200px;
-      margin: 35px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: #0f2d4b;
-      border-radius: 16px;
-      padding: 18px 14px;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    }
-
-    .card:active {
-      transform: scale(0.96);
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
-    }
-
-    .card i {
-      background: none;
-      padding: 0;
-      font-size: 22px;
-      color: #cbb884;
-    }
-
-    .card:hover i {
-      transform: translateY(-3px) scale(1.1);
-    }
-
-    .card h3 {
-      margin: 6px 0 4px;
-      font-size: 17px;
-    }
-
-    .card p {
-      font-size: 11px;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .card-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.5;
-      opacity: 0.9;
-    }
-
-    .card-list li {
-      margin: 2px 0;
-    }
-
-    @media (max-width: 600px) {
       .header h1 {
+        font-family: "cairo", sans-serif;
         font-size: 18px;
+        color: #cbb884;
+      }
+
+      .logo {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
       }
 
       section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        max-width: 1200px;
+        margin: 35px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 22px;
+        padding: 0 20px;
       }
 
-      .footer-content {
-        flex-direction: column;
+      .card {
+        background: #0f2d4b;
+        border-radius: 16px;
+        padding: 18px 14px;
         text-align: center;
-      }
-    }
-
-    /* الخلفية */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
-    }
-
-    /* اظهار المودال */
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* الصندوق */
-    .modal-box {
-      background: #1e293b;
-      padding: 25px 35px;
-      border-radius: 18px;
-      text-align: center;
-      color: #fff;
-      min-width: 260px;
-      transform: scale(0.8);
-      transition: 0.3s ease;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal-overlay.active .modal-box {
-      transform: scale(1);
-    }
-
-    /* الأيقونة */
-    .modal-icon {
-      font-size: 40px;
-      margin-bottom: 12px;
-    }
-
-    /* النص */
-    .modal-text {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .confirm-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
-    }
-
-    .confirm-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .confirm-box {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 20px;
-      width: 300px;
-      text-align: center;
-      color: #fff;
-      transform: scale(0.8);
-      transition: 0.3s ease;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .confirm-overlay.active .confirm-box {
-      transform: scale(1);
-    }
-
-    .confirm-icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .confirm-text {
-      font-size: 16px;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .confirm-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .btn-cancel,
-    .btn-confirm {
-      flex: 1;
-      padding: 10px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .btn-cancel {
-      background: #334155;
-      color: #fff;
-    }
-
-    .btn-cancel:hover {
-      background: #475569;
-    }
-
-    .btn-confirm {
-      background: #dc3545;
-      color: #fff;
-    }
-
-    .btn-confirm:hover {
-      background: #b02a37;
-    }
-
-    .header-right {
-      display: flex;
-      margin-right: auto;
-      gap: 12px;
-    }
-
-    /* زر الاشعارات */
-
-    .notification-btn {
-      position: relative;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      border-radius: 10px;
-      color: #0f2d4b;
-      font-size: 17px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .notification-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* زر الخروج */
-
-    .logout-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: #fff;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      color: #0f2d4b;
-    }
-
-    .logout-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* زر النسخ الاحتياطي */
-
-    .header-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: #fff;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      color: #0f2d4b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .header-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* Backup dropdown */
-
-    .backup-menu {
-      position: relative;
-    }
-
-    .backup-dropdown {
-      position: absolute;
-      top: 45px;
-      right: 50%;
-      transform: translateX(50%);
-      background: #16213e;
-      border: 1px solid #cbb884;
-      border-radius: 12px;
-      display: none;
-      flex-direction: column;
-      min-width: 180px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .backup-dropdown button {
-      background: none;
-      border: none;
-      color: #fff;
-      padding: 12px;
-      text-align: right;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: 0.3s;
-    }
-
-    .backup-dropdown button:hover {
-      background: #2c3e50;
-    }
-
-    .backup-dropdown.show {
-      display: flex;
-    }
-
-    /* ===== Login Success Toast ===== */
-
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1e293b;
-      color: #fff;
-      padding: 14px 18px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      transform: translateY(-80px);
-      opacity: 0;
-      transition: 0.35s ease;
-      z-index: 99999;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast i {
-      font-size: 18px;
-      color: #22c55e;
-    }
-
-    .app-footer {
-      background: #133b5c;
-      /* قريب من البادي */
-      padding: 12px 0;
-      color: #cbd5e1;
-      font-size: 13px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .scroll-wrapper {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .scroll-content {
-      display: inline-flex;
-      align-items: center;
-      white-space: nowrap;
-      animation: scroll-loop 18s linear infinite;
-    }
-
-    .scroll-content i {
-      color: #cbb884;
-      margin-right: 10px;
-      /* خففنا المسافة جدا */
-      font-size: 14px;
-    }
-
-    .scroll-content span {
-      margin-right: 10px;
-      /* المسافة بين النسخ المتكررة */
-    }
-
-    @keyframes scroll-loop {
-
-      0% {
-        transform: translateX(100%);
-        /* يبدأ من خارج الشاشة يمين */
+        color: #fff;
+        text-decoration: none;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
       }
 
-      100% {
-        transform: translateX(-100%);
-        /* يخرج من اليسار */
+      .card:active {
+        transform: scale(0.96);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
       }
 
-    }
+      .card i {
+        background: none;
+        padding: 0;
+        font-size: 22px;
+        color: #cbb884;
+      }
 
-    .scroll-content i {
-      color: #cbb884;
-      margin-right: 10px;
-      /* خففنا المسافة جدا */
-      font-size: 14px;
-    }
+      .card:hover i {
+        transform: translateY(-3px) scale(1.1);
+      }
 
-    .scroll-content span {
-      margin-right: 10px;
-      /* المسافة بين النسخ المتكررة */
-    }
-  </style>
-</head>
+      .card h3 {
+        margin: 6px 0 4px;
+        font-size: 17px;
+      }
 
-<body>
-  <header class="header">
-    <div class="logo">
-      <i class="fa-solid fa-chart-simple"></i>
-      المحاسب المحترف
-    </div>
-    <div class="header-right">
-      <!-- Backup Dropdown -->
-      <div class="backup-menu">
-        <button class="header-btn" id="backupMenuBtn">
-          <i class="fa-solid fa-cloud"></i>
-        </button>
+      .card p {
+        font-size: 11px;
+        line-height: 1.5;
+        margin: 0;
+      }
 
-        <div class="backup-dropdown" id="backupDropdown">
-          <button id="backupBtn">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            رفع نسخة احتياطية
-          </button>
+      .card-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.9;
+      }
 
-          <button id="restoreBtn">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-            استرجاع النسخة
-          </button>
-        </div>
+      .card-list li {
+        margin: 2px 0;
+      }
+
+      @media (max-width: 600px) {
+        .header h1 {
+          font-size: 18px;
+        }
+
+        section {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* الخلفية */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+        z-index: 9999;
+      }
+
+      /* اظهار المودال */
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* الصندوق */
+      .modal-box {
+        background: #1e293b;
+        padding: 25px 35px;
+        border-radius: 18px;
+        text-align: center;
+        color: #fff;
+        min-width: 260px;
+        transform: scale(0.8);
+        transition: 0.3s ease;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-overlay.active .modal-box {
+        transform: scale(1);
+      }
+
+      /* الأيقونة */
+      .modal-icon {
+        font-size: 40px;
+        margin-bottom: 12px;
+      }
+
+      /* النص */
+      .modal-text {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .confirm-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+        z-index: 9999;
+      }
+
+      .confirm-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .confirm-box {
+        background: #1e293b;
+        padding: 30px;
+        border-radius: 20px;
+        width: 300px;
+        text-align: center;
+        color: #fff;
+        transform: scale(0.8);
+        transition: 0.3s ease;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .confirm-overlay.active .confirm-box {
+        transform: scale(1);
+      }
+
+      .confirm-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+      }
+
+      .confirm-text {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .confirm-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .btn-cancel,
+      .btn-confirm {
+        flex: 1;
+        padding: 10px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn-cancel {
+        background: #334155;
+        color: #fff;
+      }
+
+      .btn-cancel:hover {
+        background: #475569;
+      }
+
+      .btn-confirm {
+        background: #dc3545;
+        color: #fff;
+      }
+
+      .btn-confirm:hover {
+        background: #b02a37;
+      }
+
+      .header-right {
+        display: flex;
+        margin-right: auto;
+        gap: 12px;
+      }
+
+      /* زر الاشعارات */
+
+      .notification-btn {
+        position: relative;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 10px;
+        color: #0f2d4b;
+        font-size: 17px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .notification-btn:hover {
+        background: #e74c3c;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /* زر الخروج */
+
+      .logout-btn {
+        width: 38px;
+        height: 38px;
+        border: none;
+        background: #fff;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #0f2d4b;
+      }
+
+      .logout-btn:hover {
+        background: #e74c3c;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /* زر النسخ الاحتياطي */
+
+      .header-btn {
+        width: 38px;
+        height: 38px;
+        border: none;
+        background: #fff;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #0f2d4b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header-btn:hover {
+        background: #e74c3c;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /* Backup dropdown */
+
+      .backup-menu {
+        position: relative;
+      }
+
+      .backup-dropdown {
+        position: absolute;
+        top: 45px;
+        right: 50%;
+        transform: translateX(50%);
+        background: #16213e;
+        border: 1px solid #cbb884;
+        border-radius: 12px;
+        display: none;
+        flex-direction: column;
+        min-width: 180px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .backup-dropdown button {
+        background: none;
+        border: none;
+        color: #fff;
+        padding: 12px;
+        text-align: right;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+      }
+
+      .backup-dropdown button:hover {
+        background: #2c3e50;
+      }
+
+      .backup-dropdown.show {
+        display: flex;
+      }
+
+      /* ===== Login Success Toast ===== */
+
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #1e293b;
+        color: #fff;
+        padding: 14px 18px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        transform: translateY(-80px);
+        opacity: 0;
+        transition: 0.35s ease;
+        z-index: 99999;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .toast i {
+        font-size: 18px;
+        color: #22c55e;
+      }
+
+      .app-footer {
+        background: #1466e0;
+        padding: 12px;
+        text-align: center;
+        font-size: 13px;
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="logo">
+        <i class="fa-solid fa-chart-simple"></i>
+        المحاسب المحترف
       </div>
+      <div class="header-right">
+        <!-- Backup Dropdown -->
+        <div class="backup-menu">
+          <button class="header-btn" id="backupMenuBtn">
+            <i class="fa-solid fa-cloud"></i>
+          </button>
 
-      <!-- الاشعارات -->
-      <a href="./pages/notification.html" class="notification-btn">
-        <i class="fa-solid fa-bell"></i>
+          <div class="backup-dropdown" id="backupDropdown">
+            <button id="backupBtn">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              رفع نسخة احتياطية
+            </button>
+
+            <button id="restoreBtn">
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              استرجاع النسخة
+            </button>
+          </div>
+        </div>
+
+        <!-- الاشعارات -->
+        <a href="./pages/notification.html" class="notification-btn">
+          <i class="fa-solid fa-bell"></i>
+        </a>
+
+        <!-- تسجيل الخروج -->
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <section>
+      <a class="card" href="pages/customers.html">
+        <i class="fa fa-users"></i>
+        <h3>الحسابات</h3>
+
+        <ul class="card-list">
+          <li>إضافة حساب</li>
+          <li>إدارة العملاء</li>
+          <li>كشف حساب</li>
+          <li>أرصدة إفتتاحية</li>
+        </ul>
       </a>
 
-      <!-- تسجيل الخروج -->
-      <button id="logoutBtn" class="logout-btn">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
-    </div>
-  </header>
+      <a class="card" href="pages/products.html">
+        <i class="fa-solid fa-box-open"></i>
+        <h3>المنتجات</h3>
+        <ul class="card-list">
+          <li>إضافة منتج</li>
+          <li>إدارة المخزون</li>
+          <li>حركة صنف</li>
+          <li>أرصدة إفتتاحية</li>
+        </ul>
+      </a>
 
-  <section>
-    <a class="card" href="pages/customers.html">
-      <i class="fa fa-users"></i>
-      <h3>الحسابات</h3>
+      <a class="card" href="pages/sales.html">
+        <i class="fa fa-cart-shopping"></i>
+        <h3>المبيعات</h3>
+        <ul class="card-list">
+          <li>فاتورة بيع</li>
+          <li>بيع نقدي</li>
+          <li>بيع بالأجل</li>
+          <li>إدارة الفواتير</li>
+        </ul>
+      </a>
 
-      <ul class="card-list">
-        <li>إضافة حساب</li>
-        <li>إدارة العملاء</li>
-        <li>كشف حساب</li>
-        <li>أرصدة إفتتاحية</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/purchases.html">
+        <i class="fa-solid fa-dolly"></i>
+        <h3>المشتريات</h3>
+        <ul class="card-list">
+          <li>فاتورة شراء</li>
+          <li>تحديث المخزون</li>
+          <li>تحديث الموردين</li>
+          <li>إدارة الفواتير</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/products.html">
-      <i class="fa-solid fa-box-open"></i>
-      <h3>المنتجات</h3>
-      <ul class="card-list">
-        <li>إضافة منتج</li>
-        <li>إدارة المخزون</li>
-        <li>حركة صنف</li>
-        <li>أرصدة إفتتاحية</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/receipts.html">
+        <i class="fa fa-hand-holding-dollar"></i>
+        <h3>القبض</h3>
+        <ul class="card-list">
+          <li>سند قبض</li>
+          <li>تحصيل ديون</li>
+          <li>تدفقات نقدية</li>
+          <li>إضافة رأس مال</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/sales.html">
-      <i class="fa fa-cart-shopping"></i>
-      <h3>المبيعات</h3>
-      <ul class="card-list">
-        <li>فاتورة بيع</li>
-        <li>بيع نقدي</li>
-        <li>بيع بالأجل</li>
-        <li>إدارة الفواتير</li>
-      </ul>
-    </a>
+      <a class="card" href="#">
+        <i class="fa fa-money-bill-wave"></i>
+        <h3>الدفع</h3>
+        <ul class="card-list">
+          <li>سند دفع</li>
+          <li>دفع مستحقات</li>
+          <li>تصفية شريك</li>
+          <li>تخفيض رأس مال</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/purchases.html">
-      <i class="fa-solid fa-dolly"></i>
-      <h3>المشتريات</h3>
-      <ul class="card-list">
-        <li>فاتورة شراء</li>
-        <li>تحديث المخزون</li>
-        <li>تحديث الموردين</li>
-        <li>إدارة الفواتير</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/income.html">
+        <i class="fa fa-chart-line"></i>
+        <h3>الإيرادات</h3>
+        <ul class="card-list">
+          <li>تسجيل إيراد</li>
+          <li>إيرادات خارجية</li>
+          <li>سجل إيرادات</li>
+          <li>تحديث الأرباح</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/receipts.html">
-      <i class="fa fa-hand-holding-dollar"></i>
-      <h3>القبض</h3>
-      <ul class="card-list">
-        <li>سند قبض</li>
-        <li>تحصيل ديون</li>
-        <li>تدفقات نقدية</li>
-        <li>إضافة رأس مال</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/expenses.html">
+        <i class="fa fa-receipt"></i>
+        <h3>المصروفات</h3>
+        <ul class="card-list">
+          <li>تسجيل مصروف</li>
+          <li>أجور ومرتبات</li>
+          <li>رسوم وإيجارات</li>
+          <li>سلف العاملين</li>
+        </ul>
+      </a>
 
-    <a class="card" href="#">
-      <i class="fa fa-money-bill-wave"></i>
-      <h3>الدفع</h3>
-      <ul class="card-list">
-        <li>سند دفع</li>
-        <li>دفع مستحقات</li>
-        <li>تصفية شريك</li>
-        <li>تخفيض رأس مال</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/cash.html">
+        <i class="fa fa-vault"></i>
+        <h3>الخزينة</h3>
+        <ul class="card-list">
+          <li>رصيد الخزينة</li>
+          <li>حركة النقدية</li>
+          <li>تقارير يومية</li>
+          <li>تقارير شهرية</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/income.html">
-      <i class="fa fa-chart-line"></i>
-      <h3>الإيرادات</h3>
-      <ul class="card-list">
-        <li>تسجيل إيراد</li>
-        <li>إيرادات خارجية</li>
-        <li>سجل إيرادات</li>
-        <li>تحديث الأرباح</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/profit.html">
+        <i class="fa fa-coins"></i>
+        <h3>الأرباح</h3>
+        <ul class="card-list">
+          <li>مجمل الربح</li>
+          <li>صافي الربح</li>
+          <li>تقرير يومي</li>
+          <li>تقرير شهري</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/expenses.html">
-      <i class="fa fa-receipt"></i>
-      <h3>المصروفات</h3>
-      <ul class="card-list">
-        <li>تسجيل مصروف</li>
-        <li>أجور ومرتبات</li>
-        <li>رسوم وإيجارات</li>
-        <li>سلف العاملين</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/dashboard.html">
+        <i class="fa fa-chart-pie"></i>
+        <h3>الحركة</h3>
+        <ul class="card-list">
+          <li>حركة يومية</li>
+          <li>الربح اليومي</li>
+          <li>الربح الشهري</li>
+          <li>مبيعات اليوم</li>
+        </ul>
+      </a>
 
-    <a class="card" href="pages/cash.html">
-      <i class="fa fa-vault"></i>
-      <h3>الخزينة</h3>
-      <ul class="card-list">
-        <li>رصيد الخزينة</li>
-        <li>حركة النقدية</li>
-        <li>تقارير يومية</li>
-        <li>تقارير شهرية</li>
-      </ul>
-    </a>
+      <a class="card" href="pages/about.html">
+        <i class="fa fa-headset"></i>
+        <h3>التواصل</h3>
 
-    <a class="card" href="pages/profit.html">
-      <i class="fa fa-coins"></i>
-      <h3>الأرباح</h3>
-      <ul class="card-list">
-        <li>مجمل الربح</li>
-        <li>صافي الربح</li>
-        <li>تقرير يومي</li>
-        <li>تقرير شهري</li>
-      </ul>
-    </a>
+        <ul class="card-list">
+          <li>عن النظام</li>
+          <li>التحديثات</li>
+          <li>الدعم الفني</li>
+          <li>تواصل معنا</li>
+        </ul>
+      </a>
+    </section>
 
-    <a class="card" href="pages/dashboard.html">
-      <i class="fa fa-chart-pie"></i>
-      <h3>الحركة</h3>
-      <ul class="card-list">
-        <li>حركة يومية</li>
-        <li>الربح اليومي</li>
-        <li>الربح الشهري</li>
-        <li>مبيعات اليوم</li>
-      </ul>
-    </a>
+    <footer class="app-footer">
+      الرجاء التأكد من إجراء نسخ احتياطي بشكل دوري للحفاظ على بياناتك.
+    </footer>
 
-    <a class="card" href="pages/about.html">
-      <i class="fa fa-headset"></i>
-      <h3>التواصل</h3>
-
-      <ul class="card-list">
-        <li>عن النظام</li>
-        <li>التحديثات</li>
-        <li>الدعم الفني</li>
-        <li>تواصل معنا</li>
-      </ul>
-    </a>
-  </section>
-
-  <footer class="app-footer">
-    <div class="scroll-wrapper">
-      <div class="scroll-content">
-        <i class="fa-solid fa-cloud-arrow-up"></i><span>الرجاء التأكد من إجراء نسخة احتياطية بشكل دوري للحفاظ على
-          بياناتك</span>
-        <i class="fa-solid fa-cloud-arrow-up"></i><span>يرجي إجراء نسخ احتياطي بشكل دوري للحفاظ على بياناتك</span>
+    <!-- Modern Modal -->
+    <div id="statusModal" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-icon" id="modalIcon">✔</div>
+        <div class="modal-text" id="modalText">تمت العملية بنجاح</div>
       </div>
     </div>
-  </footer>
 
-  <!-- Modern Modal -->
-  <div id="statusModal" class="modal-overlay">
-    <div class="modal-box">
-      <div class="modal-icon" id="modalIcon">✔</div>
-      <div class="modal-text" id="modalText">تمت العملية بنجاح</div>
-    </div>
-  </div>
+    <!-- Logout Confirmation Modal -->
+    <div id="confirmModal" class="confirm-overlay">
+      <div class="confirm-box">
+        <div class="confirm-icon">🔐</div>
+        <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
 
-  <!-- Logout Confirmation Modal -->
-  <div id="confirmModal" class="confirm-overlay">
-    <div class="confirm-box">
-      <div class="confirm-icon">🔐</div>
-      <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
-
-      <div class="confirm-actions">
-        <button id="cancelLogout" class="btn-cancel">إلغاء</button>
-        <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+        <div class="confirm-actions">
+          <button id="cancelLogout" class="btn-cancel">إلغاء</button>
+          <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Login Success Toast -->
-  <div id="loginToast" class="toast">
-    <i class="fa-solid fa-circle-check"></i>
-    <span>تم تسجيل الدخول بنجاح</span>
-  </div>
+    <!-- Login Success Toast -->
+    <div id="loginToast" class="toast">
+      <i class="fa-solid fa-circle-check"></i>
+      <span>تم تسجيل الدخول بنجاح</span>
+    </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import {
-      getFirestore,
-      doc,
-      setDoc,
-      getDoc,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        setDoc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-    let customers = [];
-    let products = [];
-    let sales = [];
-    let purchases = [];
-    let incomes = [];
-    let expenses = [];
-    let receipts = [];
-    let cash = { opening: 0, income: 0, expenses: 0 };
+      let customers = [];
+      let products = [];
+      let sales = [];
+      let purchases = [];
+      let incomes = [];
+      let expenses = [];
+      let receipts = [];
+      let cash = { opening: 0, income: 0, expenses: 0 };
 
-    function saveData() {
-      localStorage.setItem("customers", JSON.stringify(customers));
-      localStorage.setItem("products", JSON.stringify(products));
-      localStorage.setItem("sales", JSON.stringify(sales));
-      localStorage.setItem("purchases", JSON.stringify(purchases));
-      localStorage.setItem("incomes", JSON.stringify(incomes));
-      localStorage.setItem("expenses", JSON.stringify(expenses));
-      localStorage.setItem("cash", JSON.stringify(cash));
-      localStorage.setItem("receipts", JSON.stringify(receipts));
-    }
-
-    function loadData() {
-      const c = localStorage.getItem("customers");
-      const p = localStorage.getItem("products");
-      const s = localStorage.getItem("sales");
-      const pu = localStorage.getItem("purchases");
-      const i = localStorage.getItem("incomes");
-      const e = localStorage.getItem("expenses");
-      const ca = localStorage.getItem("cash");
-      const r = localStorage.getItem("receipts");
-
-      customers = c ? JSON.parse(c) : [];
-      products = p ? JSON.parse(p) : [];
-      sales = s ? JSON.parse(s) : [];
-      purchases = pu ? JSON.parse(pu) : [];
-      incomes = i ? JSON.parse(i) : [];
-      expenses = e ? JSON.parse(e) : [];
-      receipts = r ? JSON.parse(r) : [];
-      cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
-    }
-
-    // ======================= Firebase =======================
-    const firebaseConfig = {
-      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
-      authDomain: "accounts-system-47961.firebaseapp.com",
-      projectId: "accounts-system-47961",
-      storageBucket: "accounts-system-47961.firebasestorage.app",
-      messagingSenderId: "164539147206",
-      appId: "1:164539147206:web:8b8267577e1af4622948c7",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // نخفي الصفحة لحد ما يتم التحقق
-    document.body.style.display = "none";
-
-    // ======================= النسخ الاحتياطي =======================
-    async function saveBackup() {
-      const user = auth.currentUser;
-      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
-      try {
-        await setDoc(doc(db, "backups", user.uid), {
-          timestamp: new Date(),
-          customers,
-          products,
-          sales,
-          purchases,
-          incomes,
-          expenses,
-          receipts,
-          cash,
-        });
-        showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
-      } catch (e) {
-        console.error(e);
-        showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
+      function saveData() {
+        localStorage.setItem("customers", JSON.stringify(customers));
+        localStorage.setItem("products", JSON.stringify(products));
+        localStorage.setItem("sales", JSON.stringify(sales));
+        localStorage.setItem("purchases", JSON.stringify(purchases));
+        localStorage.setItem("incomes", JSON.stringify(incomes));
+        localStorage.setItem("expenses", JSON.stringify(expenses));
+        localStorage.setItem("cash", JSON.stringify(cash));
+        localStorage.setItem("receipts", JSON.stringify(receipts));
       }
-    }
 
-    async function restoreBackup() {
-      const user = auth.currentUser;
-      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
-      try {
-        const docRef = doc(db, "backups", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          customers = data.customers || [];
-          products = data.products || [];
-          sales = data.sales || [];
-          purchases = data.purchases || [];
-          incomes = data.incomes || [];
-          expenses = data.expenses || [];
-          receipts = data.receipts || [];
-          cash = data.cash || { opening: 0, income: 0, expenses: 0 };
-          saveData();
-          showModal("تم استرجاع النسخة الاحتياطية بنجاح", "success");
+      function loadData() {
+        const c = localStorage.getItem("customers");
+        const p = localStorage.getItem("products");
+        const s = localStorage.getItem("sales");
+        const pu = localStorage.getItem("purchases");
+        const i = localStorage.getItem("incomes");
+        const e = localStorage.getItem("expenses");
+        const ca = localStorage.getItem("cash");
+        const r = localStorage.getItem("receipts");
+
+        customers = c ? JSON.parse(c) : [];
+        products = p ? JSON.parse(p) : [];
+        sales = s ? JSON.parse(s) : [];
+        purchases = pu ? JSON.parse(pu) : [];
+        incomes = i ? JSON.parse(i) : [];
+        expenses = e ? JSON.parse(e) : [];
+        receipts = r ? JSON.parse(r) : [];
+        cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
+      }
+
+      // ======================= Firebase =======================
+      const firebaseConfig = {
+        apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+        authDomain: "accounts-system-47961.firebaseapp.com",
+        projectId: "accounts-system-47961",
+        storageBucket: "accounts-system-47961.firebasestorage.app",
+        messagingSenderId: "164539147206",
+        appId: "1:164539147206:web:8b8267577e1af4622948c7",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      // نخفي الصفحة لحد ما يتم التحقق
+      document.body.style.display = "none";
+
+      // ======================= النسخ الاحتياطي =======================
+      async function saveBackup() {
+        const user = auth.currentUser;
+        if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+        try {
+          await setDoc(doc(db, "backups", user.uid), {
+            timestamp: new Date(),
+            customers,
+            products,
+            sales,
+            purchases,
+            incomes,
+            expenses,
+            receipts,
+            cash,
+          });
+          showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
+        } catch (e) {
+          console.error(e);
+          showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
+        }
+      }
+
+      async function restoreBackup() {
+        const user = auth.currentUser;
+        if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+        try {
+          const docRef = doc(db, "backups", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            customers = data.customers || [];
+            products = data.products || [];
+            sales = data.sales || [];
+            purchases = data.purchases || [];
+            incomes = data.incomes || [];
+            expenses = data.expenses || [];
+            receipts = data.receipts || [];
+            cash = data.cash || { opening: 0, income: 0, expenses: 0 };
+            saveData();
+            showModal("تم استرجاع النسخة الاحتياطية بنجاح", "success");
+          } else {
+            showModal("لا توجد نسخة احتياطية على Firebase", "warning");
+          }
+        } catch (e) {
+          console.error(e);
+          showModal("حدث خطأ أثناء استرجاع النسخة الاحتياطية", "error");
+        }
+      }
+
+      function showLoginToast() {
+        const toast = document.getElementById("loginToast");
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2500);
+      }
+
+      // ======================= التحقق من تسجيل الدخول =======================
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.replace("login.html");
         } else {
-          showModal("لا توجد نسخة احتياطية على Firebase", "warning");
-        }
-      } catch (e) {
-        console.error(e);
-        showModal("حدث خطأ أثناء استرجاع النسخة الاحتياطية", "error");
-      }
-    }
-
-    function showLoginToast() {
-      const toast = document.getElementById("loginToast");
-
-      toast.classList.add("show");
-
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2500);
-    }
-
-    // ======================= التحقق من تسجيل الدخول =======================
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.replace("login.html");
-      } else {
-        // المستخدم موجود
-        loadData();
-        document.body.style.display = "block";
-        if (sessionStorage.getItem("loginSuccess") === "true") {
-          showLoginToast();
-          sessionStorage.removeItem("loginSuccess");
-        }
-
-        // ربط الأزرار
-        document.getElementById("backupBtn").onclick = saveBackup;
-        document.getElementById("restoreBtn").onclick = restoreBackup;
-
-        // النسخ التلقائي كل 15 دقيقة
-        setInterval(saveBackup, 15 * 60 * 1000);
-
-        // تسجيل الخروج
-        const confirmModal = document.getElementById("confirmModal");
-        const confirmBtn = document.getElementById("confirmLogout");
-        const cancelBtn = document.getElementById("cancelLogout");
-        const logoutBtn = document.getElementById("logoutBtn");
-
-        logoutBtn.onclick = () => {
-          confirmModal.classList.add("active");
-        };
-
-        cancelBtn.onclick = () => {
-          confirmModal.classList.remove("active");
-        };
-
-        confirmBtn.onclick = async () => {
-          const user = auth.currentUser;
-          if (user) {
-            try {
-              await setDoc(doc(db, "backups", user.uid), {
-                timestamp: new Date(),
-                customers,
-                products,
-                sales,
-                purchases,
-                incomes,
-                expenses,
-                receipts,
-                cash,
-              });
-            } catch (e) {
-              console.error("Backup before logout failed:", e);
-            }
+          // المستخدم موجود
+          loadData();
+          document.body.style.display = "block";
+          if (sessionStorage.getItem("loginSuccess") === "true") {
+            showLoginToast();
+            sessionStorage.removeItem("loginSuccess");
           }
 
-          sessionStorage.setItem("logoutSuccess", "true");
+          // ربط الأزرار
+          document.getElementById("backupBtn").onclick = saveBackup;
+          document.getElementById("restoreBtn").onclick = restoreBackup;
 
-          signOut(auth).then(() => {
-            window.location.replace("login.html");
-          });
-        };
+          // النسخ التلقائي كل 15 دقيقة
+          setInterval(saveBackup, 15 * 60 * 1000);
+
+          // تسجيل الخروج
+          const confirmModal = document.getElementById("confirmModal");
+          const confirmBtn = document.getElementById("confirmLogout");
+          const cancelBtn = document.getElementById("cancelLogout");
+          const logoutBtn = document.getElementById("logoutBtn");
+
+          logoutBtn.onclick = () => {
+            confirmModal.classList.add("active");
+          };
+
+          cancelBtn.onclick = () => {
+            confirmModal.classList.remove("active");
+          };
+
+          confirmBtn.onclick = async () => {
+            const user = auth.currentUser;
+            if (user) {
+              try {
+                await setDoc(doc(db, "backups", user.uid), {
+                  timestamp: new Date(),
+                  customers,
+                  products,
+                  sales,
+                  purchases,
+                  incomes,
+                  expenses,
+                  receipts,
+                  cash,
+                });
+              } catch (e) {
+                console.error("Backup before logout failed:", e);
+              }
+            }
+
+            sessionStorage.setItem("logoutSuccess", "true");
+
+            signOut(auth).then(() => {
+              window.location.replace("login.html");
+            });
+          };
+        }
+      });
+
+      function showModal(message, type = "success") {
+        const modal = document.getElementById("statusModal");
+        const text = document.getElementById("modalText");
+        const icon = document.getElementById("modalIcon");
+
+        text.textContent = message;
+
+        if (type === "success") {
+          icon.textContent = "✔";
+          icon.style.color = "#22c55e";
+        } else if (type === "error") {
+          icon.textContent = "✖";
+          icon.style.color = "#ef4444";
+        } else {
+          icon.textContent = "⚠";
+          icon.style.color = "#f59e0b";
+        }
+
+        modal.classList.add("active");
+
+        setTimeout(() => {
+          modal.classList.remove("active");
+        }, 2000); // يختفي بعد ثانيتين
       }
-    });
 
-    function showModal(message, type = "success") {
-      const modal = document.getElementById("statusModal");
-      const text = document.getElementById("modalText");
-      const icon = document.getElementById("modalIcon");
+      // قائمة النسخ الاحتياطي
+      const backupMenuBtn = document.getElementById("backupMenuBtn");
+      const backupDropdown = document.getElementById("backupDropdown");
 
-      text.textContent = message;
+      // فتح وغلق القائمة
+      backupMenuBtn.onclick = () => {
+        backupDropdown.classList.toggle("show");
+      };
 
-      if (type === "success") {
-        icon.textContent = "✔";
-        icon.style.color = "#22c55e";
-      } else if (type === "error") {
-        icon.textContent = "✖";
-        icon.style.color = "#ef4444";
-      } else {
-        icon.textContent = "⚠";
-        icon.style.color = "#f59e0b";
-      }
+      // اغلاق القائمة عند الضغط خارجها
+      window.addEventListener("click", function (e) {
+        if (!e.target.closest(".backup-menu")) {
+          backupDropdown.classList.remove("show");
+        }
+      });
 
-      modal.classList.add("active");
-
-      setTimeout(() => {
-        modal.classList.remove("active");
-      }, 2000); // يختفي بعد ثانيتين
-    }
-
-    // قائمة النسخ الاحتياطي
-    const backupMenuBtn = document.getElementById("backupMenuBtn");
-    const backupDropdown = document.getElementById("backupDropdown");
-
-    // فتح وغلق القائمة
-    backupMenuBtn.onclick = () => {
-      backupDropdown.classList.toggle("show");
-    };
-
-    // اغلاق القائمة عند الضغط خارجها
-    window.addEventListener("click", function (e) {
-      if (!e.target.closest(".backup-menu")) {
+      // اغلاق القائمة عند اختيار عنصر منها
+      backupDropdown.addEventListener("click", function () {
         backupDropdown.classList.remove("show");
-      }
-    });
-
-    // اغلاق القائمة عند اختيار عنصر منها
-    backupDropdown.addEventListener("click", function () {
-      backupDropdown.classList.remove("show");
-    });
-  </script>
-</body>
-
+      });
+    </script>
+  </body>
 </html>
