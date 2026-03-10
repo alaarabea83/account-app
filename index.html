@@ -424,28 +424,33 @@
       display: inline-flex;
       align-items: center;
       white-space: nowrap;
-      animation: scroll-loop 15s linear infinite;
+      animation: scroll-loop 18s linear infinite;
     }
 
     .scroll-content i {
       color: #cbb884;
-      margin-right: 4px;
-      /* المسافة بين الأيقونة والنص */
+      margin-right: 10px;
+      /* خففنا المسافة جدا */
+      font-size: 14px;
     }
 
     .scroll-content span {
-      margin-right: 50px;
+      margin-right: 10px;
       /* المسافة بين النسخ المتكررة */
     }
 
     @keyframes scroll-loop {
+
       0% {
-        transform: translateX(0);
+        transform: translateX(100%);
+        /* يبدأ من خارج الشاشة يمين */
       }
 
       100% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
+        /* يخرج من اليسار */
       }
+
     }
 
     .scroll-content i {
@@ -639,7 +644,8 @@
   <footer class="app-footer">
     <div class="scroll-wrapper">
       <div class="scroll-content">
-        <i class="fa-solid fa-cloud-arrow-up"></i><span>الرجاء التأكد من إجراء نسخة احتياطية بشكل دوري للحفاظ على بياناتك</span>
+        <i class="fa-solid fa-cloud-arrow-up"></i><span>الرجاء التأكد من إجراء نسخة احتياطية بشكل دوري للحفاظ على
+          بياناتك</span>
         <i class="fa-solid fa-cloud-arrow-up"></i><span>يرجي إجراء نسخ احتياطي بشكل دوري للحفاظ على بياناتك</span>
       </div>
     </div>
