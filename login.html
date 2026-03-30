@@ -734,7 +734,7 @@
       const auth = getAuth(app);
       const db = getFirestore(app);
       onAuthStateChanged(auth, (u) => {
-        if (u) window.location.replace("index.html");
+        if (u) window.location.replace("./pages/main-db.html");
       });
 
       const lt = document.getElementById("loginTab"),
@@ -779,7 +779,7 @@
             if (remember) localStorage.setItem("rememberUser", "true");
             else localStorage.removeItem("rememberUser");
             sessionStorage.setItem("justLoggedIn", "true");
-            window.location.replace("index.html");
+            window.location.replace("./pages/main-db.html");
           })
           .catch(() => {
             btn.classList.remove("loading");
@@ -806,7 +806,7 @@
           });
           localStorage.setItem("rememberUser", "true");
           sessionStorage.setItem("justLoggedIn", "true");
-          window.location.replace("index.html");
+          window.location.replace("./pages/main-db.html");
         } catch (err) {
           btn.classList.remove("loading");
           btn.textContent = "إنشاء الحساب";
