@@ -1,469 +1,456 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>سهل لإدارة الحسابات</title>
-
+  <link rel="stylesheet" href="../css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <title>تقرير الحركة | المحاسب المحترف</title>
   <style>
-
     :root {
-    --bg: linear-gradient(135deg,#1e293b,#0f172a);
-    --card: #2c3e50;
-    --text: #f1f5f9;
-    --accent: #CBB884;
-    --danger: #ef4444;
-}
-
-body {
-    margin:0;
-    font-family: 'cairo', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #DCCB9A;
-    font-weight: bold;
-    z-index: 1002;
-    padding: 0 25px;
-    height: 65px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    border-bottom: 1px solid #334155;
-}
-
-.header h1 {
-    font-size: 16px;
-    margin: 0;
-    color: #1f2a44;
-}
-
-.breadcrumb {
-    background: rgba(28,39,59,0.8);
-    padding: 14px 20px;
-    text-align: center;
-    font-size: 15px;
-    border-bottom: 1px solid #334155;
-}
-
-.breadcrumb a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.breadcrumb a:hover {
-    color: #f5d78e;
-}
-
-.breadcrumb .active {
-    color: #cbd5e1;
-    font-weight: 500;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
-}
-
-.stat {
-    background: var(--card);
-    padding: 20px;
-    border-radius: 18px;
-    text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.stat:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
-}
-
-.stat h2 {
-    color: var(--accent);
-    margin: 10px 0;
-    font-size: 22px;
-}
-
-.chart-box {
-    background: var(--card);
-    margin: 20px;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-/* مودال الخسارة */
-.loss-modal {
-    position: fixed;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:9999;
-}
-
-.loss-modal.show {
-    opacity:1;
-    pointer-events:auto;
-}
-
-.loss-box {
-    background: linear-gradient(145deg, #1e293b, #0f172a);
-    padding: 30px;
-    border-radius: 20px;
-    text-align:center;
-    width: 340px;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.6);
-    border: 1px solid #334155;
-    animation: pop .4s ease;
-}
-
-@keyframes pop {
-    from {transform: scale(.7); opacity:0;}
-    to {transform: scale(1); opacity:1;}
-}
-
-.loss-icon {
-    font-size: 50px;
-    margin-bottom: 12px;
-    color: var(--danger);
-}
-
-.loss-box h2 {
-    color: var(--danger);
-    margin-bottom:10px;
-}
-
-.loss-box p {
-    color:#cbd5e1;
-    margin-bottom:20px;
-}
-
-.loss-box button {
-    background: var(--danger);
-    border:none;
-    padding:12px 22px;
-    border-radius:12px;
-    color:white;
-    cursor:pointer;
-    font-size:16px;
-    transition:0.3s;
-}
-
-.loss-box button:hover {
-    background:#dc2626;
-    box-shadow:0 0 12px var(--danger);
-}
-
-/* responsive */
-@media (max-width:768px){
-    .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+      --bg:        #f4f6fa;
+      --bg2:       #eef1f7;
+      --white:     #ffffff;
+      --primary:   #2563eb;
+      --primary-lt:#eff4ff;
+      --primary-md:#bfcfff;
+      --accent:    #0ea5e9;
+      --success:   #16a34a;
+      --success-lt:#f0fdf4;
+      --success-md:#bbf7d0;
+      --warning:   #d97706;
+      --warning-lt:#fffbeb;
+      --warning-md:#fcd34d;
+      --danger:    #dc2626;
+      --danger-lt: #fef2f2;
+      --danger-md: #fecaca;
+      --purple:    #7c3aed;
+      --purple-lt: #f5f3ff;
+      --purple-md: #ddd6fe;
+      --gold:      #b45309;
+      --gold-lt:   #fffbeb;
+      --gold-md:   #fde68a;
+      --text:      #0f172a;
+      --text2:     #475569;
+      --text3:     #94a3b8;
+      --border:    #e2e8f0;
+      --border2:   #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
+      --shadow:    0 4px 14px rgba(0,0,0,.07);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
+      --r:         14px;
     }
-    .chart-box {
-        margin:12px;
-        padding:16px;
-    }
-}
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(37,99,235,.045) 1px, transparent 0);
+      background-size: 28px 28px; pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
+      z-index: 1100;
+    }
+
+    /* ══ HEADER ══ */
+    .header {
+      position: sticky; top: 3px;
+      height: 60px; background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; z-index: 100;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; }
+    .brand-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #fff; box-shadow: 0 3px 10px rgba(37,99,235,.3);
+    }
+    .brand span { color: var(--primary); }
+
+    .hdr-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 9px;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text2); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all .2s;
+    }
+    .hdr-back:hover { background: var(--primary-lt); color: var(--primary); border-color: var(--primary-md); }
+
+    /* ══ PAGE ══ */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+      padding: 28px 22px 40px;
+    }
+
+    .page-head { margin-bottom: 24px; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .page-head h2 { font-size: 20px; font-weight: 900; display: flex; align-items: center; gap: 9px; }
+    .page-head h2 i { color: var(--primary); }
+
+    /* ══ STATS GRID ══ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+      gap: 14px; margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; gap: 13px;
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+      animation: fadeUp .4s ease both;
+    }
+
+    .stat-card:nth-child(1){animation-delay:.04s}
+    .stat-card:nth-child(2){animation-delay:.08s}
+    .stat-card:nth-child(3){animation-delay:.12s}
+    .stat-card:nth-child(4){animation-delay:.16s}
+    .stat-card:nth-child(5){animation-delay:.20s}
+    .stat-card:nth-child(6){animation-delay:.24s}
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 4px; height: 100%;
+      background: var(--sc, var(--primary));
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+
+    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .sc-blue   { --sc: var(--primary); }
+    .sc-sky    { --sc: var(--accent); }
+    .sc-green  { --sc: var(--success); }
+    .sc-gold   { --sc: var(--gold); }
+    .sc-purple { --sc: var(--purple); }
+    .sc-teal   { --sc: #0891b2; }
+
+    .stat-icon {
+      width: 42px; height: 42px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+
+    .sc-blue   .stat-icon { background: var(--primary-lt); color: var(--primary); }
+    .sc-sky    .stat-icon { background: #f0f9ff; color: var(--accent); }
+    .sc-green  .stat-icon { background: var(--success-lt); color: var(--success); }
+    .sc-gold   .stat-icon { background: var(--gold-lt); color: var(--gold); }
+    .sc-purple .stat-icon { background: var(--purple-lt); color: var(--purple); }
+    .sc-teal   .stat-icon { background: #ecfeff; color: #0891b2; }
+
+    .stat-info { flex: 1; min-width: 0; }
+    .stat-label { font-size: 11.5px; color: var(--text3); font-weight: 600; margin-bottom: 4px; }
+    .stat-val   { font-size: 20px; font-weight: 900; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ══ CHART CARD ══ */
+    .chart-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeUp .4s .28s ease both;
+    }
+
+    .chart-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
+    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--primary-lt); border: 1px solid var(--primary-md); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--primary); }
+    .chart-hdr h5 { font-size: 15px; font-weight: 800; }
+
+    .chart-wrap { position: relative; height: 300px; }
+
+    /* ══ LOSS MODAL ══ */
+    .loss-modal {
+      position: fixed; inset: 0;
+      background: rgba(15,23,42,.35); backdrop-filter: blur(8px);
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: .3s; z-index: 9999;
+    }
+    .loss-modal.show { opacity: 1; pointer-events: auto; }
+
+    .loss-box {
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--danger);
+      border-radius: 20px; padding: 32px 30px;
+      width: 340px; text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: popIn .35s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{opacity:0;transform:scale(.86)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
+
+    .loss-icon-wrap {
+      width: 60px; height: 60px;
+      background: var(--danger-lt); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; color: var(--danger);
+      margin: 0 auto 14px;
+    }
+
+    .loss-box h2 { font-size: 18px; font-weight: 800; color: var(--danger); margin-bottom: 8px; }
+    .loss-box p  { font-size: 14px; color: var(--text2); margin-bottom: 22px; line-height: 1.7; }
+
+    .loss-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 11px 28px; border: none; border-radius: 11px;
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
+      color: #fff; font-family: "Cairo", sans-serif;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(220,38,38,.25);
+      transition: all .2s;
+    }
+    .loss-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+      .page { padding: 20px 12px 32px; }
+      .chart-wrap { height: 220px; }
+    }
   </style>
 </head>
-
 <body>
 
-  <div class="header">
-    <h1>نظام الحسابات والفواتير</h1>
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-chart-pie"></i></div>
+    المحاسب <span>المحترف</span>
+  </div>
+  <a href="../index.html" class="hdr-back">
+    <i class="fa-solid fa-house"></i> الرئيسية
+  </a>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <div class="page-head">
+    <div class="breadcrumb">
+      <a href="../index.html">الرئيسية</a>
+      <i class="fa-solid fa-chevron-left" style="font-size:9px"></i>
+      <span>تقرير الحركة</span>
+    </div>
+    <h2><i class="fa-solid fa-chart-pie"></i> تقرير الحركة</h2>
   </div>
 
-  <nav class="breadcrumb">
-    <a href="../index.html">الرئيسية</a> -
-    <span class="active">تقرير الحركة</span>
-  </nav>
-
-  <!-- العدادات -->
-  <div class="stats">
-
-    <div class="stat">
-      <h2 id="cust">0</h2>
-      العملاء
+  <!-- STAT CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card sc-blue">
+      <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">إجمالي العملاء</div>
+        <div class="stat-val" id="cust">0</div>
+      </div>
     </div>
-
-    <div class="stat">
-      <h2 id="inv">0</h2>
-      الفواتير
+    <div class="stat-card sc-sky">
+      <div class="stat-icon"><i class="fa-solid fa-file-invoice"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">الفواتير</div>
+        <div class="stat-val" id="inv">0</div>
+      </div>
     </div>
-
-    <div class="stat">
-      <h2 id="salesT">0</h2>
-      المبيعات
+    <div class="stat-card sc-teal">
+      <div class="stat-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">إجمالي المبيعات</div>
+        <div class="stat-val" id="salesT">0</div>
+      </div>
     </div>
-
-    <div class="stat">
-      <h2 id="profit">0</h2>
-      الربح الكلي
+    <div class="stat-card sc-gold">
+      <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">الربح الكلي</div>
+        <div class="stat-val" id="profit">0</div>
+      </div>
     </div>
-
-    <div class="stat">
-      <h2 id="profitDay">0</h2>
-      ربح اليوم
+    <div class="stat-card sc-green">
+      <div class="stat-icon"><i class="fa-solid fa-sun"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">ربح اليوم</div>
+        <div class="stat-val" id="profitDay">0</div>
+      </div>
     </div>
-
-    <div class="stat">
-      <h2 id="profitMonth">0</h2>
-      ربح الشهر
-    </div>
-
-  </div>
-
-  <!-- الرسم البياني -->
-  <div class="chart-box">
-    <canvas id="chart"></canvas>
-  </div>
-
-  <!-- مودال الخسارة -->
-  <div id="lossModal" class="loss-modal">
-    <div class="loss-box">
-      <div class="loss-icon">⚠️</div>
-      <h2>تنبيه خسارة</h2>
-      <p id="lossText">يوجد خسارة في الأرباح</p>
-
-      <button onclick="closeLossModal()">حسناً</button>
+    <div class="stat-card sc-purple">
+      <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+      <div class="stat-info">
+        <div class="stat-label">ربح الشهر</div>
+        <div class="stat-val" id="profitMonth">0</div>
+      </div>
     </div>
   </div>
 
-  <script>
+  <!-- CHART -->
+  <div class="chart-card">
+    <div class="chart-hdr">
+      <div class="chdr-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <h5>الأرباح الشهرية (آخر 6 أشهر)</h5>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
 
-    /////////////////////////
-    // تحميل البيانات
-    /////////////////////////
+</div>
 
-    const customers = JSON.parse(localStorage.getItem("customers")) || [];
-    const sales = JSON.parse(localStorage.getItem("sales")) || [];
-    const purchases = JSON.parse(localStorage.getItem("purchases")) || [];
-    const products = JSON.parse(localStorage.getItem("products")) || [];
-    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+<!-- LOSS MODAL -->
+<div id="lossModal" class="loss-modal">
+  <div class="loss-box">
+    <div class="loss-icon-wrap"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <h2>تنبيه خسارة</h2>
+    <p id="lossText">يوجد خسارة في الأرباح</p>
+    <button class="loss-btn" onclick="closeLossModal()">
+      <i class="fa-solid fa-check"></i> حسناً
+    </button>
+  </div>
+</div>
 
-    /////////////////////////
-    // العدادات
-    /////////////////////////
+<script>
+  /* ── Data ── */
+  const customers = JSON.parse(localStorage.getItem("customers")) || [];
+  const sales     = JSON.parse(localStorage.getItem("sales"))     || [];
+  const products  = JSON.parse(localStorage.getItem("products"))  || [];
+  const expenses  = JSON.parse(localStorage.getItem("expenses"))  || [];
 
-    cust.innerText = customers.length;
-    inv.innerText = sales.length;
+  /* ── Counters ── */
+  document.getElementById("cust").textContent = customers.length;
+  document.getElementById("inv").textContent  = sales.length;
 
-    /////////////////////////
-    // إجمالي المبيعات
-    /////////////////////////
+  let totalSales = 0;
+  sales.forEach(inv => {
+    if (inv.items) inv.items.forEach(i => { totalSales += i.price * i.qty; });
+    else totalSales += Number(inv.total || 0);
+  });
+  document.getElementById("salesT").textContent = totalSales.toFixed(2);
 
-    let totalSales = 0;
+  /* ── Profit calc ── */
+  function calcProfit(filterFn) {
+    let profit = 0;
+    sales.filter(filterFn).forEach(inv => {
+      let t = 0, c = 0;
+      inv.items?.forEach(item => {
+        const pr  = products.find(p => p.name === item.name);
+        const buy = pr ? Number(pr.buyPrice || 0) : 0;
+        t += item.price * item.qty;
+        c += buy * item.qty;
+      });
+      profit += (t - c);
+    });
+    const exp = expenses.filter(filterFn).reduce((s, e) => s + Number(e.amount || 0), 0);
+    return profit - exp;
+  }
 
-    sales.forEach(inv => {
-      if (inv.items) {
-        inv.items.forEach(i => {
-          totalSales += i.price * i.qty;
-        });
-      } else {
-        totalSales += Number(inv.total || 0);
-      }
+  /* ── Date helpers ── */
+  const today = new Date();
+  const isToday = d => new Date(d).toDateString() === today.toDateString();
+  const isMonth = d => { const x = new Date(d); return x.getMonth() === today.getMonth() && x.getFullYear() === today.getFullYear(); };
+
+  /* ── Display profit cards ── */
+  const totalProfit = calcProfit(() => true);
+  const dayProfit   = calcProfit(s => isToday(s.date));
+  const monthProfit = calcProfit(s => isMonth(s.date));
+
+  const profitEl = document.getElementById("profit");
+  profitEl.textContent = totalProfit.toFixed(2);
+  profitEl.style.color = totalProfit < 0 ? 'var(--danger)' : '';
+
+  const profitDayEl = document.getElementById("profitDay");
+  profitDayEl.textContent = dayProfit.toFixed(2);
+  profitDayEl.style.color = dayProfit < 0 ? 'var(--danger)' : 'var(--success)';
+
+  const profitMonthEl = document.getElementById("profitMonth");
+  profitMonthEl.textContent = monthProfit.toFixed(2);
+  profitMonthEl.style.color = monthProfit < 0 ? 'var(--danger)' : 'var(--purple)';
+
+  /* ── Loss alert ── */
+  if (totalProfit < 0) {
+    document.getElementById("lossText").textContent = `يوجد خسارة بقيمة ${Math.abs(totalProfit).toFixed(2)} جنيه`;
+    document.getElementById("lossModal").classList.add("show");
+  }
+
+  function closeLossModal() {
+    document.getElementById("lossModal").classList.remove("show");
+  }
+
+  /* ── Chart ── */
+  const monthNames = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  const labels = [], data = [], colors = [];
+
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date();
+    d.setMonth(d.getMonth() - i);
+    const m = d.getMonth(), y = d.getFullYear();
+
+    const p = calcProfit(s => {
+      const x = new Date(s.date);
+      return x.getMonth() === m && x.getFullYear() === y;
     });
 
-    salesT.innerText = totalSales.toFixed(2);
+    labels.push(monthNames[m]);
+    data.push(Number(p.toFixed(2)));
+    colors.push(p >= 0 ? 'rgba(37,99,235,0.75)' : 'rgba(220,38,38,0.75)');
+  }
 
-    /////////////////////////
-    // حساب الربح الحقيقي
-    /////////////////////////
-
-    function calcProfit(filterFn) {
-
-      let profit = 0;
-
-      sales.filter(filterFn).forEach(inv => {
-        let t = 0, c = 0;
-
-        inv.items?.forEach(item => {
-          const pr = products.find(p => p.name == item.name);
-          const buy = pr ? Number(pr.buyPrice || 0) : 0;
-
-          t += item.price * item.qty;
-          c += buy * item.qty;
-        });
-
-        profit += (t - c);
-      });
-
-      const exp = expenses
-        .filter(filterFn)
-        .reduce((s, e) => s + Number(e.amount || 0), 0);
-
-      return profit - exp;
-    }
-
-    /////////////////////////
-    // فلترة زمنية
-    /////////////////////////
-
-    const today = new Date();
-
-    const isToday = d => {
-      const x = new Date(d);
-      return x.toDateString() == today.toDateString();
-    };
-
-    const isMonth = d => {
-      const x = new Date(d);
-      return x.getMonth() == today.getMonth()
-        && x.getFullYear() == today.getFullYear();
-    };
-
-    /////////////////////////
-    // عرض الأرباح
-    /////////////////////////
-
-    profit.innerText = calcProfit(() => true).toFixed(2);
-    profitDay.innerText = calcProfit(s => isToday(s.date)).toFixed(2);
-    profitMonth.innerText = calcProfit(s => isMonth(s.date)).toFixed(2);
-
-    /////////////////////////
-    // تنبيه خسارة
-    /////////////////////////
-
-    if (calcProfit(() => true) < 0) {
-      showLossModal(calcProfit(() => true));
-    }
-
-
-    /////////////////////////
-    // رسم بياني 6 شهور
-    /////////////////////////
-
-    const monthNames = [
-      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-    ];
-
-    let labels = [];
-    let data = [];
-
-    for (let i = 5; i >= 0; i--) {
-      const d = new Date();
-      d.setMonth(d.getMonth() - i);
-
-      const m = d.getMonth();
-      const y = d.getFullYear();
-
-      const p = calcProfit(s => {
-        const x = new Date(s.date);
-        return x.getMonth() == m && x.getFullYear() == y;
-      });
-
-      labels.push(monthNames[m]);
-      data.push(p.toFixed(2));
-    }
-
-    new Chart(chart, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [{
-          label: "الأرباح الشهرية",
-          data: data
-        }]
-      }
-    });
-
-    /////////////////////////
-    // الوضع الليلي
-    /////////////////////////
-
-    function toggleMode() {
-      document.body.classList.toggle("light");
-      localStorage.setItem("mode",
-        document.body.classList.contains("light") ? "light" : "dark");
-    }
-
-    if (localStorage.getItem("mode") == "light") {
-      document.body.classList.add("light");
-    }
-
-    /////////////////////////
-    // Backup
-    /////////////////////////
-
-    function backup() {
-      let data = JSON.stringify(localStorage);
-      let blob = new Blob([data]);
-      let a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "backup.json";
-      a.click();
-    }
-
-    /////////////////////////
-    // Restore
-    /////////////////////////
-
-    function restore() {
-      let i = document.createElement("input");
-      i.type = "file";
-
-      i.onchange = e => {
-        let f = e.target.files[0];
-        let r = new FileReader();
-
-        r.onload = () => {
-          let d = JSON.parse(r.result);
-          for (let k in d) {
-            localStorage.setItem(k, d[k]);
+  new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "الأرباح الشهرية",
+        data,
+        backgroundColor: colors,
+        borderColor: colors.map(c => c.replace('0.75','1')),
+        borderWidth: 1.5,
+        borderRadius: 8,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          rtl: true,
+          titleFont: { family: 'Cairo' },
+          bodyFont:  { family: 'Cairo' },
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y.toFixed(2)} جنيه`
           }
-          location.reload();
-        };
-
-        r.readAsText(f);
-      };
-
-      i.click();
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Cairo', size: 12 }, color: '#64748b' }
+        },
+        y: {
+          grid: { color: '#f1f5f9' },
+          ticks: { font: { family: 'Cairo', size: 11 }, color: '#64748b' }
+        }
+      }
     }
-
-    function showLossModal(value) {
-      document.getElementById("lossText").innerText =
-        `يوجد خسارة بقيمة ${value.toFixed(2)} جنيه`;
-
-      document.getElementById("lossModal").classList.add("show");
-    }
-
-    function closeLossModal() {
-      document.getElementById("lossModal").classList.remove("show");
-    }
-
-
-  </script>
-
+  });
+</script>
 </body>
-
 </html>

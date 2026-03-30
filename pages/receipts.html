@@ -1,379 +1,480 @@
-  <!DOCTYPE html>
-  <html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>المقبوضات | المحاسب المحترف</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg:        #f4f6fa;
+      --bg2:       #eef1f7;
+      --white:     #ffffff;
+      --primary:   #2563eb;
+      --primary-lt:#eff4ff;
+      --primary-md:#bfcfff;
+      --accent:    #0ea5e9;
+      --sky:       #0284c7;
+      --sky-lt:    #f0f9ff;
+      --sky-md:    #bae6fd;
+      --success:   #16a34a;
+      --success-lt:#f0fdf4;
+      --success-md:#bbf7d0;
+      --warning:   #d97706;
+      --warning-lt:#fffbeb;
+      --danger:    #dc2626;
+      --danger-lt: #fef2f2;
+      --danger-md: #fecaca;
+      --text:      #0f172a;
+      --text2:     #475569;
+      --text3:     #94a3b8;
+      --border:    #e2e8f0;
+      --border2:   #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
+      --shadow:    0 4px 14px rgba(0,0,0,.07);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
+      --r:         13px;
+      --sw:        252px;
+    }
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>المقبوضات</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-      rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-      * {
-        box-sizing: border-box;
-        font-family: "Cairo", sans-serif;
-        margin: 0;
-        padding: 0;
-      }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      body {
-        background: #1E293B;
-        color: #F8F9FA;
-        padding-bottom: 100px;
-      }
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+    }
 
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 25px;
-        background: #1E3A8A;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        border-radius: 0 0 15px 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(2,132,199,.05) 1px, transparent 0);
+      background-size: 28px 28px; pointer-events: none;
+    }
 
-      .header h1 {
-        font-family: "Tajawal", sans-serif;
-        font-size: 24px;
-      }
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--accent));
+      z-index: 1100;
+    }
 
-      .header-right button {
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
-        color: white;
-        font-size: 18px;
-        padding: 8px 12px;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: 0.3s;
-      }
+    /* ══ HEADER ══ */
+    .header {
+      position: fixed; top: 3px; right: 0; left: 0; height: 60px;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px; z-index: 1002;
+    }
 
-      .header-right button:hover {
-        background: rgba(255, 255, 255, 0.4);
-      }
+    .brand { display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 800; }
+    .brand-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--sky), var(--accent));
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #fff; box-shadow: 0 3px 10px rgba(2,132,199,.3);
+    }
+    .brand span { color: var(--sky); }
 
-      .form-container {
-        max-width: 950px;
-        margin: 20px auto;
-        background: #2E3A59;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      }
+    .hdr-cash {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--sky-lt); border: 1px solid var(--sky-md);
+      padding: 5px 13px; border-radius: 18px;
+      font-size: 13px; font-weight: 600; color: var(--sky);
+    }
 
-      .form-container input,
-      .form-container select,
-      .form-container button {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border-radius: 6px;
-        border: none;
-        font-size: 16px;
-      }
+    .menu-toggle {
+      width: 34px; height: 34px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text2); font-size: 14px; cursor: pointer;
+      display: none; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .menu-toggle:hover { background: var(--sky-lt); color: var(--sky); border-color: var(--sky-md); }
 
-      .form-container input,
-      .form-container select {
-        background-color: #0f172a;
-        color: #fff;
-      }
+    /* ══ SIDEBAR ══ */
+    .sidebar {
+      position: fixed; top: 63px; right: 0;
+      width: var(--sw); height: calc(100dvh - 63px);
+      background: var(--white); border-left: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 14px 10px 28px; z-index: 1001; overflow-y: auto;
+      scrollbar-width: none; transition: right .3s;
+    }
+    .sidebar::-webkit-scrollbar { display: none; }
 
-      .form-container button {
-        background: #1E3A8A;
-        color: white;
-        cursor: pointer;
-        transition: 0.3s;
-      }
+    .sb-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); padding: 10px 10px 4px; }
+    .sb-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; text-decoration: none; color: var(--text2); font-size: 13px; font-weight: 600; transition: all .18s; }
+    .sb-link i { width: 16px; text-align: center; font-size: 12px; flex-shrink: 0; }
+    .sb-link:hover { background: var(--bg); color: var(--text); }
+    .sb-link.active { background: var(--sky-lt); color: var(--sky); font-weight: 700; }
 
-      .form-container button:hover {
-        background: #1E3A8A;
-      }
+    .sb-cash {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; border-radius: 10px;
+      background: var(--sky-lt); border: 1px solid var(--sky-md);
+      margin-bottom: 6px; font-size: 12.5px; font-weight: 600; color: var(--sky);
+    }
+    .sb-cash span { font-weight: 800; }
 
-      .table-wrapper {
-        max-height: 400px;
-        overflow-y: auto;
-        overflow-x: auto;
-        margin-top: 20px;
-        border-radius: 8px;
-        background: #1E293B;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      }
+    #overlay { position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(4px); display: none; z-index: 1000; }
+    #overlay.show { display: block; }
 
-      .table-wrapper table {
-        width: 100%;
-        border-collapse: collapse;
-      }
+    /* ══ MAIN ══ */
+    .main { position: relative; z-index: 1; margin-right: var(--sw); padding: 78px 22px 30px; }
 
-      th,
-      td {
-        padding: 12px;
-        text-align: center;
-      }
+    .page-head { margin-bottom: 20px; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+    .breadcrumb a { color: var(--sky); text-decoration: none; }
+    .page-head h2 { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+    .page-head h2 i { color: var(--sky); }
 
-      th {
-        background: #21618C;
-      }
+    /* ══ CARD ══ */
+    .card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px 18px;
+      margin-bottom: 14px; box-shadow: var(--shadow-sm);
+    }
 
-      tr:nth-child(even) {
-        background: #2E3A59;
-      }
+    .card-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
+    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--sky-lt); border: 1px solid var(--sky-md); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--sky); }
+    .chdr-icon.blue { background: var(--primary-lt); border-color: var(--primary-md); color: var(--primary); }
+    .card-hdr h5 { font-size: 15px; font-weight: 800; }
 
-      tr:nth-child(odd) {
-        background: #1E2A45;
-      }
+    /* ══ FORM ══ */
+    .form-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 12px; align-items: end;
+    }
 
-      tfoot td {
-        font-weight: bold;
-        background: #21618C;
-      }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg label { font-size: 11px; font-weight: 700; color: var(--text2); }
 
-      .table-wrapper::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-      }
+    input, select {
+      width: 100%; padding: 10px 13px;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 9px; color: var(--text);
+      font-family: "Cairo", sans-serif; font-size: 13px;
+      outline: none; transition: all .2s;
+    }
+    input::placeholder { color: var(--text3); }
+    select option { background: var(--white); }
+    input:focus, select:focus { border-color: var(--sky); background: var(--sky-lt); box-shadow: 0 0 0 3px rgba(2,132,199,.1); }
+    input:disabled { background: var(--bg2); color: var(--text2); cursor: default; }
+    input:disabled:focus { border-color: var(--border); box-shadow: none; background: var(--bg2); }
 
-      .table-wrapper::-webkit-scrollbar-track {
-        background: #0F172A;
-        border-radius: 5px;
-      }
+    button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 18px; border: none; border-radius: 9px;
+      font-family: "Cairo", sans-serif; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; transition: all .2s;
+    }
 
-      .table-wrapper::-webkit-scrollbar-thumb {
-        background: #3B82F6;
-        border-radius: 5px;
-      }
+    #addReceiptBtn {
+      background: linear-gradient(135deg, var(--sky), var(--primary));
+      color: #fff; box-shadow: 0 4px 14px rgba(2,132,199,.25);
+      width: 100%; margin-top: 4px;
+    }
+    #addReceiptBtn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
-      .table-wrapper::-webkit-scrollbar-thumb:hover {
-        background: #60A5FA;
-      }
+    /* ══ FILTER ROW ══ */
+    .filter-row {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 11px; padding: 14px; margin-bottom: 14px;
+    }
+    .filter-row .fg { flex: 1; min-width: 150px; }
+    .filter-row input, .filter-row select { background: var(--white); }
 
-      .filter-container {
-        max-width: 950px;
-        margin: 10px auto;
-        background: #1E293B;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
+    #filterBtn {
+      background: linear-gradient(135deg, var(--sky), var(--accent));
+      color: #fff; box-shadow: 0 4px 12px rgba(2,132,199,.2);
+      white-space: nowrap; flex-shrink: 0; align-self: flex-end;
+      padding: 10px 20px;
+    }
+    #filterBtn:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
-      .filter-container select,
-      .filter-container input {
-        width: auto;
-        flex: 1;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #fff;
-        background: #1E293B;
-        color: #F8F9FA;
-        font-size: 16px;
-      }
+    /* ══ TABLE ══ */
+    .table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .table-wrapper { overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; max-height: 420px; }
+    .table-wrapper::-webkit-scrollbar { width: 4px; height: 4px; }
+    .table-wrapper::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-      .filter-container input:focus,
-      .filter-container select:focus {
-        outline: none;
-        background: #3B82F6;
-        color: white;
-      }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    thead { position: sticky; top: 0; z-index: 2; }
+    th { background: var(--bg2); color: var(--text2); padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .3px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    td { padding: 10px 12px; text-align: center; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); font-weight: 600; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background .15s; }
+    tbody tr:nth-child(even) { background: var(--bg); }
+    tbody tr:hover { background: var(--sky-lt); }
 
-      .filter-container button {
-        padding: 10px 20px;
-        border-radius: 8px;
-        border: none;
-        background: #1E3A8A;
-        color: white;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.3s;
-      }
+    tfoot td { background: var(--bg2); color: var(--sky); font-weight: 800; border-top: 2px solid var(--border2); }
 
-      .filter-container button:hover {
-        background: #1E3A8A;
-      }
+    .cell-green { color: var(--success); font-weight: 700; }
+    .cell-red   { color: var(--danger);  font-weight: 700; }
+    .cell-sky   { color: var(--sky);     font-weight: 700; }
 
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        justify-content: center;
-        align-items: center;
-        z-index: 200;
-      }
+    /* ══ MODALS ══ */
+    .modal-ov {
+      position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(6px);
+      display: none; justify-content: center; align-items: center; z-index: 9999;
+    }
+    .modal-ov.open { display: flex; }
 
-      .modal-content {
-        background: #1E3A8A;
-        padding: 20px;
-        border-radius: 10px;
-        width: 300px;
-        text-align: center;
-        color: white;
-      }
+    /* keep legacy display:flex → .open in sync */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 9999; }
 
-      .modal-content input {
-        width: 100%;
-        padding: 8px;
-        margin: 8px 0;
-        border-radius: 6px;
-        border: none;
-      }
+    .modal-box {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 18px; padding: 26px 24px; width: 95%; max-width: 400px;
+      box-shadow: var(--shadow-lg);
+      animation: popIn .3s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{opacity:0;transform:scale(.88)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
 
-      .modal-content button {
-        padding: 8px 12px;
-        margin: 5px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-      }
+    #titleModal .modal-box { border-top: 3px solid var(--primary); }
 
-      .save-btn {
-        background: #3B82F6;
-        color: white;
-      }
+    .modal-box h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .modal-box h3 i { color: var(--primary); }
 
-      .close-btn {
-        background: #F87171;
-        color: white;
-      }
+    .mfg { margin-bottom: 12px; }
+    .mfg label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
+    .modal-box input {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 9px; padding: 10px 13px; width: 100%;
+      color: var(--text); font-family: "Cairo", sans-serif; font-size: 13.5px;
+    }
+    .modal-box input:focus { border-color: var(--sky); background: var(--sky-lt); box-shadow: 0 0 0 3px rgba(2,132,199,.1); outline: none; }
 
-      .success-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: .3s;
-  z-index: 9999;
-}
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; }
+    .mbtn { border: none; padding: 10px 18px; border-radius: 9px; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: "Cairo", sans-serif; display: inline-flex; align-items: center; gap: 6px; transition: all .2s; }
+    .mbtn-save   { background: linear-gradient(135deg, var(--sky), var(--primary)); color: #fff; }
+    .mbtn-cancel { background: var(--bg); color: var(--text2); border: 1px solid var(--border); }
+    .mbtn:hover  { filter: brightness(1.08); transform: translateY(-1px); }
 
-.success-modal.active {
-  visibility: visible;
-  opacity: 1;
-}
+    /* success modal */
+    .success-modal {
+      position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(6px);
+      display: flex; justify-content: center; align-items: center;
+      visibility: hidden; opacity: 0; transition: .3s; z-index: 9999;
+    }
+    .success-modal.active { visibility: visible; opacity: 1; }
 
-.success-box {
-  background: #28a745;
-  padding: 30px 50px;
-  border-radius: 16px;
-  text-align: center;
-  animation: pop .3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
-}
+    .success-box {
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--success);
+      border-radius: 18px; padding: 32px 36px;
+      text-align: center; box-shadow: var(--shadow-lg);
+      animation: popIn .35s cubic-bezier(.34,1.56,.64,1) both;
+    }
 
-.check-icon {
-  width: 70px;
-  height: 70px;
-  margin: auto;
-  background: #28a745;
-  color: #fff;
-  font-size: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
+    .check-icon {
+      width: 56px; height: 56px; background: var(--success-lt);
+      border-radius: 50%; display: flex; justify-content: center;
+      align-items: center; font-size: 22px; color: var(--success);
+      margin: 0 auto 14px;
+    }
 
-@keyframes pop {
-  from { transform: scale(.7); opacity:0; }
-  to { transform: scale(1); opacity:1; }
-}
-    </style>
-  </head>
+    #successText { font-size: 15px; font-weight: 700; color: var(--text); }
 
-  <body>
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .sidebar { right: -270px; }
+      .sidebar.show { right: 0; }
+      .main { margin-right: 0; padding: 76px 12px 22px; }
+      .form-grid { grid-template-columns: 1fr; }
+      #filterBtn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
 
-    <header class="header">
-      <div class="header-left">
-        <h1>المقبوضات</h1>
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+    المحاسب <span>المحترف</span>
+  </div>
+  <div class="hdr-cash">
+    <i class="fa-solid fa-vault"></i>
+    <span id="cashBalanceHeader">0.00 جنيه</span>
+  </div>
+  <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-cash">
+    <span><i class="fa-solid fa-vault" style="margin-left:5px"></i>رصيد الخزينة</span>
+    <span id="cashBalance">0.00 ج</span>
+  </div>
+
+  <div class="sb-lbl">القائمة الرئيسية</div>
+  <a href="../index.html"           class="sb-link"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+  <a href="customers.html"          class="sb-link"><i class="fa-solid fa-users"></i><span>الحسابات</span></a>
+  <a href="products.html"           class="sb-link"><i class="fa-solid fa-box-open"></i><span>المنتجات</span></a>
+
+  <div class="sb-lbl">المعاملات</div>
+  <a href="sales.html"              class="sb-link"><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a>
+  <a href="purchases.html"          class="sb-link"><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a>
+  <a href="receipts.html"           class="sb-link active"><i class="fa-solid fa-hand-holding-dollar"></i><span>المقبوضات</span></a>
+
+  <div class="sb-lbl">التقارير</div>
+  <a href="income.html"             class="sb-link"><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a>
+  <a href="expenses.html"           class="sb-link"><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a>
+  <a href="cash.html"               class="sb-link"><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a>
+  <a href="profit.html"             class="sb-link"><i class="fa-solid fa-coins"></i><span>الأرباح</span></a>
+  <a href="../pages/dashboard.html" class="sb-link"><i class="fa-solid fa-chart-pie"></i><span>الحركة</span></a>
+  <a href="../pages/tayar.html"     class="sb-link"><i class="fa-solid fa-plane"></i><span>تطبيق الطيار</span></a>
+</div>
+
+<div id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="page-head">
+    <div class="breadcrumb">
+      <a href="../index.html">الرئيسية</a>
+      <i class="fa-solid fa-chevron-left" style="font-size:9px"></i>
+      <span>المقبوضات</span>
+    </div>
+    <h2><i class="fa-solid fa-hand-holding-dollar"></i> سندات القبض</h2>
+  </div>
+
+  <!-- ══ ADD RECEIPT ══ -->
+  <div class="card">
+    <div class="card-hdr">
+      <div class="chdr-icon"><i class="fa-solid fa-plus"></i></div>
+      <h5>إضافة سند قبض</h5>
+    </div>
+    <div class="form-grid">
+      <div class="fg">
+        <label>اختر الحساب</label>
+        <select id="receiptCustomer">
+          <option value="" disabled selected>اختر الحساب...</option>
+        </select>
       </div>
-      <div class="header-right">
-        <button><i class="fa fa-bell"></i></button>
-        <button><i class="fa fa-user"></i></button>
+      <div class="fg">
+        <label>الرصيد السابق</label>
+        <input type="text" id="prevBalance" disabled placeholder="0.00" />
       </div>
-    </header>
-
-    <div class="form-container">
-      <select id="receiptCustomer">
-        <option value="" disabled selected>اختر الحساب</option>
-      </select>
-
-      <input type="text" id="prevBalance" disabled placeholder="الرصيد السابق">
-
-      <select id="receiptTitle">
-        <option value="" disabled selected>البند / البيان</option>
-        <option value="سند قبض">سند قبض</option>
-        <option value="تحصيل ديون">تحصيل ديون</option>
-        <option value="أخرى">أخرى</option>
-      </select>
-
-      <input type="number" id="receiptAmount" placeholder="ادخل المبلغ">
-
-      <input type="text" id="remainingBalance" disabled placeholder="المتبقي بعد الدفع">
-
-      <button id="addReceiptBtn">إضافة المقبوض</button>
-    </div>
-
-    <div class="filter-container">
-      <input type="date" id="fromDate" placeholder="من تاريخ">
-      <input type="date" id="toDate" placeholder="إلى تاريخ">
-      <select id="filterCustomer">
-        <option value="">الكل</option>
-      </select>
-      <button id="filterBtn">تطبيق الفلتر</button>
-    </div>
-
-    <div class="table-wrapper">
-      <table id="receiptTable">
-        <thead>
-          <tr>
-            <th>التاريخ</th>
-            <th>الحساب</th>
-            <th>الرصيد السابق</th>
-            <th>المبلغ</th>
-            <th>المتبقي</th>
-            <th>البيان</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-        </tfoot>
-      </table>
-    </div>
-
-    <div class="modal" id="titleModal">
-      <div class="modal-content">
-        <h3>أضف بيان جديد</h3>
-        <input type="text" id="otherTitleInput" placeholder="اكتب البيان هنا">
-        <div>
-          <button class="save-btn" id="saveTitleBtn">حفظ</button>
-          <button class="close-btn" id="closeModalBtn">إلغاء</button>
-        </div>
+      <div class="fg">
+        <label>البند / البيان</label>
+        <select id="receiptTitle">
+          <option value="" disabled selected>اختر البيان...</option>
+          <option value="سند قبض">سند قبض</option>
+          <option value="تحصيل ديون">تحصيل ديون</option>
+          <option value="أخرى">أخرى</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>المبلغ</label>
+        <input type="number" id="receiptAmount" placeholder="0.00" />
+      </div>
+      <div class="fg">
+        <label>المتبقي بعد الدفع</label>
+        <input type="text" id="remainingBalance" disabled placeholder="0.00" />
       </div>
     </div>
+    <button id="addReceiptBtn" style="margin-top:16px">
+      <i class="fa-solid fa-plus"></i> إضافة المقبوض
+    </button>
+  </div>
 
-    <div id="successModal" class="success-modal">
+  <!-- ══ FILTER + TABLE ══ -->
+  <div class="card">
+    <div class="card-hdr">
+      <div class="chdr-icon blue"><i class="fa-solid fa-list-check"></i></div>
+      <h5>سجل المقبوضات</h5>
+    </div>
+
+    <div class="filter-row">
+      <div class="fg" style="flex:1;min-width:150px">
+        <label>من تاريخ</label>
+        <input type="date" id="fromDate" />
+      </div>
+      <div class="fg" style="flex:1;min-width:150px">
+        <label>إلى تاريخ</label>
+        <input type="date" id="toDate" />
+      </div>
+      <div class="fg" style="flex:1;min-width:160px">
+        <label>تصفية بالحساب</label>
+        <select id="filterCustomer">
+          <option value="">كل الحسابات</option>
+        </select>
+      </div>
+      <button id="filterBtn">
+        <i class="fa-solid fa-magnifying-glass"></i> تطبيق
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-wrapper">
+        <table id="receiptTable">
+          <thead>
+            <tr>
+              <th>التاريخ</th>
+              <th>الحساب</th>
+              <th>الرصيد السابق</th>
+              <th>المبلغ</th>
+              <th>المتبقي</th>
+              <th>البيان</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- OTHER TITLE MODAL -->
+<div id="titleModal" class="modal">
+  <div class="modal-box">
+    <h3><i class="fa-solid fa-pen"></i> إضافة بيان جديد</h3>
+    <div class="mfg">
+      <label>اكتب البيان</label>
+      <input type="text" id="otherTitleInput" placeholder="أدخل البيان هنا..." />
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-cancel" id="closeModalBtn"><i class="fa-solid fa-xmark"></i> إلغاء</button>
+      <button class="mbtn mbtn-save"   id="saveTitleBtn"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="success-modal">
   <div class="success-box">
-    <div class="check-icon">✔</div>
+    <div class="check-icon"><i class="fa-solid fa-circle-check"></i></div>
     <h3 id="successText">تمت العملية بنجاح</h3>
   </div>
 </div>
 
-    <script src="../js/data.js"></script>
-      <script src="../js/common.js"></script>
-      <script src="../js/receipts.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/receipts.js"></script>
 
-  </body>
+<script>
+  function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("show");
+    document.getElementById("overlay").classList.toggle("show");
+  }
 
-  </html>
+  /* sync display:flex → .open for modal divs */
+  ['titleModal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    new MutationObserver(() => {
+      el.classList.toggle('open', el.style.display === 'flex');
+    }).observe(el, { attributes: true, attributeFilter: ['style'] });
+  });
+</script>
+</body>
+</html>

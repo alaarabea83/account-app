@@ -1,921 +1,1033 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>المحاسب المحترف</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #0f172a;
-      color: #fff;
-    }
-
-    .header {
-      padding: 4px 8px;
-      position: sticky;
-      top: 0;
-      background: linear-gradient(135deg,#1e293b,#0f172a);
-      color: #f5f5f5;
-      z-index: 100;
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header-right {
-      display: flex;
-      gap: 10px;
-    }
-
-    .logo {
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    section {
-      max-width: 1200px;
-      margin: 40px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 18px;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      padding: 22px 16px;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.25s;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-    }
-
-    .card:active {
-      transform: scale(0.96);
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
-    }
-
-    .card i {
-      font-size: 28px;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .card h3 {
-      margin: 6px 0;
-      font-size: 17px;
-      color: #fff;
-    }
-
-    .card-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.5;
-      opacity: 0.9;
-    }
-
-    .card-list li {
-      margin: 2px 0;
-      color: #fff;
-    }
-
-    .green {
-      background: #05595b;
-    }
-
-    .blue {
-      background: #05595b;
-    }
-
-    .darkblue {
-      background: #05595b;
-    }
-
-    .orange {
-      background: #05595b;
-    }
-
-    .red {
-      background: #05595b;
-    }
-
-    .teal {
-      background: #05595b;
-    }
-
-    .yellow {
-      background: #05595b;
-    }
-
-    .purple {
-      background: #05595b;
-    }
-
-    .turquoise {
-      background: #05595b;
-    }
-
-    @media (max-width: 600px) {
-      .header h1 {
-        font-size: 18px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../icons/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>المحاسب المحترف</title>
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #ffffff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --warning: #d97706;
+        --danger: #dc2626;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --border2: #cbd5e1;
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.05);
+        --shadow-lg:
+          0 10px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+        --r: 14px;
       }
 
-      section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
 
-      .footer-content {
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* ══ HEADER ══ */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .hdr {
+        max-width: 1320px;
+        margin: auto;
+        padding: 0 28px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .logo-icon {
+        width: 38px;
+        height: 38px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .logo span {
+        color: var(--primary);
+      }
+
+      .hdr-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .hbtn {
+        width: 38px;
+        height: 38px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text2);
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .hbtn:hover {
+        background: var(--primary-lt);
+        border-color: var(--primary-md);
+        color: var(--primary);
+      }
+
+      .bk-menu {
+        position: relative;
+      }
+
+      .bk-drop {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        min-width: 200px;
+        display: none;
         flex-direction: column;
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+
+      .bk-drop.show {
+        display: flex;
+      }
+
+      .bk-drop button {
+        background: none;
+        border: none;
+        color: var(--text);
+        padding: 12px 16px;
+        text-align: right;
+        cursor: pointer;
+        font-size: 13.5px;
+        font-family: "Cairo", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        transition: background 0.15s;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .bk-drop button:last-child {
+        border-bottom: none;
+      }
+
+      .bk-drop button:hover {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+
+      .bk-drop button i {
+        color: var(--primary);
+      }
+
+      /* ══ HERO ══ */
+      .hero {
+        max-width: 1320px;
+        margin: 36px auto 0;
+        padding: 0 28px;
+      }
+
+      .hero-inner {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          #1d4ed8 50%,
+          var(--accent) 100%
+        );
+        border-radius: 20px;
+        padding: 32px 36px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        box-shadow: 0 8px 32px rgba(37, 99, 235, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* decorative circles */
+      .hero-inner::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .hero-inner::after {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        left: 30%;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-text h1 {
+        font-size: clamp(20px, 2.8vw, 32px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+      }
+
+      .hero-text h1 span {
+        color: #bfcfff;
+      }
+
+      .hero-text p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 6px;
+        font-weight: 400;
+      }
+
+      .hero-pills {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pill {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 14px;
+        padding: 12px 20px;
         text-align: center;
+        min-width: 90px;
       }
-    }
 
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
-    }
+      .pill strong {
+        display: block;
+        font-size: 22px;
+        font-weight: 800;
+        color: #fff;
+      }
 
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+      .pill span {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.7);
+      }
 
-    .modal-box {
-      background: #1e293b;
-      padding: 25px 35px;
-      border-radius: 18px;
-      text-align: center;
-      color: #fff;
-      min-width: 260px;
-      transform: scale(0.8);
-      transition: 0.3s ease;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
+      /* ══ SECTION LABEL ══ */
+      .sec-lbl {
+        max-width: 1320px;
+        margin: 32px auto 16px;
+        padding: 0 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
 
-    .modal-overlay.active .modal-box {
-      transform: scale(1);
-    }
+      .sec-lbl span {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text3);
+      }
 
-    .modal-icon {
-      font-size: 40px;
-      margin-bottom: 12px;
-    }
+      .sec-lbl::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
 
-    .modal-text {
-      font-size: 15px;
-      font-weight: 600;
-    }
+      /* ══ GRID ══ */
+      .grid {
+        max-width: 1320px;
+        margin: 0 auto 56px;
+        padding: 0 28px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 14px;
+      }
 
-    .confirm-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
-    }
+      /* ══ CARD ══ */
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 22px 18px 20px;
+        text-decoration: none;
+        color: var(--text);
+        transition:
+          transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+          box-shadow 0.3s,
+          border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+        animation: fadeUp 0.45s ease both;
+      }
 
-    .confirm-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+      .card:nth-child(1) {
+        animation-delay: 0.04s;
+      }
 
-    .confirm-box {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 20px;
-      width: 300px;
-      text-align: center;
-      color: #fff;
-      transform: scale(0.8);
-      transition: 0.3s ease;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
+      .card:nth-child(2) {
+        animation-delay: 0.08s;
+      }
 
-    .confirm-overlay.active .confirm-box {
-      transform: scale(1);
-    }
+      .card:nth-child(3) {
+        animation-delay: 0.12s;
+      }
 
-    .confirm-icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
+      .card:nth-child(4) {
+        animation-delay: 0.16s;
+      }
 
-    .confirm-text {
-      font-size: 16px;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+      .card:nth-child(5) {
+        animation-delay: 0.2s;
+      }
 
-    .confirm-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
+      .card:nth-child(6) {
+        animation-delay: 0.24s;
+      }
 
-    .btn-cancel,
-    .btn-confirm {
-      flex: 1;
-      padding: 10px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+      .card:nth-child(7) {
+        animation-delay: 0.28s;
+      }
 
-    .btn-cancel {
-      background: #334155;
-      color: #fff;
-    }
+      .card:nth-child(8) {
+        animation-delay: 0.32s;
+      }
 
-    .btn-cancel:hover {
-      background: #475569;
-    }
+      .card:nth-child(9) {
+        animation-delay: 0.36s;
+      }
 
-    .btn-confirm {
-      background: #dc3545;
-      color: #fff;
-    }
+      .card:nth-child(10) {
+        animation-delay: 0.4s;
+      }
 
-    .btn-confirm:hover {
-      background: #b02a37;
-    }
+      .card:nth-child(11) {
+        animation-delay: 0.44s;
+      }
 
-    .header-right {
-      display: flex;
-      margin-right: auto;
-      gap: 5px;
-    }
+      .card:nth-child(12) {
+        animation-delay: 0.48s;
+      }
 
-    .notification-btn {
-      position: relative;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #1f2937;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 17px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
 
-    .notification-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    .logout-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: #1f2937;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      color: #fff;
-    }
+      /* colored left border */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--cc, var(--primary));
+        border-radius: 0 var(--r) var(--r) 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
 
-    .logout-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
+      .card:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--cc, var(--primary));
+      }
 
-    /* زر النسخ الاحتياطي */
+      .card:hover::before {
+        opacity: 1;
+      }
 
-    .header-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: #1f2937;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .card:active {
+        transform: scale(0.98);
+      }
 
-    .header-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
+      /* color variants */
+      .cc-blue {
+        --cc: #2563eb;
+        --cc-lt: #eff4ff;
+      }
 
-    /* Backup dropdown */
+      .cc-teal {
+        --cc: #0891b2;
+        --cc-lt: #ecfeff;
+      }
 
-    .backup-menu {
-      position: relative;
-    }
+      .cc-green {
+        --cc: #16a34a;
+        --cc-lt: #f0fdf4;
+      }
 
-    .backup-dropdown {
-      position: absolute;
-      top: 45px;
-      right: 50%;
-      transform: translateX(50%);
-      background: #16213e;
-      border: 1px solid #cbb884;
-      border-radius: 12px;
-      display: none;
-      flex-direction: column;
-      min-width: 180px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
+      .cc-orange {
+        --cc: #d97706;
+        --cc-lt: #fffbeb;
+      }
 
-    .backup-dropdown button {
-      background: none;
-      border: none;
-      color: #fff;
-      padding: 12px;
-      text-align: right;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: 0.3s;
-    }
+      .cc-red {
+        --cc: #dc2626;
+        --cc-lt: #fef2f2;
+      }
 
-    .backup-dropdown button:hover {
-      background: #2c3e50;
-    }
+      .cc-purple {
+        --cc: #7c3aed;
+        --cc-lt: #f5f3ff;
+      }
 
-    .backup-dropdown.show {
-      display: flex;
-    }
+      .cc-pink {
+        --cc: #db2777;
+        --cc-lt: #fdf2f8;
+      }
 
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1e293b;
-      color: #fff;
-      padding: 14px 18px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      transform: translateY(-80px);
-      opacity: 0;
-      transition: 0.35s ease;
-      z-index: 99999;
-    }
+      .cc-sky {
+        --cc: #0284c7;
+        --cc-lt: #f0f9ff;
+      }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+      .cc-lime {
+        --cc: #65a30d;
+        --cc-lt: #f7fee7;
+      }
 
-    .toast i {
-      font-size: 18px;
-      color: #22c55e;
-    }
+      .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        background: var(--cc-lt, var(--primary-lt));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--cc, var(--primary));
+        margin-bottom: 13px;
+        transition: transform 0.25s;
+      }
 
-    .app-footer {
-      padding: 12px;
-      text-align: center;
-      font-size: 13px;
-      color: #bbb;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      background: #0f172a;
-    }
+      .card:hover .card-icon {
+        transform: scale(1.1);
+      }
 
-    .app-footer .last-backup {
-      font-size: 12px;
-      color: #bbb;
-      font-weight: normal;
-    }
-  </style>
-</head>
+      .card-title {
+        font-size: 15.5px;
+        font-weight: 800;
+        margin-bottom: 9px;
+        color: var(--text);
+      }
 
-<body>
-  <header class="header">
-    <div class="header-container">
-      <div class="logo">
-        <i class="fa-solid fa-chart-simple"></i>
-        المحاسب المحترف
-      </div>
+      .card-divider {
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 10px;
+      }
 
-      <div class="header-right">
-        <a href="./pages/notification.html" class="notification-btn">
-          <i class="fa-solid fa-bell"></i>
-        </a>
-        <!-- Backup Dropdown -->
-        <div class="backup-menu">
-          <button class="header-btn" id="backupMenuBtn">
-            <i class="fa-solid fa-cloud"></i>
-          </button>
+      .card-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
 
-          <div class="backup-dropdown" id="backupDropdown">
-            <button id="backupBtn">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-              رفع نسخة احتياطية
-            </button>
+      .card-list li {
+        font-size: 12.5px;
+        color: var(--text2);
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
 
-            <button id="restoreBtn">
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              استرجاع النسخة
-            </button>
-          </div>
+      .card-list li::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--cc, var(--primary));
+        flex-shrink: 0;
+        opacity: 0.6;
+      }
+
+      .card-arrow {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 11px;
+        color: var(--cc, var(--primary));
+        opacity: 0;
+        transform: translateX(6px);
+        transition: all 0.25s;
+      }
+
+      .card:hover .card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* ══ FOOTER ══ */
+      footer {
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        padding: 16px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .foot-l {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12.5px;
+        color: var(--text3);
+      }
+
+      .foot-l i {
+        color: var(--primary);
+      }
+
+      .foot-r {
+        font-size: 12px;
+        color: var(--text3);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .foot-r i {
+        color: var(--accent);
+      }
+
+      /* ══ MODALS ══ */
+      .modal-ov {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.35);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.25s;
+        z-index: 9999;
+      }
+
+      .modal-ov.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-box {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 32px 38px;
+        text-align: center;
+        min-width: 280px;
+        transform: scale(0.88) translateY(10px);
+        transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .modal-ov.active .modal-box {
+        transform: scale(1) translateY(0);
+      }
+
+      .m-icon {
+        font-size: 42px;
+        margin-bottom: 12px;
+      }
+
+      .m-text {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .cfm-box {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 36px 32px;
+        width: 320px;
+        text-align: center;
+        transform: scale(0.88);
+        transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .modal-ov.active .cfm-box {
+        transform: scale(1);
+      }
+
+      .cfm-icon {
+        font-size: 42px;
+        margin-bottom: 14px;
+      }
+
+      .cfm-text {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 22px;
+        color: var(--text);
+      }
+
+      .cfm-btns {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-outline {
+        flex: 1;
+        padding: 11px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text2);
+        font-family: "Cairo", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-outline:hover {
+        background: var(--border);
+        color: var(--text);
+      }
+
+      .btn-danger {
+        flex: 1;
+        padding: 11px;
+        border-radius: 10px;
+        border: none;
+        background: var(--danger);
+        color: #fff;
+        font-family: "Cairo", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+      }
+
+      .btn-danger:hover {
+        background: #b91c1c;
+      }
+
+      /* ══ TOAST ══ */
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 13px 18px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13.5px;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-80px);
+        opacity: 0;
+        transition: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 99999;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .toast i {
+        color: var(--success);
+        font-size: 17px;
+      }
+
+      @media (max-width: 700px) {
+        .hero-inner {
+          flex-direction: column;
+        }
+
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          padding: 0 14px;
+        }
+
+        .hdr {
+          padding: 0 14px;
+        }
+
+        .hero,
+        .sec-lbl {
+          padding: 0 14px;
+        }
+
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="hdr">
+        <div class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-chart-simple"></i></div>
+          المحاسب <span>المحترف</span>
         </div>
+        <div class="hdr-actions">
+          <a href="./pages/notification.html" class="hbtn" title="الإشعارات">
+            <i class="fa-solid fa-bell"></i>
+          </a>
+          <div class="bk-menu">
+            <button class="hbtn" id="backupMenuBtn" title="النسخ الاحتياطي">
+              <i class="fa-solid fa-cloud"></i>
+            </button>
+            <div class="bk-drop" id="backupDropdown">
+              <button id="backupBtn">
+                <i class="fa-solid fa-cloud-arrow-up"></i> رفع نسخة احتياطية
+              </button>
+              <button id="restoreBtn">
+                <i class="fa-solid fa-cloud-arrow-down"></i> استرجاع النسخة
+              </button>
+            </div>
+          </div>
+          <button id="logoutBtn" class="hbtn" title="تسجيل الخروج">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </header>
 
-        <button id="logoutBtn" class="logout-btn">
-          <i class="fa-solid fa-right-from-bracket"></i>
-        </button>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1>لوحة <span>التحكم</span> الرئيسية</h1>
+          <p>نظام محاسبة متكامل · آمن · سريع</p>
+        </div>
+        <div class="hero-pills">
+          <div class="pill"><strong>12</strong><span>وحدة نظام</span></div>
+          <div class="pill"><strong>∞</strong><span>سجلات آمنة</span></div>
+        </div>
       </div>
     </div>
-  </header>
 
-  <section>
-    <a class="card green" href="pages/customers.html">
-      <i class="fa fa-users"></i>
-      <h3>الحسابات</h3>
-      <ul class="card-list">
-        <li>إضافة حساب</li>
-        <li>إدارة العملاء</li>
-        <li>كشف حساب</li>
-        <li>أرصدة إفتتاحية</li>
-      </ul>
-    </a>
+    <div class="sec-lbl"><span>الوحدات الرئيسية</span></div>
 
-    <a class="card blue" href="pages/products.html">
-      <i class="fa-solid fa-box-open"></i>
-      <h3>المنتجات</h3>
-      <ul class="card-list">
-        <li>إضافة منتج</li>
-        <li>إدارة المخزون</li>
-        <li>حركة صنف</li>
-        <li>أرصدة إفتتاحية</li>
-      </ul>
-    </a>
-
-    <a class="card darkblue" href="pages/sales.html">
-      <i class="fa fa-cart-shopping"></i>
-      <h3>المبيعات</h3>
-      <ul class="card-list">
-        <li>فاتورة بيع</li>
-        <li>بيع نقدي</li>
-        <li>بيع بالأجل</li>
-        <li>إدارة الفواتير</li>
-      </ul>
-    </a>
-
-    <a class="card orange" href="pages/purchases.html">
-      <i class="fa-solid fa-dolly"></i>
-      <h3>المشتريات</h3>
-      <ul class="card-list">
-        <li>فاتورة شراء</li>
-        <li>تحديث المخزون</li>
-        <li>تحديث الموردين</li>
-        <li>إدارة الفواتير</li>
-      </ul>
-    </a>
-
-    <a class="card teal" href="pages/receipts.html">
-      <i class="fa fa-hand-holding-dollar"></i>
-      <h3>القبض</h3>
-      <ul class="card-list">
-        <li>سند قبض</li>
-        <li>تحصيل ديون</li>
-        <li>تدفقات نقدية</li>
-        <li>إضافة رأس مال</li>
-      </ul>
-    </a>
-
-    <a class="card red" href="#">
-      <i class="fa fa-money-bill-wave"></i>
-      <h3>الدفع</h3>
-      <ul class="card-list">
-        <li>سند دفع</li>
-        <li>دفع مستحقات</li>
-        <li>تصفية شريك</li>
-        <li>تخفيض رأس مال</li>
-      </ul>
-    </a>
-
-    <a class="card yellow" href="pages/income.html">
-      <i class="fa fa-chart-line"></i>
-      <h3>الإيرادات</h3>
-      <ul class="card-list">
-        <li>تسجيل إيراد</li>
-        <li>إيرادات خارجية</li>
-        <li>سجل إيرادات</li>
-        <li>تحديث الأرباح</li>
-      </ul>
-    </a>
-
-    <a class="card purple" href="pages/expenses.html">
-      <i class="fa fa-receipt"></i>
-      <h3>المصروفات</h3>
-      <ul class="card-list">
-        <li>تسجيل مصروف</li>
-        <li>أجور ومرتبات</li>
-        <li>رسوم وإيجارات</li>
-        <li>سلف العاملين</li>
-      </ul>
-    </a>
-
-    <a class="card turquoise" href="pages/cash.html">
-      <i class="fa-solid fa-building-columns"></i>
-      <h3>الخزينة</h3>
-      <ul class="card-list">
-        <li>رصيد الخزينة</li>
-        <li>حركة النقدية</li>
-        <li>تقارير يومية</li>
-        <li>تقارير شهرية</li>
-      </ul>
-    </a>
-
-    <a class="card green" href="pages/profit.html">
-      <i class="fa fa-coins"></i>
-      <h3>الأرباح</h3>
-      <ul class="card-list">
-        <li>مجمل الربح</li>
-        <li>صافي الربح</li>
-        <li>تقرير يومي</li>
-        <li>تقرير شهري</li>
-      </ul>
-    </a>
-
-    <a class="card blue" href="pages/dashboard.html">
-      <i class="fa fa-chart-pie"></i>
-      <h3>الحركة</h3>
-      <ul class="card-list">
-        <li>حركة يومية</li>
-        <li>الربح اليومي</li>
-        <li>الربح الشهري</li>
-        <li>مبيعات اليوم</li>
-      </ul>
-    </a>
-
-    <a class="card teal" href="pages/about.html">
-      <i class="fa fa-headset"></i>
-      <h3>التواصل</h3>
-      <ul class="card-list">
-        <li>عن النظام</li>
-        <li>التحديثات</li>
-        <li>الدعم الفني</li>
-        <li>تواصل معنا</li>
-      </ul>
-    </a>
-  </section>
-
-  <footer class="app-footer">
-    <div>الرجاء التأكد من إجراء نسخ احتياطي بشكل دوري للحفاظ على بياناتك</div>
-    <div id="lastBackupTime" class="last-backup">
-      آخر النسخ الاحتياطية: لم يتم رفع نسخة بعد
+    <!-- GRID -->
+    <div class="grid">
+      <a class="card cc-blue" href="pages/customers.html">
+        <div class="card-icon"><i class="fa fa-users"></i></div>
+        <div class="card-title">الحسابات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>إضافة حساب</li>
+          <li>إدارة العملاء</li>
+          <li>كشف حساب</li>
+          <li>أرصدة إفتتاحية</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-teal" href="pages/products.html">
+        <div class="card-icon"><i class="fa-solid fa-box-open"></i></div>
+        <div class="card-title">المنتجات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>إضافة منتج</li>
+          <li>إدارة المخزون</li>
+          <li>حركة صنف</li>
+          <li>أرصدة إفتتاحية</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-green" href="pages/sales.html">
+        <div class="card-icon"><i class="fa fa-cart-shopping"></i></div>
+        <div class="card-title">المبيعات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>فاتورة بيع</li>
+          <li>بيع نقدي</li>
+          <li>بيع بالأجل</li>
+          <li>إدارة الفواتير</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-orange" href="pages/purchases.html">
+        <div class="card-icon"><i class="fa-solid fa-dolly"></i></div>
+        <div class="card-title">المشتريات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>فاتورة شراء</li>
+          <li>تحديث المخزون</li>
+          <li>تحديث الموردين</li>
+          <li>إدارة الفواتير</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-sky" href="pages/receipts.html">
+        <div class="card-icon"><i class="fa fa-hand-holding-dollar"></i></div>
+        <div class="card-title">القبض</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>سند قبض</li>
+          <li>تحصيل ديون</li>
+          <li>تدفقات نقدية</li>
+          <li>إضافة رأس مال</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-red" href="#">
+        <div class="card-icon"><i class="fa fa-money-bill-wave"></i></div>
+        <div class="card-title">الدفع</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>سند دفع</li>
+          <li>دفع مستحقات</li>
+          <li>تصفية شريك</li>
+          <li>تخفيض رأس مال</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-lime" href="pages/income.html">
+        <div class="card-icon"><i class="fa fa-chart-line"></i></div>
+        <div class="card-title">الإيرادات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>تسجيل إيراد</li>
+          <li>إيرادات خارجية</li>
+          <li>سجل إيرادات</li>
+          <li>تحديث الأرباح</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-purple" href="pages/expenses.html">
+        <div class="card-icon"><i class="fa fa-receipt"></i></div>
+        <div class="card-title">المصروفات</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>تسجيل مصروف</li>
+          <li>أجور ومرتبات</li>
+          <li>رسوم وإيجارات</li>
+          <li>سلف العاملين</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-teal" href="pages/cash.html">
+        <div class="card-icon">
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+        <div class="card-title">الخزينة</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>رصيد الخزينة</li>
+          <li>حركة النقدية</li>
+          <li>تقارير يومية</li>
+          <li>تقارير شهرية</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-green" href="pages/profit.html">
+        <div class="card-icon"><i class="fa fa-coins"></i></div>
+        <div class="card-title">الأرباح</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>مجمل الربح</li>
+          <li>صافي الربح</li>
+          <li>تقرير يومي</li>
+          <li>تقرير شهري</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-blue" href="pages/dashboard.html">
+        <div class="card-icon"><i class="fa fa-chart-pie"></i></div>
+        <div class="card-title">الحركة</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>حركة يومية</li>
+          <li>الربح اليومي</li>
+          <li>الربح الشهري</li>
+          <li>مبيعات اليوم</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
+      <a class="card cc-pink" href="pages/about.html">
+        <div class="card-icon"><i class="fa fa-headset"></i></div>
+        <div class="card-title">التواصل</div>
+        <div class="card-divider"></div>
+        <ul class="card-list">
+          <li>عن النظام</li>
+          <li>التحديثات</li>
+          <li>الدعم الفني</li>
+          <li>تواصل معنا</li>
+        </ul>
+        <div class="card-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+      </a>
     </div>
-  </footer>
 
-  <!-- Modern Modal -->
-  <div id="statusModal" class="modal-overlay">
-    <div class="modal-box">
-      <div class="modal-icon" id="modalIcon">✔</div>
-      <div class="modal-text" id="modalText">تمت العملية بنجاح</div>
-    </div>
-  </div>
+    <!-- FOOTER -->
+    <footer>
+      <div class="foot-l">
+        <i class="fa-solid fa-shield-halved"></i> تأكد من إجراء نسخ احتياطي بشكل
+        دوري للحفاظ على بياناتك
+      </div>
+      <div class="foot-r">
+        <i class="fa-solid fa-clock-rotate-left"></i
+        ><span id="lastBackupTime"
+          >آخر النسخ الاحتياطية: لم يتم رفع نسخة بعد</span
+        >
+      </div>
+    </footer>
 
-  <!-- Logout Confirmation Modal -->
-  <div id="confirmModal" class="confirm-overlay">
-    <div class="confirm-box">
-      <div class="confirm-icon">🔐</div>
-      <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
-
-      <div class="confirm-actions">
-        <button id="cancelLogout" class="btn-cancel">إلغاء</button>
-        <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+    <!-- Status Modal -->
+    <div id="statusModal" class="modal-ov">
+      <div class="modal-box">
+        <div class="m-icon" id="modalIcon">✔</div>
+        <div class="m-text" id="modalText">تمت العملية بنجاح</div>
       </div>
     </div>
-  </div>
 
-  <!-- Login Success Toast -->
-  <div id="loginToast" class="toast">
-    <i class="fa-solid fa-circle-check"></i>
-    <span>تم تسجيل الدخول بنجاح</span>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-
-    import {
-      getFirestore,
-      doc,
-      setDoc,
-      getDoc,
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-    let customers = [];
-    let products = [];
-    let sales = [];
-    let purchases = [];
-    let incomes = [];
-    let expenses = [];
-    let receipts = [];
-    let cash = { opening: 0, income: 0, expenses: 0 };
-
-    function saveData() {
-      localStorage.setItem("customers", JSON.stringify(customers));
-      localStorage.setItem("products", JSON.stringify(products));
-      localStorage.setItem("sales", JSON.stringify(sales));
-      localStorage.setItem("purchases", JSON.stringify(purchases));
-      localStorage.setItem("incomes", JSON.stringify(incomes));
-      localStorage.setItem("expenses", JSON.stringify(expenses));
-      localStorage.setItem("cash", JSON.stringify(cash));
-      localStorage.setItem("receipts", JSON.stringify(receipts));
-
-      markBackupNeeded();
-    }
-
-    function loadData() {
-      const c = localStorage.getItem("customers");
-      const p = localStorage.getItem("products");
-      const s = localStorage.getItem("sales");
-      const pu = localStorage.getItem("purchases");
-      const i = localStorage.getItem("incomes");
-      const e = localStorage.getItem("expenses");
-      const ca = localStorage.getItem("cash");
-      const r = localStorage.getItem("receipts");
-
-      customers = c ? JSON.parse(c) : [];
-      products = p ? JSON.parse(p) : [];
-      sales = s ? JSON.parse(s) : [];
-      purchases = pu ? JSON.parse(pu) : [];
-      incomes = i ? JSON.parse(i) : [];
-      expenses = e ? JSON.parse(e) : [];
-      receipts = r ? JSON.parse(r) : [];
-      cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
-    }
-
-    // ======================= Firebase =======================
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
-      authDomain: "accounts-system-47961.firebaseapp.com",
-      projectId: "accounts-system-47961",
-      storageBucket: "accounts-system-47961.firebasestorage.app",
-      messagingSenderId: "164539147206",
-      appId: "1:164539147206:web:8b8267577e1af4622948c7",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // نخفي الصفحة لحد التحقق
-    document.body.style.display = "none";
-
-    // ======================= الإنترنت =======================
-
-    function isOnline() {
-      return navigator.onLine;
-    }
-
-    window.addEventListener("online", async () => {
-      console.log("الإنترنت عاد");
-
-      if (localStorage.getItem("backupNeeded") === "yes") {
-        await saveBackup();
-        localStorage.removeItem("backupNeeded");
-      }
-    });
-
-
-
-    // ======================= النسخ الاحتياطي =======================
-
-    function markBackupNeeded() {
-      localStorage.setItem("backupNeeded", "yes");
-    }
-
-    function updateBackupTime() {
-      let now = new Date();
-      let time = now.toLocaleTimeString("ar-EG");
-
-      localStorage.setItem("lastBackup", time);
-
-      let el = document.getElementById("lastBackupTime");
-
-      if (el) {
-        el.textContent = "آخر نسخة احتياطية: " + time;
-      }
-    }
-
-    async function saveBackup() {
-      const user = auth.currentUser;
-
-      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
-
-      if (!navigator.onLine) {
-        console.log("لا يوجد اتصال بالإنترنت");
-
-        markBackupNeeded();
-
-        return;
-      }
-
-      try {
-        const data = {
-          timestamp: new Date(),
-          customers,
-          products,
-          sales,
-          purchases,
-          incomes,
-          expenses,
-          receipts,
-          cash,
-        };
-
-        let dataHash = JSON.stringify(data);
-
-        if (localStorage.getItem("lastData") === dataHash) {
-          console.log("لا يوجد تغيير في البيانات");
-
-          return;
-        }
-
-        await setDoc(doc(db, "backups", user.uid), data);
-
-        localStorage.setItem("lastData", dataHash);
-
-        updateBackupTime();
-
-        showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
-        updateBackupTime(); // <-- تحديث آخر نسخة
-      } catch (e) {
-        console.error(e);
-
-        showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
-      }
-    }
-
-    async function restoreBackup() {
-      const user = auth.currentUser;
-
-      if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
-
-      try {
-        const docRef = doc(db, "backups", user.uid);
-
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-
-          customers = data.customers || [];
-          products = data.products || [];
-          sales = data.sales || [];
-          purchases = data.purchases || [];
-          incomes = data.incomes || [];
-          expenses = data.expenses || [];
-          receipts = data.receipts || [];
-          cash = data.cash || { opening: 0, income: 0, expenses: 0 };
-
-          saveData();
-
-          showModal("تم استرجاع النسخة الاحتياطية بنجاح", "success");
-        } else {
-          showModal("لا توجد نسخة احتياطية على Firebase", "warning");
-        }
-      } catch (e) {
-        console.error(e);
-
-        showModal("حدث خطأ أثناء استرجاع النسخة الاحتياطية", "error");
-      }
-    }
-
-    // ======================= Toast =======================
-
-    function showLoginToast() {
-      const toast = document.getElementById("loginToast");
-
-      toast.classList.add("show");
-
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2500);
-    }
-
-    // ======================= التحقق من تسجيل الدخول =======================
-
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.replace("login.html");
-      } else {
-        loadData();
-
-        document.body.style.display = "block";
-
-        let lastBackup = localStorage.getItem("lastBackup");
-
-        if (lastBackup) {
-          let el = document.getElementById("lastBackupTime");
-
-          if (el) {
-            el.textContent = "آخر نسخة احتياطية: " + lastBackup;
-          }
-        }
-
-        if (sessionStorage.getItem("loginSuccess") === "true") {
-          showLoginToast();
-
-          sessionStorage.removeItem("loginSuccess");
-        }
-
-        document.getElementById("backupBtn").onclick = saveBackup;
-
-        document.getElementById("restoreBtn").onclick = restoreBackup;
-
-        // النسخ التلقائي كل 15 دقيقة
-        setInterval(saveBackup, 15 * 60 * 1000);
-
-        // ======================= تسجيل الخروج =======================
-
-        const confirmModal = document.getElementById("confirmModal");
-
-        const confirmBtn = document.getElementById("confirmLogout");
-
-        const cancelBtn = document.getElementById("cancelLogout");
-
-        const logoutBtn = document.getElementById("logoutBtn");
-
-        logoutBtn.onclick = () => {
-          confirmModal.classList.add("active");
-        };
-
-        cancelBtn.onclick = () => {
-          confirmModal.classList.remove("active");
-        };
-
-        confirmBtn.onclick = async () => {
-          const user = auth.currentUser;
-
-          if (user) {
-            try {
-              await setDoc(doc(db, "backups", user.uid), {
-                timestamp: new Date(),
+    <!-- Logout Confirm -->
+    <div id="confirmModal" class="modal-ov">
+      <div class="cfm-box">
+        <div class="cfm-icon">🔐</div>
+        <div class="cfm-text">هل تريد تسجيل الخروج؟</div>
+        <div class="cfm-btns">
+          <button id="cancelLogout" class="btn-outline">إلغاء</button>
+          <button id="confirmLogout" class="btn-danger">تأكيد</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="loginToast" class="toast">
+      <i class="fa-solid fa-circle-check"></i>
+      <span>تم تسجيل الدخول بنجاح</span>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        setDoc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+      let customers = [],
+        products = [],
+        sales = [],
+        purchases = [],
+        incomes = [],
+        expenses = [],
+        receipts = [];
+      let cash = { opening: 0, income: 0, expenses: 0 };
+
+      function saveData() {
+        [
+          "customers",
+          "products",
+          "sales",
+          "purchases",
+          "incomes",
+          "expenses",
+          "receipts",
+        ].forEach((k, i) =>
+          localStorage.setItem(
+            k,
+            JSON.stringify(
+              [
                 customers,
                 products,
                 sales,
@@ -923,71 +1035,177 @@
                 incomes,
                 expenses,
                 receipts,
-                cash,
-              });
-            } catch (e) {
-              console.error("Backup before logout failed:", e);
-            }
-          }
-
-          sessionStorage.setItem("logoutSuccess", "true");
-
-          signOut(auth).then(() => {
-            window.location.replace("login.html");
-          });
+              ][i],
+            ),
+          ),
+        );
+        localStorage.setItem("cash", JSON.stringify(cash));
+        markBackupNeeded();
+      }
+      function loadData() {
+        const p = (k) => {
+          const v = localStorage.getItem(k);
+          return v ? JSON.parse(v) : [];
         };
-      }
-    });
-
-    // ======================= Modal =======================
-
-    function showModal(message, type = "success") {
-      const modal = document.getElementById("statusModal");
-
-      const text = document.getElementById("modalText");
-
-      const icon = document.getElementById("modalIcon");
-
-      text.textContent = message;
-
-      if (type === "success") {
-        icon.textContent = "✔";
-        icon.style.color = "#22c55e";
-      } else if (type === "error") {
-        icon.textContent = "✖";
-        icon.style.color = "#ef4444";
-      } else {
-        icon.textContent = "⚠";
-        icon.style.color = "#f59e0b";
+        customers = p("customers");
+        products = p("products");
+        sales = p("sales");
+        purchases = p("purchases");
+        incomes = p("incomes");
+        expenses = p("expenses");
+        receipts = p("receipts");
+        const ca = localStorage.getItem("cash");
+        cash = ca ? JSON.parse(ca) : { opening: 0, income: 0, expenses: 0 };
       }
 
-      modal.classList.add("active");
+      const firebaseConfig = {
+        apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+        authDomain: "accounts-system-47961.firebaseapp.com",
+        projectId: "accounts-system-47961",
+        storageBucket: "accounts-system-47961.firebasestorage.app",
+        messagingSenderId: "164539147206",
+        appId: "1:164539147206:web:8b8267577e1af4622948c7",
+      };
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      document.body.style.display = "none";
 
-      setTimeout(() => {
-        modal.classList.remove("active");
-      }, 2000);
-    }
-
-    // ======================= قائمة النسخ الاحتياطي =======================
-
-    const backupMenuBtn = document.getElementById("backupMenuBtn");
-
-    const backupDropdown = document.getElementById("backupDropdown");
-
-    backupMenuBtn.onclick = () => {
-      backupDropdown.classList.toggle("show");
-    };
-
-    window.addEventListener("click", function (e) {
-      if (!e.target.closest(".backup-menu")) {
-        backupDropdown.classList.remove("show");
+      window.addEventListener("online", async () => {
+        if (localStorage.getItem("backupNeeded") === "yes") {
+          await saveBackup();
+          localStorage.removeItem("backupNeeded");
+        }
+      });
+      function markBackupNeeded() {
+        localStorage.setItem("backupNeeded", "yes");
       }
-    });
+      function updateBackupTime() {
+        const t = new Date().toLocaleTimeString("ar-EG");
+        localStorage.setItem("lastBackup", t);
+        const el = document.getElementById("lastBackupTime");
+        if (el) el.textContent = "آخر نسخة احتياطية: " + t;
+      }
 
-    backupDropdown.addEventListener("click", function () {
-      backupDropdown.classList.remove("show");
-    });
-  </script>
-</body>
+      async function saveBackup() {
+        const user = auth.currentUser;
+        if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+        if (!navigator.onLine) {
+          markBackupNeeded();
+          return;
+        }
+        try {
+          const data = {
+            timestamp: new Date(),
+            customers,
+            products,
+            sales,
+            purchases,
+            incomes,
+            expenses,
+            receipts,
+            cash,
+          };
+          const h = JSON.stringify(data);
+          if (localStorage.getItem("lastData") === h) return;
+          await setDoc(doc(db, "backups", user.uid), data);
+          localStorage.setItem("lastData", h);
+          updateBackupTime();
+          showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
+        } catch (e) {
+          showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
+        }
+      }
 
+      async function restoreBackup() {
+        const user = auth.currentUser;
+        if (!user) return showModal("المستخدم غير مسجل الدخول", "warning");
+        try {
+          const snap = await getDoc(doc(db, "backups", user.uid));
+          if (snap.exists()) {
+            const d = snap.data();
+            customers = d.customers || [];
+            products = d.products || [];
+            sales = d.sales || [];
+            purchases = d.purchases || [];
+            incomes = d.incomes || [];
+            expenses = d.expenses || [];
+            receipts = d.receipts || [];
+            cash = d.cash || { opening: 0, income: 0, expenses: 0 };
+            saveData();
+            showModal("تم استرجاع النسخة الاحتياطية بنجاح", "success");
+          } else showModal("لا توجد نسخة احتياطية على Firebase", "warning");
+        } catch (e) {
+          showModal("حدث خطأ أثناء استرجاع النسخة الاحتياطية", "error");
+        }
+      }
+
+      function showModal(text, type) {
+        const m = document.getElementById("statusModal");
+        document.getElementById("modalIcon").textContent =
+          type === "success" ? "✔" : type === "error" ? "✖" : "⚠";
+        document.getElementById("modalText").textContent = text;
+        m.classList.add("active");
+        setTimeout(() => m.classList.remove("active"), 2200);
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = "./pages/login.html";
+          return;
+        }
+        document.body.style.display = "";
+        loadData();
+        const lb = localStorage.getItem("lastBackup");
+        const el = document.getElementById("lastBackupTime");
+        if (lb && el) el.textContent = "آخر نسخة احتياطية: " + lb;
+        if (sessionStorage.getItem("justLoggedIn")) {
+          const t = document.getElementById("loginToast");
+          t.classList.add("show");
+          setTimeout(() => t.classList.remove("show"), 2500);
+          sessionStorage.removeItem("justLoggedIn");
+        }
+        if (
+          navigator.onLine &&
+          localStorage.getItem("backupNeeded") === "yes"
+        ) {
+          await saveBackup();
+          localStorage.removeItem("backupNeeded");
+        }
+      });
+
+      document
+        .getElementById("backupMenuBtn")
+        .addEventListener("click", (e) => {
+          e.stopPropagation();
+          document.getElementById("backupDropdown").classList.toggle("show");
+        });
+      document.addEventListener("click", () =>
+        document.getElementById("backupDropdown").classList.remove("show"),
+      );
+      document
+        .getElementById("backupBtn")
+        .addEventListener("click", saveBackup);
+      document
+        .getElementById("restoreBtn")
+        .addEventListener("click", restoreBackup);
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", () =>
+          document.getElementById("confirmModal").classList.add("active"),
+        );
+      document
+        .getElementById("cancelLogout")
+        .addEventListener("click", () =>
+          document.getElementById("confirmModal").classList.remove("active"),
+        );
+      document
+        .getElementById("confirmLogout")
+        .addEventListener("click", async () => {
+          await signOut(auth);
+          window.location.href = "login.html";
+        });
+      window.showModal = showModal;
+    </script>
+  </body>
 </html>

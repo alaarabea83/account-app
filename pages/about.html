@@ -1,540 +1,597 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>سهل لإدارة الحسابات</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
+  <title>عن النظام | المحاسب المحترف</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
-    body {
-      margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #0f172a;
-      color: white;
+    :root {
+      --bg:        #f4f6fa;
+      --bg2:       #eef1f7;
+      --white:     #ffffff;
+      --primary:   #2563eb;
+      --primary-lt:#eff4ff;
+      --primary-md:#bfcfff;
+      --accent:    #0ea5e9;
+      --success:   #16a34a;
+      --success-lt:#f0fdf4;
+      --warning:   #d97706;
+      --warning-lt:#fffbeb;
+      --danger:    #dc2626;
+      --danger-lt: #fef2f2;
+      --purple:    #7c3aed;
+      --purple-lt: #f5f3ff;
+      --teal:      #0891b2;
+      --teal-lt:   #ecfeff;
+      --emerald:   #059669;
+      --emerald-lt:#ecfdf5;
+      --text:      #0f172a;
+      --text2:     #475569;
+      --text3:     #94a3b8;
+      --border:    #e2e8f0;
+      --border2:   #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
+      --shadow:    0 4px 14px rgba(0,0,0,.07);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,.1);
+      --r:         14px;
     }
 
-    /* header */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg); color: var(--text);
+    }
+
+    /* dot pattern */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(37,99,235,.04) 1px, transparent 0);
+      background-size: 28px 28px; pointer-events: none;
+    }
+
+    /* ══ HEADER ══ */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background: #1e293b;
-      border-bottom: 1px solid #cbb884;
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hdr-inner {
+      max-width: 1200px; margin: auto;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #cbb884;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 17px; font-weight: 800; color: var(--text);
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: #fff; box-shadow: 0 4px 12px rgba(37,99,235,.3);
     }
 
-    /* زر الاشعارات */
+    .logo span { color: var(--primary); }
 
-    .notification-btn {
-      position: relative;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #cbb884;
-      border-radius: 10px;
-      color: #333;
-      font-size: 17px;
-      text-decoration: none;
-      transition: 0.3s;
+    .hdr-actions { display: flex; gap: 8px; }
+
+    .hbtn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 9px;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text2); font-size: 13px; font-weight: 600;
+      text-decoration: none; cursor: pointer; transition: all .2s;
     }
+    .hbtn:hover { background: var(--primary-lt); color: var(--primary); border-color: var(--primary-md); }
 
-    .notification-btn:hover {
-      background: #e6d8b5;
-      transform: translateY(-2px);
+    .hbtn-primary {
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      color: #fff; border: none;
+      box-shadow: 0 4px 12px rgba(37,99,235,.25);
     }
+    .hbtn-primary:hover { filter: brightness(1.08); color: #fff; background: linear-gradient(135deg, var(--primary), #1d4ed8); }
 
-    /* زر الخروج */
+    #logoutBtn { font-family: "Cairo", sans-serif; }
 
-    .logout-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: #cbb884;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      color: #333;
-    }
-
-    .logout-btn:hover {
-      background: #e74c3c;
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* hero */
-
+    /* ══ HERO ══ */
     .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
+      position: relative; z-index: 1;
+      background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 55%, var(--accent) 100%);
+      padding: 80px 24px 90px;
+      text-align: center; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: 10%;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: auto; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,.9);
+      margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 900; color: #fff; line-height: 1.2;
+      margin-bottom: 14px;
     }
+
+    .hero h1 span { color: #bfcfff; }
 
     .hero p {
-      color: #bbb;
-      font-size: 16px;
-      margin-bottom: 30px;
+      font-size: 15px; color: rgba(255,255,255,.8);
+      line-height: 1.7; margin-bottom: 32px; font-weight: 400;
     }
+
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
     .hero-btn {
-      background: #cbb884;
-      color: #1f2a44;
-      padding: 14px 25px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 8px;
-      display: inline-block;
-      transition: 0.3s;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px; border-radius: 11px;
+      font-family: "Cairo", sans-serif;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: all .25s;
     }
 
-    .hero-btn:hover {
-      background: white;
+    .btn-white {
+      background: #fff; color: var(--primary);
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
     }
+    .btn-white:hover { background: var(--primary-lt); transform: translateY(-2px); }
 
-    /* section */
+    .btn-outline {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff; backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.2); transform: translateY(-2px); }
 
+    /* ══ SECTIONS ══ */
     .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 60px 20px;
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: auto;
+      padding: 64px 24px;
     }
 
-    .title {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 40px;
-      color: #cbb884;
-    }
+    .sec-head { text-align: center; margin-bottom: 40px; }
+    .sec-head h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .sec-head h2 span { color: var(--primary); }
+    .sec-head p { font-size: 14px; color: var(--text3); font-weight: 400; }
 
-    /* features */
-
-    .features {
+    /* ── FEATURES ── */
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+      gap: 16px;
     }
 
-    .feature {
-      background: #1e293b;
-      padding: 25px;
-      border-radius: 14px;
-      text-align: center;
-      transition: 0.3s;
+    .feature-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 24px 20px;
+      text-align: center; box-shadow: var(--shadow-sm);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      animation: fadeUp .45s ease both;
     }
 
-    .feature:hover {
-      transform: translateY(-5px);
+    .feature-card:nth-child(1){animation-delay:.04s}.feature-card:nth-child(2){animation-delay:.08s}
+    .feature-card:nth-child(3){animation-delay:.12s}.feature-card:nth-child(4){animation-delay:.16s}
+    .feature-card:nth-child(5){animation-delay:.20s}.feature-card:nth-child(6){animation-delay:.24s}
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--primary-md); }
+
+    .feat-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin: 0 auto 14px;
     }
 
-    .feature i {
-      font-size: 28px;
-      color: #cbb884;
-      margin-bottom: 10px;
-    }
+    .fi-blue   { background: var(--primary-lt); color: var(--primary); }
+    .fi-sky    { background: #f0f9ff; color: var(--accent); }
+    .fi-green  { background: var(--success-lt); color: var(--success); }
+    .fi-purple { background: var(--purple-lt); color: var(--purple); }
+    .fi-teal   { background: var(--teal-lt); color: var(--teal); }
+    .fi-cloud  { background: var(--emerald-lt); color: var(--emerald); }
 
-    /* sections */
+    .feature-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+    .feature-card p  { font-size: 12.5px; color: var(--text3); font-weight: 400; line-height: 1.6; }
 
-    .cards {
+    /* ── SECTIONS CARDS ── */
+    .divider { background: var(--bg2); }
+
+    .sections-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+      gap: 12px;
     }
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      transition: 0.3s;
+    .sec-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px 14px;
+      text-align: center; box-shadow: var(--shadow-sm);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      cursor: default;
+    }
+    .sec-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--primary-md); }
+
+    .sc-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin: 0 auto 10px;
     }
 
-    .card:hover {
-      background: #253447;
-      transform: translateY(-5px);
+    .sec-card h4 { font-size: 13.5px; font-weight: 700; color: var(--text); }
+
+    /* ── CTA ── */
+    .cta-box {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 20px; padding: 48px 32px;
+      text-align: center; position: relative; overflow: hidden;
     }
 
-    .card i {
-      font-size: 22px;
-      color: #cbb884;
-      margin-bottom: 10px;
+    .cta-box::before {
+      content: '';
+      position: absolute; top: -40px; left: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(255,255,255,.08);
     }
 
-    /* ===== Footer ===== */
-    .footer {
-      background: #1f2a44;
-      color: #ffffff;
-      padding: 35px 20px 20px;
-      margin-top: 60px;
-      font-family: "Tajawal", sans-serif;
+    .cta-box h2 { font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 10px; position: relative; }
+    .cta-box p  { font-size: 14px; color: rgba(255,255,255,.8); margin-bottom: 24px; font-weight: 400; position: relative; }
+
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    /* ══ FOOTER ══ */
+    footer {
+      position: relative; z-index: 1;
+      background: var(--text); color: rgba(255,255,255,.8);
+      padding: 48px 24px 24px;
     }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      max-width: 1200px;
-      margin: auto;
+    .foot-grid {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 32px; margin-bottom: 32px;
     }
 
-    .footer h4 {
-      margin-bottom: 10px;
-      font-size: 16px;
+    .foot-brand { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .foot-logo { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #fff; }
+    .foot-brand span { font-size: 15px; font-weight: 800; color: #fff; }
+
+    .foot-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,.55); font-weight: 400; }
+
+    .foot-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+
+    .foot-link { display: block; font-size: 13px; color: rgba(255,255,255,.55); text-decoration: none; margin-bottom: 8px; transition: color .2s; font-weight: 400; }
+    .foot-link:hover { color: rgba(255,255,255,.9); }
+
+    .foot-bottom {
+      max-width: 1200px; margin: auto;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+      font-size: 12.5px; color: rgba(255,255,255,.4);
     }
 
-    .footer a {
-      color: #e5e7eb;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 6px;
-      transition: 0.3s;
-      font-size: 14px;
-    }
+    .foot-bottom i { color: var(--primary); }
 
-    .footer a:hover {
-      color: #dccb9a;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 20px;
-      padding-top: 15px;
-      text-align: center;
-      font-size: 13px;
-      opacity: 0.8;
-    }
-
-    /* mobile */
-
-    @media (max-width: 700px) {
-      .hero h1 {
-        font-size: 26px;
-      }
-    }
-
+    /* ══ MODAL ══ */
     .confirm-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s ease;
-      z-index: 9999;
+      position: fixed; inset: 0;
+      background: rgba(15,23,42,.35); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: .3s; z-index: 9999;
     }
-
-    .confirm-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .confirm-overlay.active { opacity: 1; visibility: visible; }
 
     .confirm-box {
-      background: #1e293b;
-      padding: 30px;
-      border-radius: 20px;
-      width: 300px;
-      text-align: center;
-      color: #fff;
-      transform: scale(0.8);
-      transition: 0.3s ease;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--danger);
+      padding: 32px 28px; border-radius: 20px; width: 310px;
+      text-align: center; box-shadow: var(--shadow-lg);
+      transform: scale(.88); transition: .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .confirm-overlay.active .confirm-box { transform: scale(1); }
+
+    .confirm-icon-wrap {
+      width: 54px; height: 54px; background: var(--danger-lt);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: var(--danger); margin: 0 auto 14px;
     }
 
-    .confirm-overlay.active .confirm-box {
-      transform: scale(1);
-    }
+    .confirm-text { font-size: 16px; font-weight: 700; margin-bottom: 22px; color: var(--text); }
 
-    .confirm-icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .confirm-text {
-      font-size: 16px;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .confirm-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .btn-cancel,
-    .btn-confirm {
-      flex: 1;
-      padding: 10px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+    .confirm-actions { display: flex; gap: 10px; }
 
     .btn-cancel {
-      background: #334155;
-      color: #fff;
+      flex: 1; padding: 11px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text2); font-family: "Cairo", sans-serif;
+      font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s;
     }
-
-    .btn-cancel:hover {
-      background: #475569;
-    }
+    .btn-cancel:hover { background: var(--border); }
 
     .btn-confirm {
-      background: #dc3545;
-      color: #fff;
+      flex: 1; padding: 11px; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
+      color: #fff; font-family: "Cairo", sans-serif;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(220,38,38,.25); transition: all .2s;
     }
+    .btn-confirm:hover { filter: brightness(1.1); }
 
-    .btn-confirm:hover {
-      background: #b02a37;
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 16px 70px; }
+      .section { padding: 48px 16px; }
+      .features-grid { grid-template-columns: repeat(2,1fr); }
+      .sections-grid { grid-template-columns: repeat(2,1fr); }
+      .foot-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .foot-bottom { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
-
 <body>
-  <header>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr-inner">
     <div class="logo">
-      <i class="fa-solid fa-calculator"></i>
-      سهل للحسابات
+      <div class="logo-icon"><i class="fa-solid fa-chart-simple"></i></div>
+      المحاسب <span>المحترف</span>
     </div>
-    <div class="header-right">
-      <!-- Notifications -->
-      <a href="./pages/notification.html" class="notification-btn">
+    <div class="hdr-actions">
+      <a href="./notification.html" class="hbtn">
         <i class="fa-solid fa-bell"></i>
       </a>
-
-      <!-- Logout -->
-      <button id="logoutBtn" class="logout-btn">
+      <a href="../index.html" class="hbtn">
+        <i class="fa-solid fa-house"></i>
+        الرئيسية
+      </a>
+      <button id="logoutBtn" class="hbtn">
         <i class="fa-solid fa-right-from-bracket"></i>
+        خروج
       </button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section class="hero">
-    <h1>نظام إدارة الحسابات والفواتير</h1>
-
-    <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع</p>
-
-    <a class="hero-btn" href="../index.html">
-      <i class="fa-solid fa-play"></i>
-      دخول النظام
-    </a>
-
-    <a class="hero-btn" href="https://wa.me/201019065615" target="_blank">
-      <iz class="fa-brands fa-whatsapp"></iz>
-      الدعم الفني
-    </a>
-  </section>
-
-  <section class="section">
-    <div class="title">مميزات النظام</div>
-
-    <div class="features">
-      <div class="feature">
-        <i class="fa-solid fa-users"></i>
-        <h3>إدارة العملاء</h3>
-        <p>تسجيل العملاء وكشف الحساب</p>
-      </div>
-
-      <div class="feature">
-        <i class="fa-solid fa-box"></i>
-        <h3>إدارة المنتجات</h3>
-        <p>متابعة المخزون والأسعار</p>
-      </div>
-
-      <div class="feature">
-        <i class="fa-solid fa-file-invoice"></i>
-        <h3>فواتير البيع</h3>
-        <p>إنشاء وإدارة الفواتير</p>
-      </div>
-
-      <div class="feature">
-        <i class="fa-solid fa-chart-line"></i>
-        <h3>تقارير الأرباح</h3>
-        <p>معرفة الأرباح اليومية والشهرية</p>
-      </div>
-
-      <div class="feature">
-        <i class="fa-solid fa-vault"></i>
-        <h3>إدارة الخزينة</h3>
-        <p>متابعة حركة النقدية</p>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-vault"></i>
-        <h3>إدارة الخزينة</h3>
-        <p>متابعة حركة النقدية</p>
-      </div>
-      <div class="feature">
-        <i class="fa-solid fa-vault"></i>
-        <h3>إدارة الخزينة</h3>
-        <p>متابعة حركة النقدية</p>
-      </div>
-
-      <div class="feature">
-        <i class="fa-solid fa-cloud"></i>
-        <h3>نسخ احتياطي</h3>
-        <p>حفظ البيانات على Firebase</p>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <i class="fa-solid fa-star"></i>
+      نظام محاسبة متكامل
     </div>
-  </section>
+    <h1>نظام إدارة <span>الحسابات</span> والفواتير</h1>
+    <p>إدارة المبيعات والمخزون والعملاء والخزينة في نظام واحد بسيط وسريع وآمن</p>
+    <div class="hero-btns">
+      <a href="../index.html" class="hero-btn btn-white">
+        <i class="fa-solid fa-play"></i>
+        دخول النظام
+      </a>
+      <a href="https://wa.me/201019065615" target="_blank" class="hero-btn btn-outline">
+        <i class="fa-brands fa-whatsapp"></i>
+        الدعم الفني
+      </a>
+    </div>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="title">أقسام النظام</div>
+<!-- FEATURES -->
+<div class="section">
+  <div class="sec-head">
+    <h2>مميزات <span>النظام</span></h2>
+    <p>كل ما تحتاجه لإدارة أعمالك في مكان واحد</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feat-icon fi-blue"><i class="fa-solid fa-users"></i></div>
+      <h3>إدارة العملاء</h3>
+      <p>تسجيل العملاء وكشف حساب مفصل لكل عميل</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon fi-sky"><i class="fa-solid fa-box-open"></i></div>
+      <h3>إدارة المنتجات</h3>
+      <p>متابعة المخزون والأسعار وحركة الأصناف</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon fi-green"><i class="fa-solid fa-file-invoice"></i></div>
+      <h3>فواتير البيع والشراء</h3>
+      <p>إنشاء وإدارة الفواتير بسهولة تامة</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon fi-purple"><i class="fa-solid fa-chart-line"></i></div>
+      <h3>تقارير الأرباح</h3>
+      <p>معرفة الأرباح اليومية والشهرية بدقة</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon fi-teal"><i class="fa-solid fa-vault"></i></div>
+      <h3>إدارة الخزينة</h3>
+      <p>متابعة كاملة لحركة النقدية والصندوق</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon fi-cloud"><i class="fa-solid fa-cloud"></i></div>
+      <h3>نسخ احتياطي آمن</h3>
+      <p>حفظ البيانات تلقائياً على Firebase</p>
+    </div>
+  </div>
+</div>
 
-    <div class="cards">
-      <div class="card">
-        <i class="fa-solid fa-users"></i>
+<!-- SECTIONS -->
+<div class="divider">
+  <div class="section">
+    <div class="sec-head">
+      <h2>أقسام <span>النظام</span></h2>
+      <p>نظام متكامل يغطي كل جوانب إدارة أعمالك</p>
+    </div>
+    <div class="sections-grid">
+      <div class="sec-card">
+        <div class="sc-icon fi-blue"><i class="fa-solid fa-users"></i></div>
         <h4>الحسابات</h4>
       </div>
-
-      <div class="card">
-        <i class="fa-solid fa-box"></i>
+      <div class="sec-card">
+        <div class="sc-icon fi-sky"><i class="fa-solid fa-box-open"></i></div>
         <h4>المنتجات</h4>
       </div>
-
-      <div class="card">
-        <i class="fa-solid fa-cart-shopping"></i>
+      <div class="sec-card">
+        <div class="sc-icon fi-green"><i class="fa-solid fa-cart-shopping"></i></div>
         <h4>المبيعات</h4>
       </div>
-
-      <div class="card">
-        <i class="fa-solid fa-truck"></i>
+      <div class="sec-card">
+        <div class="sc-icon" style="background:var(--warning-lt);color:var(--warning)"><i class="fa-solid fa-dolly"></i></div>
         <h4>المشتريات</h4>
       </div>
-
-      <div class="card">
-        <i class="fa-solid fa-receipt"></i>
+      <div class="sec-card">
+        <div class="sc-icon fi-teal"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <h4>المقبوضات</h4>
+      </div>
+      <div class="sec-card">
+        <div class="sc-icon" style="background:var(--danger-lt);color:var(--danger)"><i class="fa-solid fa-receipt"></i></div>
         <h4>المصروفات</h4>
       </div>
-      <div class="card">
-        <i class="fa-solid fa-receipt"></i>
-        <h4>المصروفات</h4>
+      <div class="sec-card">
+        <div class="sc-icon fi-purple"><i class="fa-solid fa-chart-line"></i></div>
+        <h4>الإيرادات</h4>
       </div>
-      <div class="card">
-        <i class="fa-solid fa-receipt"></i>
-        <h4>المصروفات</h4>
+      <div class="sec-card">
+        <div class="sc-icon fi-cloud"><i class="fa-solid fa-building-columns"></i></div>
+        <h4>الصندوق</h4>
       </div>
-      <div class="card">
-        <i class="fa-solid fa-receipt"></i>
-        <h4>المصروفات</h4>
-      </div>
-      <div class="card">
-        <i class="fa-solid fa-receipt"></i>
-        <h4>المصروفات</h4>
-      </div>
-
-      <div class="card">
-        <i class="fa-solid fa-coins"></i>
+      <div class="sec-card">
+        <div class="sc-icon" style="background:var(--gold-lt,#fffbeb);color:#b45309"><i class="fa-solid fa-coins"></i></div>
         <h4>الأرباح</h4>
       </div>
-    </div>
-  </section>
-
-  <!-- Logout Confirmation Modal -->
-  <div id="confirmModal" class="confirm-overlay">
-    <div class="confirm-box">
-      <div class="confirm-icon">🔐</div>
-      <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
-
-      <div class="confirm-actions">
-        <button id="cancelLogout" class="btn-cancel">إلغاء</button>
-        <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+      <div class="sec-card">
+        <div class="sc-icon fi-blue"><i class="fa-solid fa-chart-pie"></i></div>
+        <h4>الحركة</h4>
       </div>
     </div>
   </div>
+</div>
 
-  <footer class="footer">
-    <div class="footer-content">
-      <div>
-        <h4>نظام الحسابات والفواتير</h4>
-        <a href="#">عن النظام</a>
-        <a href="#">التحديثات</a>
-        <a href="#">الدعم الفني</a>
-      </div>
-      <div>
-        <h4>روابط سريعة</h4>
-        <a href="#">المبيعات</a>
-        <a href="#">المشتريات</a>
-        <a href="#">التقارير</a>
-      </div>
+<!-- CTA -->
+<div class="section">
+  <div class="cta-box">
+    <h2>ابدأ الآن بدون تعقيد</h2>
+    <p>سجّل دخولك وابدأ إدارة أعمالك بكفاءة عالية من أول يوم</p>
+    <div class="cta-btns">
+      <a href="../index.html" class="hero-btn btn-white">
+        <i class="fa-solid fa-play"></i>
+        دخول النظام
+      </a>
+      <a href="https://wa.me/201019065615" target="_blank" class="hero-btn btn-outline">
+        <i class="fa-brands fa-whatsapp"></i>
+        تواصل معنا
+      </a>
     </div>
-    <div class="footer-bottom">تطوير : علاء ربيع</div>
-  </footer>
+  </div>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand">
+        <div class="foot-logo"><i class="fa-solid fa-chart-simple"></i></div>
+        <span>المحاسب المحترف</span>
+      </div>
+      <p class="foot-desc">نظام محاسبة متكامل لإدارة المبيعات والمخزون والعملاء والخزينة بكل سهولة واحترافية.</p>
+    </div>
+    <div>
+      <div class="foot-title">النظام</div>
+      <a href="#" class="foot-link">عن النظام</a>
+      <a href="#" class="foot-link">التحديثات</a>
+      <a href="#" class="foot-link">الدعم الفني</a>
+    </div>
+    <div>
+      <div class="foot-title">روابط سريعة</div>
+      <a href="../index.html" class="foot-link">الرئيسية</a>
+      <a href="sales.html"    class="foot-link">المبيعات</a>
+      <a href="profit.html"   class="foot-link">التقارير</a>
+    </div>
+    <div>
+      <div class="foot-title">تواصل معنا</div>
+      <a href="https://wa.me/201019065615" class="foot-link" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="margin-left:6px;color:#22c55e"></i>
+        واتساب
+      </a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>جميع الحقوق محفوظة © 2025 المحاسب المحترف</span>
+    <span>تطوير: <strong style="color:rgba(255,255,255,.7)">علاء ربيع</strong> &nbsp;<i class="fa-solid fa-heart" style="color:#ef4444"></i></span>
+  </div>
+</footer>
 
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
-      authDomain: "accounts-system-47961.firebaseapp.com",
-      projectId: "accounts-system-47961",
-      storageBucket: "accounts-system-47961.firebasestorage.app",
-      messagingSenderId: "164539147206",
-      appId: "1:164539147206:web:8b8267577e1af4622948c7",
-    };
+<!-- LOGOUT MODAL -->
+<div id="confirmModal" class="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-icon-wrap"><i class="fa-solid fa-right-from-bracket"></i></div>
+    <div class="confirm-text">هل تريد تسجيل الخروج؟</div>
+    <div class="confirm-actions">
+      <button id="cancelLogout" class="btn-cancel">إلغاء</button>
+      <button id="confirmLogout" class="btn-confirm">تأكيد</button>
+    </div>
+  </div>
+</div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-    const confirmModal = document.getElementById("confirmModal");
-    const confirmBtn = document.getElementById("confirmLogout");
-    const cancelBtn = document.getElementById("cancelLogout");
-    const logoutBtn = document.getElementById("logoutBtn");
+  const firebaseConfig = {
+    apiKey: "AIzaSyDEngmNH8ZuGLEFT8EZ-dXL7VCwpF5vDeU",
+    authDomain: "accounts-system-47961.firebaseapp.com",
+    projectId: "accounts-system-47961",
+    storageBucket: "accounts-system-47961.firebasestorage.app",
+    messagingSenderId: "164539147206",
+    appId: "1:164539147206:web:8b8267577e1af4622948c7",
+  };
 
-    // فتح المودال
-    logoutBtn.onclick = () => {
-      confirmModal.classList.add("active");
-    };
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-    // إغلاق عند إلغاء
-    cancelBtn.onclick = () => {
-      confirmModal.classList.remove("active");
-    };
+  const modal      = document.getElementById("confirmModal");
+  const logoutBtn  = document.getElementById("logoutBtn");
+  const cancelBtn  = document.getElementById("cancelLogout");
+  const confirmBtn = document.getElementById("confirmLogout");
 
-    // تنفيذ تسجيل الخروج
-    confirmBtn.onclick = () => {
-      signOut(auth).then(() => {
-        window.location.replace("../login.html");
-      }).catch((error) => {
-        alert("حدث خطأ أثناء تسجيل الخروج ❌");
-        console.error(error);
-      });
-    };
-  </script>
+  logoutBtn.onclick  = () => modal.classList.add("active");
+  cancelBtn.onclick  = () => modal.classList.remove("active");
+
+  confirmBtn.onclick = () => {
+    signOut(auth).then(() => {
+      window.location.replace("../login.html");
+    }).catch(err => {
+      console.error(err);
+    });
+  };
+</script>
 </body>
-
 </html>

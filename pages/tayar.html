@@ -1,502 +1,603 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>تطبيق الطيار | المحاسب المحترف</title>
+  <link rel="icon" type="image/png" href="../icons/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg:        #f4f6fa;
+      --bg2:       #eef1f7;
+      --white:     #ffffff;
+      --primary:   #2563eb;
+      --primary-lt:#eff4ff;
+      --primary-md:#bfcfff;
+      --accent:    #0ea5e9;
+      --success:   #16a34a;
+      --success-lt:#f0fdf4;
+      --success-md:#bbf7d0;
+      --warning:   #d97706;
+      --warning-lt:#fffbeb;
+      --warning-md:#fcd34d;
+      --danger:    #dc2626;
+      --danger-lt: #fef2f2;
+      --danger-md: #fecaca;
+      --purple:    #7c3aed;
+      --purple-lt: #f5f3ff;
+      --indigo:    #4338ca;
+      --indigo-lt: #eef2ff;
+      --indigo-md: #c7d2fe;
+      --text:      #0f172a;
+      --text2:     #475569;
+      --text3:     #94a3b8;
+      --border:    #e2e8f0;
+      --border2:   #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
+      --shadow:    0 4px 14px rgba(0,0,0,.07);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
+      --r:         13px;
+    }
 
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>سهل لإدارة الحسابات</title>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link rel="icon" type="image/png" href="../icons/logo.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-        rel="stylesheet" />
+    body {
+      font-family: "Cairo", sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+    }
 
-    <style>
-        :root {
-            --bg: #0f172a;
-            --text: #e5e7eb;
-            --card: #1f2937;
-            --primary: #1d4ed8;
-            --primary-hover: #1e40af;
-            --tab: #1e3a8a;
-            --border: #374151;
-        }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(67,56,202,.045) 1px, transparent 0);
+      background-size: 28px 28px; pointer-events: none;
+    }
 
-        body {
-            font-family: Cairo, sans-serif;
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            transition: 0.3s;
-        }
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--indigo), var(--accent));
+      z-index: 1100;
+    }
 
-        header {
-            background: var(--primary);
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            position: relative;
-        }
+    /* ══ HEADER ══ */
+    header {
+      position: sticky; top: 3px; z-index: 100;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 0 20px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
 
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 14px;
-        }
+    .hdr-brand { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 800; }
+    .hdr-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--indigo), var(--accent));
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #fff; box-shadow: 0 3px 10px rgba(67,56,202,.3);
+    }
+    .hdr-brand span { color: var(--indigo); }
 
-        .tabs button {
-            flex: 1 1 50%;
-            padding: 14px;
-            background: var(--tab);
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            margin: 5px;
-        }
+    .hdr-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 9px;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text2); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all .2s;
+    }
+    .hdr-back:hover { background: var(--indigo-lt); color: var(--indigo); border-color: var(--indigo-md); }
 
-        .section {
-            display: none;
-            padding: 14px;
-        }
+    /* ══ TABS ══ */
+    .tabs-wrap {
+      position: relative; z-index: 1;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      display: flex; gap: 2px; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-wrap::-webkit-scrollbar { display: none; }
 
-        .active {
-            display: block;
-        }
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 14px 18px; border: none; border-bottom: 2px solid transparent;
+      background: none; color: var(--text3);
+      font-family: "Cairo", sans-serif; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text2); }
+    .tab-btn.active { color: var(--indigo); border-bottom-color: var(--indigo); }
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--card);
-            padding: 20px;
-            border-radius: 14px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-        }
+    /* ══ CONTENT ══ */
+    .page { position: relative; z-index: 1; max-width: 960px; margin: auto; padding: 24px 18px 40px; }
 
-        .card-2 {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 14px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-        }
+    .section { display: none; }
+    .section.active { display: block; }
 
-        h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
+    /* ══ STAT CARDS ══ */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 14px; margin-bottom: 20px;
+    }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            max-width: 80%;
-            padding: 14px 16px;
-            margin: 8px 0;
-            border-radius: 12px;
-            border: 1px solid #ccc;
-            background: #0f172a;
-            color: #fff;
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-        }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; gap: 12px;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before { content:''; position:absolute; top:0; right:0; width:4px; height:100%; background: var(--sc, var(--indigo)); border-radius:0 var(--r) var(--r) 0; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 
-        button {
-            width: 100%;
-            background: var(--primary);
-            border: none;
-            padding: 14px;
-            color: white;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 8px;
-            font-size: 16px;
-            transition: 0.2s;
-        }
+    .sc-indigo  { --sc: var(--indigo); }
+    .sc-success { --sc: var(--success); }
+    .sc-blue    { --sc: var(--primary); }
 
-        .card button {
-            width: 100%;
-            max-width: 40%;
-            background: var(--primary);
-            border: none;
-            padding: 14px;
-            color: white;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 8px;
-            font-size: 16px;
-            transition: 0.2s;
-        }
+    .si {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 17px;
+    }
+    .sc-indigo  .si { background: var(--indigo-lt); color: var(--indigo); }
+    .sc-success .si { background: var(--success-lt); color: var(--success); }
+    .sc-blue    .si { background: var(--primary-lt); color: var(--primary); }
 
-        button:hover {
-            background: var(--primary-hover);
-        }
+    .sl { font-size: 11px; color: var(--text3); font-weight: 600; margin-bottom: 3px; }
+    .sv { font-size: 20px; font-weight: 900; }
+    .sc-indigo  .sv { color: var(--indigo); }
+    .sc-success .sv { color: var(--success); }
+    .sc-blue    .sv { color: var(--primary); }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 14px;
-        }
+    /* ══ CARD ══ */
+    .card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px 18px;
+      margin-bottom: 14px; box-shadow: var(--shadow-sm);
+    }
 
-        th,
-        td {
-            padding: 12px 8px;
-            text-align: center;
-            font-size: 16px;
-            min-width: 80px;
-            word-break: break-word;
-            border-bottom: 1px solid #ccc;
-        }
+    .card-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
+    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--indigo-lt); border: 1px solid var(--indigo-md); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--indigo); }
+    .chdr-icon.green { background: var(--success-lt); border-color: var(--success-md); color: var(--success); }
+    .card-hdr h5 { font-size: 15px; font-weight: 800; }
 
-        .stat {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+    /* ══ FORM ══ */
+    .form-col { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+    .fw-full { width: 100%; max-width: 520px; }
+    .fw-full label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 4px; }
 
-        .box {
-            background: var(--primary);
-            padding: 14px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 16px;
-            color: white;
-        }
+    input, select, textarea {
+      width: 100%; padding: 10px 13px;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 9px; color: var(--text);
+      font-family: "Cairo", sans-serif; font-size: 13px;
+      outline: none; transition: all .2s;
+    }
+    input::placeholder, textarea::placeholder { color: var(--text3); }
+    select option { background: var(--white); }
+    input:focus, select:focus, textarea:focus { border-color: var(--indigo); background: var(--indigo-lt); box-shadow: 0 0 0 3px rgba(67,56,202,.1); }
 
-        .green {
-            color: #22c55e;
-        }
+    button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 20px; border: none; border-radius: 9px;
+      font-family: "Cairo", sans-serif; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; transition: all .2s;
+    }
 
-        .red {
-            color: #ef4444;
-        }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--indigo), var(--primary));
+      color: #fff; box-shadow: 0 4px 14px rgba(67,56,202,.25);
+      width: 100%; max-width: 520px;
+    }
+    .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
-        .orange {
-            color: #f59e0b;
-        }
+    .btn-teal {
+      background: linear-gradient(135deg, #0891b2, var(--accent));
+      color: #fff; box-shadow: 0 4px 12px rgba(8,145,178,.2);
+      width: 100%;
+    }
+    .btn-teal:hover { filter: brightness(1.08); }
 
-        /* مودال */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeIn 0.3s;
-        }
+    /* ══ AUTOCOMPLETE ══ */
+    .ac-wrap { position: relative; width: 100%; max-width: 520px; }
 
-        .modal-content {
-            background: var(--card);
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            font-size: 18px;
-            color: var(--text);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            width: 400px;
-            position: relative;
-            transform: translateY(-50px);
-            animation: slideDown 0.3s forwards;
-        }
+    ul.autocomplete-list {
+      list-style: none; margin: 0; padding: 0;
+      background: var(--white); border: 1px solid var(--border);
+      border-top: none; border-radius: 0 0 10px 10px;
+      max-height: 140px; overflow-y: auto;
+      position: absolute; z-index: 500; width: 100%;
+      box-shadow: var(--shadow); display: none;
+    }
+    ul.autocomplete-list.show { display: block; }
+    ul.autocomplete-list li { padding: 10px 13px; cursor: pointer; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); transition: background .15s; }
+    ul.autocomplete-list li:last-child { border-bottom: none; }
+    ul.autocomplete-list li:hover { background: var(--indigo-lt); color: var(--indigo); }
 
-        .modal-content h3 {
-            margin-bottom: 10px;
-        }
+    /* ══ TABLE ══ */
+    .table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .table-wrapper { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; max-height: 400px; }
+    .table-wrapper::-webkit-scrollbar { width: 4px; height: 4px; }
+    .table-wrapper::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-        .modal button {
-            margin-top: 15px;
-            background: #3b82f6;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+    table { width: 100%; border-collapse: collapse; min-width: 520px; font-size: 13px; }
+    thead { position: sticky; top: 0; z-index: 2; }
+    th { background: var(--bg2); color: var(--text2); padding: 10px 10px; text-align: center; font-size: 11.5px; font-weight: 700; letter-spacing: .3px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    td { padding: 10px 10px; text-align: center; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); word-break: break-word; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background .15s; }
+    tbody tr:hover { background: var(--bg); }
 
-        .modal button:hover {
-            background: #2563eb;
-        }
+    .cell-green { color: var(--success); font-weight: 700; }
+    .cell-red   { color: var(--danger);  font-weight: 700; }
+    .cell-orange{ color: var(--warning); font-weight: 700; }
 
-        @keyframes slideDown {
-            to {
-                transform: translateY(0);
-            }
-        }
+    /* ══ ACTION BUTTONS ══ */
+    .actions { display: flex; gap: 4px; justify-content: center; flex-wrap: nowrap; }
+    .act-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      height: 29px; padding: 0 9px; border: 1px solid; border-radius: 7px;
+      font-size: 11.5px; font-weight: 600; cursor: pointer; transition: all .18s;
+      white-space: nowrap; font-family: "Cairo", sans-serif;
+    }
+    .ab-edit    { background: var(--primary-lt); color: var(--primary);  border-color: var(--primary-md); }
+    .ab-del     { background: var(--danger-lt);  color: var(--danger);   border-color: var(--danger-md); }
+    .ab-account { background: var(--indigo-lt);  color: var(--indigo);   border-color: var(--indigo-md); }
+    .ab-cancel  { background: var(--warning-lt); color: var(--warning);  border-color: var(--warning-md); }
+    .act-btn:hover { filter: brightness(.93); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+    /* filter row */
+    .filter-row {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 11px; padding: 14px; margin-bottom: 14px;
+    }
+    .filter-row .fw { flex: 1; min-width: 150px; }
+    .filter-row label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
+    .filter-row input { background: var(--white); }
+    .btn-filter {
+      background: var(--indigo-lt); color: var(--indigo);
+      border: 1px solid var(--indigo-md); padding: 10px 18px;
+      font-size: 13px; white-space: nowrap; align-self: flex-end;
+    }
 
-            to {
-                opacity: 1;
-            }
-        }
+    /* ══ MODALS ══ */
+    .modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,23,42,.3); backdrop-filter: blur(6px);
+      justify-content: center; align-items: center; z-index: 9999;
+    }
+    .modal.open, .modal[style*="flex"] { display: flex; }
 
-        .table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
+    .modal-content {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 18px; padding: 26px 24px;
+      width: 95%; max-width: 400px;
+      box-shadow: var(--shadow-lg); text-align: center;
+      animation: popIn .3s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{opacity:0;transform:scale(.88)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
 
-        ul.autocomplete-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background: #3b82f6;
-            max-height: 120px;
-            overflow-y: auto;
-            border-radius: 0 0 12px 12px;
-            position: absolute;
-            z-index: 1000;
-            width: 77%;
-            border: 1px solid #ccc;
-            border-top: none;
-            display: none;
-            /* نخفي القائمة افتراضياً */
-        }
+    #modal            .modal-content { border-top: 3px solid var(--indigo); }
+    #editDriverModal  .modal-content { border-top: 3px solid var(--primary); }
+    #deleteDriverModal .modal-content { border-top: 3px solid var(--danger); }
+    #accountDriverModal .modal-content { border-top: 3px solid var(--indigo); max-width: 520px; }
+    #cashModal        .modal-content { border-top: 3px solid var(--success); }
 
-        /* نظهرها فقط لو فيها عناصر */
-        ul.autocomplete-list li {
-            display: block;
-        }
+    .modal-content h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .modal-content p  { font-size: 13.5px; color: var(--text2); margin-bottom: 4px; line-height: 1.7; }
 
-        ul.autocomplete-list.show {
-            display: block;
-        }
+    .modal-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; text-align: right; }
+    .modal-form label { font-size: 11px; font-weight: 700; color: var(--text2); }
 
-        ul.autocomplete-list li:hover {
-            background: #3b82f6;
-            color: white;
-        }
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .modal-actions button, .modal button { width: auto; flex: 1; }
+    .mbtn { border: none; padding: 10px; border-radius: 9px; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: "Cairo", sans-serif; transition: all .2s; }
+    .mbtn-ok     { background: linear-gradient(135deg, var(--indigo), var(--primary)); color: #fff; }
+    .mbtn-save   { background: linear-gradient(135deg, var(--success), #15803d); color: #fff; }
+    .mbtn-del    { background: linear-gradient(135deg, var(--danger), #b91c1c); color: #fff; }
+    .mbtn-cancel { background: var(--bg); color: var(--text2); border: 1px solid var(--border); }
+    .mbtn-cash   { background: linear-gradient(135deg, var(--success), #15803d); color: #fff; }
+    .mbtn:hover  { filter: brightness(1.08); transform: translateY(-1px); }
 
-        @media (max-width: 600px) {
-            .tabs button {
-                flex: 1 1 100%;
-                font-size: 15px;
-                padding: 12px;
-            }
+    /* account modal table */
+    #accountContent { max-height: 280px; overflow-y: auto; text-align: right; }
+    #accountContent table { min-width: 400px; }
 
-            .stat {
-                grid-template-columns: 1fr;
-            }
-
-            .box {
-                font-size: 14px;
-                padding: 12px;
-            }
-
-            table th,
-            table td {
-                font-size: 13px;
-                padding: 6px;
-            }
-
-            input,
-            select,
-            textarea {
-                font-size: 15px;
-                padding: 12px;
-            }
-
-            button {
-                font-size: 15px;
-                padding: 12px;
-            }
-        }
-    </style>
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr; gap: 10px; }
+      .page { padding: 16px 12px 32px; }
+      .form-col { align-items: stretch; }
+      .fw-full, .btn-primary, .ac-wrap { max-width: 100%; }
+    }
+  </style>
 </head>
-
 <body>
-    <header>🚚 توصيل الطلبات</header>
 
-    <div class="tabs">
-        <button onclick="show('dash')">لوحة التحكم</button>
-        <button onclick="show('drivers')">الطيارين</button>
-        <button onclick="show('orders')">الأوردرات</button>
-        <button onclick="show('reports')">التقارير</button>
+<!-- HEADER -->
+<header>
+  <div class="hdr-brand">
+    <div class="hdr-icon"><i class="fa-solid fa-plane"></i></div>
+    تطبيق <span>الطيار</span>
+  </div>
+  <a href="../index.html" class="hdr-back">
+    <i class="fa-solid fa-house"></i> الرئيسية
+  </a>
+</header>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <button class="tab-btn active" onclick="show('dash')">
+    <i class="fa-solid fa-chart-pie"></i> لوحة التحكم
+  </button>
+  <button class="tab-btn" onclick="show('drivers')">
+    <i class="fa-solid fa-motorcycle"></i> الطيارين
+  </button>
+  <button class="tab-btn" onclick="show('orders')">
+    <i class="fa-solid fa-box"></i> الأوردرات
+  </button>
+  <button class="tab-btn" onclick="show('reports')">
+    <i class="fa-solid fa-file-lines"></i> التقارير
+  </button>
+</div>
+
+<!-- MODALS -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3><i class="fa-solid fa-circle-info" style="color:var(--indigo);margin-left:7px"></i> تنبيه</h3>
+    <p id="modalText">من فضلك أكمل البيانات</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-ok" onclick="document.getElementById('modal').style.display='none'">
+        <i class="fa-solid fa-check"></i> حسناً
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="editDriverModal" class="modal">
+  <div class="modal-content">
+    <h3><i class="fa-solid fa-pen-to-square" style="color:var(--primary);margin-left:7px"></i> تعديل بيانات الطيار</h3>
+    <div class="modal-form">
+      <label>اسم الطيار</label><input id="editName" placeholder="اسم الطيار" />
+      <label>رقم الهاتف</label><input id="editPhone" placeholder="رقم الهاتف" />
+      <label>الرصيد</label><input id="editBalance" type="number" placeholder="0.00" />
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-cancel" onclick="editDriverModal.style.display='none'"><i class="fa-solid fa-xmark"></i> إلغاء</button>
+      <button class="mbtn mbtn-save"   id="saveEditDriver"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>
+    </div>
+  </div>
+</div>
+
+<div id="deleteDriverModal" class="modal">
+  <div class="modal-content">
+    <h3><i class="fa-solid fa-triangle-exclamation" style="color:var(--danger);margin-left:7px"></i> حذف الطيار</h3>
+    <p>هل أنت متأكد من حذف هذا الطيار؟ لا يمكن التراجع.</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-cancel" onclick="deleteDriverModal.style.display='none'"><i class="fa-solid fa-xmark"></i> إلغاء</button>
+      <button class="mbtn mbtn-del"    id="confirmDeleteDriver"><i class="fa-solid fa-trash"></i> حذف</button>
+    </div>
+  </div>
+</div>
+
+<div id="accountDriverModal" class="modal">
+  <div class="modal-content" style="max-width:540px">
+    <h3><i class="fa-solid fa-file-invoice" style="color:var(--indigo);margin-left:7px"></i> كشف حساب الطيار</h3>
+    <div class="table-wrap">
+      <div class="table-wrapper" style="max-height:280px">
+        <div id="accountContent"></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-cancel" onclick="accountDriverModal.style.display='none'"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<div id="cashModal" class="modal">
+  <div class="modal-content">
+    <h3><i class="fa-solid fa-hand-holding-dollar" style="color:var(--success);margin-left:7px"></i> استلام نقدية من طيار</h3>
+    <div class="modal-form">
+      <label>اختر الطيار</label><select id="cashDriver"></select>
+      <label>المبلغ</label><input id="cashAmount" type="number" placeholder="0.00" />
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-cancel" onclick="cashModal.style.display='none'"><i class="fa-solid fa-xmark"></i> إلغاء</button>
+      <button class="mbtn mbtn-cash"   onclick="receiveCash()"><i class="fa-solid fa-check"></i> تأكيد الاستلام</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page">
+
+  <!-- DASHBOARD -->
+  <div id="dash" class="section active">
+    <div class="stats-grid">
+      <div class="stat-card sc-indigo">
+        <div class="si"><i class="fa-solid fa-box"></i></div>
+        <div>
+          <div class="sl">أوردرات اليوم</div>
+          <div class="sv" id="dOrders">0</div>
+        </div>
+      </div>
+      <div class="stat-card sc-success">
+        <div class="si"><i class="fa-solid fa-coins"></i></div>
+        <div>
+          <div class="sl">تحصيل اليوم</div>
+          <div class="sv" id="dCash">0</div>
+        </div>
+      </div>
+      <div class="stat-card sc-blue">
+        <div class="si"><i class="fa-solid fa-vault"></i></div>
+        <div>
+          <div class="sl">رصيد الخزنة</div>
+          <div class="sv" id="dSafe">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRIVERS -->
+  <div id="drivers" class="section">
+
+    <div class="card">
+      <div class="card-hdr">
+        <div class="chdr-icon"><i class="fa-solid fa-user-plus"></i></div>
+        <h5>إضافة طيار جديد</h5>
+      </div>
+      <div class="form-col">
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">اسم الطيار</label>
+          <input id="dName" placeholder="أدخل اسم الطيار..." />
+        </div>
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">رقم الهاتف</label>
+          <input id="dPhone" placeholder="رقم الهاتف..." />
+        </div>
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">رصيد افتتاحي / سلفة</label>
+          <input id="opening" type="number" placeholder="0.00" />
+        </div>
+        <button class="btn-primary" id="addDriverBtn"><i class="fa-solid fa-plus"></i> حفظ الطيار</button>
+      </div>
     </div>
 
-    <!-- مودال افتراضي -->
-    <div id="modal" class="modal">
-        <div class="modal-content" id="modalText">من فضلك أكمل البيانات</div>
-        <button onclick="modal.style.display = 'none'">حسناً</button>
+    <button class="btn-teal" style="margin-bottom:14px" onclick="openCashModal()">
+      <i class="fa-solid fa-hand-holding-dollar"></i> استلام نقدية من طيار
+    </button>
+
+    <div class="card">
+      <div class="card-hdr">
+        <div class="chdr-icon green"><i class="fa-solid fa-table-list"></i></div>
+        <h5>جدول الطيارين</h5>
+      </div>
+      <div class="table-wrap">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>الاسم</th><th>الهاتف</th><th>الرصيد</th><th>الإجراءات</th></tr>
+            </thead>
+            <tbody id="driversTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDERS -->
+  <div id="orders" class="section">
+
+    <div class="card">
+      <div class="card-hdr">
+        <div class="chdr-icon"><i class="fa-solid fa-plus"></i></div>
+        <h5>أوردر جديد</h5>
+      </div>
+      <div class="form-col">
+        <div class="ac-wrap">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">اسم العميل</label>
+          <input id="cName" placeholder="اسم العميل..." oninput="autocompleteClient()" />
+          <ul id="clientList" class="autocomplete-list"></ul>
+        </div>
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">العنوان</label>
+          <input id="addr" placeholder="عنوان التوصيل..." />
+        </div>
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">قيمة الأوردر</label>
+          <input id="amt" type="number" placeholder="0.00" />
+        </div>
+        <div class="fw-full">
+          <label style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:5px;display:block">الطيار</label>
+          <select id="drv"><option value="">اختر الطيار...</option></select>
+        </div>
+        <button class="btn-primary" id="addOrderBtn"><i class="fa-solid fa-plus"></i> تسجيل الأوردر</button>
+      </div>
     </div>
 
-    <!-- مودالات الطيارين -->
-    <div id="editDriverModal" class="modal">
-        <div class="modal-content">
-            <h3>تعديل بيانات الطيار</h3>
-            <input id="editName" placeholder="اسم الطيار" />
-            <input id="editPhone" placeholder="رقم الهاتف" />
-            <input id="editBalance" type="number" placeholder="رصيد" />
-            <button id="saveEditDriver">حفظ التعديلات</button>
-            <button onclick="editDriverModal.style.display = 'none'" style="background: #ef4444">
-                إلغاء
-            </button>
-        </div>
+    <div class="filter-row">
+      <div class="fw">
+        <label>فلترة بالتاريخ</label>
+        <input type="date" id="filterDate" onchange="renderOrders()" />
+      </div>
+      <button class="btn-filter" onclick="resetFilter()">
+        <i class="fa-solid fa-rotate-right"></i> اليوم
+      </button>
     </div>
 
-    <div id="deleteDriverModal" class="modal">
-        <div class="modal-content">
-            <h3>حذف الطيار</h3>
-            <p>هل أنت متأكد من حذف هذا الطيار؟</p>
-            <button id="confirmDeleteDriver">نعم، احذف الطيار</button>
-            <button onclick="deleteDriverModal.style.display = 'none'" style="background: #ef4444">
-                إلغاء
-            </button>
+    <div class="card">
+      <div class="card-hdr">
+        <div class="chdr-icon green"><i class="fa-solid fa-list"></i></div>
+        <h5>قائمة الأوردرات</h5>
+      </div>
+      <div class="table-wrap">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>#</th><th>العميل</th><th>العنوان</th><th>الطيار</th><th>القيمة</th><th>الحالة</th><th>إلغاء</th></tr>
+            </thead>
+            <tbody id="ordersTable"></tbody>
+          </table>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS -->
+  <div id="reports" class="section">
+
+    <div class="filter-row">
+      <div class="fw">
+        <label>اختر التاريخ</label>
+        <input type="date" id="rDate" />
+      </div>
+      <button class="btn-filter" onclick="dailyReport()">
+        <i class="fa-solid fa-sun"></i> تقرير يومي
+      </button>
+      <button class="btn-filter" style="background:var(--purple-lt);color:var(--purple);border-color:#ddd6fe" onclick="monthlyReport()">
+        <i class="fa-solid fa-calendar-days"></i> تقرير شهري
+      </button>
     </div>
 
-    <div id="accountDriverModal" class="modal">
-        <div class="modal-content">
-            <h3>كشف حساب الطيار</h3>
-            <div id="accountContent" style="max-height: 300px; overflow-y: auto; text-align: right"></div>
-            <button onclick="accountDriverModal.style.display = 'none'">
-                إغلاق
-            </button>
+    <div class="card">
+      <div class="card-hdr">
+        <div class="chdr-icon"><i class="fa-solid fa-file-lines"></i></div>
+        <h5>نتائج التقرير</h5>
+      </div>
+      <div class="table-wrap">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>#</th><th>العميل</th><th>العنوان</th><th>الطيار</th><th>القيمة</th><th>الحالة</th></tr>
+            </thead>
+            <tbody id="reportTable"></tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div id="cashModal" class="modal">
-        <div class="modal-content">
-            <h3>استلام نقدية من طيار</h3>
+</div><!-- /page -->
 
-            <select id="cashDriver"></select>
-            <input id="cashAmount" type="number" placeholder="المبلغ">
+<script>
+  /* ── Tab switching ── */
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = ['dash','drivers','orders','reports'].indexOf(id);
+    document.querySelectorAll('.tab-btn')[idx]?.classList.add('active');
+  }
 
-            <button onclick="receiveCash()">تأكيد الاستلام</button>
-            <button onclick="cashModal.style.display='none'" style="background:#ef4444;">
-                إلغاء
-            </button>
-        </div>
-    </div>
+  /* ── Modal helper ── */
+  function openCashModal() {
+    document.getElementById('cashModal').style.display = 'flex';
+  }
+</script>
 
-
-    <!-- DASHBOARD -->
-    <div id="dash" class="section active">
-        <div class="stat">
-            <div class="box">📦 أوردرات اليوم<br /><span id="dOrders"></span></div>
-            <div class="box">💰 تحصيل اليوم<br /><span id="dCash"></span></div>
-            <div class="box">🏦 رصيد الخزنة<br /><span id="dSafe"></span></div>
-        </div>
-    </div>
-
-    <!-- DRIVERS -->
-    <div id="drivers" class="section">
-        <div class="card">
-            <h3>إضافة طيار</h3>
-            <input id="dName" placeholder="اسم الطيار" />
-            <input id="dPhone" placeholder="رقم الهاتف" />
-            <input id="opening" type="number" placeholder="رصيد افتتاحي / سلفة" />
-            <button id="addDriverBtn">حفظ الطيار</button>
-        </div>
-
-        <button onclick="openCashModal()" style="background: var(--tab);">
-            استلام نقدية من طيار
-        </button>
-
-
-        <div class="card-2">
-            <h3>جدول الطيارين</h3>
-            <div class="table-wrapper">
-                <table>
-                    <tr>
-                        <th>الاسم</th>
-                        <th>الهاتف</th>
-                        <th>رصيد</th>
-                        <th>تعديل</th>
-                        <th>حذف</th>
-                        <th>كشف حساب</th>
-                    </tr>
-                    <tbody id="driversTable"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- ORDERS -->
-    <div id="orders" class="section">
-        <div class="card">
-            <h3>أوردر جديد</h3>
-            <input id="cName" placeholder="اسم العميل" oninput="autocompleteClient()" />
-            <ul id="clientList" class="autocomplete-list"></ul>
-            <input id="addr" placeholder="العنوان" />
-            <input id="amt" type="number" placeholder="القيمة" />
-            <select id="drv">
-                <option value="">اختر الطيار</option>
-            </select>
-            <button id="addOrderBtn">تسجيل الأوردر</button>
-        </div>
-
-        <div class="card">
-            <label>فلترة بالتاريخ:</label>
-            <input type="date" id="filterDate" onchange="renderOrders()" />
-            <button onclick="resetFilter()">اليوم</button>
-        </div>
-
-        <div class="card-2">
-            <div class="table-wrapper">
-                <table>
-                    <tr>
-                        <th>رقم</th>
-                        <th>عميل</th>
-                        <th>عنوان</th>
-                        <th>طيار</th>
-                        <th>قيمة</th>
-                        <th>الحالة</th>
-                        <th>إلغاء</th>
-                    </tr>
-                    <tbody id="ordersTable"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- REPORTS -->
-    <div id="reports" class="section">
-        <div class="card">
-            <label>اختر التاريخ:</label>
-            <input type="date" id="rDate" />
-            <button onclick="dailyReport()">تقرير يومى</button>
-            <button onclick="monthlyReport()">تقرير شهرى</button>
-        </div>
-
-        <div class="card-2">
-            <div class="table-wrapper">
-                <table>
-                    <tr>
-                        <th>رقم</th>
-                        <th>عميل</th>
-                        <th>عنوان</th>
-                        <th>طيار</th>
-                        <th>قيمة</th>
-                        <th>حالة</th>
-                    </tr>
-                    <tbody id="reportTable"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <script src="../js/tayar.js"></script>
+<script src="../js/tayar.js"></script>
 </body>
-
 </html>

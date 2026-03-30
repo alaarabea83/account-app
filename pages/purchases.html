@@ -1,663 +1,447 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
   <meta charset="UTF-8" />
-  <title>سهل لإدارة الحسابات - المشتريات</title>
-
+  <title>فواتير الشراء | المحاسب المحترف</title>
   <link rel="icon" type="image/png" href="../icons/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Tajawal:wght@400;500&display=swap"
-    rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
-
   <style>
-    /* =====================================
-   🔷 SAHL SYSTEM UI - CLEAN VERSION
-====================================== */
-
-    /* ===== Variables ===== */
     :root {
-      --primary: #6366f1;
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f1f5f9;
-      --border: #334155;
+      --bg:        #f4f6fa;
+      --bg2:       #eef1f7;
+      --white:     #ffffff;
+      --primary:   #2563eb;
+      --primary-lt:#eff4ff;
+      --primary-md:#bfcfff;
+      --accent:    #0ea5e9;
+      --success:   #16a34a;
+      --success-lt:#f0fdf4;
+      --warning:   #d97706;
+      --warning-lt:#fffbeb;
+      --danger:    #dc2626;
+      --danger-lt: #fef2f2;
+      --orange:    #ea580c;
+      --orange-lt: #fff7ed;
+      --text:      #0f172a;
+      --text2:     #475569;
+      --text3:     #94a3b8;
+      --border:    #e2e8f0;
+      --border2:   #cbd5e1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
+      --shadow:    0 4px 14px rgba(0,0,0,.07);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
+      --r:         13px;
+      --sw:        252px;
     }
 
-    /* Light Mode */
-    .light {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --text: #0f172a;
-    }
-
-    /* Reset */
-    * {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      font-family: Tajawal, sans-serif;
+      font-family: "Cairo", sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* =====================================
-   🔷 HEADER
-====================================== */
+    /* dot pattern */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(37,99,235,.055) 1px, transparent 0);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
 
+    /* top accent */
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--warning));
+      z-index: 1100;
+    }
+
+    /* ══ HEADER ══ */
     .header {
-      position: fixed;
-      inset: 0 0 auto 0;
+      position: fixed; top: 3px; right: 0; left: 0;
       height: 60px;
-      background: #1E3A8A;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-      z-index: 1002;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-    }
-
-    .header h1 {
-      font-size: 18px;
-      margin: 40px;
-    }
-
-    /* =====================================
-   🔷 SIDEBAR
-====================================== */
-
-     .menu-toggle {
-      position: fixed;
-      right: 12px;
-      background: white;
-      color: #000;
-      z-index: 1001;
-      border: none;
-      padding: 4px 8px;
-      border-radius: 8px;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      width: 260px;
-      height: calc(100dvh - 60px);
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: 0.3s;
-      z-index: 1001;
-      overflow-y: auto;
-      scrollbar-width: none;
-      font-family: "Cairo", sans-serif;
-      font-weight: 600;
-      padding: 20px 20px 40px 20px;
-    }
-
-    .sidebar.show {
-      right: 0;
-    }
-
-    .sidebar a,
-    .sidebar button,
-    .sidebar div {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #1e293b;
-      border-radius: 8px;
-      text-align: center;
-      color: white;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .sidebar a:hover,
-    .sidebar button:hover {
-      background: #334155;
-    }
-
-    /* Sidebar Titles */
-    .sidebar h2 {
-      text-align: center;
-      color: #a78bfa;
-      margin-bottom: 10px;
-    }
-
-    /* ===== Overlay ===== */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 1000;
-    }
-
-    #overlay.show {
-      display: block;
-    }
-
-    /* Sidebar Links */
-    .sidebar-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 12px;
-      text-decoration: none;
-      color: #cbd5f5;
-      border-radius: 10px;
-      transition: 0.2s;
-    }
-
-    .sidebar-link img {
-      display: block;
-    }
-
-    .sidebar-link:hover {
-      background: var(--primary, #2563eb);
-      color: white;
-    }
-
-    /* ===== Mobile ===== */
-    @media (max-width: 768px) {
-      .sidebar {
-        right: -260px;
-      }
-
-      .sidebar.show {
-        right: 0;
-      }
-    }
-
-    /* =====================================
-   🔷 LAYOUT
-====================================== */
-
-    section {
-      max-width: 1300px;
-      margin: 80px auto 20px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    /* Desktop layout */
-    @media (min-width:768px) {
-      .menu-toggle {
-        display: none;
-      }
-
-      section {
-        margin-right: 260px;
-      }
-    }
-
-    /* =====================================
-   🔷 CARD
-====================================== */
-
-    .card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 16px;
-    }
-
-    /* =====================================
-   🔷 FORM ROW
-====================================== */
-
-    .form-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      background: var(--card);
-      border-radius: 12px;
-      padding: 15px;
-    }
-
-    .form-row input,
-    .form-row select {
-      flex: 1;
-      min-width: 140px;
-      background: #111827;
-      color: white;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 14px;
-    }
-
-    .form-row input:focus,
-    .form-row select:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: #21618c;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto;
-      max-width: 120px;
-      margin: 5px auto;
-    }
-
-
-    /* Mobile */
-    @media (max-width:768px) {
-      .form-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-
-    /* =====================================
-   🔷 TABLE
-====================================== */
-
-    .table-container {
-      margin-top: 15px;
-      border-radius: 12px;
-      padding: 10px;
-      background: var(--card);
-    }
-
-    .table-scroll {
-      overflow: auto;
-      max-height: 400px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 600px;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      text-align: center;
-      font-size: 14px;
+      background: var(--white);
       border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px; z-index: 1002;
     }
 
-    thead th {
-      background: #21618c;
-      font-weight: 600;
+    .brand { display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 800; }
+    .brand-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--orange), var(--warning));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #fff;
+      box-shadow: 0 3px 10px rgba(234,88,12,.3);
+    }
+    .brand span { color: var(--orange); }
+
+    .hdr-cash {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--warning-lt);
+      border: 1px solid #fcd34d;
+      padding: 5px 13px; border-radius: 18px;
+      font-size: 13px; font-weight: 600; color: var(--warning);
     }
 
-    tbody tr:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .menu-toggle {
+      width: 34px; height: 34px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text2);
+      font-size: 14px; cursor: pointer;
+      display: none; align-items: center; justify-content: center;
+      transition: all .2s;
     }
+    .menu-toggle:hover { background: var(--orange-lt); color: var(--orange); border-color: #fed7aa; }
 
-    tfoot tr {
-      background: #111827;
-      color: #fbbf24;
-      font-weight: bold;
+    /* ══ SIDEBAR ══ */
+    .sidebar {
+      position: fixed; top: 63px; right: 0;
+      width: var(--sw); height: calc(100dvh - 63px);
+      background: var(--white);
+      border-left: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 14px 10px 28px;
+      z-index: 1001; overflow-y: auto; scrollbar-width: none;
+      transition: right .3s;
     }
+    .sidebar::-webkit-scrollbar { display: none; }
 
-    /* Scrollbar */
-    .table-scroll::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+    .sb-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); padding: 10px 10px 4px; }
+
+    .sb-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; text-decoration: none; color: var(--text2); font-size: 13px; font-weight: 600; transition: all .18s; }
+    .sb-link i { width: 16px; text-align: center; font-size: 12px; flex-shrink: 0; }
+    .sb-link:hover { background: var(--bg); color: var(--text); }
+    .sb-link.active { background: var(--orange-lt); color: var(--orange); font-weight: 700; }
+
+    .sb-cash {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; border-radius: 10px;
+      background: var(--warning-lt); border: 1px solid #fcd34d;
+      margin-bottom: 6px; font-size: 12.5px; font-weight: 600; color: var(--warning);
     }
+    .sb-cash span { font-weight: 800; }
 
-    .table-scroll::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 10px;
-    }
+    #overlay { position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(4px); display: none; z-index: 1000; }
+    #overlay.show { display: block; }
 
-    /* =====================================
-   🔷 ACTION BUTTONS
-====================================== */
+    /* ══ MAIN ══ */
+    .main { position: relative; z-index: 1; margin-right: var(--sw); padding: 78px 22px 30px; }
 
-    .action-buttons {
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-    }
+    .page-head { margin-bottom: 20px; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+    .breadcrumb a { color: var(--orange); text-decoration: none; }
+    .page-head h2 { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+    .page-head h2 i { color: var(--orange); }
 
-    .btn-edit {
-      background: #3b82f6;
-    }
-
-    .btn-delete {
-      background: #ef4444;
-    }
-
-    .btn-edit,
-    .btn-delete {
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    /* =====================================
-   🔷 INVOICE INPUTS
-====================================== */
-    .qty,
-    .price,
-    .total {
-      width: 75px;
-      padding: 6px;
-      text-align: center;
-      border-radius: 6px;
+    /* ══ CARD ══ */
+    .card {
+      background: var(--white);
       border: 1px solid var(--border);
-      background: #111827;
-      color: white;
+      border-radius: var(--r);
+      padding: 20px 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
     }
 
-    /* عند التركيز */
-    .qty:focus,
-    .price:focus,
-    .total:focus {
-      outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-    }
+    .card-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
+    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--orange-lt); border: 1px solid #fed7aa; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--orange); }
+    .chdr-icon.green { background: var(--success-lt); border-color: #bbf7d0; color: var(--success); }
+    .card-hdr h5 { font-size: 15px; font-weight: 800; }
 
-    .total {
-      color: #f1c40f;
-      font-weight: bold;
-    }
+    /* ══ FORM ══ */
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 14px; }
+    .fw { flex: 1; min-width: 150px; }
+    .fw label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
 
-    /* =====================================
-   🔷 SAVE BUTTON
-====================================== */
+    input, select {
+      width: 100%; padding: 10px 13px;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 9px; color: var(--text);
+      font-family: "Cairo", sans-serif; font-size: 13px;
+      outline: none; transition: all .2s;
+    }
+    input::placeholder { color: var(--text3); }
+    select option { background: var(--white); }
+    input:focus, select:focus { border-color: var(--orange); background: var(--orange-lt); box-shadow: 0 0 0 3px rgba(234,88,12,.1); }
+    input[readonly] { background: var(--bg2); color: var(--text2); cursor: default; }
+    input[readonly]:focus { border-color: var(--border); box-shadow: none; background: var(--bg2); }
+
+    /* ══ SAVE BUTTON ══ */
+    button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 18px; border: none; border-radius: 9px;
+      font-family: "Cairo", sans-serif; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; transition: all .2s;
+    }
 
     #saveInvoiceBtn {
-      width: 100%;
-      max-width: 200px;
-      margin: 15px auto 0;
-      display: block;
-      padding: 12px;
-      font-size: 15px;
-      border-radius: 8px;
-      background: #21618c;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
+      background: linear-gradient(135deg, var(--orange), #c2410c);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(234,88,12,.3);
+      padding: 11px 24px;
+      white-space: nowrap; flex-shrink: 0; align-self: flex-end; margin: 0;
     }
+    #saveInvoiceBtn:hover { filter: brightness(1.08); transform: translateY(-2px); }
 
-    /* =====================================
-   🔷 MODAL
-====================================== */
+    /* ══ TABLE ══ */
+    .table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 14px 0; }
 
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
+    .table-scroll { overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; max-height: 300px; }
+    .table-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+    .table-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+    .purchases-scroll { max-height: 420px; }
+
+    table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    thead { position: sticky; top: 0; z-index: 2; }
+    th { background: var(--bg2); color: var(--text2); padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .3px; border-bottom: 1px solid var(--border); }
+    td { padding: 10px 12px; text-align: center; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background .15s; }
+    tbody tr:hover { background: var(--bg); }
+
+    tfoot tr td { background: var(--bg2); color: var(--warning); font-weight: 800; border-top: 2px solid var(--border2); }
+
+    /* inline inputs */
+    .qty, .price {
+      width: 80px; padding: 6px 8px; text-align: center;
+      border-radius: 7px; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text);
+      font-family: "Cairo", sans-serif; font-size: 12.5px;
     }
+    .qty:focus, .price:focus { border-color: var(--orange); background: var(--orange-lt); outline: none; }
+    .total { font-weight: 700; color: var(--success); }
+
+    /* ══ TOTALS ROW ══ */
+    .totals-row {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; margin-top: 0;
+    }
+    .totals-row .fw input { background: var(--white); }
+    .totals-row .fw input[readonly] { background: var(--bg); }
+
+    /* ══ ACTION BTNS ══ */
+    .actions { display: flex; gap: 5px; justify-content: center; }
+    .action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 5px; height: 30px; padding: 0 10px; border: 1px solid; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .18s; white-space: nowrap; font-family: "Cairo", sans-serif; }
+    .action-btn.edit   { background: var(--primary-lt); color: var(--primary); border-color: var(--primary-md); }
+    .action-btn.delete { background: var(--danger-lt); color: var(--danger); border-color: #fecaca; }
+    .action-btn.view   { background: #ecfeff; color: #0891b2; border-color: #a5f3fc; }
+    .action-btn:hover  { filter: brightness(.95); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+    /* ══ SEARCH ROW ══ */
+    .search-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: flex-end; }
+    .search-row .fw { flex: 1; min-width: 160px; }
+
+    /* ══ MODAL ══ */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 2000; }
+    .modal-overlay.open { display: flex; }
 
     .modal-box {
-      background: white;
-      color: black;
-      padding: 25px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--orange);
+      padding: 28px 26px; border-radius: 18px;
+      width: 90%; max-width: 400px; text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: popIn .3s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{opacity:0;transform:scale(.88)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
+
+    .modal-box h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .modal-box p  { font-size: 13.5px; color: var(--text2); margin-bottom: 20px; line-height: 1.7; }
+
+    .modal-btns { display: flex; gap: 8px; justify-content: center; }
+    .mbtn { border: none; padding: 10px 20px; border-radius: 9px; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: "Cairo", sans-serif; transition: all .2s; }
+    .mbtn-ok     { background: linear-gradient(135deg, var(--orange), #c2410c); color: #fff; box-shadow: 0 3px 10px rgba(234,88,12,.2); }
+    .mbtn-cancel { background: var(--bg); color: var(--text2); border: 1px solid var(--border); }
+    .mbtn-del    { background: linear-gradient(135deg, var(--danger), #b91c1c); color: #fff; box-shadow: 0 3px 10px rgba(220,38,38,.2); }
+    .mbtn:hover  { filter: brightness(1.08); transform: translateY(-1px); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .sidebar { right: -270px; }
+      .sidebar.show { right: 0; }
+      .main { margin-right: 0; padding: 76px 12px 22px; }
+      .form-row { flex-direction: column; }
+      #saveInvoiceBtn { width: 100%; }
     }
   </style>
 </head>
-
 <body>
-  <div class="header">
-    <h1> فواتير الشراء</h1>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    <div class="brand-icon"><i class="fa-solid fa-dolly"></i></div>
+    المحاسب <span>المحترف</span>
+  </div>
+  <div class="hdr-cash">
+    <i class="fa-solid fa-vault"></i>
+    <span id="cashBalanceHeader">0.00 جنيه</span>
+  </div>
+  <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-cash">
+    <span><i class="fa-solid fa-vault" style="margin-left:5px"></i>رصيد الخزينة</span>
+    <span id="cashBalance">0.00 ج</span>
   </div>
 
-  <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <!-- رصيد الخزينة -->
-      <div class="menu-item cash-item">
-        💰 رصيد الخزينة:
-        <span class="cash-badge" id="cashBalance">0.00 جنيه</span>
-      </div>
+  <div class="sb-lbl">القائمة الرئيسية</div>
+  <a href="../index.html"           class="sb-link"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+  <a href="customers.html"          class="sb-link"><i class="fa-solid fa-users"></i><span>الحسابات</span></a>
+  <a href="products.html"           class="sb-link"><i class="fa-solid fa-box-open"></i><span>المخزون</span></a>
 
-      <a href="../index.html" class="sidebar-link">
-        <img
-          src="../icons/home.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>الصفحة الرئيسية</span>
-      </a>
+  <div class="sb-lbl">المعاملات</div>
+  <a href="sales.html"              class="sb-link"><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a>
+  <a href="purchases.html"          class="sb-link active"><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a>
+  <a href="receipts.html"           class="sb-link"><i class="fa-solid fa-hand-holding-dollar"></i><span>المقبوضات</span></a>
+  <a href="#"                       class="sb-link"><i class="fa-solid fa-money-bill-wave"></i><span>المدفوعات</span></a>
 
-      <a href="customers.html" class="sidebar-link">
-        <img
-          src="../icons/customer-512.png"
-          width="32"
-          height="32"
-          alt="Customers Icon"
-        />
-        <span>الحسابات</span>
-      </a>
+  <div class="sb-lbl">التقارير</div>
+  <a href="income.html"             class="sb-link"><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a>
+  <a href="expenses.html"           class="sb-link"><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a>
+  <a href="cash.html"               class="sb-link"><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a>
+  <a href="profit.html"             class="sb-link"><i class="fa-solid fa-coins"></i><span>الأرباح</span></a>
+  <a href="../pages/dashboard.html" class="sb-link"><i class="fa-solid fa-chart-pie"></i><span>الحركة</span></a>
+  <a href="../pages/tayar.html"     class="sb-link"><i class="fa-solid fa-plane"></i><span>تطبيق الطيار</span></a>
+</div>
 
-      <a href="products.html" class="sidebar-link">
-        <img
-          src="../icons/products.png"
-          width="32"
-          height="32"
-          alt="Products Icon"
-        />
-        <span>المخزون</span>
-      </a>
+<div id="overlay" onclick="toggleSidebar()"></div>
 
-      <a href="sales.html" class="sidebar-link">
-        <img src="../icons/sales.png" width="32" height="32" alt="Sales Icon" />
-        <span>المبيعات</span>
-      </a>
+<!-- MAIN -->
+<div class="main">
 
-      <a href="purchases.html" class="sidebar-link">
-        <img
-          src="../icons/purchases.png"
-          width="32"
-          height="32"
-          alt="Purchases Icon"
-        />
-        <span>المشتريات</span>
-      </a>
+  <div class="page-head">
+    <div class="breadcrumb">
+      <a href="../index.html">الرئيسية</a>
+      <i class="fa-solid fa-chevron-left" style="font-size:9px"></i>
+      <span>فواتير الشراء</span>
+    </div>
+    <h2><i class="fa-solid fa-dolly"></i> فواتير الشراء</h2>
+  </div>
 
-      <a href="receipts.html" class="sidebar-link">
-        <img
-          src="../icons/income-512.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>المقبوضات</span>
-      </a>
-
-      <a href="#" class="sidebar-link">
-        <img
-          src="../icons/accounting-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>المدفوعات</span>
-      </a>
-      <a href="income.html" class="sidebar-link">
-        <img
-          src="../icons/income.png"
-          width="32"
-          height="32"
-          alt="Income Icon"
-        />
-        <span>تسجيل الإيرادات</span>
-      </a>
-
-      <a href="expenses.html" class="sidebar-link">
-        <img
-          src="../icons/expenses.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>تسجيل المصروفات</span>
-      </a>
-      <a href="cash.html" class="sidebar-link">
-        <img
-          src="../icons/icon-512.png"
-          width="32"
-          height="32"
-          alt="Expenses Icon"
-        />
-        <span>الصندوق الرئيسي</span>
-      </a>
-
-      <a href="profit.html" class="sidebar-link">
-        <img
-          src="../icons/profit.png"
-          width="32"
-          height="32"
-          alt="Profit Icon"
-        />
-        <span>تقارير الأرباح</span>
-      </a>
-
-      <a href="../pages/dashboard.html" class="sidebar-link">
-        <img
-          src="../icons/dashboard.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تقرير حركه</span>
-      </a>
-      <a href="../pages/tayar.html" class="sidebar-link">
-        <img
-          src="../icons/delivery.png"
-          width="32"
-          height="32"
-          alt="Dashboard Icon"
-        />
-        <span>تطبيق الطيار</span>
-      </a>
+  <!-- ══ NEW PURCHASE INVOICE ══ -->
+  <div class="card">
+    <div class="card-hdr">
+      <div class="chdr-icon"><i class="fa-solid fa-file-invoice"></i></div>
+      <h5>فاتورة شراء جديدة</h5>
     </div>
 
-  <div id="overlay" onclick="toggleSidebar()"></div>
-
-  <section>
-
-    <div class="card">
-      <h5>🧾 فاتورة شراء جديده</h5>
-      <div class="form-row">
+    <div class="form-row">
+      <div class="fw">
+        <label>اختر المورد / الحساب</label>
         <select id="invoiceCustomer"></select>
-        <input type="number" id="customerBalance" readonly placeholder="الرصيد السابق" />
+      </div>
+      <div class="fw">
+        <label>الرصيد السابق</label>
+        <input type="number" id="customerBalance" readonly placeholder="0.00" />
+      </div>
+      <div class="fw">
+        <label>إضافة منتج</label>
         <select id="productSelect">
-          <option value="">أضف منتج</option>
+          <option value="">اختر منتجاً...</option>
         </select>
       </div>
+    </div>
 
-      <div class="table-container">
-        <div class="table-scroll">
-          <table id="invoiceTable">
-            <thead>
-              <tr>
-                <th>م</th>
-                <th>المنتج</th>
-                <th>الكمية</th>
-                <th>سعر الشراء</th>
-                <th>الإجمالي</th>
-                <th>المزيد</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label>إجمالي الفاتورة:</label>
-        <input type="number" id="invoiceTotal" placeholder="0" readonly />
-        <label>الإجمالي الكلي:</label>
-        <input type="number" id="grandTotal" placeholder="0" readonly />
-        <label>المبلغ المدفوع:</label>
-        <input type="number" id="paidAmount" placeholder="0" />
-        <label>الرصيد الجديد:</label>
-        <input type="number" id="remainingAmount" placeholder="0" readonly />
-      </div>
-
-      <div class="form-row">
-        <button id="saveInvoiceBtn">💾 حفظ الفاتورة</button>
+    <!-- Invoice Table -->
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table id="invoiceTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>المنتج</th>
+              <th>الكمية</th>
+              <th>سعر الشراء</th>
+              <th>الإجمالي</th>
+              <th>حذف</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
 
-    <!-- ================= Previous Invoices ================= -->
-    <div class="card">
-      <h5>📋 سجل فواتير الشراء</h5>
-      <div class="form-row">
-
-        <div>
-          <label>من تاريخ</label>
-          <input type="date" id="fromDate" />
-        </div>
-
-        <div>
-          <label>إلى تاريخ</label>
-          <input type="date" id="toDate" />
-        </div>
-
-        <input type="text" id="searchPurchase" placeholder="بحث بإسم المورد / العميل" />
-
+    <!-- Totals -->
+    <div class="form-row totals-row">
+      <div class="fw">
+        <label>إجمالي الفاتورة</label>
+        <input type="number" id="invoiceTotal" placeholder="0.00" readonly />
       </div>
+      <div class="fw">
+        <label>الإجمالي الكلي</label>
+        <input type="number" id="grandTotal" placeholder="0.00" readonly />
+      </div>
+      <div class="fw">
+        <label>المبلغ المدفوع</label>
+        <input type="number" id="paidAmount" placeholder="0.00" />
+      </div>
+      <div class="fw">
+        <label>الرصيد الجديد</label>
+        <input type="number" id="remainingAmount" placeholder="0.00" readonly />
+      </div>
+      <button id="saveInvoiceBtn">
+        <i class="fa-solid fa-floppy-disk"></i> حفظ الفاتورة
+      </button>
+    </div>
+  </div>
 
-      <div class="table-scroll">
+  <!-- ══ PURCHASE HISTORY ══ -->
+  <div class="card">
+    <div class="card-hdr">
+      <div class="chdr-icon green"><i class="fa-solid fa-list-check"></i></div>
+      <h5>سجل فواتير الشراء</h5>
+    </div>
+
+    <div class="search-row">
+      <div class="fw">
+        <label>من تاريخ</label>
+        <input type="date" id="fromDate" />
+      </div>
+      <div class="fw">
+        <label>إلى تاريخ</label>
+        <input type="date" id="toDate" />
+      </div>
+      <div class="fw">
+        <label>بحث</label>
+        <input type="text" id="searchPurchase" placeholder="🔍  بحث بإسم المورد / العميل..." />
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-scroll purchases-scroll">
         <table id="purchasesTable">
           <thead>
             <tr>
-              <th>م</th>
+              <th>#</th>
               <th>التاريخ</th>
-              <th>العميل</th>
+              <th>المورد</th>
               <th>إجمالي الفاتورة</th>
               <th>المدفوع</th>
               <th>المتبقي</th>
               <th>الرصيد السابق</th>
               <th>الرصيد الجديد</th>
-              <th>إجراءات</th>
+              <th>الإجراءات</th>
             </tr>
           </thead>
           <tbody></tbody>
-
-          <!-- صف الإجمالي -->
           <tfoot>
-            <tr style="background:#0f172a; font-weight:bold; color:#fbbf24;">
+            <tr>
               <td colspan="3">الإجمالي</td>
               <td id="sumTotal">0</td>
               <td id="sumPaid">0</td>
@@ -666,37 +450,37 @@
             </tr>
           </tfoot>
         </table>
-        </table>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== Modal ===== -->
-  <div id="appModal" class="modal-overlay">
-    <div class="modal-box">
-      <h3 id="modalTitle">تنبيه</h3>
-      <p id="modalMessage"></p>
-      <button id="modalCancelBtn">إلغاء</button>
-      <button id="modalConfirmBtn">حذف</button>
-      <button id="modalOkBtn">حسناً</button>
     </div>
   </div>
 
-  <script src="../js/data.js"></script>
-  <script src="../js/common.js"></script>
-  <script src="../js/purchases.js"></script>
+</div><!-- /main -->
 
-  <script>
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-      document.getElementById("overlay").classList.toggle("show");
-    }
+<!-- MODAL -->
+<div id="appModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 id="modalTitle">تنبيه</h3>
+    <p id="modalMessage"></p>
+    <div class="modal-btns">
+      <button id="modalCancelBtn"  class="mbtn mbtn-cancel">إلغاء</button>
+      <button id="modalConfirmBtn" class="mbtn mbtn-del"><i class="fa-solid fa-trash"></i> حذف</button>
+      <button id="modalOkBtn"      class="mbtn mbtn-ok"><i class="fa-solid fa-check"></i> حسناً</button>
+    </div>
+  </div>
+</div>
 
-    function toggleMode() {
-      document.body.classList.toggle("light");
-    }
-  </script>
+<script src="../js/data.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/purchases.js"></script>
 
+<script>
+  function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("show");
+    document.getElementById("overlay").classList.toggle("show");
+  }
+
+  const _m = document.getElementById("appModal");
+  if(_m) new MutationObserver(()=>_m.classList.toggle('open', _m.style.display==='flex')).observe(_m,{attributes:true,attributeFilter:['style']});
+</script>
 </body>
-
 </html>

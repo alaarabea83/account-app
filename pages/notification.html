@@ -4,153 +4,531 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>الإشعارات</title>
-
+    <title>الإشعارات | المحاسب المحترف</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <style>
+        :root {
+            --bg: #f4f6fa;
+            --bg2: #eef1f7;
+            --white: #ffffff;
+            --primary: #2563eb;
+            --primary-lt: #eff4ff;
+            --primary-md: #bfcfff;
+            --accent: #0ea5e9;
+            --success: #16a34a;
+            --success-lt: #f0fdf4;
+            --warning: #d97706;
+            --warning-lt: #fffbeb;
+            --danger: #dc2626;
+            --danger-lt: #fef2f2;
+            --purple: #7c3aed;
+            --purple-lt: #f5f3ff;
+            --teal: #0891b2;
+            --teal-lt: #ecfeff;
+            --text: #0f172a;
+            --text2: #475569;
+            --text3: #94a3b8;
+            --border: #e2e8f0;
+            --border2: #cbd5e1;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .07);
+            --shadow: 0 4px 14px rgba(0, 0, 0, .07);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .1);
+            --r: 14px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            margin: 0;
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background: #f8f6ef;
+            font-family: "Cairo", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
 
-        /* ===== Header ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(37, 99, 235, .04) 1px, transparent 0);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 100;
+        }
+
+        /* ══ HEADER ══ */
         .header {
-            background: #dccb9a;
-            padding: 15px 25px;
+            position: sticky;
+            top: 3px;
+            z-index: 50;
+            height: 60px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .back-btn {
-            text-decoration: none;
-            color: #333;
-            font-size: 18px;
-        }
-
-        /* ===== Container ===== */
-        .container {
-            max-width: 750px;
-            margin: 40px auto;
+            justify-content: space-between;
             padding: 0 20px;
         }
 
-        /* ===== Notification Card ===== */
-        .notification-card {
-            background: white;
-            padding: 18px 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: 9px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .2s;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-lt);
+            color: var(--primary);
+            border-color: var(--primary-md);
+        }
+
+        .hdr-center {
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: 0.3s;
+            gap: 9px;
+            font-size: 16px;
+            font-weight: 800;
         }
 
-        .notification-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .icon-box {
-            width: 45px;
-            height: 45px;
-            background: #f5ebd3;
-            border-radius: 12px;
+        .hdr-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            color: #8b7a50;
+            font-size: 13px;
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(37, 99, 235, .3);
         }
 
-        .notification-text {
+        .hdr-badge {
+            background: var(--primary-lt);
+            border: 1px solid var(--primary-md);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+
+        /* ══ PAGE ══ */
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 28px 20px 48px;
+        }
+
+        /* section header */
+        .section-lbl {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .section-lbl span {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        .section-lbl::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ══ NOTIFICATION CARD ══ */
+        .notif-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            box-shadow: var(--shadow-sm);
+            transition: transform .25s, box-shadow .25s, border-color .25s;
+            animation: slideIn .4s ease both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notif-card:nth-child(1) {
+            animation-delay: .04s
+        }
+
+        .notif-card:nth-child(2) {
+            animation-delay: .10s
+        }
+
+        .notif-card:nth-child(3) {
+            animation-delay: .16s
+        }
+
+        .notif-card:nth-child(4) {
+            animation-delay: .22s
+        }
+
+        .notif-card:nth-child(5) {
+            animation-delay: .28s
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        .notif-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--nc, var(--primary));
+            border-radius: 0 var(--r) var(--r) 0;
+        }
+
+        .notif-card:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--nc, var(--primary));
+        }
+
+        /* type variants */
+        .nc-blue {
+            --nc: var(--primary);
+        }
+
+        .nc-warning {
+            --nc: var(--warning);
+        }
+
+        .nc-danger {
+            --nc: var(--danger);
+        }
+
+        .nc-success {
+            --nc: var(--success);
+        }
+
+        .nc-purple {
+            --nc: var(--purple);
+        }
+
+        .nc-teal {
+            --nc: var(--teal);
+        }
+
+        .notif-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+
+        .nc-blue .notif-icon {
+            background: var(--primary-lt);
+            color: var(--primary);
+        }
+
+        .nc-warning .notif-icon {
+            background: var(--warning-lt);
+            color: var(--warning);
+        }
+
+        .nc-danger .notif-icon {
+            background: var(--danger-lt);
+            color: var(--danger);
+        }
+
+        .nc-success .notif-icon {
+            background: var(--success-lt);
+            color: var(--success);
+        }
+
+        .nc-purple .notif-icon {
+            background: var(--purple-lt);
+            color: var(--purple);
+        }
+
+        .nc-teal .notif-icon {
+            background: var(--teal-lt);
+            color: var(--teal);
+        }
+
+        .notif-body {
             flex: 1;
         }
 
-        .notification-text p {
-            margin: 0;
-            font-size: 14px;
-            color: #333;
+        .notif-text {
+            font-size: 13.5px;
+            color: var(--text);
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 5px;
         }
 
-        .notification-text span {
-            font-size: 12px;
-            color: #888;
+        .notif-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ===== Empty State ===== */
-        .empty {
+        .notif-date {
+            font-size: 11.5px;
+            color: var(--text3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .notif-date i {
+            font-size: 10px;
+        }
+
+        .notif-tag {
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .tag-warning {
+            background: var(--warning-lt);
+            color: var(--warning);
+        }
+
+        .tag-info {
+            background: var(--primary-lt);
+            color: var(--primary);
+        }
+
+        .tag-alert {
+            background: var(--danger-lt);
+            color: var(--danger);
+        }
+
+        .tag-success {
+            background: var(--success-lt);
+            color: var(--success);
+        }
+
+        .tag-update {
+            background: var(--purple-lt);
+            color: var(--purple);
+        }
+
+        .tag-tip {
+            background: var(--teal-lt);
+            color: var(--teal);
+        }
+
+        /* ══ EMPTY STATE ══ */
+        .empty-state {
             text-align: center;
-            color: #888;
-            margin-top: 50px;
+            padding: 60px 20px;
+            animation: fadeUp .5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .empty-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--bg2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--text3);
+            margin: 0 auto 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        /* ══ FOOTER NOTE ══ */
+        .footer-note {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-top: 32px;
+            font-size: 12px;
+            color: var(--text3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .footer-note i {
+            color: var(--primary);
+        }
+
+        /* ══ RESPONSIVE ══ */
+        @media (max-width: 480px) {
+            .page {
+                padding: 20px 12px 36px;
+            }
+
+            .hdr-center span {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- HEADER -->
     <div class="header">
+        <div class="hdr-center">
+            <div class="hdr-icon"><i class="fa-solid fa-bell"></i></div>
+            <span>الإشعارات</span>
+            <span class="hdr-badge" id="notifCount">0</span>
+        </div>
         <a href="../index.html" class="back-btn">
-            <i class="fas fa-arrow-right"></i>
+            <i class="fa-solid fa-arrow-right"></i>
+            رجوع
         </a>
-        <h1>الإشعارات</h1>
     </div>
 
-    <div class="container" id="notificationsContainer"></div>
+    <!-- PAGE -->
+    <div class="page">
+        <div class="section-lbl"><span>الإشعارات الحالية</span></div>
+        <div id="notificationsContainer"></div>
+
+        <div class="footer-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            إشعاراتك محفوظة وآمنة
+        </div>
+    </div>
 
     <script>
-        // ✨ عدل هنا براحتك
-        let notifications = [
+        /* ── Notifications data ── */
+        const notifications = [
             {
                 text: "سيتم إيقاف النظام للصيانة يوم الجمعة الساعة 10 مساءً",
                 date: "اليوم",
                 icon: "fa-wrench",
+                type: "nc-warning",
+                tag: "تنبيه", tagClass: "tag-warning"
             },
             {
-                text: "تم تحديث شروط الاستخدام",
+                text: "تم تحديث شروط الاستخدام — يرجى المراجعة",
                 date: "أمس",
-                icon: "fa-file-alt",
+                icon: "fa-file-lines",
+                type: "nc-purple",
+                tag: "تحديث", tagClass: "tag-update"
             },
             {
-                text: "يرجى مراجعة الفواتير قبل اعتمادها",
+                text: "يرجى مراجعة الفواتير قبل اعتمادها والتأكد من صحة البيانات",
                 date: "منذ يومين",
                 icon: "fa-circle-exclamation",
+                type: "nc-danger",
+                tag: "تنبيه", tagClass: "tag-alert"
             },
         ];
 
-        // حفظ العدد في localStorage عشان يظهر في الجرس
+        /* ── Save count for bell badge ── */
         localStorage.setItem("notificationCount", notifications.length);
+        document.getElementById("notifCount").textContent = notifications.length;
 
-        // عرض الإشعارات
+        /* ── Render ── */
         function renderNotifications() {
             const container = document.getElementById("notificationsContainer");
             container.innerHTML = "";
 
             if (notifications.length === 0) {
-                container.innerHTML = `<div class="empty">لا توجد إشعارات حالياً</div>`;
+                container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon"><i class="fa-solid fa-bell-slash"></i></div>
+          <h3>لا توجد إشعارات</h3>
+          <p>ستظهر هنا إشعاراتك عند ورودها</p>
+        </div>`;
                 return;
             }
 
-            notifications.forEach((note) => {
+            notifications.forEach(note => {
                 container.innerHTML += `
-    <div class="notification-card">
-        <div class="icon-box">
-        <i class="fas ${note.icon}"></i>
-        </div>
-        <div class="notification-text">
-        <p>${note.text}</p>
-        <span>${note.date}</span>
-        </div>
-    </div>
-    `;
+        <div class="notif-card ${note.type}">
+          <div class="notif-icon"><i class="fas ${note.icon}"></i></div>
+          <div class="notif-body">
+            <div class="notif-text">${note.text}</div>
+            <div class="notif-meta">
+              <div class="notif-date"><i class="fa-regular fa-clock"></i>${note.date}</div>
+              <span class="notif-tag ${note.tagClass}">${note.tag}</span>
+            </div>
+          </div>
+        </div>`;
             });
         }
 
