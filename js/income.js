@@ -160,7 +160,7 @@ function renderIncome() {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="6" style="text-align:center; padding:20px; color:#fff;">
+      <td colspan="6" style="text-align:center; padding:20px; color:#000;">
         لا توجد بيانات
       </td>
     `;

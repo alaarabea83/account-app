@@ -120,7 +120,7 @@ function renderProducts(searchQuery = "") {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="8" style="text-align:center; padding:20px; color:#fff;">
+      <td colspan="8" style="text-align:center; padding:20px; color:#000;">
         لا توجد بيانات للعرض
       </td>
     `;
