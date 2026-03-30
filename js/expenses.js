@@ -145,7 +145,7 @@ function renderExpenses() {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
       <td colspan="6" style="text-align:center; padding:20px; color:#6B7280;">
-        لا توجد بيانات
+        لا توجد بيانات للعرض
       </td>
     `;
     expenseTableBody.appendChild(emptyRow);

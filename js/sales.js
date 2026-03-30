@@ -420,7 +420,7 @@ function renderSales(data = sales) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
       <td colspan="9" style="text-align:center; padding:20px;">
-        لا توجد بيانات
+        لا توجد بيانات للعرض
       </td>
     `;
     tbody.appendChild(emptyRow);
