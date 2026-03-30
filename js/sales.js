@@ -419,7 +419,7 @@ function renderSales(data = sales) {
   if (visibleCount === 0) {
     const emptyRow = document.createElement("tr");
     emptyRow.innerHTML = `
-      <td colspan="9" style="text-align:center; padding:20px; color:#fff;">
+      <td colspan="9" style="text-align:center; padding:20px;">
         لا توجد بيانات
       </td>
     `;
@@ -429,9 +429,8 @@ function renderSales(data = sales) {
 
   // ===== صف الإجمالي =====
   const totalRow = document.createElement("tr");
-  totalRow.style.background = "#0f172a";
+  totalRow.style.background = "var(--bg2)";
   totalRow.style.fontWeight = "bold";
-  totalRow.style.color = "#fff";
   totalRow.innerHTML = `
     <td colspan="3">الإجمالي</td>
     <td>${sumTotal.toFixed(2)}</td>
