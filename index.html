@@ -688,13 +688,12 @@
         }
 
         .foot-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 24px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 60px;
         }
 
-        .foot-bottom {
-          flex-direction: column;
-          text-align: center;
+        .foot-grid > div:first-child {
+          grid-column: span 2;
         }
       }
     </style>
