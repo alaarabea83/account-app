@@ -32,9 +32,9 @@
             --text3: #94a3b8;
             --border: #e2e8f0;
             --border2: #cbd5e1;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .07);
-            --shadow: 0 4px 14px rgba(0, 0, 0, .07);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+            --shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
             --r: 14px;
         }
 
@@ -54,17 +54,19 @@
         }
 
         body::before {
-            content: '';
+            content: "";
             position: fixed;
             inset: 0;
             z-index: 0;
-            background-image: radial-gradient(circle at 1px 1px, rgba(37, 99, 235, .04) 1px, transparent 0);
+            background-image: radial-gradient(circle at 1px 1px,
+                    rgba(37, 99, 235, 0.04) 1px,
+                    transparent 0);
             background-size: 28px 28px;
             pointer-events: none;
         }
 
         body::after {
-            content: '';
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
@@ -101,7 +103,7 @@
             font-size: 13px;
             font-weight: 600;
             text-decoration: none;
-            transition: all .2s;
+            transition: all 0.2s;
         }
 
         .back-btn:hover {
@@ -128,7 +130,7 @@
             justify-content: center;
             font-size: 13px;
             color: #fff;
-            box-shadow: 0 3px 10px rgba(37, 99, 235, .3);
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
         }
 
         .hdr-badge {
@@ -167,7 +169,7 @@
         }
 
         .section-lbl::after {
-            content: '';
+            content: "";
             flex: 1;
             height: 1px;
             background: var(--border);
@@ -184,46 +186,49 @@
             align-items: flex-start;
             gap: 14px;
             box-shadow: var(--shadow-sm);
-            transition: transform .25s, box-shadow .25s, border-color .25s;
-            animation: slideIn .4s ease both;
+            transition:
+                transform 0.25s,
+                box-shadow 0.25s,
+                border-color 0.25s;
+            animation: slideIn 0.4s ease both;
             position: relative;
             overflow: hidden;
         }
 
         .notif-card:nth-child(1) {
-            animation-delay: .04s
+            animation-delay: 0.04s;
         }
 
         .notif-card:nth-child(2) {
-            animation-delay: .10s
+            animation-delay: 0.1s;
         }
 
         .notif-card:nth-child(3) {
-            animation-delay: .16s
+            animation-delay: 0.16s;
         }
 
         .notif-card:nth-child(4) {
-            animation-delay: .22s
+            animation-delay: 0.22s;
         }
 
         .notif-card:nth-child(5) {
-            animation-delay: .28s
+            animation-delay: 0.28s;
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(16px)
+                transform: translateX(16px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0)
+                transform: translateX(0);
             }
         }
 
         .notif-card::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             right: 0;
@@ -376,18 +381,18 @@
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            animation: fadeUp .5s ease both;
+            animation: fadeUp 0.5s ease both;
         }
 
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(16px)
+                transform: translateY(16px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0)
+                transform: translateY(0);
             }
         }
 
@@ -447,7 +452,6 @@
 </head>
 
 <body>
-
     <!-- HEADER -->
     <div class="header">
         <div class="hdr-center">
@@ -480,21 +484,24 @@
                 date: "اليوم",
                 icon: "fa-wrench",
                 type: "nc-warning",
-                tag: "تنبيه", tagClass: "tag-warning"
+                tag: "تنبيه",
+                tagClass: "tag-warning",
             },
             {
                 text: "تم تحديث شروط الاستخدام — يرجى المراجعة",
                 date: "أمس",
                 icon: "fa-file-lines",
                 type: "nc-purple",
-                tag: "تحديث", tagClass: "tag-update"
+                tag: "تحديث",
+                tagClass: "tag-update",
             },
             {
                 text: "يرجى مراجعة الفواتير قبل اعتمادها والتأكد من صحة البيانات",
                 date: "منذ يومين",
                 icon: "fa-circle-exclamation",
                 type: "nc-danger",
-                tag: "تنبيه", tagClass: "tag-alert"
+                tag: "تنبيه",
+                tagClass: "tag-alert",
             },
         ];
 
@@ -517,7 +524,7 @@
                 return;
             }
 
-            notifications.forEach(note => {
+            notifications.forEach((note) => {
                 container.innerHTML += `
         <div class="notif-card ${note.type}">
           <div class="notif-icon"><i class="fas ${note.icon}"></i></div>

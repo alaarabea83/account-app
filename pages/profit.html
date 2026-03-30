@@ -1,480 +1,919 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تقارير الأرباح | المحاسب المحترف</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <style>
-    :root {
-      --bg:        #f4f6fa;
-      --bg2:       #eef1f7;
-      --white:     #ffffff;
-      --primary:   #2563eb;
-      --primary-lt:#eff4ff;
-      --primary-md:#bfcfff;
-      --accent:    #0ea5e9;
-      --success:   #16a34a;
-      --success-lt:#f0fdf4;
-      --success-md:#bbf7d0;
-      --warning:   #d97706;
-      --warning-lt:#fffbeb;
-      --warning-md:#fcd34d;
-      --danger:    #dc2626;
-      --danger-lt: #fef2f2;
-      --danger-md: #fecaca;
-      --gold:      #b45309;
-      --gold-lt:   #fffbeb;
-      --gold-md:   #fde68a;
-      --text:      #0f172a;
-      --text2:     #475569;
-      --text3:     #94a3b8;
-      --border:    #e2e8f0;
-      --border2:   #cbd5e1;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
-      --shadow:    0 4px 14px rgba(0,0,0,.07);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
-      --r:         13px;
-      --sw:        252px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تقارير الأرباح | المحاسب المحترف</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #ffffff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --success-lt: #f0fdf4;
+        --success-md: #bbf7d0;
+        --warning: #d97706;
+        --warning-lt: #fffbeb;
+        --warning-md: #fcd34d;
+        --danger: #dc2626;
+        --danger-lt: #fef2f2;
+        --danger-md: #fecaca;
+        --gold: #b45309;
+        --gold-lt: #fffbeb;
+        --gold-md: #fde68a;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --border2: #cbd5e1;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+        --r: 13px;
+        --sw: 252px;
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: "Cairo", sans-serif;
-      background: var(--bg); color: var(--text); min-height: 100vh;
-    }
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image: radial-gradient(circle at 1px 1px, rgba(180,83,9,.045) 1px, transparent 0);
-      background-size: 28px 28px; pointer-events: none;
-    }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(180, 83, 9, 0.045) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+      }
 
-    body::after {
-      content: '';
-      position: fixed; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--warning));
-      z-index: 1100;
-    }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--warning));
+        z-index: 1100;
+      }
 
-    /* ══ HEADER ══ */
-    .header {
-      position: fixed; top: 3px; right: 0; left: 0; height: 60px;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 18px; z-index: 1002;
-    }
+      /* ══ HEADER ══ */
+      .header {
+        position: fixed;
+        top: 3px;
+        right: 0;
+        left: 0;
+        height: 60px;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        z-index: 1002;
+      }
 
-    .brand { display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 800; }
-    .brand-icon {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--gold), var(--warning));
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #fff; box-shadow: 0 3px 10px rgba(180,83,9,.3);
-    }
-    .brand span { color: var(--gold); }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 15.5px;
+        font-weight: 800;
+      }
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--gold), var(--warning));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(180, 83, 9, 0.3);
+      }
+      .brand span {
+        color: var(--gold);
+      }
 
-    .menu-toggle {
-      width: 34px; height: 34px; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text2); font-size: 14px; cursor: pointer;
-      display: none; align-items: center; justify-content: center; transition: all .2s;
-    }
-    .menu-toggle:hover { background: var(--gold-lt); color: var(--gold); border-color: var(--gold-md); }
+      .menu-toggle {
+        width: 34px;
+        height: 34px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text2);
+        font-size: 14px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .menu-toggle:hover {
+        background: var(--gold-lt);
+        color: var(--gold);
+        border-color: var(--gold-md);
+      }
 
-    /* ══ SIDEBAR ══ */
-    .sidebar {
-      position: fixed; top: 63px; right: 0;
-      width: var(--sw); height: calc(100dvh - 63px);
-      background: var(--white); border-left: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 14px 10px 28px; z-index: 1001; overflow-y: auto;
-      scrollbar-width: none; transition: right .3s;
-    }
-    .sidebar::-webkit-scrollbar { display: none; }
+      /* ══ SIDEBAR ══ */
+      .sidebar {
+        position: fixed;
+        top: 63px;
+        right: 0;
+        width: var(--sw);
+        height: calc(100dvh - 63px);
+        background: var(--white);
+        border-left: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 14px 10px 28px;
+        z-index: 1001;
+        overflow-y: auto;
+        scrollbar-width: none;
+        transition: right 0.3s;
+      }
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
 
-    .sb-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); padding: 10px 10px 4px; }
+      .sb-lbl {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text3);
+        padding: 10px 10px 4px;
+      }
 
-    .sb-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; text-decoration: none; color: var(--text2); font-size: 13px; font-weight: 600; transition: all .18s; }
-    .sb-link i { width: 16px; text-align: center; font-size: 12px; flex-shrink: 0; }
-    .sb-link:hover { background: var(--bg); color: var(--text); }
-    .sb-link.active { background: var(--gold-lt); color: var(--gold); font-weight: 700; }
+      .sb-link {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 11px;
+        border-radius: 9px;
+        text-decoration: none;
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.18s;
+      }
+      .sb-link i {
+        width: 16px;
+        text-align: center;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .sb-link:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .sb-link.active {
+        background: var(--gold-lt);
+        color: var(--gold);
+        font-weight: 700;
+      }
 
-    #overlay { position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(4px); display: none; z-index: 1000; }
-    #overlay.show { display: block; }
+      #overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.3);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 1000;
+      }
+      #overlay.show {
+        display: block;
+      }
 
-    /* ══ MAIN ══ */
-    .main { position: relative; z-index: 1; margin-right: var(--sw); padding: 78px 22px 30px; }
+      /* ══ MAIN ══ */
+      .main {
+        position: relative;
+        z-index: 1;
+        margin-right: var(--sw);
+        padding: 78px 22px 30px;
+      }
 
-    .page-head { margin-bottom: 22px; }
-    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); margin-bottom: 4px; }
-    .breadcrumb a { color: var(--gold); text-decoration: none; }
-    .page-head h2 { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
-    .page-head h2 i { color: var(--gold); }
+      .page-head {
+        margin-bottom: 22px;
+      }
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text3);
+        margin-bottom: 4px;
+      }
+      .breadcrumb a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .page-head h2 {
+        font-size: 18px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .page-head h2 i {
+        color: var(--gold);
+      }
 
-    /* ══ FILTER BAR ══ */
-    .filter-bar {
-      display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 16px 18px;
-      margin-bottom: 18px; box-shadow: var(--shadow-sm);
-    }
+      /* ══ FILTER BAR ══ */
+      .filter-bar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 16px 18px;
+        margin-bottom: 18px;
+        box-shadow: var(--shadow-sm);
+      }
 
-    .fw { flex: 1; min-width: 150px; }
-    .fw label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
+      .fw {
+        flex: 1;
+        min-width: 150px;
+      }
+      .fw label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text2);
+        margin-bottom: 5px;
+      }
 
-    input[type=date] {
-      width: 100%; padding: 10px 13px;
-      background: var(--bg); border: 1.5px solid var(--border);
-      border-radius: 9px; color: var(--text);
-      font-family: "Cairo", sans-serif; font-size: 13px;
-      outline: none; transition: all .2s;
-    }
-    input[type=date]:focus { border-color: var(--gold); background: var(--gold-lt); box-shadow: 0 0 0 3px rgba(180,83,9,.1); }
+      input[type="date"] {
+        width: 100%;
+        padding: 10px 13px;
+        background: var(--bg);
+        border: 1.5px solid var(--border);
+        border-radius: 9px;
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        font-size: 13px;
+        outline: none;
+        transition: all 0.2s;
+      }
+      input[type="date"]:focus {
+        border-color: var(--gold);
+        background: var(--gold-lt);
+        box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+      }
 
-    #filterBtn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 11px 22px; border: none; border-radius: 9px;
-      font-family: "Cairo", sans-serif; font-size: 13.5px; font-weight: 700;
-      cursor: pointer; transition: all .2s;
-      background: linear-gradient(135deg, var(--gold), var(--warning));
-      color: #fff; box-shadow: 0 4px 14px rgba(180,83,9,.25);
-      white-space: nowrap; flex-shrink: 0; align-self: flex-end;
-    }
-    #filterBtn:hover { filter: brightness(1.08); transform: translateY(-2px); }
+      #filterBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 11px 22px;
+        border: none;
+        border-radius: 9px;
+        font-family: "Cairo", sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: linear-gradient(135deg, var(--gold), var(--warning));
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(180, 83, 9, 0.25);
+        white-space: nowrap;
+        flex-shrink: 0;
+        align-self: flex-end;
+      }
+      #filterBtn:hover {
+        filter: brightness(1.08);
+        transform: translateY(-2px);
+      }
 
-    /* ══ STAT CARDS ══ */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-      gap: 14px; margin-bottom: 18px;
-    }
+      /* ══ STAT CARDS ══ */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+      }
 
-    .stat-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 18px 16px;
-      box-shadow: var(--shadow-sm);
-      display: flex; align-items: center; gap: 14px;
-      transition: transform .2s, box-shadow .2s;
-      position: relative; overflow: hidden;
-    }
+      .stat-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 18px 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .stat-card::before {
-      content: '';
-      position: absolute; top: 0; right: 0;
-      width: 4px; height: 100%;
-      background: var(--sc, var(--gold));
-      border-radius: 0 var(--r) var(--r) 0;
-    }
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--sc, var(--gold));
+        border-radius: 0 var(--r) var(--r) 0;
+      }
 
-    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+      }
 
-    .sc-profit   { --sc: var(--primary); }
-    .sc-expenses { --sc: var(--danger); }
-    .sc-net      { --sc: var(--success); }
+      .sc-profit {
+        --sc: var(--primary);
+      }
+      .sc-expenses {
+        --sc: var(--danger);
+      }
+      .sc-net {
+        --sc: var(--success);
+      }
 
-    .stat-icon {
-      width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 18px;
-    }
+      .stat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
 
-    .sc-profit   .stat-icon { background: var(--primary-lt); color: var(--primary); }
-    .sc-expenses .stat-icon { background: var(--danger-lt);  color: var(--danger); }
-    .sc-net      .stat-icon { background: var(--success-lt); color: var(--success); }
+      .sc-profit .stat-icon {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+      .sc-expenses .stat-icon {
+        background: var(--danger-lt);
+        color: var(--danger);
+      }
+      .sc-net .stat-icon {
+        background: var(--success-lt);
+        color: var(--success);
+      }
 
-    .stat-info { flex: 1; }
-    .stat-label { font-size: 12px; color: var(--text3); font-weight: 600; margin-bottom: 5px; }
-    .stat-val   { font-size: 20px; font-weight: 900; }
+      .stat-info {
+        flex: 1;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: var(--text3);
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .stat-val {
+        font-size: 20px;
+        font-weight: 900;
+      }
 
-    .sc-profit   .stat-val { color: var(--primary); }
-    .sc-expenses .stat-val { color: var(--danger); }
-    .sc-net      .stat-val { color: var(--success); }
+      .sc-profit .stat-val {
+        color: var(--primary);
+      }
+      .sc-expenses .stat-val {
+        color: var(--danger);
+      }
+      .sc-net .stat-val {
+        color: var(--success);
+      }
 
-    /* ══ CARD ══ */
-    .card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 20px 18px;
-      margin-bottom: 14px; box-shadow: var(--shadow-sm);
-    }
+      /* ══ CARD ══ */
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 20px 18px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow-sm);
+      }
 
-    .card-hdr { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-    .card-hdr-left { display: flex; align-items: center; gap: 10px; }
-    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--gold-lt); border: 1px solid var(--gold-md); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gold); }
-    .card-hdr h5 { font-size: 15px; font-weight: 800; }
+      .card-hdr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--border);
+        flex-wrap: wrap;
+      }
+      .card-hdr-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .chdr-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--gold-lt);
+        border: 1px solid var(--gold-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--gold);
+      }
+      .card-hdr h5 {
+        font-size: 15px;
+        font-weight: 800;
+      }
 
-    /* show expenses btn */
-    .show-exp-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 8px 16px; border: none; border-radius: 9px;
-      font-family: "Cairo", sans-serif; font-size: 13px; font-weight: 700;
-      cursor: pointer; transition: all .2s;
-      background: var(--gold-lt); color: var(--gold);
-      border: 1px solid var(--gold-md);
-    }
-    .show-exp-btn:hover { background: var(--gold-md); transform: translateY(-1px); }
+      /* show expenses btn */
+      .show-exp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 9px;
+        font-family: "Cairo", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: var(--gold-lt);
+        color: var(--gold);
+        border: 1px solid var(--gold-md);
+      }
+      .show-exp-btn:hover {
+        background: var(--gold-md);
+        transform: translateY(-1px);
+      }
 
-    /* ══ TABLE ══ */
-    .table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-    .table-scroll { overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; max-height: 440px; }
-    .table-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
-    .table-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+      /* ══ TABLE ══ */
+      .table-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .table-scroll {
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border2) transparent;
+        max-height: 440px;
+      }
+      .table-scroll::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      .table-scroll::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 4px;
+      }
 
-    table { width: 100%; border-collapse: collapse; min-width: 560px; }
-    thead { position: sticky; top: 0; z-index: 2; }
-    th { background: var(--bg2); color: var(--text2); padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .3px; border-bottom: 1px solid var(--border); white-space: nowrap; }
-    td { padding: 10px 12px; text-align: center; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); font-weight: 600; white-space: nowrap; }
-    tbody tr:last-child td { border-bottom: none; }
-    tbody tr { transition: background .15s; }
-    tbody tr:nth-child(even) { background: var(--bg); }
-    tbody tr:hover { background: var(--gold-lt); }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 560px;
+      }
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      th {
+        background: var(--bg2);
+        color: var(--text2);
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      td {
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr {
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--bg);
+      }
+      tbody tr:hover {
+        background: var(--gold-lt);
+      }
 
-    /* colour columns */
-    td.col-profit   { color: var(--primary); font-weight: 700; }
-    td.col-expenses { color: var(--danger);  font-weight: 700; }
-    td.col-net-pos  { color: var(--success); font-weight: 700; }
-    td.col-net-neg  { color: var(--danger);  font-weight: 700; }
+      /* colour columns */
+      td.col-profit {
+        color: var(--primary);
+        font-weight: 700;
+      }
+      td.col-expenses {
+        color: var(--danger);
+        font-weight: 700;
+      }
+      td.col-net-pos {
+        color: var(--success);
+        font-weight: 700;
+      }
+      td.col-net-neg {
+        color: var(--danger);
+        font-weight: 700;
+      }
 
-    /* ══ MODAL ══ */
-    .modal-ov {
-      position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(6px);
-      display: none; justify-content: center; align-items: center; z-index: 9999;
-    }
-    .modal-ov.open { display: flex; }
+      /* ══ MODAL ══ */
+      .modal-ov {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.3);
+        backdrop-filter: blur(6px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .modal-ov.open {
+        display: flex;
+      }
 
-    .modal-box {
-      background: var(--white); border: 1px solid var(--border);
-      border-top: 3px solid var(--danger);
-      border-radius: 18px; padding: 26px 24px; width: 95%; max-width: 560px;
-      max-height: 85vh; overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-      animation: popIn .3s cubic-bezier(.34,1.56,.64,1) both;
-    }
-    @keyframes popIn { from{opacity:0;transform:scale(.88)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
+      .modal-box {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--danger);
+        border-radius: 18px;
+        padding: 26px 24px;
+        width: 95%;
+        max-width: 560px;
+        max-height: 85vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-lg);
+        animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.88) translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
 
-    .modal-box h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .modal-box h3 i { color: var(--danger); }
+      .modal-box h3 {
+        font-size: 15.5px;
+        font-weight: 800;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .modal-box h3 i {
+        color: var(--danger);
+      }
 
-    .modal-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
-    .mbtn-cancel { border: none; padding: 10px 20px; border-radius: 9px; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: "Cairo", sans-serif; background: var(--bg); color: var(--text2); border: 1px solid var(--border); transition: all .2s; }
-    .mbtn-cancel:hover { background: var(--border); }
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+      }
+      .mbtn-cancel {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 9px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text2);
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+      }
+      .mbtn-cancel:hover {
+        background: var(--border);
+      }
 
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 900px) {
-      .menu-toggle { display: flex; }
-      .sidebar { right: -270px; }
-      .sidebar.show { right: 0; }
-      .main { margin-right: 0; padding: 76px 12px 22px; }
-      .filter-bar { flex-direction: column; }
-      #filterBtn { width: 100%; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="brand">
-    <div class="brand-icon"><i class="fa-solid fa-coins"></i></div>
-    المحاسب <span>المحترف</span>
-  </div>
-  <button class="menu-toggle" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
-</div>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-  <div class="sb-lbl">القائمة الرئيسية</div>
-  <a href="../index.html"           class="sb-link"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
-  <a href="customers.html"          class="sb-link"><i class="fa-solid fa-users"></i><span>الحسابات</span></a>
-  <a href="products.html"           class="sb-link"><i class="fa-solid fa-box-open"></i><span>المخزون</span></a>
-
-  <div class="sb-lbl">المعاملات</div>
-  <a href="sales.html"              class="sb-link"><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a>
-  <a href="purchases.html"          class="sb-link"><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a>
-  <a href="receipts.html"           class="sb-link"><i class="fa-solid fa-hand-holding-dollar"></i><span>المقبوضات</span></a>
-  <a href="#"                       class="sb-link"><i class="fa-solid fa-money-bill-wave"></i><span>المدفوعات</span></a>
-
-  <div class="sb-lbl">التقارير</div>
-  <a href="income.html"             class="sb-link"><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a>
-  <a href="expenses.html"           class="sb-link"><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a>
-  <a href="cash.html"               class="sb-link"><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a>
-  <a href="profit.html"             class="sb-link active"><i class="fa-solid fa-coins"></i><span>الأرباح</span></a>
-</div>
-
-<div id="overlay" onclick="closeSidebar()"></div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <div class="page-head">
-    <div class="breadcrumb">
-      <a href="../index.html">الرئيسية</a>
-      <i class="fa-solid fa-chevron-left" style="font-size:9px"></i>
-      <span>تقارير الأرباح</span>
-    </div>
-    <h2><i class="fa-solid fa-coins"></i> تقارير الأرباح</h2>
-  </div>
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <div class="fw">
-      <label>من تاريخ</label>
-      <input type="date" id="fromDate" />
-    </div>
-    <div class="fw">
-      <label>إلى تاريخ</label>
-      <input type="date" id="toDate" />
-    </div>
-    <button id="filterBtn" onclick="filterAndRender()">
-      <i class="fa-solid fa-magnifying-glass"></i> فلترة
-    </button>
-  </div>
-
-  <!-- STAT CARDS -->
-  <div class="stats-grid">
-    <div class="stat-card sc-profit">
-      <div class="stat-icon"><i class="fa-solid fa-chart-bar"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">إجمالي الربح</div>
-        <div class="stat-val" id="totalProfitCard">0.00</div>
+      /* ══ RESPONSIVE ══ */
+      @media (max-width: 900px) {
+        .menu-toggle {
+          display: flex;
+        }
+        .sidebar {
+          right: -270px;
+        }
+        .sidebar.show {
+          right: 0;
+        }
+        .main {
+          margin-right: 0;
+          padding: 76px 12px 22px;
+        }
+        .filter-bar {
+          flex-direction: column;
+        }
+        #filterBtn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-coins"></i></div>
+        المحاسب <span>المحترف</span>
       </div>
-    </div>
-    <div class="stat-card sc-expenses">
-      <div class="stat-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">إجمالي المصروفات</div>
-        <div class="stat-val" id="totalExpensesCard">0.00</div>
-      </div>
-    </div>
-    <div class="stat-card sc-net">
-      <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">صافي الربح</div>
-        <div class="stat-val" id="netProfitCard">0.00</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROFIT TABLE -->
-  <div class="card">
-    <div class="card-hdr">
-      <div class="card-hdr-left">
-        <div class="chdr-icon"><i class="fa-solid fa-table-list"></i></div>
-        <h5>تفاصيل الأرباح اليومية</h5>
-      </div>
-      <button class="show-exp-btn" onclick="showExpenses()">
-        <i class="fa-solid fa-receipt"></i> عرض المصروفات
+      <button class="menu-toggle" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>التاريخ</th>
-              <th>إجمالي الربح</th>
-              <th>إجمالي المصروفات</th>
-              <th>صافي الربح</th>
-            </tr>
-          </thead>
-          <tbody id="netTable"></tbody>
-        </table>
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sb-lbl">القائمة الرئيسية</div>
+      <a href="../index.html" class="sb-link"
+        ><i class="fa-solid fa-house"></i><span>الرئيسية</span></a
+      >
+      <a href="customers.html" class="sb-link"
+        ><i class="fa-solid fa-users"></i><span>الحسابات</span></a
+      >
+      <a href="products.html" class="sb-link"
+        ><i class="fa-solid fa-box-open"></i><span>المخزون</span></a
+      >
+
+      <div class="sb-lbl">المعاملات</div>
+      <a href="sales.html" class="sb-link"
+        ><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a
+      >
+      <a href="purchases.html" class="sb-link"
+        ><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a
+      >
+      <a href="receipts.html" class="sb-link"
+        ><i class="fa-solid fa-hand-holding-dollar"></i
+        ><span>المقبوضات</span></a
+      >
+      <a href="#" class="sb-link"
+        ><i class="fa-solid fa-money-bill-wave"></i><span>المدفوعات</span></a
+      >
+
+      <div class="sb-lbl">التقارير</div>
+      <a href="income.html" class="sb-link"
+        ><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a
+      >
+      <a href="expenses.html" class="sb-link"
+        ><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a
+      >
+      <a href="cash.html" class="sb-link"
+        ><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a
+      >
+      <a href="profit.html" class="sb-link active"
+        ><i class="fa-solid fa-coins"></i><span>الأرباح</span></a
+      >
+    </div>
+
+    <div id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="page-head">
+        <div class="breadcrumb">
+          <a href="../index.html">الرئيسية</a>
+          <i class="fa-solid fa-chevron-left" style="font-size: 9px"></i>
+          <span>تقارير الأرباح</span>
+        </div>
+        <h2><i class="fa-solid fa-coins"></i> تقارير الأرباح</h2>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <div class="fw">
+          <label>من تاريخ</label>
+          <input type="date" id="fromDate" />
+        </div>
+        <div class="fw">
+          <label>إلى تاريخ</label>
+          <input type="date" id="toDate" />
+        </div>
+        <button id="filterBtn" onclick="filterAndRender()">
+          <i class="fa-solid fa-magnifying-glass"></i> فلترة
+        </button>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card sc-profit">
+          <div class="stat-icon"><i class="fa-solid fa-chart-bar"></i></div>
+          <div class="stat-info">
+            <div class="stat-label">إجمالي الربح</div>
+            <div class="stat-val" id="totalProfitCard">0.00</div>
+          </div>
+        </div>
+        <div class="stat-card sc-expenses">
+          <div class="stat-icon">
+            <i class="fa-solid fa-arrow-trend-down"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">إجمالي المصروفات</div>
+            <div class="stat-val" id="totalExpensesCard">0.00</div>
+          </div>
+        </div>
+        <div class="stat-card sc-net">
+          <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
+          <div class="stat-info">
+            <div class="stat-label">صافي الربح</div>
+            <div class="stat-val" id="netProfitCard">0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFIT TABLE -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-hdr-left">
+            <div class="chdr-icon"><i class="fa-solid fa-table-list"></i></div>
+            <h5>تفاصيل الأرباح اليومية</h5>
+          </div>
+          <button class="show-exp-btn" onclick="showExpenses()">
+            <i class="fa-solid fa-receipt"></i> عرض المصروفات
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>التاريخ</th>
+                  <th>إجمالي الربح</th>
+                  <th>إجمالي المصروفات</th>
+                  <th>صافي الربح</th>
+                </tr>
+              </thead>
+              <tbody id="netTable"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    <!-- /main -->
 
-</div><!-- /main -->
-
-<!-- EXPENSES MODAL -->
-<div class="modal-ov" id="expensesModal">
-  <div class="modal-box">
-    <h3><i class="fa-solid fa-receipt"></i> المصروفات خلال الفترة</h3>
-    <div class="table-wrap">
-      <div class="table-scroll" style="max-height:320px">
-        <table>
-          <thead>
-            <tr><th>#</th><th>التاريخ</th><th>البند</th><th>المبلغ</th></tr>
-          </thead>
-          <tbody id="expensesTableBody"></tbody>
-        </table>
+    <!-- EXPENSES MODAL -->
+    <div class="modal-ov" id="expensesModal">
+      <div class="modal-box">
+        <h3><i class="fa-solid fa-receipt"></i> المصروفات خلال الفترة</h3>
+        <div class="table-wrap">
+          <div class="table-scroll" style="max-height: 320px">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>التاريخ</th>
+                  <th>البند</th>
+                  <th>المبلغ</th>
+                </tr>
+              </thead>
+              <tbody id="expensesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="mbtn-cancel" onclick="closeModal()">
+            <i class="fa-solid fa-xmark"></i> إغلاق
+          </button>
+        </div>
       </div>
     </div>
-    <div class="modal-actions">
-      <button class="mbtn-cancel" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> إغلاق</button>
-    </div>
-  </div>
-</div>
 
-<script>
-  // ── Sidebar toggle ──
-  const sidebar = document.getElementById("sidebar");
-  const menuBtn = document.getElementById("menuBtn");
-  const overlay = document.getElementById("overlay");
+    <script>
+      // ── Sidebar toggle ──
+      const sidebar = document.getElementById("sidebar");
+      const menuBtn = document.getElementById("menuBtn");
+      const overlay = document.getElementById("overlay");
 
-  menuBtn.addEventListener("click", e => {
-    e.stopPropagation();
-    sidebar.classList.toggle("show");
-    overlay.classList.toggle("show");
-  });
-
-  function closeSidebar() {
-    sidebar.classList.remove("show");
-    overlay.classList.remove("show");
-  }
-
-  document.addEventListener("click", e => {
-    if (window.innerWidth <= 900 && !sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
-      closeSidebar();
-    }
-  });
-
-  // ── Data ──
-  const sales    = JSON.parse(localStorage.getItem("sales"))    || [];
-  const products = JSON.parse(localStorage.getItem("products")) || [];
-  const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-
-  // ── Filter & Render ──
-  function filterAndRender() {
-    const from = document.getElementById("fromDate").value || "1970-01-01";
-    const to   = document.getElementById("toDate").value   || "9999-12-31";
-
-    const filteredSales    = sales.filter(s => s.date.slice(0,10) >= from && s.date.slice(0,10) <= to);
-    const filteredExpenses = expenses.filter(e => e.date.slice(0,10) >= from && e.date.slice(0,10) <= to);
-
-    const profitByDate = {}, expensesByDate = {};
-
-    filteredSales.forEach(inv => {
-      if (!profitByDate[inv.date]) profitByDate[inv.date] = 0;
-      inv.items.forEach(item => {
-        const product = products.find(p => p.name === item.name);
-        const buy = product ? product.buyPrice : 0;
-        profitByDate[inv.date] += item.qty * (item.price - buy);
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("show");
+        overlay.classList.toggle("show");
       });
-    });
 
-    filteredExpenses.forEach(e => {
-      if (!expensesByDate[e.date]) expensesByDate[e.date] = 0;
-      expensesByDate[e.date] += e.amount;
-    });
+      function closeSidebar() {
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+      }
 
-    const allDates = Array.from(new Set([...Object.keys(profitByDate), ...Object.keys(expensesByDate)])).sort();
-    let totalProfit = 0, totalExpenses = 0, net = 0;
-    const tbody = document.getElementById("netTable");
-    tbody.innerHTML = "";
+      document.addEventListener("click", (e) => {
+        if (
+          window.innerWidth <= 900 &&
+          !sidebar.contains(e.target) &&
+          !menuBtn.contains(e.target)
+        ) {
+          closeSidebar();
+        }
+      });
 
-    allDates.forEach((date, i) => {
-      const p = profitByDate[date] || 0;
-      const ex = expensesByDate[date] || 0;
-      const n = p - ex;
-      totalProfit += p; totalExpenses += ex; net += n;
+      // ── Data ──
+      const sales = JSON.parse(localStorage.getItem("sales")) || [];
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-      const netClass = n >= 0 ? 'col-net-pos' : 'col-net-neg';
-      tbody.innerHTML += `
+      // ── Filter & Render ──
+      function filterAndRender() {
+        const from = document.getElementById("fromDate").value || "1970-01-01";
+        const to = document.getElementById("toDate").value || "9999-12-31";
+
+        const filteredSales = sales.filter(
+          (s) => s.date.slice(0, 10) >= from && s.date.slice(0, 10) <= to,
+        );
+        const filteredExpenses = expenses.filter(
+          (e) => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to,
+        );
+
+        const profitByDate = {},
+          expensesByDate = {};
+
+        filteredSales.forEach((inv) => {
+          if (!profitByDate[inv.date]) profitByDate[inv.date] = 0;
+          inv.items.forEach((item) => {
+            const product = products.find((p) => p.name === item.name);
+            const buy = product ? product.buyPrice : 0;
+            profitByDate[inv.date] += item.qty * (item.price - buy);
+          });
+        });
+
+        filteredExpenses.forEach((e) => {
+          if (!expensesByDate[e.date]) expensesByDate[e.date] = 0;
+          expensesByDate[e.date] += e.amount;
+        });
+
+        const allDates = Array.from(
+          new Set([
+            ...Object.keys(profitByDate),
+            ...Object.keys(expensesByDate),
+          ]),
+        ).sort();
+        let totalProfit = 0,
+          totalExpenses = 0,
+          net = 0;
+        const tbody = document.getElementById("netTable");
+        tbody.innerHTML = "";
+
+        allDates.forEach((date, i) => {
+          const p = profitByDate[date] || 0;
+          const ex = expensesByDate[date] || 0;
+          const n = p - ex;
+          totalProfit += p;
+          totalExpenses += ex;
+          net += n;
+
+          const netClass = n >= 0 ? "col-net-pos" : "col-net-neg";
+          tbody.innerHTML += `
         <tr>
           <td>${i + 1}</td>
           <td>${date}</td>
@@ -482,45 +921,49 @@
           <td class="col-expenses">${ex.toFixed(2)}</td>
           <td class="${netClass}">${n.toFixed(2)}</td>
         </tr>`;
-    });
+        });
 
-    document.getElementById("totalProfitCard").textContent  = totalProfit.toFixed(2);
-    document.getElementById("totalExpensesCard").textContent = totalExpenses.toFixed(2);
+        document.getElementById("totalProfitCard").textContent =
+          totalProfit.toFixed(2);
+        document.getElementById("totalExpensesCard").textContent =
+          totalExpenses.toFixed(2);
 
-    const netEl = document.getElementById("netProfitCard");
-    netEl.textContent = net.toFixed(2);
-    netEl.style.color = net >= 0 ? 'var(--success)' : 'var(--danger)';
-  }
+        const netEl = document.getElementById("netProfitCard");
+        netEl.textContent = net.toFixed(2);
+        netEl.style.color = net >= 0 ? "var(--success)" : "var(--danger)";
+      }
 
-  // ── Show Expenses Modal ──
-  function showExpenses() {
-    const from = document.getElementById("fromDate").value || "1970-01-01";
-    const to   = document.getElementById("toDate").value   || "9999-12-31";
-    const filtered = expenses.filter(e => e.date.slice(0,10) >= from && e.date.slice(0,10) <= to);
+      // ── Show Expenses Modal ──
+      function showExpenses() {
+        const from = document.getElementById("fromDate").value || "1970-01-01";
+        const to = document.getElementById("toDate").value || "9999-12-31";
+        const filtered = expenses.filter(
+          (e) => e.date.slice(0, 10) >= from && e.date.slice(0, 10) <= to,
+        );
 
-    const tbody = document.getElementById("expensesTableBody");
-    tbody.innerHTML = "";
-    filtered.forEach((e, i) => {
-      tbody.innerHTML += `<tr>
+        const tbody = document.getElementById("expensesTableBody");
+        tbody.innerHTML = "";
+        filtered.forEach((e, i) => {
+          tbody.innerHTML += `<tr>
         <td>${i + 1}</td>
         <td>${e.date}</td>
         <td>${e.title}</td>
         <td class="col-expenses">${e.amount.toFixed(2)}</td>
       </tr>`;
-    });
+        });
 
-    document.getElementById("expensesModal").classList.add("open");
-  }
+        document.getElementById("expensesModal").classList.add("open");
+      }
 
-  function closeModal() {
-    document.getElementById("expensesModal").classList.remove("open");
-  }
+      function closeModal() {
+        document.getElementById("expensesModal").classList.remove("open");
+      }
 
-  // ── Init ──
-  const today = new Date().toISOString().slice(0, 10);
-  document.getElementById("fromDate").value = today;
-  document.getElementById("toDate").value   = today;
-  window.onload = filterAndRender;
-</script>
-</body>
+      // ── Init ──
+      const today = new Date().toISOString().slice(0, 10);
+      document.getElementById("fromDate").value = today;
+      document.getElementById("toDate").value = today;
+      window.onload = filterAndRender;
+    </script>
+  </body>
 </html>

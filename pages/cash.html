@@ -1,430 +1,800 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" type="image/png" href="../icons/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <title>حركة الخزينة | المحاسب المحترف</title>
-  <style>
-    :root {
-      --bg:        #f4f6fa;
-      --bg2:       #eef1f7;
-      --white:     #ffffff;
-      --primary:   #2563eb;
-      --primary-lt:#eff4ff;
-      --primary-md:#bfcfff;
-      --accent:    #0ea5e9;
-      --success:   #16a34a;
-      --success-lt:#f0fdf4;
-      --warning:   #d97706;
-      --warning-lt:#fffbeb;
-      --danger:    #dc2626;
-      --danger-lt: #fef2f2;
-      --teal:      #0891b2;
-      --teal-lt:   #ecfeff;
-      --teal-md:   #a5f3fc;
-      --text:      #0f172a;
-      --text2:     #475569;
-      --text3:     #94a3b8;
-      --border:    #e2e8f0;
-      --border2:   #cbd5e1;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.07);
-      --shadow:    0 4px 14px rgba(0,0,0,.07);
-      --shadow-lg: 0 12px 40px rgba(0,0,0,.1);
-      --r:         13px;
-      --sw:        252px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/png" href="../icons/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>حركة الخزينة | المحاسب المحترف</title>
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #ffffff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --success-lt: #f0fdf4;
+        --warning: #d97706;
+        --warning-lt: #fffbeb;
+        --danger: #dc2626;
+        --danger-lt: #fef2f2;
+        --teal: #0891b2;
+        --teal-lt: #ecfeff;
+        --teal-md: #a5f3fc;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --border2: #cbd5e1;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+        --r: 13px;
+        --sw: 252px;
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: "Cairo", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image: radial-gradient(circle at 1px 1px, rgba(8,145,178,.055) 1px, transparent 0);
-      background-size: 28px 28px;
-      pointer-events: none;
-    }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(8, 145, 178, 0.055) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+      }
 
-    body::after {
-      content: '';
-      position: fixed; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--primary));
-      z-index: 1100;
-    }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--teal), var(--primary));
+        z-index: 1100;
+      }
 
-    /* ══ HEADER ══ */
-    .header {
-      position: fixed; top: 3px; right: 0; left: 0; height: 60px;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 18px; z-index: 1002;
-    }
+      /* ══ HEADER ══ */
+      .header {
+        position: fixed;
+        top: 3px;
+        right: 0;
+        left: 0;
+        height: 60px;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        z-index: 1002;
+      }
 
-    .brand { display: flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 800; }
-    .brand-icon {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, var(--teal), var(--primary));
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #fff;
-      box-shadow: 0 3px 10px rgba(8,145,178,.3);
-    }
-    .brand span { color: var(--teal); }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 15.5px;
+        font-weight: 800;
+      }
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--teal), var(--primary));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(8, 145, 178, 0.3);
+      }
+      .brand span {
+        color: var(--teal);
+      }
 
-    .hdr-cash {
-      display: flex; align-items: center; gap: 6px;
-      background: var(--teal-lt); border: 1px solid var(--teal-md);
-      padding: 5px 13px; border-radius: 18px;
-      font-size: 13px; font-weight: 600; color: var(--teal);
-    }
+      .hdr-cash {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--teal-lt);
+        border: 1px solid var(--teal-md);
+        padding: 5px 13px;
+        border-radius: 18px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--teal);
+      }
 
-    .menu-toggle {
-      width: 34px; height: 34px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text2); font-size: 14px; cursor: pointer;
-      display: none; align-items: center; justify-content: center; transition: all .2s;
-    }
-    .menu-toggle:hover { background: var(--teal-lt); color: var(--teal); border-color: var(--teal-md); }
+      .menu-toggle {
+        width: 34px;
+        height: 34px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text2);
+        font-size: 14px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .menu-toggle:hover {
+        background: var(--teal-lt);
+        color: var(--teal);
+        border-color: var(--teal-md);
+      }
 
-    /* ══ SIDEBAR ══ */
-    .sidebar {
-      position: fixed; top: 63px; right: 0;
-      width: var(--sw); height: calc(100dvh - 63px);
-      background: var(--white); border-left: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 14px 10px 28px;
-      z-index: 1001; overflow-y: auto; scrollbar-width: none; transition: right .3s;
-    }
-    .sidebar::-webkit-scrollbar { display: none; }
+      /* ══ SIDEBAR ══ */
+      .sidebar {
+        position: fixed;
+        top: 63px;
+        right: 0;
+        width: var(--sw);
+        height: calc(100dvh - 63px);
+        background: var(--white);
+        border-left: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 14px 10px 28px;
+        z-index: 1001;
+        overflow-y: auto;
+        scrollbar-width: none;
+        transition: right 0.3s;
+      }
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
 
-    .sb-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); padding: 10px 10px 4px; }
+      .sb-lbl {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text3);
+        padding: 10px 10px 4px;
+      }
 
-    .sb-link { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; text-decoration: none; color: var(--text2); font-size: 13px; font-weight: 600; transition: all .18s; }
-    .sb-link i { width: 16px; text-align: center; font-size: 12px; flex-shrink: 0; }
-    .sb-link:hover { background: var(--bg); color: var(--text); }
-    .sb-link.active { background: var(--teal-lt); color: var(--teal); font-weight: 700; }
+      .sb-link {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 11px;
+        border-radius: 9px;
+        text-decoration: none;
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.18s;
+      }
+      .sb-link i {
+        width: 16px;
+        text-align: center;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .sb-link:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .sb-link.active {
+        background: var(--teal-lt);
+        color: var(--teal);
+        font-weight: 700;
+      }
 
-    .sb-cash {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 12px; border-radius: 10px;
-      background: var(--teal-lt); border: 1px solid var(--teal-md);
-      margin-bottom: 6px; font-size: 12.5px; font-weight: 600; color: var(--teal);
-    }
-    .sb-cash span { font-weight: 800; }
+      .sb-cash {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: var(--teal-lt);
+        border: 1px solid var(--teal-md);
+        margin-bottom: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--teal);
+      }
+      .sb-cash span {
+        font-weight: 800;
+      }
 
-    #overlay { position: fixed; inset: 0; background: rgba(15,23,42,.3); backdrop-filter: blur(4px); display: none; z-index: 1000; }
-    #overlay.show { display: block; }
+      #overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.3);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 1000;
+      }
+      #overlay.show {
+        display: block;
+      }
 
-    /* ══ MAIN ══ */
-    .main { position: relative; z-index: 1; margin-right: var(--sw); padding: 78px 22px 30px; }
+      /* ══ MAIN ══ */
+      .main {
+        position: relative;
+        z-index: 1;
+        margin-right: var(--sw);
+        padding: 78px 22px 30px;
+      }
 
-    .page-head { margin-bottom: 20px; }
-    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); margin-bottom: 4px; }
-    .breadcrumb a { color: var(--teal); text-decoration: none; }
-    .page-head h2 { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
-    .page-head h2 i { color: var(--teal); }
+      .page-head {
+        margin-bottom: 20px;
+      }
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text3);
+        margin-bottom: 4px;
+      }
+      .breadcrumb a {
+        color: var(--teal);
+        text-decoration: none;
+      }
+      .page-head h2 {
+        font-size: 18px;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .page-head h2 i {
+        color: var(--teal);
+      }
 
-    /* ══ SUMMARY STATS ══ */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 14px;
-    }
+      /* ══ SUMMARY STATS ══ */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin-bottom: 14px;
+      }
 
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 18px 16px;
-      box-shadow: var(--shadow-sm);
-      display: flex; align-items: center; gap: 14px;
-      transition: transform .2s, box-shadow .2s;
-      position: relative; overflow: hidden;
-    }
+      .stat-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 18px 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .stat-card::before {
-      content: '';
-      position: absolute; top: 0; right: 0;
-      width: 4px; height: 100%;
-      background: var(--sc, var(--teal));
-      border-radius: 0 var(--r) var(--r) 0;
-    }
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--sc, var(--teal));
+        border-radius: 0 var(--r) var(--r) 0;
+      }
 
-    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+      }
 
-    .sc-opening { --sc: var(--teal); }
-    .sc-income   { --sc: var(--success); }
-    .sc-expenses { --sc: var(--danger); }
-    .sc-balance  { --sc: var(--primary); }
+      .sc-opening {
+        --sc: var(--teal);
+      }
+      .sc-income {
+        --sc: var(--success);
+      }
+      .sc-expenses {
+        --sc: var(--danger);
+      }
+      .sc-balance {
+        --sc: var(--primary);
+      }
 
-    .stat-icon {
-      width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px;
-    }
+      .stat-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+      }
 
-    .sc-opening .stat-icon { background: var(--teal-lt);   color: var(--teal); }
-    .sc-income  .stat-icon { background: var(--success-lt); color: var(--success); }
-    .sc-expenses .stat-icon { background: var(--danger-lt); color: var(--danger); }
-    .sc-balance .stat-icon  { background: var(--primary-lt); color: var(--primary); }
+      .sc-opening .stat-icon {
+        background: var(--teal-lt);
+        color: var(--teal);
+      }
+      .sc-income .stat-icon {
+        background: var(--success-lt);
+        color: var(--success);
+      }
+      .sc-expenses .stat-icon {
+        background: var(--danger-lt);
+        color: var(--danger);
+      }
+      .sc-balance .stat-icon {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
 
-    .stat-info { flex: 1; min-width: 0; }
-    .stat-label { font-size: 11.5px; color: var(--text3); font-weight: 600; margin-bottom: 4px; }
-    .stat-value { font-size: 18px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .stat-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .stat-label {
+        font-size: 11.5px;
+        color: var(--text3);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .stat-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-    .sc-opening .stat-value { color: var(--teal); }
-    .sc-income  .stat-value { color: var(--success); }
-    .sc-expenses .stat-value { color: var(--danger); }
-    .sc-balance  .stat-value { color: var(--primary); }
+      .sc-opening .stat-value {
+        color: var(--teal);
+      }
+      .sc-income .stat-value {
+        color: var(--success);
+      }
+      .sc-expenses .stat-value {
+        color: var(--danger);
+      }
+      .sc-balance .stat-value {
+        color: var(--primary);
+      }
 
-    /* ══ CARD ══ */
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 20px 18px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-    }
+      /* ══ CARD ══ */
+      .card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 20px 18px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow-sm);
+      }
 
-    .card-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 13px; border-bottom: 1px solid var(--border); }
-    .chdr-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--teal-lt); border: 1px solid var(--teal-md); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--teal); }
-    .card-hdr h5 { font-size: 15px; font-weight: 800; }
+      .card-hdr {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid var(--border);
+      }
+      .chdr-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--teal-lt);
+        border: 1px solid var(--teal-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--teal);
+      }
+      .card-hdr h5 {
+        font-size: 15px;
+        font-weight: 800;
+      }
 
-    /* ══ FILTERS ══ */
-    .filters-row {
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end;
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 11px; padding: 16px;
-      margin-bottom: 16px;
-    }
+      /* ══ FILTERS ══ */
+      .filters-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
 
-    .fw { flex: 1; min-width: 150px; }
-    .fw label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
+      .fw {
+        flex: 1;
+        min-width: 150px;
+      }
+      .fw label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text2);
+        margin-bottom: 5px;
+      }
 
-    input, select {
-      width: 100%; padding: 10px 13px;
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 9px; color: var(--text);
-      font-family: "Cairo", sans-serif; font-size: 13px;
-      outline: none; transition: all .2s;
-    }
-    input::placeholder { color: var(--text3); }
-    select option { background: var(--white); }
-    input:focus, select:focus { border-color: var(--teal); background: var(--teal-lt); box-shadow: 0 0 0 3px rgba(8,145,178,.1); }
+      input,
+      select {
+        width: 100%;
+        padding: 10px 13px;
+        background: var(--white);
+        border: 1.5px solid var(--border);
+        border-radius: 9px;
+        color: var(--text);
+        font-family: "Cairo", sans-serif;
+        font-size: 13px;
+        outline: none;
+        transition: all 0.2s;
+      }
+      input::placeholder {
+        color: var(--text3);
+      }
+      select option {
+        background: var(--white);
+      }
+      input:focus,
+      select:focus {
+        border-color: var(--teal);
+        background: var(--teal-lt);
+        box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+      }
 
-    #filterCashBtn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 10px 20px; border: none; border-radius: 9px;
-      font-family: "Cairo", sans-serif; font-size: 13.5px; font-weight: 700;
-      cursor: pointer; transition: all .2s;
-      background: linear-gradient(135deg, var(--teal), var(--primary));
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(8,145,178,.25);
-      white-space: nowrap; flex-shrink: 0; align-self: flex-end;
-    }
-    #filterCashBtn:hover { filter: brightness(1.08); transform: translateY(-2px); }
+      #filterCashBtn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 9px;
+        font-family: "Cairo", sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: linear-gradient(135deg, var(--teal), var(--primary));
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
+        white-space: nowrap;
+        flex-shrink: 0;
+        align-self: flex-end;
+      }
+      #filterCashBtn:hover {
+        filter: brightness(1.08);
+        transform: translateY(-2px);
+      }
 
-    /* ══ TABLE ══ */
-    .table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+      /* ══ TABLE ══ */
+      .table-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
 
-    .t-scroll { overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border2) transparent; max-height: 460px; }
-    .t-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
-    .t-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
-    .t-scroll table { min-width: 800px; }
+      .t-scroll {
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border2) transparent;
+        max-height: 460px;
+      }
+      .t-scroll::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      .t-scroll::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 4px;
+      }
+      .t-scroll table {
+        min-width: 800px;
+      }
 
-    table { width: 100%; border-collapse: collapse; }
-    thead { position: sticky; top: 0; z-index: 2; }
-    th { background: var(--bg2); color: var(--text2); padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .3px; border-bottom: 1px solid var(--border); }
-    td { padding: 10px 12px; text-align: center; font-size: 13px; color: var(--text); border-bottom: 1px solid var(--border); }
-    tbody tr:last-child td { border-bottom: none; }
-    tbody tr { transition: background .15s; }
-    tbody tr:hover { background: var(--bg); }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      th {
+        background: var(--bg2);
+        color: var(--text2);
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        border-bottom: 1px solid var(--border);
+      }
+      td {
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr {
+        transition: background 0.15s;
+      }
+      tbody tr:hover {
+        background: var(--bg);
+      }
 
-    /* tfoot */
-    #cashStatementTable tfoot tr td {
-      background: var(--bg2); color: var(--warning);
-      font-weight: 800; border-top: 2px solid var(--border2);
-    }
+      /* tfoot */
+      #cashStatementTable tfoot tr td {
+        background: var(--bg2);
+        color: var(--warning);
+        font-weight: 800;
+        border-top: 2px solid var(--border2);
+      }
 
-    /* money colors */
-    .cell-green { color: var(--success); font-weight: 700; }
-    .cell-red   { color: var(--danger);  font-weight: 700; }
-    .cell-teal  { color: var(--teal);    font-weight: 700; }
-    .cell-blue  { color: var(--primary); font-weight: 700; }
+      /* money colors */
+      .cell-green {
+        color: var(--success);
+        font-weight: 700;
+      }
+      .cell-red {
+        color: var(--danger);
+        font-weight: 700;
+      }
+      .cell-teal {
+        color: var(--teal);
+        font-weight: 700;
+      }
+      .cell-blue {
+        color: var(--primary);
+        font-weight: 700;
+      }
 
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 768px) {
-      .menu-toggle { display: flex; }
-      .sidebar { right: -270px; }
-      .sidebar.show { right: 0; }
-      .main { margin-right: 0; padding: 76px 12px 22px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .filters-row { flex-direction: column; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="brand">
-    <div class="brand-icon"><i class="fa-solid fa-building-columns"></i></div>
-    المحاسب <span>المحترف</span>
-  </div>
-  <div class="hdr-cash">
-    <i class="fa-solid fa-vault"></i>
-    <span id="cashBalanceHeader">0.00 جنيه</span>
-  </div>
-  <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-</div>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-  <div class="sb-cash">
-    <span><i class="fa-solid fa-vault" style="margin-left:5px"></i>رصيد الخزينة</span>
-    <span id="cashBalance">0.00 ج</span>
-  </div>
-
-  <div class="sb-lbl">القائمة الرئيسية</div>
-  <a href="../index.html"           class="sb-link"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
-  <a href="customers.html"          class="sb-link"><i class="fa-solid fa-users"></i><span>الحسابات</span></a>
-  <a href="products.html"           class="sb-link"><i class="fa-solid fa-box-open"></i><span>المخزون</span></a>
-
-  <div class="sb-lbl">المعاملات</div>
-  <a href="sales.html"              class="sb-link"><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a>
-  <a href="purchases.html"          class="sb-link"><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a>
-  <a href="receipts.html"           class="sb-link"><i class="fa-solid fa-hand-holding-dollar"></i><span>المقبوضات</span></a>
-  <a href="#"                       class="sb-link"><i class="fa-solid fa-money-bill-wave"></i><span>المدفوعات</span></a>
-
-  <div class="sb-lbl">التقارير</div>
-  <a href="income.html"             class="sb-link"><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a>
-  <a href="expenses.html"           class="sb-link"><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a>
-  <a href="cash.html"               class="sb-link active"><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a>
-  <a href="profit.html"             class="sb-link"><i class="fa-solid fa-coins"></i><span>الأرباح</span></a>
-  <a href="../pages/dashboard.html" class="sb-link"><i class="fa-solid fa-chart-pie"></i><span>الحركة</span></a>
-  <a href="../pages/tayar.html"     class="sb-link"><i class="fa-solid fa-plane"></i><span>تطبيق الطيار</span></a>
-</div>
-
-<div id="overlay" onclick="toggleSidebar()"></div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <div class="page-head">
-    <div class="breadcrumb">
-      <a href="../index.html">الرئيسية</a>
-      <i class="fa-solid fa-chevron-left" style="font-size:9px"></i>
-      <span>حركة الخزينة</span>
-    </div>
-    <h2><i class="fa-solid fa-building-columns"></i> حركة الخزينة</h2>
-  </div>
-
-  <!-- ══ SUMMARY STATS ══ -->
-  <div class="stats-grid">
-    <div class="stat-card sc-opening">
-      <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">الرصيد الافتتاحي</div>
-        <div class="stat-value" id="cashOpening">0.00</div>
+      /* ══ RESPONSIVE ══ */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+        .sidebar {
+          right: -270px;
+        }
+        .sidebar.show {
+          right: 0;
+        }
+        .main {
+          margin-right: 0;
+          padding: 76px 12px 22px;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .filters-row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+        المحاسب <span>المحترف</span>
       </div>
-    </div>
-
-    <div class="stat-card sc-income">
-      <div class="stat-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">إجمالي المقبوضات</div>
-        <div class="stat-value" id="cashIncome">0.00</div>
-      </div>
-    </div>
-
-    <div class="stat-card sc-expenses">
-      <div class="stat-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">إجمالي المصروفات</div>
-        <div class="stat-value" id="cashExpenses">0.00</div>
-      </div>
-    </div>
-
-    <div class="stat-card sc-balance">
-      <div class="stat-icon"><i class="fa-solid fa-vault"></i></div>
-      <div class="stat-info">
-        <div class="stat-label">الرصيد الختامي</div>
-        <div class="stat-value" id="cashFinal">0.00</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ CASH STATEMENT ══ -->
-  <div class="card">
-    <div class="card-hdr">
-      <div class="chdr-icon"><i class="fa-solid fa-scroll"></i></div>
-      <h5>كشف حركات الخزينة</h5>
-    </div>
-
-    <div class="filters-row">
-      <div class="fw">
-        <label>من تاريخ</label>
-        <input type="date" id="fromDate" />
-      </div>
-      <div class="fw">
-        <label>إلى تاريخ</label>
-        <input type="date" id="toDate" />
-      </div>
-      <div class="fw">
-        <label>تصفية بالحساب</label>
-        <select id="cashCustomerFilter">
-          <option value="">كل الحسابات</option>
-        </select>
-      </div>
-      <button id="filterCashBtn">
-        <i class="fa-solid fa-magnifying-glass"></i> عرض الكشف
+      <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
       </button>
     </div>
 
-    <div class="table-wrap">
-      <div class="t-scroll">
-        <table id="cashStatementTable">
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>الحساب</th>
-              <th>البيان</th>
-              <th>مدين</th>
-              <th>دائن</th>
-              <th>الرصيد</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot></tfoot>
-        </table>
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sb-cash">
+        <span
+          ><i class="fa-solid fa-vault" style="margin-left: 5px"></i>رصيد
+          الخزينة</span
+        >
+        <span id="cashBalance">0.00 ج</span>
+      </div>
+
+      <div class="sb-lbl">القائمة الرئيسية</div>
+      <a href="../index.html" class="sb-link"
+        ><i class="fa-solid fa-house"></i><span>الرئيسية</span></a
+      >
+      <a href="customers.html" class="sb-link"
+        ><i class="fa-solid fa-users"></i><span>الحسابات</span></a
+      >
+      <a href="products.html" class="sb-link"
+        ><i class="fa-solid fa-box-open"></i><span>المخزون</span></a
+      >
+
+      <div class="sb-lbl">المعاملات</div>
+      <a href="sales.html" class="sb-link"
+        ><i class="fa-solid fa-cart-shopping"></i><span>المبيعات</span></a
+      >
+      <a href="purchases.html" class="sb-link"
+        ><i class="fa-solid fa-dolly"></i><span>المشتريات</span></a
+      >
+      <a href="receipts.html" class="sb-link"
+        ><i class="fa-solid fa-hand-holding-dollar"></i
+        ><span>المقبوضات</span></a
+      >
+      <a href="#" class="sb-link"
+        ><i class="fa-solid fa-money-bill-wave"></i><span>المدفوعات</span></a
+      >
+
+      <div class="sb-lbl">التقارير</div>
+      <a href="income.html" class="sb-link"
+        ><i class="fa-solid fa-chart-line"></i><span>الإيرادات</span></a
+      >
+      <a href="expenses.html" class="sb-link"
+        ><i class="fa-solid fa-receipt"></i><span>المصروفات</span></a
+      >
+      <a href="cash.html" class="sb-link active"
+        ><i class="fa-solid fa-building-columns"></i><span>الصندوق</span></a
+      >
+      <a href="profit.html" class="sb-link"
+        ><i class="fa-solid fa-coins"></i><span>الأرباح</span></a
+      >
+      <a href="../pages/dashboard.html" class="sb-link"
+        ><i class="fa-solid fa-chart-pie"></i><span>الحركة</span></a
+      >
+      <a href="../pages/tayar.html" class="sb-link"
+        ><i class="fa-solid fa-plane"></i><span>تطبيق الطيار</span></a
+      >
+    </div>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="page-head">
+        <div class="breadcrumb">
+          <a href="../index.html">الرئيسية</a>
+          <i class="fa-solid fa-chevron-left" style="font-size: 9px"></i>
+          <span>حركة الخزينة</span>
+        </div>
+        <h2><i class="fa-solid fa-building-columns"></i> حركة الخزينة</h2>
+      </div>
+
+      <!-- ══ SUMMARY STATS ══ -->
+      <div class="stats-grid">
+        <div class="stat-card sc-opening">
+          <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+          <div class="stat-info">
+            <div class="stat-label">الرصيد الافتتاحي</div>
+            <div class="stat-value" id="cashOpening">0.00</div>
+          </div>
+        </div>
+
+        <div class="stat-card sc-income">
+          <div class="stat-icon">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">إجمالي المقبوضات</div>
+            <div class="stat-value" id="cashIncome">0.00</div>
+          </div>
+        </div>
+
+        <div class="stat-card sc-expenses">
+          <div class="stat-icon">
+            <i class="fa-solid fa-arrow-trend-down"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-label">إجمالي المصروفات</div>
+            <div class="stat-value" id="cashExpenses">0.00</div>
+          </div>
+        </div>
+
+        <div class="stat-card sc-balance">
+          <div class="stat-icon"><i class="fa-solid fa-vault"></i></div>
+          <div class="stat-info">
+            <div class="stat-label">الرصيد الختامي</div>
+            <div class="stat-value" id="cashFinal">0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CASH STATEMENT ══ -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="chdr-icon"><i class="fa-solid fa-scroll"></i></div>
+          <h5>كشف حركات الخزينة</h5>
+        </div>
+
+        <div class="filters-row">
+          <div class="fw">
+            <label>من تاريخ</label>
+            <input type="date" id="fromDate" />
+          </div>
+          <div class="fw">
+            <label>إلى تاريخ</label>
+            <input type="date" id="toDate" />
+          </div>
+          <div class="fw">
+            <label>تصفية بالحساب</label>
+            <select id="cashCustomerFilter">
+              <option value="">كل الحسابات</option>
+            </select>
+          </div>
+          <button id="filterCashBtn">
+            <i class="fa-solid fa-magnifying-glass"></i> عرض الكشف
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <div class="t-scroll">
+            <table id="cashStatementTable">
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>الحساب</th>
+                  <th>البيان</th>
+                  <th>مدين</th>
+                  <th>دائن</th>
+                  <th>الرصيد</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    <!-- /main -->
 
-</div><!-- /main -->
+    <script src="../js/data.js"></script>
+    <script src="../js/cash.js"></script>
 
-<script src="../js/data.js"></script>
-<script src="../js/cash.js"></script>
-
-<script>
-  function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("show");
-    document.getElementById("overlay").classList.toggle("show");
-  }
-</script>
-</body>
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("show");
+        document.getElementById("overlay").classList.toggle("show");
+      }
+    </script>
+  </body>
 </html>
