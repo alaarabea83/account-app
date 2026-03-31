@@ -1,0 +1,2052 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل الاستخدام | المحاسب المحترف</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #ffffff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --success-lt: #f0fdf4;
+        --warning: #d97706;
+        --warning-lt: #fffbeb;
+        --danger: #dc2626;
+        --danger-lt: #fef2f2;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+        --r: 14px;
+        --sidebar-w: 280px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(37, 99, 235, 0.04) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--accent),
+          var(--success)
+        );
+        z-index: 200;
+      }
+
+      /* ══ HEADER ══ */
+      .header {
+        position: fixed;
+        top: 3px;
+        right: 0;
+        left: 0;
+        height: 62px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        z-index: 150;
+      }
+
+      .hdr-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 800;
+      }
+
+      .hdr-icon {
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .hdr-brand span {
+        color: var(--primary);
+      }
+
+      .hdr-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .hdr-badge {
+        background: var(--primary-lt);
+        border: 1px solid var(--primary-md);
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+
+      .hdr-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 9px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .hdr-back:hover {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border-color: var(--primary-md);
+      }
+
+      /* mobile toggle */
+      .menu-toggle {
+        width: 36px;
+        height: 36px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        color: var(--text2);
+        font-size: 15px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+
+      .menu-toggle:hover {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+
+      /* ══ LAYOUT ══ */
+      .layout {
+        display: flex;
+        padding-top: 65px;
+        min-height: 100vh;
+      }
+
+      /* ══ SIDEBAR ══ */
+      .sidebar {
+        position: fixed;
+        top: 65px;
+        right: 0;
+        width: var(--sidebar-w);
+        height: calc(100vh - 65px);
+        background: var(--white);
+        border-left: 1px solid var(--border);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+        padding: 20px 14px 40px;
+        z-index: 100;
+        transition: right 0.3s;
+      }
+
+      .sidebar::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+      }
+
+      .sb-title {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--text3);
+        padding: 12px 8px 6px;
+        display: block;
+      }
+
+      .sb-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.18s;
+        margin-bottom: 2px;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      .sb-item i {
+        width: 18px;
+        text-align: center;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      .sb-item:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .sb-item.active {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border-color: var(--primary-md);
+        font-weight: 700;
+      }
+
+      /* ══ MAIN ══ */
+      .main {
+        flex: 1;
+        margin-right: var(--sidebar-w);
+        padding: 32px 36px 60px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ══ HERO ══ */
+      .guide-hero {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          #1d4ed8 50%,
+          var(--accent)
+        );
+        border-radius: 20px;
+        padding: 40px 36px;
+        margin-bottom: 36px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .guide-hero::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .guide-hero::after {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        left: 20%;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        padding: 5px 14px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 16px;
+      }
+
+      .guide-hero h1 {
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      .guide-hero h1 span {
+        color: #bfcfff;
+      }
+
+      .guide-hero p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+        font-weight: 400;
+        max-width: 560px;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 14px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+
+      .h-stat {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 12px 18px;
+        text-align: center;
+      }
+
+      .h-stat strong {
+        display: block;
+        font-size: 20px;
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .h-stat span {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      /* ══ SECTION ══ */
+      .guide-section {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        scroll-margin-top: 80px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg);
+      }
+
+      .section-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .section-body {
+        padding: 24px;
+      }
+
+      .section-desc {
+        font-size: 14px;
+        color: var(--text2);
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+
+      /* ── STEPS ── */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .step {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 16px 18px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        animation: fadeUp 0.4s ease both;
+      }
+
+      .step:hover {
+        background: var(--white);
+        border-color: var(--primary-md);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .step-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+      }
+
+      .step-content h4 {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .step-content p {
+        font-size: 12.5px;
+        color: var(--text3);
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      /* ── TIPS ── */
+      .tip-box {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin-top: 16px;
+      }
+
+      .tip-box i {
+        font-size: 16px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+
+      .tip-box p {
+        font-size: 12.5px;
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      .tip-info {
+        background: var(--primary-lt);
+        border: 1px solid var(--primary-md);
+        color: var(--primary);
+      }
+
+      .tip-info p {
+        color: #1d4ed8;
+      }
+
+      .tip-warn {
+        background: var(--warning-lt);
+        border: 1px solid #fcd34d;
+        color: var(--warning);
+      }
+
+      .tip-warn p {
+        color: #92400e;
+      }
+
+      .tip-success {
+        background: var(--success-lt);
+        border: 1px solid #bbf7d0;
+        color: var(--success);
+      }
+
+      .tip-success p {
+        color: #166534;
+      }
+
+      /* ── ELEMENT TABLE ── */
+      .elem-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+        font-size: 13px;
+      }
+
+      .elem-table th {
+        background: var(--bg2);
+        color: var(--text2);
+        padding: 9px 12px;
+        text-align: right;
+        font-weight: 700;
+        font-size: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .elem-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text);
+        vertical-align: top;
+      }
+
+      .elem-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .elem-table tr:hover td {
+        background: var(--bg);
+      }
+
+      .el-name {
+        font-weight: 700;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .el-name i {
+        font-size: 13px;
+      }
+
+      .el-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 10.5px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .tag-input {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+
+      .tag-select {
+        background: var(--warning-lt);
+        color: var(--warning);
+      }
+
+      .tag-btn {
+        background: var(--success-lt);
+        color: var(--success);
+      }
+
+      .tag-table {
+        background: #f5f3ff;
+        color: #7c3aed;
+      }
+
+      .tag-modal {
+        background: var(--danger-lt);
+        color: var(--danger);
+      }
+
+      .tag-filter {
+        background: #ecfeff;
+        color: #0891b2;
+      }
+
+      /* ── FAQ ── */
+      .faq {
+        margin-top: 14px;
+      }
+
+      .faq-item {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        overflow: hidden;
+      }
+
+      .faq-q {
+        padding: 13px 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .faq-q:hover {
+        background: var(--bg);
+      }
+
+      .faq-q i {
+        font-size: 12px;
+        color: var(--text3);
+        transition: transform 0.25s;
+      }
+
+      .faq-item.open .faq-q i {
+        transform: rotate(180deg);
+      }
+
+      .faq-a {
+        display: none;
+        padding: 0 16px 14px;
+        font-size: 13px;
+        color: var(--text2);
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      .faq-item.open .faq-a {
+        display: block;
+      }
+
+      /* ══ COLOR CHIPS ══ */
+      .color-map {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 13px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--white);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .chip-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      /* ══ OVERLAY ══ */
+      #mob-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.3);
+        backdrop-filter: blur(4px);
+        display: none;
+        z-index: 99;
+      }
+
+      #mob-overlay.show {
+        display: block;
+      }
+
+      /* ══ RESPONSIVE ══ */
+      @media (max-width: 900px) {
+        .sidebar {
+          right: -300px;
+        }
+
+        .sidebar.show {
+          right: 0;
+        }
+
+        .main {
+          margin-right: 0;
+          padding: 24px 16px 48px;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .hdr-badge {
+          display: none;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .guide-hero {
+          padding: 28px 20px;
+        }
+
+        .section-body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="hdr-brand">
+        <div class="hdr-icon"><i class="fa-solid fa-book-open"></i></div>
+        دليل <span>الاستخدام</span>
+      </div>
+      <div class="hdr-right">
+        <span class="hdr-badge"
+          ><i class="fa-solid fa-circle-check" style="margin-left: 5px"></i>دليل
+          شامل</span
+        >
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mob-overlay" onclick="closeSidebar()"></div>
+
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <nav class="sidebar" id="sidebar">
+        <span class="sb-title">الأقسام</span>
+        <a class="sb-item active" onclick="goToSection('overview')"
+          ><i class="fa-solid fa-circle-info" style="color: var(--primary)"></i>
+          نظرة عامة</a
+        >
+        <a class="sb-item" onclick="goToSection('login')"
+          ><i class="fa-solid fa-right-to-bracket" style="color: #7c3aed"></i>
+          تسجيل الدخول</a
+        >
+        <a class="sb-item" onclick="goToSection('home')"
+          ><i class="fa-solid fa-house" style="color: var(--primary)"></i>
+          الصفحة الرئيسية</a
+        >
+
+        <span class="sb-title">الحسابات والمخزون</span>
+        <a class="sb-item" onclick="goToSection('customers')"
+          ><i class="fa-solid fa-users" style="color: var(--primary)"></i>
+          الحسابات</a
+        >
+        <a class="sb-item" onclick="goToSection('products')"
+          ><i class="fa-solid fa-box-open" style="color: #059669"></i>
+          المنتجات</a
+        >
+
+        <span class="sb-title">المعاملات</span>
+        <a class="sb-item" onclick="goToSection('sales')"
+          ><i
+            class="fa-solid fa-cart-shopping"
+            style="color: var(--success)"
+          ></i>
+          المبيعات</a
+        >
+        <a class="sb-item" onclick="goToSection('purchases')"
+          ><i class="fa-solid fa-dolly" style="color: var(--warning)"></i>
+          المشتريات</a
+        >
+        <a class="sb-item" onclick="goToSection('receipts')"
+          ><i
+            class="fa-solid fa-hand-holding-dollar"
+            style="color: #0284c7"
+          ></i>
+          المقبوضات</a
+        >
+
+        <span class="sb-title">التقارير</span>
+        <a class="sb-item" onclick="goToSection('income')"
+          ><i class="fa-solid fa-chart-line" style="color: var(--success)"></i>
+          الإيرادات</a
+        >
+        <a class="sb-item" onclick="goToSection('expenses')"
+          ><i class="fa-solid fa-receipt" style="color: #e11d48"></i>
+          المصروفات</a
+        >
+        <a class="sb-item" onclick="goToSection('cash')"
+          ><i class="fa-solid fa-building-columns" style="color: #0891b2"></i>
+          الخزينة</a
+        >
+        <a class="sb-item" onclick="goToSection('profit')"
+          ><i class="fa-solid fa-coins" style="color: var(--warning)"></i>
+          الأرباح</a
+        >
+        <a class="sb-item" onclick="goToSection('dashboard')"
+          ><i class="fa-solid fa-chart-pie" style="color: var(--primary)"></i>
+          لوحة الحركة</a
+        >
+
+        <span class="sb-title">أدوات</span>
+        <a class="sb-item" onclick="goToSection('backup')"
+          ><i class="fa-solid fa-cloud" style="color: var(--accent)"></i> النسخ
+          الاحتياطي</a
+        >
+
+        <a href="../index.html" class="hdr-back"
+          ><i class="fa-solid fa-house"></i> رجوع الي الصفحة الرئيسية</a
+        >
+      </nav>
+
+      <!-- MAIN -->
+      <main class="main">
+        <!-- HERO -->
+        <div class="guide-hero">
+          <div class="hero-inner">
+            <div class="hero-chip">
+              <i class="fa-solid fa-book-open"></i> دليل المستخدم الشامل
+            </div>
+            <h1>كيفية استخدام <span>المحاسب المحترف</span></h1>
+            <p>
+              دليل تفصيلي يشرح كل صفحة وكل عنصر في النظام خطوة بخطوة — لتبدأ
+              العمل بثقة واحترافية من اليوم الأول.
+            </p>
+            <div class="hero-stats">
+              <div class="h-stat">
+                <strong>15</strong><span>صفحة مشروحة</span>
+              </div>
+              <div class="h-stat">
+                <strong>100+</strong><span>عنصر موضح</span>
+              </div>
+              <div class="h-stat"><strong>∞</strong><span>دعم فني</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ OVERVIEW ══ -->
+        <div class="guide-section" id="overview">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">
+                نظرة عامة على النظام
+              </h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                ابدأ من هنا لفهم بنية النظام
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              المحاسب المحترف نظام محاسبة متكامل يغطي كل جوانب إدارة أعمالك من
+              بيع وشراء وخزينة وتقارير. يعمل على جميع الأجهزة ويحفظ بياناتك
+              تلقائياً على السحابة.
+            </p>
+            <div class="color-map">
+              <div class="chip">
+                <div class="chip-dot" style="background: #2563eb"></div>
+                الحسابات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #059669"></div>
+                المنتجات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #16a34a"></div>
+                المبيعات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #d97706"></div>
+                المشتريات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #0284c7"></div>
+                المقبوضات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #e11d48"></div>
+                المصروفات
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #0891b2"></div>
+                الخزينة
+              </div>
+              <div class="chip">
+                <div class="chip-dot" style="background: #b45309"></div>
+                الأرباح
+              </div>
+            </div>
+            <div class="tip-box tip-info" style="margin-top: 18px">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>
+                كل صفحة في النظام لها لون هوية مميز يساعدك على معرفة أين أنت في
+                النظام بمجرد النظر للشريط العلوي.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ LOGIN ══ -->
+        <div class="guide-section" id="login">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #f5f3ff; color: #7c3aed"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">
+                تسجيل الدخول وإنشاء الحساب
+              </h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                أول خطوة لاستخدام النظام
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              صفحة الدخول هي بوابة النظام. تستطيع تسجيل الدخول بحساب موجود أو
+              إنشاء حساب جديد. البيانات محمية بـ Firebase Authentication.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>العنصر</th>
+                <th>النوع</th>
+                <th>الوظيفة</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-envelope"></i> البريد الإلكتروني
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">حقل نص</span></td>
+                <td>أدخل بريدك الإلكتروني المسجل</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-lock"></i> كلمة المرور
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">حقل نص</span></td>
+                <td>كلمة المرور (6 أحرف على الأقل)</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-check"></i> تذكّرني
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">خيار</span></td>
+                <td>تبقى مسجلاً دون إعادة إدخال البيانات</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-play"></i> تسجيل الدخول
+                  </div>
+                </td>
+                <td><span class="el-tag tag-btn">زر</span></td>
+                <td>يدخل النظام إن كانت البيانات صحيحة</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-user-plus"></i> حساب جديد
+                  </div>
+                </td>
+                <td><span class="el-tag tag-btn">تاب</span></td>
+                <td>أنشئ حساباً جديداً باسم وبريد وكلمة مرور</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-warn" style="margin-top: 14px">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                إذا نسيت كلمة المرور تواصل مع الدعم الفني. لا يمكن استرداد كلمة
+                المرور تلقائياً في النسخة الحالية.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ HOME ══ -->
+        <div class="guide-section" id="home">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-house"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">الصفحة الرئيسية</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                لوحة التحكم المركزية للنظام
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              الصفحة الرئيسية تعرض لك 12 بطاقة — كل بطاقة تمثل قسماً من أقسام
+              النظام. اضغط على أي بطاقة للانتقال إلى ذلك القسم مباشرة.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: var(--primary)">1</div>
+                <div class="step-content">
+                  <h4>بطاقات الأقسام</h4>
+                  <p>
+                    اضغط على أي بطاقة (الحسابات، المبيعات...) للانتقال إلى
+                    الصفحة المقابلة. يظهر سهم أزرق عند تمرير الماوس فوق البطاقة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--primary)">2</div>
+                <div class="step-content">
+                  <h4>زر الإشعارات 🔔</h4>
+                  <p>
+                    في الزاوية العلوية — يفتح صفحة الإشعارات لعرض أي تنبيهات أو
+                    رسائل من النظام.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--primary)">3</div>
+                <div class="step-content">
+                  <h4>زر السحابة ☁️ (النسخ الاحتياطي)</h4>
+                  <p>
+                    اضغط عليه لفتح قائمة: "رفع نسخة احتياطية" يحفظ بياناتك على
+                    الإنترنت، و"استرجاع النسخة" يسترد آخر نسخة محفوظة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--primary)">4</div>
+                <div class="step-content">
+                  <h4>زر تسجيل الخروج</h4>
+                  <p>
+                    يظهر تأكيد قبل الخروج لضمان عدم الخروج بالخطأ. بياناتك تبقى
+                    محفوظة محلياً وعلى السحابة.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ CUSTOMERS ══ -->
+        <div class="guide-section" id="customers">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة الحسابات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                إدارة العملاء والموردين والحسابات
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              صفحة الحسابات هي قلب النظام — فيها تسجل كل حساب (عميل، مورد،
+              إيراد، مصروف) وتتابع أرصدتهم.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>العنصر</th>
+                <th>النوع</th>
+                <th>الوظيفة</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-user"></i> اسم الحساب
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">حقل نص</span></td>
+                <td>اسم العميل أو المورد أو الحساب</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-coins"></i> الرصيد السابق
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>الرصيد الابتدائي إن وجد (ديون قديمة)</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-tag"></i> نوع الحساب
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>عميل / مورد / إيراد / مصروف</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-plus"></i> زر إضافة
+                  </div>
+                </td>
+                <td><span class="el-tag tag-btn">زر</span></td>
+                <td>يضيف الحساب إلى قائمة الحسابات</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-magnifying-glass"></i> بحث
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">حقل نص</span></td>
+                <td>ابحث عن أي حساب بالاسم فوراً</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-filter"></i> تصفية النوع
+                  </div>
+                </td>
+                <td><span class="el-tag tag-filter">فلتر</span></td>
+                <td>عرض العملاء فقط أو الموردين فقط...</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-pen"></i> تعديل
+                  </div>
+                </td>
+                <td><span class="el-tag tag-btn">زر جدول</span></td>
+                <td>تعديل اسم أو رصيد الحساب</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-trash"></i> حذف
+                  </div>
+                </td>
+                <td><span class="el-tag tag-modal">زر جدول</span></td>
+                <td>حذف الحساب (يطلب تأكيد)</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-file-invoice"></i> كشف حساب
+                  </div>
+                </td>
+                <td><span class="el-tag tag-table">زر جدول</span></td>
+                <td>يعرض كل حركات الحساب مفصلاً</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-success">
+              <i class="fa-solid fa-circle-check"></i>
+              <p>
+                الأعمدة "مدين" و"دائن" في الجدول: مدين = مبالغ على العميل، دائن
+                = مبالغ دفعها أو ما له عليك.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PRODUCTS ══ -->
+        <div class="guide-section" id="products">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #ecfdf5; color: #059669"
+            >
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة المنتجات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                إدارة المخزون والأسعار
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              هنا تضيف منتجاتك وتحدد أسعار البيع والشراء. النظام يتابع المخزون
+              تلقائياً عند كل عملية بيع أو شراء.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>العنصر</th>
+                <th>النوع</th>
+                <th>الوظيفة</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-box"></i> اسم المنتج
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">حقل نص</span></td>
+                <td>اسم الصنف أو المنتج</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-layer-group"></i> الكمية الافتتاحية
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>الكمية الموجودة مسبقاً في المخزن</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-weight-hanging"></i> الوحدة
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>قطعة / علبة / كرتونة / كجم / لتر</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-tag"></i> سعر البيع
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>السعر الذي ستبيع به للعملاء</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-tag"></i> سعر الشراء
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>تكلفة شراء المنتج — يُستخدم لحساب الربح</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i> حركة
+                    الصنف
+                  </div>
+                </td>
+                <td><span class="el-tag tag-table">زر جدول</span></td>
+                <td>يعرض تاريخ كامل للمنتج (دخول/خروج)</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                لا تنسَ إدخال سعر الشراء بدقة — هو الأساس لحساب الأرباح في
+                تقارير الربح.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ SALES ══ -->
+        <div class="guide-section" id="sales">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--success-lt); color: var(--success)"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة المبيعات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                إنشاء فواتير البيع وإدارتها
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              هنا تنشئ فواتير البيع للعملاء. يمكنك البيع نقداً أو بالآجل،
+              والنظام يحدث رصيد العميل والمخزون تلقائياً.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: var(--success)">1</div>
+                <div class="step-content">
+                  <h4>اختر الحساب</h4>
+                  <p>
+                    ابدأ بكتابة اسم العميل في حقل "اختر الحساب" — ستظهر قائمة
+                    منسدلة تلقائياً. اضغط على الاسم لاختياره ويظهر رصيده السابق.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--success)">2</div>
+                <div class="step-content">
+                  <h4>أضف المنتجات</h4>
+                  <p>
+                    في حقل "أصناف الفاتورة" اكتب اسم المنتج واختره. يُضاف
+                    تلقائياً للجدول — عدّل الكمية والسعر من الجدول مباشرة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--success)">3</div>
+                <div class="step-content">
+                  <h4>أدخل المبلغ المدفوع</h4>
+                  <p>
+                    في حقل "المبلغ المدفوع" أدخل ما دفعه العميل. يحسب النظام
+                    "الرصيد الجديد" تلقائياً (الفارق الذي على العميل).
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--success)">4</div>
+                <div class="step-content">
+                  <h4>احفظ الفاتورة</h4>
+                  <p>
+                    اضغط "حفظ الفاتورة" — تُحفظ الفاتورة ويُحدَّث رصيد العميل
+                    والمخزون فوراً.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="tip-box tip-info">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>
+                إذا كان المبلغ المدفوع = إجمالي الفاتورة، فالبيع نقدي. إذا كان
+                أقل، الفارق يُضاف لرصيد العميل كدين.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PURCHASES ══ -->
+        <div class="guide-section" id="purchases">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--warning-lt); color: var(--warning)"
+            >
+              <i class="fa-solid fa-dolly"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة المشتريات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                تسجيل فواتير الشراء من الموردين
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              عند شراء بضاعة من مورد، سجلها هنا. النظام يضيف الكميات للمخزون
+              ويحدث رصيد المورد تلقائياً.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>العنصر</th>
+                <th>النوع</th>
+                <th>الوظيفة</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-truck"></i> المورد
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>اختر المورد من حسابات النوع "مورد"</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-box"></i> المنتج
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>اختر الصنف المشترى</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-hashtag"></i> الكمية
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم داخل الجدول</span></td>
+                <td>كمية الأصناف المشتراة</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-tag"></i> سعر الشراء
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم داخل الجدول</span></td>
+                <td>يُحدَّث تلقائياً من بيانات المنتج</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-money-bill"></i> المبلغ المدفوع
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>ما دفعته للمورد فعلاً</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-scale-balanced"></i> الرصيد الجديد
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">محسوب</span></td>
+                <td>ما تبقى عليك للمورد</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-success">
+              <i class="fa-solid fa-circle-check"></i>
+              <p>
+                بعد حفظ فاتورة الشراء، ستجد الكمية أُضيفت تلقائياً لمخزون المنتج
+                في صفحة المنتجات.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ RECEIPTS ══ -->
+        <div class="guide-section" id="receipts">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #f0f9ff; color: #0284c7"
+            >
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة المقبوضات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                تسجيل المدفوعات الواردة
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              استخدم هذه الصفحة عندما يدفع عميل مبلغاً على حسابه (سداد دين أو
+              دفعة) أو عند إضافة رأس مال للخزينة.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: #0284c7">1</div>
+                <div class="step-content">
+                  <h4>اختر الحساب</h4>
+                  <p>
+                    اختر العميل أو الحساب الذي يدفع. سيظهر رصيده الحالي تلقائياً
+                    في حقل "الرصيد السابق".
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #0284c7">2</div>
+                <div class="step-content">
+                  <h4>اختر البيان</h4>
+                  <p>
+                    سند قبض (تحصيل عادي) / تحصيل ديون / أو أدخل بياناً مخصصاً
+                    باختيار "أخرى".
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #0284c7">3</div>
+                <div class="step-content">
+                  <h4>أدخل المبلغ</h4>
+                  <p>
+                    يحسب النظام "المتبقي بعد الدفع" تلقائياً. تحقق منه قبل
+                    الحفظ.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="tip-box tip-info">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>
+                المقبوضات تزيد رصيد الخزينة وتقلل رصيد العميل (الدين) في نفس
+                الوقت.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ INCOME ══ -->
+        <div class="guide-section" id="income">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--success-lt); color: var(--success)"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة الإيرادات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                تسجيل الإيرادات الخارجية
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              الإيرادات هي أي دخل لا يأتي من المبيعات المباشرة — كالإيجارات،
+              الخدمات، أو أي مصدر دخل خارجي آخر.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>العنصر</th>
+                <th>النوع</th>
+                <th>الوظيفة</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-user"></i> الحساب
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>الحساب المرتبط بهذا الإيراد (اختياري)</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-money-bill"></i> المبلغ
+                  </div>
+                </td>
+                <td><span class="el-tag tag-input">رقم</span></td>
+                <td>قيمة الإيراد بالجنيه</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-align-right"></i> البيان
+                  </div>
+                </td>
+                <td><span class="el-tag tag-select">قائمة</span></td>
+                <td>نوع الإيراد — أو اختر "بند آخر" لإدخال نص حر</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-calendar"></i> الفلتر الزمني
+                  </div>
+                </td>
+                <td><span class="el-tag tag-filter">فلتر</span></td>
+                <td>عرض الإيرادات بين تاريخين محددين</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- ══ EXPENSES ══ -->
+        <div class="guide-section" id="expenses">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #fff1f2; color: #e11d48"
+            >
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة المصروفات</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                تتبع كل المصروفات التشغيلية
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              سجّل هنا كل المصروفات: أجور، إيجارات، وقود، نثريات... كل مصروف
+              يُخصم من الخزينة ويُؤثر على صافي الربح.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: #e11d48">1</div>
+                <div class="step-content">
+                  <h4>اختر الحساب</h4>
+                  <p>
+                    إذا كان المصروف مرتبطاً بحساب معين (مثل أجر موظف لديه حساب)
+                    اختره، وإلا اتركه فارغاً.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #e11d48">2</div>
+                <div class="step-content">
+                  <h4>اختر البند</h4>
+                  <p>
+                    مصروفات نثرية / إدارية / أجور / إيجارات / وقود... أو اختر
+                    "إدخال بند آخر" وأكتب ما تريد.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #e11d48">3</div>
+                <div class="step-content">
+                  <h4>أدخل المبلغ وأضف</h4>
+                  <p>
+                    يُخصم المبلغ فوراً من رصيد الخزينة ويُضاف لسجل المصروفات.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="tip-box tip-warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                سجّل المصروفات يومياً لتحصل على تقارير أرباح دقيقة — المصروفات
+                غير المسجلة تُظهر أرباحاً وهمية.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ CASH ══ -->
+        <div class="guide-section" id="cash">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #ecfeff; color: #0891b2"
+            >
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة الخزينة</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                كشف حركة النقدية الكاملة
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              الخزينة تعرض ملخصاً كاملاً لحركة النقدية في فترة زمنية محددة،
+              وتساعدك على معرفة الوضع المالي الفعلي في أي لحظة.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>بطاقة الخزينة</th>
+                <th>تعني</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-wallet"></i> الرصيد الافتتاحي
+                  </div>
+                </td>
+                <td>الرصيد الذي بدأت به الخزينة</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name" style="color: var(--success)">
+                    <i class="fa-solid fa-arrow-trend-up"></i> إجمالي المقبوضات
+                  </div>
+                </td>
+                <td>
+                  كل المبالغ التي دخلت الخزينة (مبيعات + مقبوضات + إيرادات)
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name" style="color: var(--danger)">
+                    <i class="fa-solid fa-arrow-trend-down"></i> إجمالي
+                    المصروفات
+                  </div>
+                </td>
+                <td>كل المبالغ التي خرجت من الخزينة</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name" style="color: var(--primary)">
+                    <i class="fa-solid fa-vault"></i> الرصيد الختامي
+                  </div>
+                </td>
+                <td>= الافتتاحي + المقبوضات - المصروفات</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-info">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>
+                استخدم فلتر التاريخ وفلتر الحساب في كشف الحركة لتتبع حركة حساب
+                معين أو فترة زمنية محددة.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PROFIT ══ -->
+        <div class="guide-section" id="profit">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #fffbeb; color: #b45309"
+            >
+              <i class="fa-solid fa-coins"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">صفحة الأرباح</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                تقارير الربح التفصيلية
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              صفحة الأرباح تحسب لك الربح الحقيقي — الفرق بين سعر البيع وسعر
+              الشراء مطروحاً منه المصروفات.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: #b45309">1</div>
+                <div class="step-content">
+                  <h4>حدد الفترة الزمنية</h4>
+                  <p>
+                    اختر "من تاريخ" و"إلى تاريخ" ثم اضغط "فلترة" لعرض أرباح تلك
+                    الفترة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #b45309">2</div>
+                <div class="step-content">
+                  <h4>قرأ البطاقات الثلاث</h4>
+                  <p>
+                    إجمالي الربح (من المبيعات) — إجمالي المصروفات — صافي الربح =
+                    الربح الحقيقي.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: #b45309">3</div>
+                <div class="step-content">
+                  <h4>اعرض المصروفات</h4>
+                  <p>
+                    اضغط "عرض المصروفات" لرؤية تفصيل كل مصروف في الفترة المختارة
+                    داخل نافذة منبثقة.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="tip-box tip-warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                إذا ظهر صافي الربح بالأحمر، هذا يعني خسارة. تحقق من أسعار الشراء
+                والمصروفات.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ DASHBOARD ══ -->
+        <div class="guide-section" id="dashboard">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">
+                لوحة الحركة (Dashboard)
+              </h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                نظرة سريعة على أداء العمل
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              لوحة الحركة تعطيك نظرة فورية على حالة عملك اليوم والشهر — أوردرات،
+              مبيعات، أرباح — مع رسم بياني للأشهر الستة الأخيرة.
+            </p>
+            <table class="elem-table">
+              <tr>
+                <th>البطاقة</th>
+                <th>تعني</th>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-users"></i> العملاء
+                  </div>
+                </td>
+                <td>إجمالي عدد الحسابات المسجلة</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-file-invoice"></i> الفواتير
+                  </div>
+                </td>
+                <td>إجمالي عدد فواتير البيع</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-cart-shopping"></i> المبيعات
+                  </div>
+                </td>
+                <td>إجمالي قيمة كل المبيعات</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-coins"></i> الربح الكلي
+                  </div>
+                </td>
+                <td>صافي الربح من كل الفترات</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-sun"></i> ربح اليوم
+                  </div>
+                </td>
+                <td>الربح المحقق اليوم فقط</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="el-name">
+                    <i class="fa-solid fa-calendar-days"></i> ربح الشهر
+                  </div>
+                </td>
+                <td>الربح المحقق هذا الشهر</td>
+              </tr>
+            </table>
+            <div class="tip-box tip-info">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>
+                الرسم البياني يعرض أعمدة الأرباح الشهرية. العمود الأحمر = خسارة
+                في ذلك الشهر، الأزرق = ربح.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ BACKUP ══ -->
+        <div class="guide-section" id="backup">
+          <div class="section-head">
+            <div
+              class="section-icon"
+              style="background: #f0f9ff; color: var(--accent)"
+            >
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 16px; font-weight: 800">النسخ الاحتياطي</h3>
+              <p style="font-size: 12px; color: var(--text3); margin-top: 3px">
+                حماية بياناتك من الضياع
+              </p>
+            </div>
+          </div>
+          <div class="section-body">
+            <p class="section-desc">
+              النظام يدعم النسخ الاحتياطي التلقائي على Firebase. بياناتك محفوظة
+              محلياً أولاً، وعند الاتصال بالإنترنت تُرفع تلقائياً.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num" style="background: var(--accent)">1</div>
+                <div class="step-content">
+                  <h4>رفع نسخة احتياطية يدوياً</h4>
+                  <p>
+                    من الصفحة الرئيسية اضغط أيقونة السحابة ☁️ ثم "رفع نسخة
+                    احتياطية". ستظهر رسالة نجاح وتاريخ آخر نسخة في الأسفل.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--accent)">2</div>
+                <div class="step-content">
+                  <h4>استرجاع النسخة</h4>
+                  <p>
+                    إذا فقدت بياناتك أو استخدمت جهازاً جديداً، اضغط "استرجاع
+                    النسخة" لاسترداد آخر نسخة محفوظة على السحابة.
+                  </p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num" style="background: var(--accent)">3</div>
+                <div class="step-content">
+                  <h4>النسخ التلقائي</h4>
+                  <p>
+                    عند الاتصال بالإنترنت بعد فترة انقطاع، يرفع النظام تلقائياً
+                    أي تغييرات جديدة دون تدخل منك.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="faq">
+              <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                  ماذا يحدث إذا عملت بدون إنترنت؟
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-a">
+                  البيانات تُحفظ محلياً على جهازك فوراً. عند عودة الإنترنت تُرفع
+                  تلقائياً للسحابة.
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                  هل يمكن استخدام النظام على أكثر من جهاز؟
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-a">
+                  نعم. سجّل دخولك بنفس الحساب على أي جهاز واسترجع النسخة
+                  الاحتياطية لتجد كل بياناتك.
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                  هل البيانات آمنة على السحابة؟
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-a">
+                  نعم. البيانات مخزنة على Firebase من Google بتشفير كامل ولا
+                  يمكن الوصول إليها إلا بحسابك.
+                </div>
+              </div>
+            </div>
+            <div class="tip-box tip-warn" style="margin-top: 16px">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                ننصح بعمل نسخة احتياطية يدوية مرة واحدة على الأقل في نهاية كل
+                يوم عمل كإجراء احترازي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- /layout -->
+
+    <script>
+      /* sidebar toggle */
+      document.getElementById("menuToggle").onclick = () => {
+        document.getElementById("sidebar").classList.toggle("show");
+        document.getElementById("mob-overlay").classList.toggle("show");
+      };
+
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("show");
+        document.getElementById("mob-overlay").classList.remove("show");
+      }
+
+      /* scroll to section */
+      function goToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        /* update active sidebar item */
+        document
+          .querySelectorAll(".sb-item")
+          .forEach((i) => i.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+        if (window.innerWidth < 900) closeSidebar();
+      }
+
+      /* faq toggle */
+      function toggleFaq(el) {
+        el.parentElement.classList.toggle("open");
+      }
+
+      /* highlight active section on scroll */
+      const sections = [
+        "overview",
+        "login",
+        "home",
+        "customers",
+        "products",
+        "sales",
+        "purchases",
+        "receipts",
+        "income",
+        "expenses",
+        "cash",
+        "profit",
+        "dashboard",
+        "tayar",
+        "backup",
+      ];
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top < 120) current = id;
+        });
+        if (current) {
+          document.querySelectorAll(".sb-item").forEach((item) => {
+            const fn = item.getAttribute("onclick") || "";
+            item.classList.toggle("active", fn.includes(`'${current}'`));
+          });
+        }
+      });
+
+      /* stagger step animations */
+      document.querySelectorAll(".step").forEach((s, i) => {
+        s.style.animationDelay = `${i * 0.08}s`;
+      });
+    </script>
+  </body>
+</html>
