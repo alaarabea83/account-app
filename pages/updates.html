@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>التحديثات | المحاسب المحترف</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #fff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --success-lt: #f0fdf4;
+        --success-md: #bbf7d0;
+        --warning: #d97706;
+        --warning-lt: #fffbeb;
+        --warning-md: #fcd34d;
+        --danger: #dc2626;
+        --danger-lt: #fef2f2;
+        --purple: #7c3aed;
+        --purple-lt: #f5f3ff;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+        --r: 14px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(37, 99, 235, 0.04) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--accent),
+          var(--success)
+        );
+        z-index: 200;
+      }
+
+      /* HEADER */
+      .header {
+        position: sticky;
+        top: 3px;
+        z-index: 100;
+        height: 62px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 800;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+      .brand span {
+        color: var(--primary);
+      }
+      .hdr-nav {
+        display: flex;
+        gap: 6px;
+      }
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 13px;
+        border-radius: 9px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border-color: var(--primary-md);
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(
+          135deg,
+          var(--purple) 0%,
+          var(--primary) 55%,
+          var(--accent) 100%
+        );
+        padding: 70px 28px 80px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -70px;
+        left: 5%;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        margin: auto;
+      }
+      .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        padding: 5px 16px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 20px;
+      }
+      .hero h1 {
+        font-size: clamp(24px, 4vw, 38px);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .hero h1 span {
+        color: #c4b5fd;
+      }
+      .hero p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        font-weight: 400;
+      }
+
+      /* VERSION BADGE */
+      .ver-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 7px 18px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 18px;
+      }
+      .ver-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        animation: pulse 2s ease infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.3);
+        }
+      }
+
+      /* CONTENT */
+      .content {
+        position: relative;
+        z-index: 1;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 48px 28px 72px;
+      }
+
+      /* FILTERS */
+      .filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+      .filter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--white);
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: "Cairo", sans-serif;
+      }
+      .filter-btn:hover {
+        border-color: var(--primary-md);
+        color: var(--primary);
+        background: var(--primary-lt);
+      }
+      .filter-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      /* TIMELINE */
+      .timeline {
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        right: 19px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+      }
+
+      /* RELEASE */
+      .release {
+        position: relative;
+        padding-right: 52px;
+        margin-bottom: 32px;
+        animation: fadeUp 0.45s ease both;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .release:nth-child(1) {
+        animation-delay: 0.04s;
+      }
+      .release:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .release:nth-child(3) {
+        animation-delay: 0.16s;
+      }
+      .release:nth-child(4) {
+        animation-delay: 0.22s;
+      }
+      .release:nth-child(5) {
+        animation-delay: 0.28s;
+      }
+
+      /* circle indicator */
+      .r-dot {
+        position: absolute;
+        right: 8px;
+        top: 18px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #fff;
+        font-weight: 800;
+        border: 3px solid var(--bg);
+      }
+
+      .release-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: box-shadow 0.25s;
+      }
+      .release-card:hover {
+        box-shadow: var(--shadow);
+      }
+
+      /* card header */
+      .rc-head {
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .rc-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ver-num {
+        font-size: 18px;
+        font-weight: 900;
+      }
+      .ver-name {
+        font-size: 13px;
+        color: var(--text3);
+        font-weight: 400;
+      }
+      .rc-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .vtag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .vt-latest {
+        background: var(--success-lt);
+        color: var(--success);
+        border: 1px solid var(--success-md);
+      }
+      .vt-major {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border: 1px solid var(--primary-md);
+      }
+      .vt-minor {
+        background: var(--warning-lt);
+        color: var(--warning);
+        border: 1px solid var(--warning-md);
+      }
+      .vt-fix {
+        background: var(--danger-lt);
+        color: var(--danger);
+        border: 1px solid #fecaca;
+      }
+      .rc-date {
+        font-size: 12px;
+        color: var(--text3);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* card body */
+      .rc-body {
+        padding: 20px 22px;
+      }
+      .rc-intro {
+        font-size: 13.5px;
+        color: var(--text2);
+        line-height: 1.7;
+        margin-bottom: 16px;
+        font-weight: 400;
+      }
+
+      /* change groups */
+      .change-group {
+        margin-bottom: 14px;
+      }
+      .cg-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .cg-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .change-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .change-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 9px;
+        background: var(--bg);
+      }
+      .ci-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+      }
+      .ci-new {
+        background: var(--success-lt);
+        color: var(--success);
+      }
+      .ci-fix {
+        background: var(--danger-lt);
+        color: var(--danger);
+      }
+      .ci-imp {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+      .ci-perf {
+        background: var(--warning-lt);
+        color: var(--warning);
+      }
+      .ci-design {
+        background: var(--purple-lt);
+        color: var(--purple);
+      }
+      .change-item p {
+        font-size: 13px;
+        color: var(--text2);
+        line-height: 1.6;
+        font-weight: 400;
+      }
+      .change-item strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      /* coming soon */
+      .coming-card {
+        background: linear-gradient(135deg, var(--purple), var(--primary));
+        border-radius: var(--r);
+        padding: 28px 24px;
+        margin-top: 8px;
+      }
+      .coming-card h3 {
+        font-size: 16px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+      .coming-card p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 16px;
+        font-weight: 400;
+      }
+      .coming-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .coming-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 9px;
+        padding: 10px 14px;
+      }
+      .coming-item i {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+      }
+      .coming-item span {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+      }
+
+      /* notify */
+      .notify-box {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        text-align: center;
+        margin-top: 32px;
+      }
+      .notify-box h3 {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .notify-box p {
+        font-size: 13px;
+        color: var(--text3);
+        margin-bottom: 18px;
+        font-weight: 400;
+      }
+      .notify-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 11px 22px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), #1d4ed8);
+        color: #fff;
+        font-family: "Cairo", sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+        transition: all 0.2s;
+      }
+      .notify-btn:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+      }
+
+      footer {
+        position: relative;
+        z-index: 1;
+        background: var(--text);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 24px;
+        text-align: center;
+        font-size: 12.5px;
+      }
+      footer strong {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      @media (max-width: 600px) {
+        .content {
+          padding: 28px 14px 56px;
+        }
+        .hero {
+          padding: 56px 16px 64px;
+        }
+        .timeline::before {
+          right: 11px;
+        }
+        .release {
+          padding-right: 36px;
+        }
+        .r-dot {
+          right: 0px;
+          width: 20px;
+          height: 20px;
+        }
+        .rc-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hdr-nav .nav-link span {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
+        المحاسب <span>المحترف</span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-chip">
+          <i class="fa-solid fa-rocket"></i> سجل التحديثات الكامل
+        </div>
+        <h1>آخر <span>التحديثات</span> والمستجدات</h1>
+        <p>
+          نعمل باستمرار على تحسين النظام وإضافة مزايا جديدة بناءً على ملاحظاتكم
+          واحتياجاتكم.
+        </p>
+        <div class="ver-badge">
+          <div class="ver-dot"></div>
+          الإصدار الحالي: v2.5.0 &nbsp;·&nbsp; يونيو 2025
+        </div>
+      </div>
+    </section>
+
+    <div class="content">
+      <!-- FILTERS -->
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterUpdates('all', this)">
+          <i class="fa-solid fa-list"></i> الكل
+        </button>
+        <button class="filter-btn" onclick="filterUpdates('major', this)">
+          <i class="fa-solid fa-star"></i> إصدارات كبرى
+        </button>
+        <button class="filter-btn" onclick="filterUpdates('minor', this)">
+          <i class="fa-solid fa-plus"></i> مزايا جديدة
+        </button>
+        <button class="filter-btn" onclick="filterUpdates('fix', this)">
+          <i class="fa-solid fa-wrench"></i> إصلاحات
+        </button>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="timeline" id="timeline">
+        <!-- v2.5.0 -->
+        <div class="release" data-type="major">
+          <div class="r-dot" style="background: var(--success)">
+            <i class="fa-solid fa-star" style="font-size: 9px"></i>
+          </div>
+          <div class="release-card">
+            <div class="rc-head">
+              <div class="rc-left">
+                <div>
+                  <div class="ver-num">v2.5.0</div>
+                  <div class="ver-name">إصدار Light Clean الاحترافي</div>
+                </div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  gap: 8px;
+                "
+              >
+                <div class="rc-tags">
+                  <span class="vtag vt-latest"
+                    ><i class="fa-solid fa-circle" style="font-size: 7px"></i>
+                    الأحدث</span
+                  >
+                  <span class="vtag vt-major">إصدار كبير</span>
+                </div>
+                <div class="rc-date">
+                  <i class="fa-solid fa-calendar"></i> يونيو 2025
+                </div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <p class="rc-intro">
+                أكبر تحديث في تاريخ النظام — إعادة تصميم كاملة لجميع الصفحات الـ
+                15 بأسلوب Light Clean الاحترافي مع هوية بصرية مميزة لكل صفحة.
+              </p>
+
+              <div class="change-group">
+                <div class="cg-title" style="color: var(--success)">
+                  <i
+                    class="fa-solid fa-sparkles"
+                    style="color: var(--success)"
+                  ></i>
+                  مزايا جديدة
+                </div>
+                <div class="change-list">
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>تصميم Light Clean كامل</strong> — خلفيات بيضاء،
+                      ألوان هادئة، خط Cairo احترافي على جميع الصفحات
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>هوية لونية لكل صفحة</strong> — أزرق للحسابات، أخضر
+                      للمبيعات، برتقالي للمشتريات، فيروزي للخزينة...
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>Sidebar احترافي</strong> مع تقسيم للأقسام وأيقونات
+                      وتمييز للصفحة الحالية
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>صفحة الخزينة محسّنة</strong> — 4 بطاقات إحصائية
+                      بدل جدول الملخص القديم
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>صفحة دليل الاستخدام</strong> — شرح تفصيلي لكل صفحة
+                      وكل عنصر في النظام
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>صفحات من نحن / خصوصية / تحديثات</strong> — مضافة
+                      لأول مرة
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="change-group">
+                <div class="cg-title" style="color: var(--primary)">
+                  <i
+                    class="fa-solid fa-arrow-trend-up"
+                    style="color: var(--primary)"
+                  ></i>
+                  تحسينات
+                </div>
+                <div class="change-list">
+                  <div class="change-item">
+                    <div class="ci-icon ci-imp">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+                    <p>
+                      <strong>صفحة تسجيل الدخول</strong> — تصميم Split Screen مع
+                      لوحة تعريفية بالنظام
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-imp">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+                    <p>
+                      <strong>Modals محسّنة</strong> في جميع الصفحات — أنيماشن
+                      أنيق وأزرار ملونة واضحة
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-design">
+                      <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <p>
+                      <strong>Breadcrumb navigation</strong> مضاف لكل الصفحات
+                      لتسهيل التنقل
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- v1.8.0 -->
+        <div class="release" data-type="minor">
+          <div class="r-dot" style="background: var(--warning)">+</div>
+          <div class="release-card">
+            <div class="rc-head">
+              <div class="rc-left">
+                <div>
+                  <div class="ver-num">v1.8.0</div>
+                  <div class="ver-name">تحسينات التقارير</div>
+                </div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  gap: 8px;
+                "
+              >
+                <div class="rc-tags">
+                  <span class="vtag vt-minor">مزايا جديدة</span>
+                </div>
+                <div class="rc-date">
+                  <i class="fa-solid fa-calendar"></i> يناير 2025
+                </div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <p class="rc-intro">
+                تحسينات شاملة على صفحات التقارير والأرباح وإضافة رسم بياني
+                للحركة الشهرية.
+              </p>
+              <div class="change-group">
+                <div class="cg-title" style="color: var(--success)">
+                  <i
+                    class="fa-solid fa-sparkles"
+                    style="color: var(--success)"
+                  ></i>
+                  مضاف
+                </div>
+                <div class="change-list">
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>رسم بياني شهري</strong> للأرباح في لوحة الحركة
+                      (Chart.js)
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>تنبيه خسارة</strong> تلقائي عند اكتشاف ربح سالب
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-imp">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+                    <p>
+                      <strong>فلتر التاريخ</strong> في صفحة الأرباح تم تحسينه
+                      ليشمل فترات مرنة
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-imp">
+                      <i class="fa-solid fa-arrow-up"></i>
+                    </div>
+                    <p>
+                      <strong>زر "عرض المصروفات"</strong> مضاف في صفحة الأرباح
+                      لعرض التفاصيل
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- v1.5.0 -->
+        <div class="release" data-type="minor">
+          <div class="r-dot" style="background: var(--accent)">+</div>
+          <div class="release-card">
+            <div class="rc-head">
+              <div class="rc-left">
+                <div>
+                  <div class="ver-num">v1.5.0</div>
+                  <div class="ver-name">النسخ الاحتياطي التلقائي</div>
+                </div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  gap: 8px;
+                "
+              >
+                <div class="rc-tags">
+                  <span class="vtag vt-minor">مزايا جديدة</span>
+                </div>
+                <div class="rc-date">
+                  <i class="fa-solid fa-calendar"></i> أكتوبر 2024
+                </div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <p class="rc-intro">
+                إضافة نظام النسخ الاحتياطي التلقائي على Firebase Firestore مع
+                دعم العمل أوفلاين.
+              </p>
+              <div class="change-group">
+                <div class="cg-title" style="color: var(--success)">
+                  <i
+                    class="fa-solid fa-sparkles"
+                    style="color: var(--success)"
+                  ></i>
+                  مضاف
+                </div>
+                <div class="change-list">
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>Firebase Firestore</strong> لتخزين النسخ
+                      الاحتياطية على السحابة
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>رفع تلقائي</strong> عند عودة الإنترنت بعد العمل
+                      أوفلاين
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>
+                      <strong>استرجاع النسخة</strong> لاستعادة البيانات على أي
+                      جهاز
+                    </p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-perf">
+                      <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <p>
+                      <strong>مقارنة Hash</strong> للبيانات — لا يرفع نسخة إذا
+                      لم تتغير البيانات
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- v1.0.0 -->
+        <div class="release" data-type="major">
+          <div class="r-dot" style="background: var(--purple)">1</div>
+          <div class="release-card">
+            <div class="rc-head">
+              <div class="rc-left">
+                <div>
+                  <div class="ver-num">v1.0.0</div>
+                  <div class="ver-name">الإصدار الأول</div>
+                </div>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  gap: 8px;
+                "
+              >
+                <div class="rc-tags">
+                  <span class="vtag vt-major">إطلاق أولي</span>
+                </div>
+                <div class="rc-date">
+                  <i class="fa-solid fa-calendar"></i> يوليو 2024
+                </div>
+              </div>
+            </div>
+            <div class="rc-body">
+              <p class="rc-intro">
+                الإطلاق الرسمي الأول للمحاسب المحترف مع المزايا الأساسية لإدارة
+                الحسابات والفواتير.
+              </p>
+              <div class="change-group">
+                <div class="cg-title" style="color: var(--success)">
+                  <i
+                    class="fa-solid fa-rocket"
+                    style="color: var(--purple)"
+                  ></i>
+                  الإصدار الأول يشمل
+                </div>
+                <div class="change-list">
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>إدارة الحسابات (عملاء / موردين)</p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>إدارة المنتجات والمخزون</p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>فواتير البيع والشراء</p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>المقبوضات والمصروفات والإيرادات</p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>الخزينة وتقارير الأرباح</p>
+                  </div>
+                  <div class="change-item">
+                    <div class="ci-icon ci-new">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <p>Firebase Authentication لتسجيل الدخول الآمن</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /timeline -->
+
+      <!-- COMING SOON -->
+      <div class="coming-card">
+        <h3>🚀 قريباً في الإصدار القادم v3.0.0</h3>
+        <p>نعمل حالياً على هذه المزايا الجديدة — ترقبوها!</p>
+        <div class="coming-list">
+          <div class="coming-item">
+            <i class="fa-solid fa-print"></i
+            ><span>طباعة الفواتير مباشرة من النظام</span>
+          </div>
+          <div class="coming-item">
+            <i class="fa-solid fa-file-pdf"></i
+            ><span>تصدير التقارير كـ PDF</span>
+          </div>
+          <div class="coming-item">
+            <i class="fa-solid fa-chart-bar"></i
+            ><span>تقارير مرئية متقدمة (رسوم بيانية متعددة)</span>
+          </div>
+          <div class="coming-item">
+            <i class="fa-solid fa-bell"></i
+            ><span>إشعارات تلقائية عند انخفاض المخزون</span>
+          </div>
+          <div class="coming-item">
+            <i class="fa-solid fa-users-gear"></i
+            ><span>دعم متعدد المستخدمين (مدير + موظف)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTIFY -->
+      <div class="notify-box">
+        <h3>هل لديك اقتراح لمزية جديدة؟</h3>
+        <p>نرحب بكل المقترحات — فكرتك القادمة قد تكون في الإصدار التالي!</p>
+        <a href="https://wa.me/201019065615" target="_blank" class="notify-btn">
+          <i class="fa-brands fa-whatsapp"></i> أرسل اقتراحك
+        </a>
+      </div>
+    </div>
+    <!-- /content -->
+
+    <footer>
+      جميع الحقوق محفوظة © 2025 &nbsp;·&nbsp;
+      <strong>المحاسب المحترف</strong> &nbsp;·&nbsp; تطوير:
+      <strong>علاء ربيع</strong>
+    </footer>
+
+    <script>
+      function filterUpdates(type, btn) {
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".release").forEach((r) => {
+          if (type === "all") r.style.display = "";
+          else r.style.display = r.dataset.type === type ? "" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سياسة الخصوصية | المحاسب المحترف</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --bg2: #eef1f7;
+        --white: #fff;
+        --primary: #2563eb;
+        --primary-lt: #eff4ff;
+        --primary-md: #bfcfff;
+        --accent: #0ea5e9;
+        --success: #16a34a;
+        --success-lt: #f0fdf4;
+        --warning: #d97706;
+        --warning-lt: #fffbeb;
+        --danger: #dc2626;
+        --danger-lt: #fef2f2;
+        --text: #0f172a;
+        --text2: #475569;
+        --text3: #94a3b8;
+        --border: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        --r: 14px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgba(37, 99, 235, 0.04) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        pointer-events: none;
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--primary),
+          var(--accent),
+          var(--success)
+        );
+        z-index: 200;
+      }
+
+      .header {
+        position: sticky;
+        top: 3px;
+        z-index: 100;
+        height: 62px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 800;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+      .brand span {
+        color: var(--primary);
+      }
+      .hdr-nav {
+        display: flex;
+        gap: 6px;
+      }
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 13px;
+        border-radius: 9px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        background: var(--primary-lt);
+        color: var(--primary);
+        border-color: var(--primary-md);
+      }
+
+      /* HERO */
+      .hero {
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(
+          135deg,
+          #1e3a8a,
+          var(--primary),
+          var(--accent)
+        );
+        padding: 70px 28px 80px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 620px;
+        margin: auto;
+      }
+      .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        padding: 5px 16px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 20px;
+      }
+      .hero h1 {
+        font-size: clamp(24px, 4vw, 38px);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .hero h1 span {
+        color: #bfcfff;
+      }
+      .hero p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        font-weight: 400;
+      }
+      .hero-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 6px 16px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 18px;
+      }
+
+      /* LAYOUT */
+      .layout {
+        display: flex;
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 28px 72px;
+        gap: 28px;
+      }
+
+      /* SIDEBAR */
+      .toc {
+        width: 220px;
+        flex-shrink: 0;
+      }
+      .toc-sticky {
+        position: sticky;
+        top: 80px;
+      }
+      .toc-title {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text3);
+        margin-bottom: 10px;
+        display: block;
+      }
+      .toc-item {
+        display: block;
+        padding: 8px 12px;
+        border-radius: 9px;
+        text-decoration: none;
+        color: var(--text2);
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.18s;
+        margin-bottom: 2px;
+      }
+      .toc-item:hover {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+      .toc-item.active {
+        background: var(--primary-lt);
+        color: var(--primary);
+      }
+
+      /* CONTENT */
+      .priv-content {
+        flex: 1;
+      }
+
+      .priv-section {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        margin-bottom: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        scroll-margin-top: 80px;
+        animation: fadeUp 0.4s ease both;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .priv-section:nth-child(2) {
+        animation-delay: 0.05s;
+      }
+      .priv-section:nth-child(3) {
+        animation-delay: 0.1s;
+      }
+      .priv-section:nth-child(4) {
+        animation-delay: 0.15s;
+      }
+      .priv-section:nth-child(5) {
+        animation-delay: 0.2s;
+      }
+      .priv-section:nth-child(6) {
+        animation-delay: 0.25s;
+      }
+      .priv-section:nth-child(7) {
+        animation-delay: 0.3s;
+      }
+
+      .ps-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 22px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+      }
+      .ps-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+      }
+      .ps-head h3 {
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .ps-body {
+        padding: 22px;
+      }
+      .ps-body p {
+        font-size: 13.5px;
+        color: var(--text2);
+        line-height: 1.85;
+        font-weight: 400;
+        margin-bottom: 12px;
+      }
+      .ps-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* list */
+      .priv-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .priv-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13.5px;
+        color: var(--text2);
+        line-height: 1.7;
+        font-weight: 400;
+      }
+      .priv-list li i {
+        font-size: 13px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+
+      /* highlight box */
+      .hl-box {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin: 14px 0;
+      }
+      .hl-box i {
+        font-size: 15px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .hl-box p {
+        font-size: 13px;
+        line-height: 1.7;
+        font-weight: 400;
+        margin: 0;
+      }
+      .hl-green {
+        background: var(--success-lt);
+        border: 1px solid #bbf7d0;
+        color: var(--success);
+      }
+      .hl-green p {
+        color: #166534;
+      }
+      .hl-blue {
+        background: var(--primary-lt);
+        border: 1px solid var(--primary-md);
+        color: var(--primary);
+      }
+      .hl-blue p {
+        color: #1d4ed8;
+      }
+      .hl-warn {
+        background: var(--warning-lt);
+        border: 1px solid #fcd34d;
+        color: var(--warning);
+      }
+      .hl-warn p {
+        color: #92400e;
+      }
+
+      /* contact */
+      .contact-card {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 16px;
+        padding: 28px;
+        text-align: center;
+      }
+      .contact-card h4 {
+        font-size: 16px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+      .contact-card p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 18px;
+        font-weight: 400;
+      }
+      .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 22px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        font-family: "Cairo", sans-serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .contact-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      footer {
+        position: relative;
+        z-index: 1;
+        background: var(--text);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 24px;
+        text-align: center;
+        font-size: 12.5px;
+      }
+      footer strong {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      @media (max-width: 768px) {
+        .layout {
+          flex-direction: column;
+          padding: 24px 16px 56px;
+        }
+        .toc {
+          width: 100%;
+        }
+        .toc-sticky {
+          position: static;
+        }
+        .hero {
+          padding: 56px 16px 64px;
+        }
+        .hdr-nav .nav-link span {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-chart-simple"></i></div>
+        المحاسب <span>المحترف</span>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-chip">
+          <i class="fa-solid fa-shield-halved"></i> حماية بياناتك أولويتنا
+        </div>
+        <h1>سياسة <span>الخصوصية</span></h1>
+        <p>
+          نلتزم بحماية بياناتك الشخصية وبياناتك التجارية بأعلى معايير الأمان
+          والشفافية.
+        </p>
+        <div class="hero-meta">
+          <i class="fa-solid fa-calendar-check"></i> آخر تحديث: يونيو 2025
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <!-- TOC -->
+      <aside class="toc">
+        <div class="toc-sticky">
+          <span class="toc-title">المحتويات</span>
+          <a class="toc-item active" href="#collect">البيانات التي نجمعها</a>
+          <a class="toc-item" href="#use">كيف نستخدم بياناتك</a>
+          <a class="toc-item" href="#storage">تخزين البيانات</a>
+          <a class="toc-item" href="#share">مشاركة البيانات</a>
+          <a class="toc-item" href="#rights">حقوقك</a>
+          <a class="toc-item" href="#cookies">ملفات الكوكيز</a>
+          <a class="toc-item" href="#contact">تواصل معنا</a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="priv-content">
+        <div class="priv-section" id="collect">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h3>البيانات التي نجمعها</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              عند استخدامك للمحاسب المحترف، نجمع فقط البيانات الضرورية لتشغيل
+              النظام وتقديم الخدمة. لا نجمع أي بيانات إضافية.
+            </p>
+            <ul class="priv-list">
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>بيانات الحساب:</strong> البريد الإلكتروني وكلمة
+                  المرور (مشفرة) لتسجيل الدخول عبر Firebase Auth</span
+                >
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>بيانات العمل:</strong> الحسابات، الفواتير، المنتجات،
+                  المصروفات — تُخزَّن فقط في حسابك الخاص</span
+                >
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>بيانات الجهاز:</strong> نوع المتصفح والجهاز لضمان
+                  التوافق التقني (لا نستخدمها لأي غرض آخر)</span
+                >
+              </li>
+            </ul>
+            <div class="hl-box hl-green">
+              <i class="fa-solid fa-circle-check"></i>
+              <p>
+                لا نجمع أي بيانات شخصية حساسة كأرقام الهوية أو معلومات الدفع أو
+                البيانات البيومترية.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="priv-section" id="use">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: var(--success-lt); color: var(--success)"
+            >
+              <i class="fa-solid fa-gears"></i>
+            </div>
+            <h3>كيف نستخدم بياناتك</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              نستخدم بياناتك حصرياً لتقديم خدمة النظام وتحسينها. لا توجد أي
+              أغراض تجارية أخرى.
+            </p>
+            <ul class="priv-list">
+              <li>
+                <i
+                  class="fa-solid fa-arrow-left"
+                  style="color: var(--primary)"
+                ></i>
+                تشغيل النظام وعرض بياناتك لك فقط
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-arrow-left"
+                  style="color: var(--primary)"
+                ></i>
+                حفظ واسترجاع النسخ الاحتياطية
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-arrow-left"
+                  style="color: var(--primary)"
+                ></i>
+                التحقق من هويتك عند تسجيل الدخول
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-arrow-left"
+                  style="color: var(--primary)"
+                ></i>
+                تحسين أداء النظام وإصلاح الأخطاء التقنية
+              </li>
+            </ul>
+            <div class="hl-box hl-blue">
+              <i class="fa-solid fa-ban"></i>
+              <p>
+                <strong>لا نستخدم</strong> بياناتك في الإعلانات، ولا نبيعها، ولا
+                نشاركها مع أطراف ثالثة لأي غرض تسويقي.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="priv-section" id="storage">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: #f0f9ff; color: var(--accent)"
+            >
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+            <h3>تخزين البيانات وأمانها</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              نستخدم خدمات Google Firebase لتخزين البيانات، وهي من أكثر المنصات
+              أماناً وموثوقية في العالم.
+            </p>
+            <ul class="priv-list">
+              <li>
+                <i class="fa-solid fa-lock" style="color: var(--primary)"></i>
+                <span
+                  ><strong>التشفير الكامل:</strong> جميع البيانات مشفرة أثناء
+                  النقل (SSL/TLS) وأثناء التخزين</span
+                >
+              </li>
+              <li>
+                <i class="fa-solid fa-lock" style="color: var(--primary)"></i>
+                <span
+                  ><strong>العزل الكامل:</strong> بيانات كل مستخدم معزولة تماماً
+                  — لا يمكن لأي مستخدم الوصول لبيانات مستخدم آخر</span
+                >
+              </li>
+              <li>
+                <i class="fa-solid fa-lock" style="color: var(--primary)"></i>
+                <span
+                  ><strong>LocalStorage:</strong> نسخة محلية تُحفظ على جهازك
+                  للعمل دون إنترنت</span
+                >
+              </li>
+              <li>
+                <i class="fa-solid fa-lock" style="color: var(--primary)"></i>
+                <span
+                  ><strong>مراكز بيانات:</strong> Firebase تستخدم مراكز بيانات
+                  Google المعتمدة دولياً</span
+                >
+              </li>
+            </ul>
+            <div class="hl-box hl-green">
+              <i class="fa-solid fa-shield-halved"></i>
+              <p>
+                بياناتك مملوكة لك بالكامل. يمكنك حذف حسابك وجميع بياناته في أي
+                وقت بالتواصل مع الدعم.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="priv-section" id="share">
+          <div class="ps-head">
+            <div class="ps-icon" style="background: #fff1f2; color: #e11d48">
+              <i class="fa-solid fa-share-nodes"></i>
+            </div>
+            <h3>مشاركة البيانات</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              نحن لا نشارك بياناتك مع أي طرف ثالث إطلاقاً، باستثناء ما هو ضروري
+              تقنياً لتشغيل الخدمة.
+            </p>
+            <ul class="priv-list">
+              <li>
+                <i class="fa-solid fa-circle-xmark" style="color: #e11d48"></i>
+                لا نبيع بياناتك لأي جهة
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-xmark" style="color: #e11d48"></i>
+                لا نشاركها مع شركات الإعلانات
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-xmark" style="color: #e11d48"></i>
+                لا نستخدمها في أبحاث خارجية
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                نشاركها مع Firebase/Google كمزود تقني فقط (وهو ملزم بسياسات
+                خصوصية صارمة)
+              </li>
+            </ul>
+            <div class="hl-box hl-warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p>
+                الاستثناء الوحيد: قد نُفصح عن بيانات إذا طُلب منا قانونياً من
+                جهات قضائية رسمية.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="priv-section" id="rights">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: #fffbeb; color: var(--warning)"
+            >
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h3>حقوقك كمستخدم</h3>
+          </div>
+          <div class="ps-body">
+            <p>لك كامل الحق في التحكم ببياناتك. إليك حقوقك الكاملة:</p>
+            <ul class="priv-list">
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>حق الوصول:</strong> الاطلاع على جميع بياناتك المخزنة
+                  في أي وقت</span
+                >
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>حق التصحيح:</strong> تعديل أي بيانات غير دقيقة من
+                  داخل النظام مباشرة</span
+                >
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>حق الحذف:</strong> حذف حسابك وجميع بياناته نهائياً
+                  بطلب منك</span
+                >
+              </li>
+              <li>
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="color: var(--success)"
+                ></i>
+                <span
+                  ><strong>حق التصدير:</strong> تصدير بياناتك عبر النسخ
+                  الاحتياطي في أي وقت</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="priv-section" id="cookies">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: var(--primary-lt); color: var(--primary)"
+            >
+              <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <h3>ملفات الكوكيز والتخزين المحلي</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              نستخدم التخزين المحلي (localStorage) للحفاظ على جلسة العمل وتخزين
+              نسخة محلية من بياناتك.
+            </p>
+            <ul class="priv-list">
+              <li>
+                <i class="fa-solid fa-check" style="color: var(--primary)"></i>
+                تخزين بيانات الجلسة (تسجيل الدخول)
+              </li>
+              <li>
+                <i class="fa-solid fa-check" style="color: var(--primary)"></i>
+                تخزين نسخة محلية من البيانات للعمل أوفلاين
+              </li>
+              <li>
+                <i class="fa-solid fa-check" style="color: var(--primary)"></i>
+                تخزين إعدادات المستخدم المحلية
+              </li>
+            </ul>
+            <p>
+              يمكنك مسح البيانات المحلية في أي وقت من إعدادات المتصفح — لكن
+              ستحتاج لاسترجاع نسخة السحابة.
+            </p>
+          </div>
+        </div>
+
+        <div class="priv-section" id="contact">
+          <div class="ps-head">
+            <div
+              class="ps-icon"
+              style="background: var(--success-lt); color: var(--success)"
+            >
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3>تواصل معنا بشأن الخصوصية</h3>
+          </div>
+          <div class="ps-body">
+            <p>
+              إذا كان لديك أي استفسار أو طلب متعلق بخصوصية بياناتك، تواصل معنا
+              مباشرة وسنرد في أقرب وقت.
+            </p>
+            <div class="contact-card" style="margin-top: 16px">
+              <h4>هل لديك سؤال؟</h4>
+              <p>
+                تواصل مع فريق الدعم للإجابة على أي استفسار عن الخصوصية أو
+                البيانات
+              </p>
+              <a
+                href="https://wa.me/201019065615"
+                target="_blank"
+                class="contact-btn"
+              >
+                <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /priv-content -->
+    </div>
+    <!-- /layout -->
+
+    <footer>
+      جميع الحقوق محفوظة © 2025 &nbsp;·&nbsp;
+      <strong>المحاسب المحترف</strong> &nbsp;·&nbsp; تطوير:
+      <strong>علاء ربيع</strong>
+    </footer>
+
+    <script>
+      /* highlight TOC on scroll */
+      const ids = [
+        "collect",
+        "use",
+        "storage",
+        "share",
+        "rights",
+        "cookies",
+        "contact",
+      ];
+      window.addEventListener("scroll", () => {
+        let cur = "";
+        ids.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top < 120) cur = id;
+        });
+        document.querySelectorAll(".toc-item").forEach((a) => {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + cur);
+        });
+      });
+    </script>
+  </body>
+</html>

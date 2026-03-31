@@ -532,26 +532,66 @@
       }
 
       .foot-title {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
         color: #fff;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
+        position: relative;
+      }
+
+      .foot-title::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        width: 30px;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
       }
 
       .foot-link {
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         font-size: 13px;
         color: rgba(255, 255, 255, 0.55);
         text-decoration: none;
-        margin-bottom: 8px;
-        transition: color 0.2s;
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
         font-weight: 400;
+        position: relative;
+      }
+
+      .foot-link i {
+        width: 18px;
+        text-align: center;
+        transition: transform 0.3s ease;
       }
 
       .foot-link:hover {
-        color: rgba(255, 255, 255, 0.9);
+        color: #fff;
+        transform: translateX(-4px); /* حركة خفيفة */
       }
 
+      .foot-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .foot-link::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -2px;
+        width: 0;
+        height: 1px;
+        background: var(--primary);
+        transition: width 0.3s ease;
+      }
+
+      .foot-link:hover::after {
+        width: 100%;
+      }
       .foot-bottom {
         max-width: 1200px;
         margin: auto;
@@ -688,12 +728,21 @@
         }
 
         .foot-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 60px;
+          grid-template-columns: 1fr;
+          text-align: center;
         }
 
-        .foot-grid > div:first-child {
-          grid-column: span 2;
+        .foot-link {
+          justify-content: center;
+        }
+
+        .foot-brand {
+          justify-content: center;
+        }
+
+        .foot-bottom {
+          flex-direction: column;
+          text-align: center;
         }
       }
     </style>
@@ -931,22 +980,26 @@
         </div>
         <div>
           <div class="foot-title">النظام</div>
-          <a href="./pages/user-guide.html" class="foot-link">دليل المستخدم</a>
-          <a href="#" class="foot-link">التحديثات</a>
+          <a href="./pages/user-guide.html" class="foot-link">
+            <i class="fa-solid fa-book-open"></i>
+            <span>دليل المستخدم</span>
+          </a>
+          <a href="./pages/updates.html" class="foot-link"
+            ><i class="fa-solid fa-rocket"></i><span>التحديثات</span></a
+          >
         </div>
         <div>
           <div class="foot-title">روابط سريعة</div>
-          <a href="#" class="foot-link">من نحن</a>
-          <a href="#" class="foot-link">سياسة الخصوصية</a>
+          <a href="./pages/about.html" class="foot-link"
+            ><i class="fa-solid fa-circle-info"></i><span>من نحن</span></a
+          >
+          <a href="./pages/privacy-policy.html" class="foot-link"
+            ><i class="fa-solid fa-shield-halved"></i
+            ><span>سياسة الخصوصية</span></a
+          >
         </div>
         <div>
-          <div class="foot-title">
-            <i
-              class="fa-solid fa-headset"
-              style="margin-left: 6px; color: var(--primary)"
-            ></i>
-            تواصل معنا
-          </div>
+          <div class="foot-title">تواصل معنا</div>
           <!-- واتساب -->
           <a
             href="https://wa.me/201011091802"
