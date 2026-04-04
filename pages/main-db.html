@@ -1224,6 +1224,7 @@
 
           setTimeout(async () => {
             await signOut(auth);
+            sessionStorage.setItem("logoutSuccess", "true");
             window.location.href = "../index.html";
           }, 1200);
 
