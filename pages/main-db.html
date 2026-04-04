@@ -1102,7 +1102,14 @@
         showModal("تم رفع النسخة الاحتياطية بنجاح", "success");
       } catch (e) {
         console.error(e);
-        showModal(e.message, "error");
+
+        if (e.code === "permission-denied") {
+          showModal("ليس لديك صلاحية لتنفيذ العملية", "error");
+        } else if (e.code === "unauthenticated") {
+          showModal("يجب تسجيل الدخول أولاً", "warning");
+        } else {
+          showModal("حدث خطأ أثناء رفع النسخة الاحتياطية", "error");
+        }
       }
     }
 
