@@ -1198,8 +1198,41 @@
     document
       .getElementById("confirmLogout")
       .addEventListener("click", async () => {
-        await signOut(auth);
-        window.location.href = "../index.html";
+
+        const btn = document.getElementById("confirmLogout");
+
+        // 🔴 اقفل نافذة التأكيد الأول
+        document.getElementById("confirmModal").classList.remove("active");
+
+        // منع الضغط المتكرر
+        btn.disabled = true;
+
+        // رسالة التحميل
+        showModal("جارى حفظ النسخة الاحتياطية...", "warning");
+
+        // منع الخروج بدون إنترنت
+        if (!navigator.onLine) {
+          showModal("لا يوجد اتصال بالإنترنت", "error");
+          btn.disabled = false;
+          return;
+        }
+
+        try {
+          await saveBackup();
+
+          showModal("تم حفظ النسخة بنجاح، جارى تسجيل الخروج...", "success");
+
+          setTimeout(async () => {
+            await signOut(auth);
+            window.location.href = "../index.html";
+          }, 1200);
+
+        } catch (e) {
+          console.error("Backup before logout failed:", e);
+
+          showModal("فشل حفظ النسخة", "error");
+          btn.disabled = false;
+        }
       });
     window.showModal = showModal;
   </script>
